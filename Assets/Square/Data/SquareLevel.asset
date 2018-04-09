@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d4d0e05c59e7f46b511c45fb494274, type: 3}
+  m_Name: SquareLevel
+  m_EditorClassIdentifier: 
+  SheetName: Assets/Square/Data/SquareItem.xls
+  WorksheetName: SquareLevel
+  dataArray:
+  - id: 1000
+    name: Level_1
+    background: bg_1
+    squareitemids: 0100000002000000030000000200000001000000
+  - id: 1001
+    name: Level_2
+    background: bg_2
+    squareitemids: 0100000002000000030000000200000002000000
+  - id: 1002
+    name: Level_3
+    background: bg_3
+    squareitemids: 0100000002000000030000000200000003000000
+  - id: 1003
+    name: Level_4
+    background: bg_4
+    squareitemids: 0100000002000000030000000200000004000000
+  - id: 1004
+    name: Level_5
+    background: bg_5
+    squareitemids: 0100000002000000030000000200000005000000
+  - id: 1005
+    name: Level_6
+    background: bg_6
+    squareitemids: 0100000002000000030000000200000006000000
+  - id: 1006
+    name: Level_7
+    background: bg_7
+    squareitemids: 0100000002000000030000000200000007000000

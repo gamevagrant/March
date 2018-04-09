@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<Group id="quest">
+	<ItemSpec id="1" npcid="红军指战员" npcposition="1" dialogue="小同志，你已经报名参加长征了吗？
+快去军需处领取子弹吧。"/>
+	<ItemSpec id="2" npcid="红军战士" npcposition="0" dialogue="是的，指战员！"/>
+	<ItemSpec id="3" npcid="红军指战员" npcposition="1" dialogue="你的体力不足，暂时无法领取子弹。
+先去完成三消任务，积攒些体力吧。"/>
+	<ItemSpec id="4" npcid="红军指战员" npcposition="0" dialogue="小同志，点击这里，进入三消任务模式。"/>
+	<ItemSpec id="5" npcid="红军指战员" npcposition="0" dialogue="小同志，点击开始游戏，进行三消任务吧。"/>
+	<ItemSpec id="6" npcid="红军指战员" npcposition="1" dialogue="小同志，每当体力不足的时候，就要去做三消任务。"/>
+	<ItemSpec id="7" npcid="红军战士" npcposition="0" dialogue="指导员，我知道了！"/>
+</Group>

@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &106592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 445928}
+  - component: {fileID: 11498774}
+  - component: {fileID: 8255172}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &445928
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &8255172
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106592}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &11498774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb36004201f06f8498e88902cf9544df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  efxSource: {fileID: 8255172}
+  swap: {fileID: 8300000, guid: b556c0b236800404b9fae3c62a4a7eed, type: 3}
+  swapBack: {fileID: 8300000, guid: 391a0b87188b08148b3254489314c53b, type: 3}
+  cookieCrush: {fileID: 8300000, guid: af308c591f17ed247a35089f8725fbee, type: 3}
+  bomb: {fileID: 8300000, guid: fa2809e8b2e2db9438b6767bfa7fc01d, type: 3}
+  bombExplode: {fileID: 8300000, guid: 8b33d18956d35e744a9080bcaeeefed6, type: 3}
+  colRowBreaker: {fileID: 8300000, guid: dba7075f1ab7d7646b026ec689b2cdfb, type: 3}
+  colRowBreakerExplode: {fileID: 8300000, guid: f0767d6ef651e4a498a105e1890aaa18,
+    type: 3}
+  rainbow: {fileID: 8300000, guid: f0db0350e1bf76c4c8e90856e2025785, type: 3}
+  rainbowExplode: {fileID: 8300000, guid: 92040a12bed6759499c5972d70af2e58, type: 3}
+  drop: {fileID: 8300000, guid: f5a6c9711ae0a74449e7e57d620ff739, type: 3}
+  coinPay: {fileID: 8300000, guid: ccc8bec27f88a8a41a7c29d2a4ca3dd1, type: 3}
+  coinAdd: {fileID: 8300000, guid: 9cc4a22e882cd274da4aaad6427ee239, type: 3}
+  UIPopupLevelSkipped: {fileID: 8300000, guid: 6bde58ac714779045886d881be9081c7, type: 3}
+  waffleExplode: {fileID: 8300000, guid: a7263d0fb0ad8e44abc50bd0547fcd2f, type: 3}
+  collectTarget: {fileID: 8300000, guid: 4006c3e1050e66948b8ee494c0ca33a4, type: 3}
+  cageExplode: {fileID: 8300000, guid: c970cd680eacfe84d90c863085318bb8, type: 3}
+  gingerbreadExplode: {fileID: 8300000, guid: 50c61c0b6d674254aa64e9b88808a455, type: 3}
+  gingerbread: {fileID: 8300000, guid: 4130ec82955f7f840a77c2c98459e6a3, type: 3}
+  marshmallowExplode: {fileID: 8300000, guid: 9ab10baead5771c4fa24be4c6ca1671d, type: 3}
+  collectibleExplode: {fileID: 8300000, guid: bbd068e69e562334d96a432b5894d7d2, type: 3}
+  chocolateExplode: {fileID: 8300000, guid: f7657fe26ce6b814487a327b5661d2d0, type: 3}
+  rockCandyExplode: {fileID: 8300000, guid: 2dd0b1dc603edb548b49de2af1bf553a, type: 3}
+  amazing: {fileID: 8300000, guid: d5ae97ee4551bc54d8d6268c12066e4a, type: 3}
+  exellent: {fileID: 8300000, guid: 415b133e3bb90ba428b53a66937c3cec, type: 3}
+  great: {fileID: 8300000, guid: f7a066f8e88d7694c8fa756257db5643, type: 3}
+  star1: {fileID: 8300000, guid: 87ff2aada3cb76d4ba83ec096cc1b12c, type: 3}
+  star2: {fileID: 8300000, guid: da589399534fd43438ff8b05f0427f66, type: 3}
+  star3: {fileID: 8300000, guid: a8bfecd16c54fa44cb3edd72667d3608, type: 3}
+  buttonClick: {fileID: 8300000, guid: c2230767e3291574dbf91bb6b4820d9f, type: 3}
+  UIPopupTarget: {fileID: 8300000, guid: 30198b4f54c754747aed2141d261e3a2, type: 3}
+  UIPopupCompleted: {fileID: 8300000, guid: 9425eed078d91054cb2c26020267bfaa, type: 3}
+  UIPopupWin: {fileID: 8300000, guid: 259d24a1b5886494cae1719f1f934edb, type: 3}
+  UIPopupLose: {fileID: 8300000, guid: 8058d8a685690f24f8a3a558f9674d54, type: 3}
+  UIPopupNoMatches: {fileID: 8300000, guid: 44d945d2c0fd11d4790b426800cf0e21, type: 3}
+  singleBooster: {fileID: 8300000, guid: e975d3082b125e9469fe68b9caabdc17, type: 3}
+  rowBooster: {fileID: 8300000, guid: f434bc18bd3e99e468f6c46c307efc99, type: 3}
+  columnBooster: {fileID: 8300000, guid: 062529db78edd1c4c95ca1d0e3b7886f, type: 3}
+  rainbowBooster: {fileID: 8300000, guid: 02c152972526f6f4cb8d9b6a8bab8038, type: 3}
+  ovenBooster: {fileID: 8300000, guid: 79781e33b1e8b1b46b60e61936907aac, type: 3}
+  playingCookieCrush: 0
+  playingBomb: 0
+  playingBombExplode: 0
+  playingColRowBreaker: 0
+  playingColRowBreakerExplode: 0
+  playingRainbow: 0
+  playingRainbowExplode: 0
+  playingDrop: 0
+  playingWaffleExplode: 0
+  playingCageExplode: 0
+  playingMarshmallowExplode: 0
+  playingChocolateExplode: 0
+  playingRockCandyExplode: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 106592}
+  m_IsPrefabParent: 1

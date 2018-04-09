@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc0ac870aa6946388c206fc3e186ac2, type: 3}
+  m_Name: GrowEditorScript
+  m_EditorClassIdentifier: 
+  GrowSettings:
+    values:
+    - name: Grow.Highway.SceneIntegratedOn
+      value: Assets/Scenes/Splash.unity
+    - name: Grow.Highway.HighwayGameKey
+      value: b6ed8b99-df15-4596-bbc7-0a9c9d2b0175
+    - name: Grow.Highway.HighwayEnvKey
+      value: d6e926c7-c6ea-432b-b957-22eb1f06489f
+    - name: Grow.Highway.IntegratedPrefabId
+      value: GrowInit:-9208

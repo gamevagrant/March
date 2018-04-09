@@ -1,0 +1,14 @@
+Assets/Plugins/Android/GROW/AndroidManifest.xml
+Assets/Plugins/Android/GROW/project.properties
+Assets/Plugins/Android/GROW/libs/GrowHighway.jar
+Assets/Plugins/Android/GROW/libs/UnityAndroidHighway.jar
+Assets/Plugins/Android/SoomlaShared
+Assets/Plugins/iOS/GROW/libAFNetworking.a
+Assets/Plugins/iOS/GROW/libGrowHighway.a
+Assets/Plugins/iOS/GROW/libUnityiOSHighway.a
+Assets/Plugins/iOs/SoomlaShared
+Assets/GROW/Editor
+Assets/GROW/GROW.prefab
+Assets/GROW/Scripts/Highway
+Assets/GROW/Scripts/Config
+Assets/GROW/Scripts/Integrations/GrowIntegration.dll

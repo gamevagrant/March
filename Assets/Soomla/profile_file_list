@@ -1,0 +1,12 @@
+Assets/Plugins/Android/Soomla/libs/AndroidProfile.jar
+Assets/Plugins/Android/Soomla/libs/UnityAndroidProfile.jar
+Assets/Plugins/iOS/Soomla/libSoomlaiOSProfile.a
+Assets/Plugins/iOS/Soomla/libUnityiOSProfile.a
+Assets/Soomla/Scripts/Profile
+Assets/Soomla/profile_file_list
+Assets/Soomla/Editor/build-tools/Soomla_ProfileRunner.py
+Assets/WebPlayerTemplates/SoomlaConfig/android/android-profile-google
+Assets/WebPlayerTemplates/SoomlaConfig/android/android-profile-twitter
+Assets/WebPlayerTemplates/SoomlaConfig/ios/ios-profile-google/libSoomlaiOSProfileGoogle.a
+Assets/WebPlayerTemplates/SoomlaConfig/ios/ios-profile-twitter
+Assets/WebPlayerTemplates/SoomlaConfig/ios/ios-profile-gamecenter

@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - UndoMovePowerupCount
+  - Furniture
+  - FurnitureTag
+  - Wall
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - On Top UI
+  - Scene
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Tile
+    uniqueID: 3521304685
+    locked: 0
+  - name: Grass
+    uniqueID: 2573785823
+    locked: 0
+  - name: Waffle
+    uniqueID: 3154099003
+    locked: 0
+  - name: Item
+    uniqueID: 3490713975
+    locked: 0
+  - name: Ice
+    uniqueID: 2200042459
+    locked: 0
+  - name: Jelly
+    uniqueID: 169335441
+    locked: 0
+  - name: PackageBox
+    uniqueID: 3476043511
+    locked: 0
+  - name: Cage
+    uniqueID: 4239158077
+    locked: 0
+  - name: baffle
+    uniqueID: 3538082295
+    locked: 0
+  - name: Effect
+    uniqueID: 2289620559
+    locked: 0
+  - name: UILayer
+    uniqueID: 2722175619
+    locked: 0

@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &137366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 472530}
+  - component: {fileID: 11451074}
+  m_Layer: 0
+  m_Name: LevelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &472530
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11451074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a2a93adfd5fc54eb68f489609f3a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  column: 0
+  row: 0
+  moves: 0
+  tileLayerData: 
+  waffleLayerData: 
+  itemLayerData: 
+  cageLayerData: 
+  usingCookies: 
+  usingColors: 
+  cookieWeight: 
+  usingGingerbreads: 
+  gingerbreadWeight: 
+  gingerbreadMarkers: 
+  maxGingerbread: 0
+  target1Type: 0
+  target2Type: 0
+  target3Type: 0
+  target4Type: 0
+  target1Amount: 0
+  target2Amount: 0
+  target3Amount: 0
+  target4Amount: 0
+  target1Color: 0
+  target2Color: 0
+  target3Color: 0
+  target4Color: 0
+  score1Star: 0
+  score2Star: 0
+  score3Star: 0
+  targetText: 
+  collectibleCollectColumnMarkers: 
+  collectibleCollectNodeMarkers: 
+  collectibleGenerateMarkers: 
+  collectibleMaxOnBoard: 0
+  marshmallowMoreThanTarget: 0
+  cake: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 137366}
+  m_IsPrefabParent: 1

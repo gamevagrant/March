@@ -1,0 +1,32 @@
+ManifestFileVersion: 0
+CRC: 2873016024
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f4b8cad0ccfd5d98fc0a8b9610da3d45
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 73553e8f626543835fe85b78faff0fef
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 79d062df2168014438b4554f72e0c535, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Square/Prefabs/Scene/Background/1.prefab
+Dependencies: []

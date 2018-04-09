@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+        <Group id="exchange">
+                 <ItemSpec id="gold_10001" dollar="0.99" gold="1200"/>
+				<ItemSpec id="gold_10002" dollar="4.99" gold="5800"/>
+				<ItemSpec id="gold_10003" dollar="9.99" gold="13500"/>
+				<ItemSpec id="gold_10004" dollar="19.99" gold="25800"/>
+				<ItemSpec id="gold_10005" dollar="39.99" gold="50000"/>
+				<ItemSpec id="gold_10006" dollar="99.99" gold="158000"/>
+        </Group>
+

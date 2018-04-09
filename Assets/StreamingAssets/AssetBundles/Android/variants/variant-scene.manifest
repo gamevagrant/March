@@ -1,0 +1,15 @@
+ManifestFileVersion: 0
+CRC: 3900478315
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8a1efa7a4e983194885acfdf564ed44b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/AssetBundleManager/AssetBundleExamples/Assets/Variants/VariantScene.unity
+Dependencies:
+- C:/Projects/marchX/client/AssetBundles/Android/variants/myassets.hd
