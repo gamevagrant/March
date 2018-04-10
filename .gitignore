@@ -1,0 +1,9 @@
+Assets/Source/Generate/
+Temp/
+.vs/
+march.Editor.csproj
+march.Editor.Plugins.csproj
+march.sln
+march.csproj
+march.Plugins.csproj
+UnityPackageManager/
