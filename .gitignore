@@ -7,3 +7,5 @@ march.sln
 march.csproj
 march.Plugins.csproj
 UnityPackageManager/
+
+Library/
