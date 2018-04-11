@@ -86,7 +86,7 @@ public class MainScene : MonoBehaviour
     {
         m_instance = this;
         m_storyListItem = Resources.Load<GameObject>("Prefabs/UI/StoryItem");
-       // PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
 
 		if (!PlayerPrefs.HasKey("music_on"))
 		{
@@ -131,6 +131,8 @@ public class MainScene : MonoBehaviour
 				saveDayInfo("{}");
 			}
 		}
+
+        //qy.ui.UIManager.Instance.OpenWindow(qy.ui.UISettings.UIWindowID.UIDialogueWindow, 1000118);
     }
 
 

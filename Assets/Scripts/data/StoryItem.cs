@@ -13,6 +13,7 @@ public class StoryItem
     public string dialogue = null;
     public string animation = null;
     public string next = null;
+    public string personFile = null;
 
     public List<StoryItem> storyItems = new List<StoryItem>(); 
 
@@ -46,6 +47,8 @@ public class story : DatabaseConfig
             _itemBean.dialogue = tempel1.GetAttribute("dialogue");
             _itemBean.animation = tempel1.GetAttribute("animation");
             _itemBean.next = tempel1.GetAttribute("next");
+
+            _itemBean.personFile = tempel1.GetAttribute("personFile");
 
             _item.storyItems.Add(_itemBean);
         }

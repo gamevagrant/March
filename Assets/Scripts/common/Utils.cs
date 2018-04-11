@@ -18,6 +18,7 @@ public class Utils : MonoSingleton<Utils>
     public string getDeviceID()
     {
         string deviceId = SystemInfo.deviceUniqueIdentifier;
+        deviceId = "20202020202";
         return deviceId;
     }
 
