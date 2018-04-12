@@ -19,8 +19,11 @@ public class PlayerData : Singleton<PlayerData>
     private int heartRecoverTime = 30; //心数恢复间隔是30min
     private int maxLives = 5; //最大生命数
     private int livePrice = 900; //补满生命金币价格
+    private Ability _ability = new Ability();
 
-	private bool isSaveDayInfo = false;
+
+
+    private bool isSaveDayInfo = false;
     private int indexDay = 0; //0-6表示某天
     private int awardState = 1; 
 
@@ -223,7 +226,27 @@ public class PlayerData : Singleton<PlayerData>
         return recoveryLeftTime;
     }
 
+    public Ability ability
+    {
+        get
+        {
+            return _ability;
+        }
+        set
+        {
+            _ability = value;
+            PlayerPrefs.SetString("ability", JsonMapper.ToJson(value));
+        }
+    }
 
+    //生存率计算公式：（纪律、忠诚、智慧的平均值+纪律、忠诚、智慧的最小值）/2
+    public int survival
+    {
+        get
+        {
+            return ((_ability.loyalty + _ability.wisdom + _ability.discipline) / 3 + Mathf.Min(_ability.loyalty, _ability.wisdom, _ability.discipline)) / 2;
+        }
+    }
     public void RefreshData(JsonData data)
     {
         if (null == data)
@@ -278,6 +301,10 @@ public class PlayerData : Singleton<PlayerData>
             }
         }
         Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+
+        string str = PlayerPrefs.GetString("ability", "");
+        _ability = string.IsNullOrEmpty(str)?new Ability(): JsonMapper.ToObject<Ability>(str);
+        Debug.Log("---------"+_ability.ToString());
     }
 
 	public string getMsgByErrorCode(string errorcode)

@@ -91,18 +91,26 @@ public class UIDialogueWindow : UIWindowBase {
         lastDialogue = curDialogue;
         curDialogue = TaskManager.Instance.Story.GetItemByID(id);
         curDialogue.personLocation = UnityEngine.Random.Range(0, 2).ToString();
-        if ( !string.IsNullOrEmpty(curDialogue.bgFile) && ( lastDialogue == null || curDialogue.bgFile!=lastDialogue.bgFile))
+        
+        if(string.IsNullOrEmpty(curDialogue.bgFile))
+        {
+            imgBG.gameObject.SetActive(false);
+        }
+        else if (lastDialogue == null || curDialogue.bgFile != lastDialogue.bgFile)
         {
             AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetStorySpritePath(curDialogue.bgFile), (sp) =>
             {
-                imgBG.sprite = sp;
-                imgBG.color = new Color(1, 1, 1, 1);
-                RectTransform imgRectTF = imgBG.transform as RectTransform;
-                imgRectTF.sizeDelta = new Vector2(0,imgRectTF.rect.width/( sp.texture.width/(float)sp.texture.height) );
+                if (sp != null)
+                {
+                    imgBG.sprite = sp;
+                    imgBG.DOFade(1, 0.5f);
+                    RectTransform imgRectTF = imgBG.transform as RectTransform;
+                    imgRectTF.sizeDelta = new Vector2(0, imgRectTF.rect.width / (sp.texture.width / (float)sp.texture.height));
+                    imgBG.gameObject.SetActive(true);
+                }
 
             });
         }
-        
 
         string dialog = LanguageManager.instance.GetValueByKey(curDialogue.dialogue);
         string personFile = lastDialogue==null || curDialogue.personFile != lastDialogue.personFile ? curDialogue.personFile : "";
@@ -151,26 +159,41 @@ public class UIDialogueWindow : UIWindowBase {
 
     private void ShowTalker(string talkerPic, string position)
     {
-        talkerPic = "person";
+        //talkerPic = "person";
         Image img = position == "0" ? personLeft : personRight;
 
-        if (!string.IsNullOrEmpty(talkerPic))
+        if(string.IsNullOrEmpty(talkerPic))
+        {
+            img.gameObject.SetActive(false);
+        }
+        else
         {
             AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetPersonHeadPath(talkerPic), (sp) => {
-                img.sprite = sp;
+
+                if(sp!=null)
+                {
+                    img.sprite = sp;
+                    img.SetNativeSize();
+                    img.gameObject.SetActive(true);
+                }
+                
             });
+
         }
 
 
         //imgCanvasGroup.alpha = 0.5f;
-        img.DOFade(1, 0.5f);
+        img.DOColor(Color.white, 0.5f);
+        img.transform.DOScale(1.1f, 0.5f);
         img.gameObject.SetActive(true);
     }
 
     private void HideTalker(string position)
     {
         Image img = position == "0" ? personLeft : personRight;
-        img.DOFade(0.5f, 0.5f);
+        //img.DOFade(0.5f, 0.5f);
+        img.transform.DOScale(0.9f, 0.5f);
+        img.DOColor(new Color(0.5f,0.5f,0.5f), 0.5f);
     }
     /// <summary>
     /// 显示

@@ -315,7 +315,7 @@ public class FilePathTools
 
     public static string GetPersonHeadPath(string name)
     {
-        string str = "Sprites/Cookie/UI/General/" + name;
+        string str = "Story/Person/" + name;
         if (GameSetting.isUseAssetBundle)
         {
             str = str.ToLower();

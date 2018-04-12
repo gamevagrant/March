@@ -107,6 +107,7 @@ public class AssetsManager : MonoBehaviour {
         yield return loader.LoadAssetAsync<T>(path,(res)=> {
             AddCache(path, res);
             callback(res);
+            Debug.Log("加载数据："+path);
         });
         isLoading = false;
     }

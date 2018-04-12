@@ -86,7 +86,7 @@ public class MainScene : MonoBehaviour
     {
         m_instance = this;
         m_storyListItem = Resources.Load<GameObject>("Prefabs/UI/StoryItem");
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
 		if (!PlayerPrefs.HasKey("music_on"))
 		{
@@ -152,7 +152,7 @@ public class MainScene : MonoBehaviour
             m_buyPanel.SetActive(false);
             TimeMonoManager.instance.setTotalTime(0);  //心数已满状态的时候totaltime 置为0；
         }
-        
+
     }
 
 	void OnApplicationFocus(bool hasFocus)

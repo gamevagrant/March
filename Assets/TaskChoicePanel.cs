@@ -23,7 +23,7 @@ public class TaskChoicePanel : MonoBehaviour
         gameObject.SetActive(false);
     }
     //显示任务列表
-    public void ShowChoiceList(string title,string describe,Dictionary<string, string> choices)
+    public void ShowChoiceList(string title,string describe,Dictionary<string, string> choices,System.Action<string> selected)
     {
         m_title.text = title;
         m_describe.text = describe;
@@ -48,8 +48,10 @@ public class TaskChoicePanel : MonoBehaviour
             //设置按钮事件
             button.transform.GetComponent<Button>().onClick.AddListener(() =>
             {
+                selected(desID);
                 PlotManager.Instance.SetStoryDescribe = TaskManager.Instance.Story.GetItemByID(choices[desID]);
                 TaskManager.Instance.onClickCollect();
+
             });
         }
     }

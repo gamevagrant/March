@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
 <Group id="quest">
+
+
+
     <ItemSpec id="10001" bg="1000124bg" type="1" sectionName="100100" sectionDes="100110" gotoId="10002" requireStar="1" requireItem="0" prize="200001:2:100,200003:1:100" storyId="1000110"/>
     <ItemSpec id="10002" bg="1000111bg" type="1" sectionName="100101" sectionDes="100111" gotoId="10003" requireStar="1" requireItem="200101:2" prize="0" storyId="0"/>
-    <ItemSpec id="10003" bg="1000111bg" type="2" sectionName="100101" sectionDes="100111" selectList="100120:1000141,100121:1000145" gotoId="10004" requireStar="0" requireItem="0" storyId="1000141:1000145"/>
+    <ItemSpec id="10003" bg="1000111bg" type="2" sectionName="100101" sectionDes="100111" selectList="100120:1000141:10005:50|50|50|,100121:1000145:10004:0|0|0" gotoId="10004" requireStar="0" requireItem="0" storyId="1000141:1000145"/>
     <ItemSpec id="10004" bg="1000105bg" type="1" sectionName="100102" sectionDes="100112" gotoId="10005" requireStar="1" requireItem="0" prize="0" storyId="1000116"/>
-    <ItemSpec id="10005" bg="1000113bg" type="1" sectionName="100103" sectionDes="100113" gotoId="10006" requireStar="1" requireItem="0" prize="0" storyId="0"/>
-    <ItemSpec id="10006" bg="1000113bg" type="2" sectionName="100103" sectionDes="100113" selectList="100122:1000149,100123:1000154" gotoId="10007" requireStar="0" requireItem="0" prize="0" storyId="1000149:1000154"/>
+    <ItemSpec id="10005" bg="1000113bg" type="1" sectionName="100103" sectionDes="100113" gotoId="10007" requireStar="1" requireItem="0" prize="0" storyId="0"/>
     <ItemSpec id="10007" bg="1000114bg" type="1" sectionName="100104" sectionDes="100114" gotoId="10008" requireStar="1" requireItem="200102:2" prize="0" storyId="0"/>
-    <ItemSpec id="10008" bg="1000114bg" type="2" sectionName="100104" sectionDes="100114" selectList="100124:1000159,100125:1000163" gotoId="10009" requireStar="0" requireItem="0" prize="0" storyId="1000159:1000163"/>
+    <ItemSpec id="10008" type="3" sectionName="100104" sectionDes="100114" endingPoint="30:1000110" gotoId="10009" requireStar="0" requireItem="0" prize="0" storyId="1000159"/>
     <ItemSpec id="10009" bg="1000123bg" type="1" sectionName="100105" sectionDes="100115" gotoId="10010" requireStar="1" requireItem="200103:2" prize="0" storyId="0"/>
-    <ItemSpec id="10010" bg="1000114bg" type="2" sectionName="100105" sectionDes="100115" selectList="100126:1000166,100127:1000170" gotoId="10011" requireStar="0" requireItem="0" prize="0" storyId="1000166:1000170"/>
+    <ItemSpec id="10010" type="2" sectionName="100105" sectionDes="100115" selectList="100126:1000166:10013:30|0|0,100127:1000170:10011:0|0|0" gotoId="10011" requireStar="0" requireItem="0" prize="0" storyId="1000166:1000170"/>
     <ItemSpec id="10011" bg="1000108bg" type="1" sectionName="100106" sectionDes="100116" gotoId="10012" requireStar="2" requireItem="0" prize="0" storyId="1000130"/>
     <ItemSpec id="10012" bg="1000119bg" type="1" sectionName="100107" sectionDes="100117" gotoId="10013" requireStar="2" requireItem="0" prize="0" storyId="1000189"/>
     <ItemSpec id="10013" bg="1000116bg" type="1" sectionName="100108" sectionDes="100118" gotoId="10014" requireStar="2" requireItem="200104:2" prize="0" storyId="0"/>
-    <ItemSpec id="10014" bg="1000114bg" type="2" sectionName="100108" sectionDes="100118" selectList="100128:1000173,100129:1000176" gotoId="10015" requireStar="0" requireItem="0" prize="0" storyId="1000173:1000176"/>
+    <ItemSpec id="10014" type="2" sectionName="100108" sectionDes="100118" selectList="100128:1000173:10014:30|30|30,1000129:1000176:10015:0|0|0" gotoId="10015" requireStar="0" requireItem="0" prize="0" storyId="1000173:1000176"/>
     <ItemSpec id="10015" bg="1000118bg" type="1" sectionName="100109" sectionDes="100119" gotoId="10016" requireStar="2" requireItem="0" prize="0" storyId="0"/>
-    <ItemSpec id="10016" bg="1000114bg" type="2" sectionName="100109" sectionDes="100119" selectList="100130:1000179,100131:1000182,100132:1000185" gotoId="10017" requireStar="0" requireItem="0" prize="0" storyId="1000179:1000182:1000185"/>
+    <ItemSpec id="10016" type="2" sectionName="100109" sectionDes="100119" selectList="100130:1000179:10008:0|0|0,1000131:1000182:10008:30|30|30,1000132:1000185:10008:30|20|10" gotoId="10010" requireStar="0" requireItem="0" prize="0" storyId="1000179:1000182:1000185"/>
+
+
+
+
+
 </Group>

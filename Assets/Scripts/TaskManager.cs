@@ -95,8 +95,10 @@ public class TaskManager : MonoBehaviour
 		}
 		gameObject.SetActive(false);
 		NetManager.instance.sendQuestIdToServer(PlayerData.instance.getQuestId());
-		PlotManager.Instance.ShowPlot();
-	}
+        //PlotManager.Instance.ShowPlot();
+        qy.ui.UIManager.Instance.OpenWindow(qy.ui.UISettings.UIWindowID.UIDialogueWindow, PlotManager.Instance.m_storyDescribe.id);
+
+    }
 
 
 	//显示任务界面
@@ -130,12 +132,11 @@ public class TaskManager : MonoBehaviour
 				return;
 			}
 		}
-		//判断当前条件是否满足
-
+        //判断当前条件是否满足
 
 		gotoQuestID = _questItem.gotoId;
 		//显示type=1
-		if (_questItem.type.Equals("1"))
+		if (_questItem.type.Equals("1") || _questItem.type.Equals("3"))
 		{
 			m_panelInfo.SetActive(true);
 			m_panelInfo.transform.Find("Des").GetComponent<Text>().text =LanguageManager.instance.GetValueByKey(_questItem.sectionDes);
@@ -186,7 +187,27 @@ public class TaskManager : MonoBehaviour
 			}
 			m_taskChoicePanel.gameObject.SetActive(false);
 			PlotManager.Instance.m_storyDescribe = Story.GetItemByID(_questItem.storyId);
-		}
+
+            if (_questItem.type.Equals("3"))
+            {
+                Debug.Log("进入关键任务");
+                string storyId = "";
+                string[] data = _questItem.endingPoint.Split(':');
+                if (PlayerData.instance.survival < int.Parse(data[0]))
+                {
+                    Debug.Log("进入结局剧情");
+                    storyId = data[1];
+                }
+                else
+                {
+                    Debug.Log("进入正常结局");
+                    storyId = _questItem.storyId;
+                }
+                PlotManager.Instance.m_storyDescribe = Story.GetItemByID(storyId);
+                _questItem.gotoId = "0";
+            }
+
+        }
 		//显示type=2
 		else if (_questItem.type.Equals("2"))
 		{
@@ -195,7 +216,16 @@ public class TaskManager : MonoBehaviour
 			Dictionary<string, string> value = Quest.GetQuestSelectListByID(_questItem.id);
 			string title =LanguageManager.instance.GetValueByKey(_questItem.sectionName);
 			string describe = LanguageManager.instance.GetValueByKey(_questItem.sectionDes);
-			m_taskChoicePanel.ShowChoiceList(title, describe, value);
-		}
+			m_taskChoicePanel.ShowChoiceList(title, describe, value, (id)=> {
+                _questItem.SetSelectedBranch(id);
+
+                gotoQuestID = _questItem.gotoId;
+                PlayerData.instance.ability += _questItem.GetAbility(id);
+                Debug.Log("====增加能力值" + _questItem.GetAbility(id).ToString());
+            });
+		}else if(_questItem.type.Equals("3"))
+        {
+           
+        }
 	}
 }
