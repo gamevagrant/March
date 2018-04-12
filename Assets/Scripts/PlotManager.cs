@@ -12,6 +12,8 @@ public class PlotManager : MonoBehaviour
     private Image background;//这是背景图片
     private GameObject m_plotBar;
     private GameObject m_dialog;
+    private Image m_npcLeft;
+    private Image m_npcRight;
     private Text m_contentText;
     private Tweener m_t;
 
@@ -26,7 +28,8 @@ public class PlotManager : MonoBehaviour
         m_contentText = transform.Find("dialog/textcontent").GetComponent<Text>();
         //这里是添加的背景
         background = transform.root.Find("Background").GetComponent<Image>();
-
+        m_npcLeft = transform.Find("npcLeft").GetComponent<Image>();
+        m_npcRight = transform.Find("npcRight").GetComponent<Image>();
     }
     public void SetContent()
     {
@@ -109,8 +112,13 @@ public class PlotManager : MonoBehaviour
                     print("Nick Name :" + PlayerData.instance.getNickName());
                     dialog = string.Format(dialog, PlayerData.instance.getNickName());
                 }
-                 m_contentText.text = dialog;
-               // m_t = m_contentText.DOText(dialog, 1.5f);
+                m_contentText.text = dialog;
+                m_npcLeft.gameObject.SetActive(false);
+                m_npcRight.gameObject.SetActive(false);
+                Image npcPic = m_storyDescribe.personLocation == "0" ? m_npcLeft : m_npcRight;
+                npcPic.gameObject.SetActive(true);
+                npcPic.sprite = Resources.Load<Sprite>("Story/" + m_storyDescribe.personFile);
+                // m_t = m_contentText.DOText(dialog, 1.5f);
                 CheckEndIsHaveDialog();
                 // m_contentText.text = MainScene.Instance.Language_CN.GetItemByID(m_storyDescribe.dialogue).value;
             }
@@ -136,6 +144,8 @@ public class PlotManager : MonoBehaviour
                 TaskManager.Instance.onClickTask();
             }
             m_plotBar.SetActive(false);
+            m_npcLeft.gameObject.SetActive(false);
+            m_npcRight.gameObject.SetActive(false);
         }
 
     }

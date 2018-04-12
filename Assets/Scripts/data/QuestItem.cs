@@ -10,13 +10,120 @@ public class QuestItem
     public string type;
     public string sectionName;
     public string sectionDes;
-    public string gotoId;
+    private string _gotoId;
     public string selectList;
     public string requireItem;
     public string storyId;
     public string requireStar;
+    public string endingPoint;//剧情结局关键点
 
     public List<QuestItem> questItems = new List<QuestItem>();
+
+
+    private string selectedID;//分支剧情的选择
+    private int survival;//生还率
+
+    /// <summary>
+    ///type==2 时设置选择的分支
+    /// </summary>
+    public void SetSelectedBranch(string id)
+    {
+        selectedID = id;
+    }
+    /// <summary>
+    /// 设置当前的生还率
+    /// </summary>
+    public void SetSurvival(int survival)
+    {
+        this.survival = survival;
+    }
+
+    public Ability GetAbility(string id)
+    {
+        if(type == "2")
+        {
+            string[] branchs = selectList.Split(',');
+            foreach (string branch in branchs)
+            {
+                string[] data = branch.Split(':');
+                if (data[0] == id && data.Length > 3)
+                {
+                    string[] abilityStr = data[3].Split('|');
+                    Ability ability = new Ability()
+                    {
+                        discipline = int.Parse(abilityStr[0]),
+                        loyalty = int.Parse(abilityStr[1]),
+                        wisdom = int.Parse(abilityStr[2]),
+                    };
+                    return ability;
+                }
+
+            }
+        }
+        return null;
+    }
+
+    public string gotoId
+    {
+        get
+        {
+            if(type == "2")
+            {
+                string[] branchs = selectList.Split(',');
+                foreach(string branch in branchs)
+                {
+                    string[] data = branch.Split(':');
+                    if(data[0] == selectedID && data.Length>2)
+                    {
+                        return data[2];
+                    }
+
+                }
+
+            }
+           
+            return _gotoId;
+        }
+        set
+        {
+            _gotoId = value;
+        }
+    }
+}
+/// <summary>
+/// 能力值
+/// </summary>
+public class Ability
+{
+    /// <summary>
+    /// 纪律
+    /// </summary>
+    public int discipline=0;
+    /// <summary>
+    /// 忠诚
+    /// </summary>
+    public int loyalty=0;
+    /// <summary>
+    /// 智慧
+    /// </summary>
+    public int wisdom=0;
+
+
+    public static Ability operator +(Ability lhs, Ability rhs)
+    {
+        Ability abilityNew = new Ability()
+        {
+            discipline = lhs.discipline + rhs.discipline,
+            loyalty = lhs.loyalty + rhs.loyalty,
+            wisdom = lhs.wisdom + rhs.wisdom,
+        };
+        return abilityNew;
+    }
+
+    public override string ToString()
+    {
+        return string.Format("[discipline:{0} loyalty:{1} wisdom:{2}]", discipline, loyalty, wisdom);
+    }
 }
 
 public class quest : DatabaseConfig
@@ -50,6 +157,7 @@ public class quest : DatabaseConfig
             _itemBean.requireItem = tempel1.GetAttribute("requireItem");
             _itemBean.storyId = tempel1.GetAttribute("storyId");
             _itemBean.requireStar = tempel1.GetAttribute("requireStar");
+            _itemBean.endingPoint = tempel1.GetAttribute("endingPoint");
 
             _item.questItems.Add(_itemBean);
 
