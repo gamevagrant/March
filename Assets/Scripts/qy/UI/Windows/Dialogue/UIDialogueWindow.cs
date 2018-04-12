@@ -179,13 +179,11 @@ public class UIDialogueWindow : UIWindowBase {
                 
             });
 
+            img.DOColor(Color.white, 0.5f);
+            img.transform.DOScale(1.1f, 0.5f);
+            img.gameObject.SetActive(true);
         }
 
-
-        //imgCanvasGroup.alpha = 0.5f;
-        img.DOColor(Color.white, 0.5f);
-        img.transform.DOScale(1.1f, 0.5f);
-        img.gameObject.SetActive(true);
     }
 
     private void HideTalker(string position)

@@ -197,6 +197,7 @@ public class TaskManager : MonoBehaviour
                 {
                     Debug.Log("进入结局剧情");
                     storyId = data[1];
+                    _questItem.gotoId = "0";
                 }
                 else
                 {
@@ -204,7 +205,7 @@ public class TaskManager : MonoBehaviour
                     storyId = _questItem.storyId;
                 }
                 PlotManager.Instance.m_storyDescribe = Story.GetItemByID(storyId);
-                _questItem.gotoId = "0";
+                
             }
 
         }
