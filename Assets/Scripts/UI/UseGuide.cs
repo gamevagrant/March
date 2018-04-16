@@ -62,7 +62,7 @@ public class UseGuide : MonoBehaviour
 
         GameObject guide = Instantiate(Resources.Load<GameObject>(prefabPath),transform);
         //guide.transform.Find("Text").GetComponent<Text>().text = content[guideIndex];
-        guide.transform.Find("Text").GetComponent<Text>().text = guideItems[guideIndex].dialogue;
+        guide.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey(guideItems[guideIndex].dialogue);
         guide.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
             guide.SetActive(false);

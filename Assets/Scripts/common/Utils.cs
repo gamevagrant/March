@@ -42,7 +42,7 @@ public class Utils : MonoSingleton<Utils>
     public bool isStrLengthValid(string _content)
     {
         int length = _content.Length;
-        if (3 <= length && length<= 6)
+        if (3 <= length && length<= 16)
             return true;
         else
             return false;

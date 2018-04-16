@@ -23,6 +23,10 @@ public class LoadingScene : MonoBehaviour
         AddConfig<guidesetup>();
 
         LanguageManager.instance.initConfig();
+
+        qy.config.ConfigManager.Instance.LoadConfig(()=> {
+            Debug.Log("配置文件初始化完毕");
+        });
     }
 
     void Start()

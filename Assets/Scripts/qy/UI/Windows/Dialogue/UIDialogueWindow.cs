@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using qy.ui;
+using qy.config;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
@@ -30,8 +31,8 @@ public class UIDialogueWindow : UIWindowBase {
     public RectTransform topBlack;
     public RectTransform bottomBlack;
 
-    private StoryItem lastDialogue;//上一句对话
-    private StoryItem curDialogue;//当前对话
+    private qy.config.StoryItem lastDialogue;//上一句对话
+    private qy.config.StoryItem curDialogue;//当前对话
 
     private string beginID;
 
@@ -78,7 +79,7 @@ public class UIDialogueWindow : UIWindowBase {
 
     protected override void EndShowWindow()
     {
-        ShowStory(beginID);
+        ShowStory(ConfigManager.Instance.storysConfig.GetItem(beginID));
     }
 
     protected override void EndHideWindow()
@@ -86,11 +87,15 @@ public class UIDialogueWindow : UIWindowBase {
 
     }
 
-    private void ShowStory(string id)
+    private void ShowStory(qy.config.StoryItem story)
     {
         lastDialogue = curDialogue;
-        curDialogue = TaskManager.Instance.Story.GetItemByID(id);
-        curDialogue.personLocation = UnityEngine.Random.Range(0, 2).ToString();
+        curDialogue = story;
+        if(string.IsNullOrEmpty(curDialogue.personLocation))
+        {
+            curDialogue.personLocation = UnityEngine.Random.Range(0, 2).ToString();
+        }
+        
         
         if(string.IsNullOrEmpty(curDialogue.bgFile))
         {
@@ -112,7 +117,7 @@ public class UIDialogueWindow : UIWindowBase {
             });
         }
 
-        string dialog = LanguageManager.instance.GetValueByKey(curDialogue.dialogue);
+        string dialog = curDialogue.dialogue;
         string personFile = lastDialogue==null || curDialogue.personFile != lastDialogue.personFile ? curDialogue.personFile : "";
         //如果这句对话和上句对话不是一个人说的则播放对话框动画
         ShowDialog(dialog, personFile, curDialogue.personLocation, lastDialogue==null || lastDialogue.personLocation != curDialogue.personLocation);
@@ -243,11 +248,11 @@ public class UIDialogueWindow : UIWindowBase {
 
     public void OnClickHandle()
     {
-        string id = curDialogue.next;
-        if(id != "0")
+        qy.config.StoryItem story = curDialogue.nextStory;
+        if(story!=null)
         {
 
-            ShowStory(id);
+            ShowStory(story);
         }else
         {
             

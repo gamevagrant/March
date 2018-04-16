@@ -41,6 +41,10 @@ public class AssetLoader:IAssetsLoader
             {
                 res = www.text;
             }
+            else if(type == typeof(TextAsset))
+            {
+                res = www.text;
+            }
             else
             {
                 res = www.bytes;

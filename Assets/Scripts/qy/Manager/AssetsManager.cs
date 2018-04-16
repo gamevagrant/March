@@ -23,10 +23,12 @@ public class AssetsManager : MonoBehaviour {
             if(_instance == null)
             {
                 GameObject go = GameObject.Find("MainManager");
+                
                 if(go == null)
                 {
                     go = new GameObject("MainManager");
                 }
+                GameObject.DontDestroyOnLoad(go);
                 go.AddComponent<AssetsManager>();
             }
             return _instance;
@@ -52,6 +54,7 @@ public class AssetsManager : MonoBehaviour {
             {
                 act();
             }
+            
         }
     }
 
@@ -86,6 +89,17 @@ public class AssetsManager : MonoBehaviour {
         return loader.LoadAsset<T>(path);
     }
 
+    public void LoadAssetWithWWW(string url, Action<WWW> callback)
+    {
+        string path = url;
+        path = FilePathTools.normalizePath(path);
+        queue.Enqueue(() =>
+        {
+            TryClearCache();
+            StartCoroutine(LoadWithWWW(url,callback));
+        });
+    }
+
     private IEnumerator LoadAsync<T>(string path,Action<T> callback)where T:Object
     {
         isLoading = true;
@@ -97,7 +111,7 @@ public class AssetsManager : MonoBehaviour {
             isLoading = false;
             yield break;
         }
-        if(path.IndexOf("http://")>=0)
+        if(path.IndexOf("http://")>=0 || path.IndexOf(Application.streamingAssetsPath)>=0)
         {
             loader = netAssetLoader;
         }else
@@ -109,6 +123,15 @@ public class AssetsManager : MonoBehaviour {
             callback(res);
             Debug.Log("加载数据："+path);
         });
+        isLoading = false;
+    }
+
+    private IEnumerator LoadWithWWW(string url, Action<WWW> callback)
+    {
+        isLoading = true;
+        WWW www = new WWW(url);
+        yield return www;
+        callback(www);
         isLoading = false;
     }
 

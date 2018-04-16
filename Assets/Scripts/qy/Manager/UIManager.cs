@@ -195,6 +195,7 @@ namespace qy.ui
         private void OnDestroy()
         {
             SpriteAtlasManager.atlasRequested -= OnLoadAtlas;
+            _instance = null;
         }
 
         private void Update()

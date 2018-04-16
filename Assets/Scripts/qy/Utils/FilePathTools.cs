@@ -243,7 +243,10 @@ public class FilePathTools
 		return str;
 	}
 
-
+    public static string getXmlPath(string name)
+    {
+        return Application.streamingAssetsPath + "/xml/" + name;
+    }
 
 	public static string getConfigPath(string name)
 	{
