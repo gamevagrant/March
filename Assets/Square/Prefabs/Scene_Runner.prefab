@@ -614,8 +614,8 @@ MonoBehaviour:
   WidthScale: 0.5
   HeightScale: 0.5
   AutoGenerate: 0
-  ShowDebug: 1
-  ShowDebugNode: 1
+  ShowDebug: 0
+  ShowDebugNode: 0
   ShowDebugNodeConnection: 0
   UnitSize: {x: 0.5, y: 0.5}
   Range: {x: -17.97, y: 2.04, z: 5.0300007, w: -1.96}
@@ -631,8 +631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7fd33c57d694994b0ab9f33fcdcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Fullscreen @ Main Camera
-  type: 0
+  Name: Global Fullscreen
+  type: 2
   _camera: {fileID: 0}
 --- !u!114 &114436254133803758
 MonoBehaviour:

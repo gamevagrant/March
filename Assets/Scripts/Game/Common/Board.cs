@@ -2,8 +2,11 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using March.Core.WindowManager;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
+
 #if UNITY_EDITOR
 // Unity Ads
 #endif
@@ -58,20 +61,8 @@ public class Board : MonoBehaviour
 
     // UI
     [Header("UI")]
-    public UITarget1 UITarget;
+    public UITarget UITarget;
     public UITop UITop;
-
-    // Popup
-    [Header("Popup")]
-    public PopupOpener targetPopup;
-    public PopupOpener completedPopup;
-    public PopupOpener winPopup;
-    public PopupOpener losePopup;
-    public PopupOpener noMatchesPopup;
-    public PopupOpener plus5MovesPopup;
-    public PopupOpener amazingPopup;
-    public PopupOpener excellentPopup;
-    public PopupOpener greatPopup;
 
     // hint
     [Header("Hint")]
@@ -139,7 +130,7 @@ public class Board : MonoBehaviour
 
         // open target popup
         TargetPopup();
-	}
+    }
 	
 	void Update () 
     {
@@ -308,6 +299,11 @@ public class Board : MonoBehaviour
 
                 GameObject tile = null;
 
+                if ((i % 2 + j % 2) % 2 == 0)
+                    tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
+                else
+                    tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
+
                 switch (tileLayerData[order])
                 {
                     case TILE_TYPE.NONE:
@@ -316,12 +312,12 @@ public class Board : MonoBehaviour
                     case TILE_TYPE.PASS_THROUGH:
                         tile = Instantiate(Resources.Load(Configure.NoneTilePrefab())) as GameObject;
                         break;
-                    case TILE_TYPE.LIGHT_TILE:
-                        tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
-                        break;
-                    case TILE_TYPE.DARD_TILE:
-                        tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
-                        break;
+                    //case TILE_TYPE.LIGHT_TILE:
+                    //    tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
+                    //    break;
+                    //case TILE_TYPE.DARD_TILE:
+                    //    tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
+                    //    break;
                 }
 
                 if (tile)
@@ -789,14 +785,14 @@ void GenerateWaffleLayer()
 
             if (node != null && node.CanStoreItem() == true)
             {
-                var box = Instantiate(Resources.Load(Configure.CollectibleBox())) as GameObject;
-
-                if (box)
-                {
-                    box.transform.SetParent(node.gameObject.transform);
-                    box.name = "Box";
-                    box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.2f, 0);
-                }
+				var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
+				if (box)
+				{
+					box.transform.SetParent(node.gameObject.transform);
+					box.name = "Box";
+					box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.4f, 0);
+					box.transform.localScale = new Vector3 (0.7f, 0.7f, 1.0f);
+				}
             }
         }
     }
@@ -832,14 +828,14 @@ void GenerateWaffleLayer()
 
                     if (node != null)
                     {
-                        var box = Instantiate(Resources.Load(Configure.CollectibleBox())) as GameObject;
-
-                        if (box)
-                        {
-                            box.transform.SetParent(node.gameObject.transform);
-                            box.name = "Box";
-                            box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.2f, 0);
-                        }
+						var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
+						if (box)
+						{
+							box.transform.SetParent(node.gameObject.transform);
+							box.name = "Box";
+							box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.4f, 0);
+							box.transform.localScale = new Vector3 (0.7f, 0.7f, 1.0f);
+						}
                     }
                 }
             }
@@ -1395,7 +1391,7 @@ void GenerateWaffleLayer()
                     // show win popup
                     state = GAME_STATE.OPENING_POPUP;
 
-                    winPopup.OpenPopup();
+                    WindowManager.instance.Show<WinPopupWindow>();
 
                     AudioManager.instance.PopupWinAudio();
 
@@ -1406,7 +1402,7 @@ void GenerateWaffleLayer()
                     // show lose popup
                     state = GAME_STATE.OPENING_POPUP;
 
-                    losePopup.OpenPopup();
+                    WindowManager.instance.Show<LosePopupWindow>();
 
                     AudioManager.instance.PopupLoseAudio();
 
@@ -3251,7 +3247,7 @@ void GenerateWaffleLayer()
 
         AudioManager.instance.PopupTargetAudio();
 
-        targetPopup.OpenPopup();
+        WindowManager.instance.Show<TargetPopupWindow>();
 
         yield return new WaitForSeconds(1.0f);
 
@@ -3286,7 +3282,7 @@ void GenerateWaffleLayer()
     {
         Configure.instance.beginFiveMoves = false;
 
-        plus5MovesPopup.OpenPopup();
+        WindowManager.instance.Show<Plus5MovesPopupWindow>();
 
         yield return new WaitForSeconds(1.0f);
 
@@ -3302,61 +3298,23 @@ void GenerateWaffleLayer()
     {
         //print("Excellent!, Amazing!, Great!, Nice!");
 
-        int encouraging = Random.Range(0, 3);
+        var encouraging = Random.Range(0, 3);
 
         switch (encouraging)
         {
             case 0:
-                StartCoroutine(InspiringPopup(amazingPopup, encouraging));
-                // sound
+                WindowManager.instance.Show<AmazingPopupWindow>();
                 AudioManager.instance.amazingAudio();
                 break;
             case 1:
-                StartCoroutine(InspiringPopup(excellentPopup, encouraging));
-                // sound
+                WindowManager.instance.Show<ExcellentPopupWindow>();
                 AudioManager.instance.exellentAudio();
                 break;
             case 2:
-                StartCoroutine(InspiringPopup(greatPopup, encouraging));
-                // sound
+                WindowManager.instance.Show<GreatPopupWindow>();
                 AudioManager.instance.greatAudio();
                 break;            
         }
-    }
-
-    IEnumerator InspiringPopup(PopupOpener popupOpener, int encouraging)
-    {
-        // prevent multiple call
-        if (showingInspiringPopup == false) showingInspiringPopup = true;
-        else yield return null;
-
-        popupOpener.OpenPopup();
-
-        yield return new WaitForSeconds(1.0f);
-
-        GameObject popup = null;
-
-        switch (encouraging)
-        {
-            case 0:
-                popup = GameObject.Find("AmazingPopup(Clone)");
-                break;
-            case 1:
-                popup = GameObject.Find("ExcellentPopup(Clone)");
-                break;
-            case 2:
-                popup = GameObject.Find("GreatPopup(Clone)");
-                break;            
-        }
-
-        if (popup)
-        {
-            popup.GetComponent<Popup>().Close();
-        }
-
-        yield return new WaitForSeconds(1f);
-
-        showingInspiringPopup = false;
     }
 
     #endregion
@@ -3387,8 +3345,7 @@ void GenerateWaffleLayer()
 
         yield return new WaitForSeconds(0.5f);
 
-        // completed popup
-        completedPopup.OpenPopup();
+        WindowManager.instance.Show<CompletedPopupWindow>();
 
         AudioManager.instance.PopupCompletedAudio();
 
@@ -3415,7 +3372,7 @@ void GenerateWaffleLayer()
 
             DecreaseMoveLeft(true);
 
-                        var prefab = Instantiate(Resources.Load(Configure.StarGold())) as GameObject;
+            var prefab = Instantiate(Resources.Load(Configure.StarGold())) as GameObject;
             prefab.transform.position = UITop.GetComponent<UITop>().movesText.gameObject.transform.position;
 
             var startPosition = prefab.transform.position;
@@ -3445,6 +3402,8 @@ void GenerateWaffleLayer()
 
         yield return new WaitForSeconds(0.5f);
 
+        //GameObject.Find("Canvas").transform.Find("PiggyBank").gameObject.SetActive(true);
+
         while (GetAllSpecialItems().Count > 0)
         {
             while (GetAllSpecialItems().Count > 0)
@@ -3452,6 +3411,8 @@ void GenerateWaffleLayer()
                 var specials = GetAllSpecialItems();
 
                 var item = specials[UnityEngine.Random.Range(0, specials.Count)];
+
+                //WinGoldReward(item);
 
                 item.Destroy();
 
@@ -3494,13 +3455,13 @@ void GenerateWaffleLayer()
 
         state = GAME_STATE.OPENING_POPUP;
 
-       // SaveLevelInfo();
+        // SaveLevelInfo();
+
+        //GameObject.Find("Canvas").transform.Find("PiggyBank").gameObject.SetActive(false);
 
         AudioManager.instance.PopupWinAudio();
 
-        winPopup.OpenPopup();
-
-        //ShowAds();
+        WindowManager.instance.Show<WinPopupWindow>();
     }
 
     public void WinGoldReward(Item item)
@@ -3517,31 +3478,55 @@ void GenerateWaffleLayer()
         if (item.IsPlaneBreaker(item.type))
         {
             winGold += Int32.Parse(config["planebreaker"]);
+            //Debug.Log("xxxxxxxxxxxxx: " + winGold.ToString());
+            getWinGold(item, winGold);
         }
         else if (item.IsColumnBreaker(item.type))
         {
             winGold += Int32.Parse(config["columnbreaker"]);
+            getWinGold(item, winGold);
         }
         else if (item.IsRowBreaker(item.type))
         {
             winGold += Int32.Parse(config["rowbreaker"]);
+            getWinGold(item, winGold);
         }
         else if (item.IsBombBreaker(item.type))
         {
             winGold += Int32.Parse(config["bombbreaker"]);
+            getWinGold(item, winGold);
         }
         else if (item.type == ITEM_TYPE.COOKIE_RAINBOW)
         {
             winGold += Int32.Parse(config["rainbow"]);
+            getWinGold(item, winGold);
         }
         if (winGold > maxgold)
         {
             winGold = maxgold;
         }
 
-
-
         //todo:金币弹出动画
+    }
+
+    private void getWinGold(Item item, int gold) {
+		return;
+        var cloneGold = Instantiate(item.gameObject, GameObject.Find("Board").transform);
+        cloneGold.transform.position = item.transform.position;
+        cloneGold.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/Cookie/UI/Map/goldsp", typeof(Sprite)) as Sprite;
+        cloneGold.GetComponent<SpriteRenderer>().sortingOrder = 90;
+        cloneGold.transform.localScale = new Vector3(1.0f, 1.0f, 1);
+        cloneGold.gameObject.SetActive(true);
+
+		Vector3 v1 = new Vector3 (item.transform.position.x, item.transform.position.y, 0);
+		Vector3 v2 = GameObject.Find ("Canvas").transform.Find ("PiggyBank").transform.position;
+		Vector3[] path = {v1, new Vector3(v1.x + 1, v1.y + 1, 0), new Vector3(v1.x + 2, v1.y + 2, 0), new Vector3(v1.x + 3, v1.y + 3, 0), v2};
+		cloneGold.transform.DOPath(path, 1.0f).SetEase(Ease.InQuad).OnComplete(() => 
+			{
+				Destroy(cloneGold);
+				GameObject.Find("Canvas").transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
+			}
+		);
     }
 
     private void DestroyAllObstacles()
@@ -3792,8 +3777,7 @@ void GenerateWaffleLayer()
 
                 AudioManager.instance.PopupNoMatchesAudio();
 
-                // show and close popup
-                noMatchesPopup.OpenPopup();
+                WindowManager.instance.Show<NoMatchesdPopupWindow>();
 
                 yield return new WaitForSeconds(1.0f);
 

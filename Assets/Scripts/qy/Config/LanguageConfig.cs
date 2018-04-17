@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Xml;
+using UnityEngine;
 
 namespace qy.config
 {
@@ -26,7 +25,7 @@ namespace qy.config
 
         public string GetItem(string id)
         {
-            string value = "";
+            string value;
             dic.TryGetValue(id, out value);
             if(string.IsNullOrEmpty(value))
             {

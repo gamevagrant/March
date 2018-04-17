@@ -45,7 +45,10 @@ namespace March.Core.Pay
         {
             var error = string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}",
                 product.definition.storeSpecificId, failureReason);
+            Debug.Log(error);
+#if UNITY_EDITOR
             Toolkit.MessageBox.Show(error, "Purchase Failed");
+#endif
         }
     }
 }

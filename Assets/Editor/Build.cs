@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System;
 using System.Collections.Generic;
@@ -52,6 +52,11 @@ namespace common
         //    GenericBuild(SCENES, target, BuildTarget.Android, BuildOptions.None);
         //    InstallApk(target);
         //}
+        static void PerformAndroidBuild_Release()
+        {
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENITY_PURCHASING;SOOMLA_OPEN_SOURCE;RELEASE_FLAG");
+            PerformAndroidBuild();
+        }
 
         [MenuItem("CustomBuild/Build Android", priority = 1000)]
         static void PerformAndroidBuild()
@@ -73,6 +78,11 @@ namespace common
 
             dir = dir + "/" + DateTime.Now.ToString("MM-dd");
 
+            PlayerSettings.Android.keystoreName = "user.keystore";
+            PlayerSettings.Android.keystorePass = "111111";
+            PlayerSettings.Android.keyaliasName = "test";
+            PlayerSettings.Android.keyaliasPass = "111111";
+
             GenericBuild(SCENES, dir + "/" + target, BuildTarget.Android, BuildOptions.None);
         }
 
@@ -88,9 +98,7 @@ namespace common
 			if (!string.IsNullOrEmpty(gameVersion))
 			{
 				PlayerSettings.bundleVersion = gameVersion;
-            }
-
-
+			}
             Debug.Log("Start build " + build_target.ToString() + " with option " + build_options.ToString() + " to " + target);
 
             string res = BuildPipeline.BuildPlayer(scenes, target, build_target, build_options);

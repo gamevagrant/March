@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 using System.Xml;
+using UnityEngine;
 
 namespace qy.config
 {
@@ -23,12 +22,21 @@ namespace qy.config
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.LoadXml(xml);
 
-            XmlNodeList xmlList = xmldoc.DocumentElement.ChildNodes;
-            foreach (XmlElement item in xmlList)
+            XmlElement element = null;
+            try
             {
-                ReadItem(item);
-
+                XmlNodeList xmlList = xmldoc.DocumentElement.ChildNodes;
+                foreach (XmlElement item in xmlList)
+                {
+                    element = item;
+                    ReadItem(item);
+                }
             }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message + element.GetAttribute("id") + ", " + Name);
+            }
+
             return true;
         }
 

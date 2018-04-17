@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Common;
 
-public class AudioManager : MonoBehaviour 
+public class AudioManager : MonoSingleton<AudioManager>
 {
-    public static AudioManager instance = null;
-
     public AudioSource efxSource;
 
     [Header("Play")]
@@ -69,20 +68,6 @@ public class AudioManager : MonoBehaviour
     public bool playingRockCandyExplode;
 
     float delay = 0.3f;
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
 
     public void PlaySingleSound(AudioClip clip)
     {

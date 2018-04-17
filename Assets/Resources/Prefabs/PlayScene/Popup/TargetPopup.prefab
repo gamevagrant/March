@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 22412078}
   - component: {fileID: 11420860}
   - component: {fileID: 9597516}
+  - component: {fileID: 114050040864803778}
   m_Layer: 5
   m_Name: TargetPopup
   m_TagString: Untagged
@@ -319,3 +320,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 197090}
   m_IsPrefabParent: 1
+--- !u!114 &114050040864803778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0441e80289ce142aafc4e497e1de66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

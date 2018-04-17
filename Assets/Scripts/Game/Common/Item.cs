@@ -1120,331 +1120,195 @@ public class Item : MonoBehaviour
         {
             return true;
         }
-        if (LevelLoader.instance.level == 1)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 25 && direction == SWAP_DIRECTION.BOTTOM)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 32 && direction == SWAP_DIRECTION.TOP)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            if (Help.instance.step == 2)
-            {
-                if (node.OrderOnBoard() == 13 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 12 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+		if (LevelLoader.instance.level == 1) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.BOTTOM) {
+					return true;
+				} else if (node.OrderOnBoard () == 32 && direction == SWAP_DIRECTION.TOP) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			if (Help.instance.step == 2) {
+				if (node.OrderOnBoard () == 13 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else if (node.OrderOnBoard () == 12 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else {
+					return false;
+				}
+			}
 
-        }
-        else if (LevelLoader.instance.level == 2)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 13 && direction == SWAP_DIRECTION.BOTTOM)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 21 && direction == SWAP_DIRECTION.TOP)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 2)
-            {
-                if (node.OrderOnBoard() == 21 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 22 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 3)
-            {
-                if (node.OrderOnBoard() == 41 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 42 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 4)
-            {
-                if (node.OrderOnBoard() == 49 && direction == SWAP_DIRECTION.SELFCLICK)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        else if (LevelLoader.instance.level == 3)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 32 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 31 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 2)
-            {
-                if (node.OrderOnBoard() == 31 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 30 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 3)
-            {
-                if (node.OrderOnBoard() == 25 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 24 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 4)
-            {
-                if (node.OrderOnBoard() == 24 && direction == SWAP_DIRECTION.SELFCLICK)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        else if (LevelLoader.instance.level == 4)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 26 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 25 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 2)
-            {
-                if (node.OrderOnBoard() == 26 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 25 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 3)
-            {
-                if (node.OrderOnBoard() == 66 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 65 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 4)
-            {
-                if (node.OrderOnBoard() == 65 && direction == SWAP_DIRECTION.SELFCLICK)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        else if (LevelLoader.instance.level == 5)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 40 && direction == SWAP_DIRECTION.BOTTOM)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 49 && direction == SWAP_DIRECTION.TOP)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 2)
-            {
-                if (node.OrderOnBoard() == 49 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 50 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        else if (LevelLoader.instance.level == 6)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 1 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 2 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 2)
-            {
-                if (node.OrderOnBoard() == 34 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 35 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 3)
-            {
-                if (node.OrderOnBoard() == 67 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 68 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (Help.instance.step == 4)
-            {
-                if (node.OrderOnBoard() == 67 && direction == SWAP_DIRECTION.BOTTOM)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 78 && direction == SWAP_DIRECTION.TOP)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        else if (LevelLoader.instance.level == 8)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 13 && direction == SWAP_DIRECTION.RIGHT)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 14 && direction == SWAP_DIRECTION.LEFT)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
+		} else if (LevelLoader.instance.level == 2) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 13 && direction == SWAP_DIRECTION.BOTTOM) {
+					return true;
+				} else if (node.OrderOnBoard () == 21 && direction == SWAP_DIRECTION.TOP) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 2) {
+				if (node.OrderOnBoard () == 21 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 22 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 3) {
+				if (node.OrderOnBoard () == 41 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 42 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 4) {
+				if (node.OrderOnBoard () == 49 && direction == SWAP_DIRECTION.SELFCLICK) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} else if (LevelLoader.instance.level == 3) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 32 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else if (node.OrderOnBoard () == 31 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 2) {
+				if (node.OrderOnBoard () == 31 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else if (node.OrderOnBoard () == 30 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 3) {
+				if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else if (node.OrderOnBoard () == 24 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 4) {
+				if (node.OrderOnBoard () == 24 && direction == SWAP_DIRECTION.SELFCLICK) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} else if (LevelLoader.instance.level == 4) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 26 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 2) {
+				if (node.OrderOnBoard () == 26 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 3) {
+				if (node.OrderOnBoard () == 66 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else if (node.OrderOnBoard () == 65 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 4) {
+				if (node.OrderOnBoard () == 65 && direction == SWAP_DIRECTION.SELFCLICK) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} else if (LevelLoader.instance.level == 5) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 40 && direction == SWAP_DIRECTION.BOTTOM) {
+					return true;
+				} else if (node.OrderOnBoard () == 49 && direction == SWAP_DIRECTION.TOP) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 2) {
+				if (node.OrderOnBoard () == 49 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 50 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} else if (LevelLoader.instance.level == 6) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 37 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 38 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} else if (LevelLoader.instance.level == 7) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 1 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 2 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 2) {
+				if (node.OrderOnBoard () == 34 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 35 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 3) {
+				if (node.OrderOnBoard () == 67 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 68 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			} else if (Help.instance.step == 4) {
+				if (node.OrderOnBoard () == 67 && direction == SWAP_DIRECTION.BOTTOM) {
+					return true;
+				} else if (node.OrderOnBoard () == 78 && direction == SWAP_DIRECTION.TOP) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} else if (LevelLoader.instance.level == 8) {
+			if (Help.instance.step == 1) {
+				if (node.OrderOnBoard () == 13 && direction == SWAP_DIRECTION.RIGHT) {
+					return true;
+				} else if (node.OrderOnBoard () == 14 && direction == SWAP_DIRECTION.LEFT) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
         else if (LevelLoader.instance.level == 12)
         {
             if (Help.instance.step == 1)

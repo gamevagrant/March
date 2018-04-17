@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
+using Assets.Scripts.Common;
+using UnityEngine;
 
 public enum MAP_LEVEL_STATUS
 {
@@ -240,10 +240,8 @@ public enum SWAP_DIRECTION
     SELFCLICK,
 }
 
-public class Configure : MonoBehaviour 
+public class Configure : MonoSingleton<Configure>
 {
-    public static Configure instance = null;
-
     [Header("Configuration")]
     public float swapTime;
     public float destroyTime;
@@ -369,20 +367,6 @@ public class Configure : MonoBehaviour
 	public static string exit_date_time = "string_exit_date_time";
 	public static string stringLife = "string_life";
 	public static string stringTimer = "string_timer";
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)/** 在unity editor下 如果长时间没有操作游戏，则该对象会被释放掉，该bug目前在设备上还没出现，多测试 **/
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
 
     #region Prefab
 
@@ -1317,6 +1301,15 @@ public class Configure : MonoBehaviour
     {
         return "Prefabs/PlayScene/Help/Level6Step4";
     }
+
+	public static string Level7Step1()
+	{
+		return "Prefabs/PlayScene/Help/Level7Step1";
+	}
+	public static string Level7Step2()
+	{
+		return "Prefabs/PlayScene/Help/Level7Step2";
+	}
 
     public static string Level8Step1()
     {

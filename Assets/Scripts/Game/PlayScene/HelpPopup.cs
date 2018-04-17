@@ -9,7 +9,7 @@ public class HelpPopup : MonoBehaviour
 
     void Start()
     {
-
+		//手指箭头
         if (arrow != null)
         {
             Vector2 direction = Vector2.zero;
@@ -96,7 +96,14 @@ public class HelpPopup : MonoBehaviour
                     direction = Vector2.right;
                 }
             }
-            else if (LevelLoader.instance.level == 6)
+			else if (LevelLoader.instance.level == 6)
+			{
+				if (Help.instance.step == 1)
+				{
+					direction = Vector2.right;
+				}
+			}
+            else if (LevelLoader.instance.level == 7)
             {
                 if (Help.instance.step == 1)
                 {
@@ -121,7 +128,10 @@ public class HelpPopup : MonoBehaviour
                 {
                     direction = Vector2.left;
                 }
-            }
+			} else if (LevelLoader.instance.level == 9) {
+				looptime = 0.5f;
+				direction = new Vector2(-0.1f, -0.1f);
+			}
             else if (LevelLoader.instance.level == 12)
             {
                 if (Help.instance.step == 1)
@@ -170,19 +180,13 @@ public class HelpPopup : MonoBehaviour
         Configure.instance.touchIsSwallowed = false;
         GameObject prefab = null;
         int step = 0;
-        if (LevelLoader.instance.level == 9)
-        {
-            if (Help.instance.step == 1)
-            {          
-                prefab = Instantiate(Resources.Load(Configure.Level9Step2())) as GameObject;
-                prefab.name = "Level 9 Step 2";
-                step = 2;
-            }
-            else if (Help.instance.step == 2)
-            {
-                SkipButtonUp();
-            }
-        }
+		if (LevelLoader.instance.level == 6)
+		{
+			if (Help.instance.step == 2)
+			{
+				SkipButtonUp();
+			}
+		}
         else if (LevelLoader.instance.level == 12)
         {
             if (Help.instance.step == 1)

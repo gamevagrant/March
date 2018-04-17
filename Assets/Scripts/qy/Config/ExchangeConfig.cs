@@ -21,7 +21,7 @@ namespace qy.config
             ExchangeItem matchLevel = new ExchangeItem();
             matchLevel.id = item.GetAttribute("id");
             matchLevel.dollar = float.Parse(item.GetAttribute("dollar"));
-            matchLevel.gold = int.Parse(item.GetAttribute("gold"));
+            matchLevel.gold = int.Parse(item.GetAttribute("gold_doller"));
 
             dic.Add(matchLevel.id, matchLevel);
         }

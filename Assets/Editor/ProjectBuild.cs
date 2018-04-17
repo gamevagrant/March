@@ -9,22 +9,36 @@ public class ProjectBuild
 {
     class BuildConfig
     {
-        public string Name;
-        public string BundleID;
+        public string ProductName;
+        public string CompanyName;
+        public string ApplicationId;
         public string Version;
+        //public int BundleVersionCode;
+        public string KeyStorePath;
+        public string KeyPassword;
+        public string KeyAliasName;
         public bool IsForDev;
     }
 
     private static BuildTarget target = BuildTarget.Android;
-    private const string BuildName = "march";
-    private const string BundleID = "com.elex.march";
+
+    private const string DefaultProductName = "candy";
+    private const string DefaultCompanyName = "elex";
+    private const string DefaultApplicationId = "com.elex.candy";
+    private const int DefaultBundleVersionCode = 1;
+
     private const string ConfigName = "BuildConfig.txt";
 
-    private static BuildConfig DefaultBuildConfig = new BuildConfig
+    private static readonly BuildConfig DefaultBuildConfig = new BuildConfig
     {
-        Name = BuildName,
-        BundleID = BundleID,
+        ProductName = DefaultProductName,
+        CompanyName = DefaultCompanyName,
+        ApplicationId = DefaultApplicationId,
+        //BundleVersionCode = DefaultBundleVersionCode,
         Version = PlayerSettings.bundleVersion,
+        KeyStorePath = string.Empty,
+        KeyPassword = string.Empty,
+        KeyAliasName = string.Empty,
         IsForDev = false,
     };
 
@@ -96,8 +110,8 @@ public class ProjectBuild
 
     private static void BuildPlayer(BuildTarget target, BuildConfig config)
     {
-        var buildName = string.Format("./package/{0}_{1}_{2}{3}.apk", config.Name, config.Version, DateTime.Now.ToString(@"yyyyMMdd"), config.IsForDev ? "_dev" : "");
-        BuildOptions additionOption = BuildOptions.None;
+        var buildName = string.Format("./package/{0}_{1}_{2}{3}.apk", config.ProductName, config.Version, DateTime.Now.ToString(@"yyyyMMdd"), config.IsForDev ? "_dev" : "");
+        var additionOption = BuildOptions.None;
         
         if (config.IsForDev)
         {
@@ -105,9 +119,16 @@ public class ProjectBuild
         }
 
         PlayerSettings.bundleVersion = config.Version;
-        PlayerSettings.productName = config.Name;
-        PlayerSettings.applicationIdentifier = config.BundleID;
-        PlayerSettings.companyName = config.BundleID;
+        //PlayerSettings.Android.bundleVersionCode = config.BundleVersionCode;
+        PlayerSettings.productName = config.ProductName;
+        PlayerSettings.companyName = config.CompanyName;
+        //PlayerSettings.applicationIdentifier = string.Format("com.{0}.{1}", config.CompanyName, config.ProductName);
+        PlayerSettings.applicationIdentifier = config.ApplicationId;
+
+        PlayerSettings.Android.keystoreName = config.KeyStorePath;
+        PlayerSettings.Android.keystorePass = config.KeyPassword;
+        PlayerSettings.Android.keyaliasName = config.KeyAliasName;
+        PlayerSettings.Android.keyaliasPass = config.KeyPassword;
 
         EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Internal;
 

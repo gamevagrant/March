@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 22497854}
   - component: {fileID: 9525370}
   - component: {fileID: 11441928}
+  - component: {fileID: 114971574847842542}
   m_Layer: 5
   m_Name: NoMatchesdPopup
   m_TagString: Untagged
@@ -62,11 +63,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6907d202412ba14992cdc76b4c920ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundColor:
-    r: 0.039215688
-    g: 0.039215688
-    b: 0.039215688
-    a: 0.6
+  AutoClose: 1
+  NeedBackground: 0
+  Duration: 1
+  backgroundColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0.6}
 --- !u!114 &11443180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,3 +148,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 141858}
   m_IsPrefabParent: 1
+--- !u!114 &114971574847842542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b996b0af4352644ad20df116f1331a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

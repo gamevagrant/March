@@ -1,12 +1,12 @@
-using UnityEngine;
-using System.Collections;
+using Assets.Scripts.Common;
 using System.Collections.Generic;
+using UnityEngine;
 
 // Spawn System:
 // Preload GameObject to reuse them later, avoiding to Instantiate them.
 // Very useful for mobile platforms.
 
-public class CFX_SpawnSystem : MonoBehaviour
+public class CFX_SpawnSystem : MonoSingleton<CFX_SpawnSystem>
 {
 
     static void DeactivateChildren(GameObject g, bool a)
@@ -99,9 +99,6 @@ public class CFX_SpawnSystem : MonoBehaviour
 		}
 	}
 	
-	// INTERNAL SYSTEM ----------------------------------------------------------------------------------------------------------------------------------------
-	
-	static private CFX_SpawnSystem instance;
 	
 	public GameObject[] objectsToPreload = new GameObject[0];
 	public int[] objectsToPreloadTimes = new int[0];
@@ -131,8 +128,9 @@ public class CFX_SpawnSystem : MonoBehaviour
 				newObj.SetActiveRecursively(false);
 			#else
                 DeactivateChildren(newObj, false);
-				//newObj.SetActive(false);
 			#endif
+
+            DontDestroyOnLoad(newObj);
 			
 			//Set flag to not destruct object
 			CFX_AutoDestructShuriken[] autoDestruct = newObj.GetComponentsInChildren<CFX_AutoDestructShuriken>(true);
@@ -177,14 +175,6 @@ public class CFX_SpawnSystem : MonoBehaviour
 		poolCursors.Remove(uniqueId);
 	}
 
-    void Awake()
-	{
-		if(instance != null)
-			Debug.LogWarning("CFX_SpawnSystem: There should only be one instance of CFX_SpawnSystem per Scene!");
-		
-		instance = this;
-	}
-	
 	void Start()
 	{
 		allObjectsLoaded = false;

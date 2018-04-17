@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using qy.config;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 

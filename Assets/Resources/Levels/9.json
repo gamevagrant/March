@@ -24,7 +24,7 @@
          "y":0
         }, 
         {
-         "data":[0, 17, 43, 35, 44, 0, 44, 35, 43, 17, 0, 17, 1, 35, 43, 51, 0, 51, 43, 35, 1, 17, 1, 17, 43, 35, 44, 51, 44, 35, 43, 17, 1, 17, 1, 35, 43, 43, 1, 43, 43, 35, 1, 17, 1, 17, 43, 35, 43, 43, 43, 35, 43, 17, 1, 86, 1, 35, 43, 43, 0, 43, 43, 35, 1, 86, 0, 17, 43, 35, 44, 51, 44, 35, 43, 17, 0],
+         "data":[0, 17, 43, 35, 44, 0, 44, 35, 43, 17, 0, 17, 1, 35, 43, 51, 0, 51, 43, 17, 1, 1, 1, 17, 43, 35, 44, 51, 44, 35, 43, 17, 17, 17, 1, 35, 43, 43, 1, 43, 43, 17, 1, 17, 1, 17, 43, 35, 43, 43, 43, 35, 17, 17, 1, 86, 1, 35, 43, 43, 0, 43, 43, 35, 1, 86, 0, 17, 43, 35, 44, 51, 44, 35, 43, 17, 0],
          "height":7,
          "name":"item_layer",
          "opacity":1,
@@ -121,511 +121,511 @@
             {
              "0":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/blue.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/blue.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "1":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/blue_bomb_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/blue_bomb_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "10":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/chocolate_4.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/chocolate_4.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "11":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/chocolate_5.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/chocolate_5.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "12":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/chocolate_6.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/chocolate_6.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "13":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/dark_tile.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/dark_tile.png",
                  "imageheight":72,
                  "imagewidth":72
                 },
              "14":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/gingerbread_generic.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/gingerbread_generic.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "15":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_generic.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_generic.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "16":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/green.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/green.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "17":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/green_bomb_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/green_bomb_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "18":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/green_column_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/green_column_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "19":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/gingerbread_green.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/gingerbread_green.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "2":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/blue_column_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/blue_column_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "20":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_green.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_green.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "21":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/green_row_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/green_row_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "22":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/green_x_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/green_x_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "23":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/light_tile.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/light_tile.png",
                  "imageheight":72,
                  "imagewidth":72
                 },
              "24":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/marshmallow.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/marshmallow.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "25":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/none_tile.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/none_tile.png",
                  "imageheight":72,
                  "imagewidth":72
                 },
              "26":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/orange.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/orange.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "27":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/orange_bomb_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/orange_bomb_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "28":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/orange_column_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/orange_column_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "29":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_orange.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_orange.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "3":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/gingerbread_blue.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/gingerbread_blue.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "30":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_orange.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_orange.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "31":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/orange_row_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/orange_row_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "32":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/orange_x_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/orange_x_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "33":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/pass_through_tile.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/pass_through_tile.png",
                  "imageheight":72,
                  "imagewidth":72
                 },
              "34":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/purple.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/purple.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "35":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/purple_bomb_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/purple_bomb_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "36":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/purple_column_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/purple_column_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "37":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/gingerbread_purple.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/gingerbread_purple.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "38":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_purple.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_purple.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "39":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/purple_row_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/purple_row_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "4":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_blue.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_blue.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "40":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/purple_x_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/purple_x_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "41":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rainbow.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rainbow.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "42":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/random_item.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/random_item.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "43":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/red.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/red.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "44":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/red_bomb_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/red_bomb_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "45":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/red_column_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/red_column_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "46":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/gingerbread_red.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/gingerbread_red.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "47":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_red.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_red.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "48":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/red_row_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/red_row_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "49":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/red_x_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/red_x_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "5":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/blue_row_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/blue_row_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "50":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/yellow.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/yellow.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "51":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/yellow_bomb_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/yellow_bomb_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "52":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/yellow_column_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/yellow_column_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "53":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/gingerbread_yellow.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/gingerbread_yellow.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "54":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/rock_candy_yellow.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/rock_candy_yellow.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "55":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/yellow_row_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/yellow_row_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "56":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/yellow_x_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/yellow_x_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "57":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/waffle_1.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/waffle_1.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "58":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/waffle_2.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/waffle_2.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "59":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/waffle_3.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/waffle_3.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "6":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/blue_x_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/blue_x_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "60":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cage_1.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/cage_1.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "61":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_1.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_1.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "62":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_2.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_2.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "63":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_3.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_3.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "64":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_4.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_4.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "65":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_5.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_5.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "66":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_6.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_6.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "67":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_7.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_7.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "68":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_8.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_8.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "69":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_9.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_9.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "7":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/chocolate_1.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/chocolate_1.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "70":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_10.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_10.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "71":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_11.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_11.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "72":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_12.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_12.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "73":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_13.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_13.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "74":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_14.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_14.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "75":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_15.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_15.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "76":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_16.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_16.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "77":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_17.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_17.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "78":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_18.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_18.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "79":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_19.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_19.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "8":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/chocolate_2.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/chocolate_2.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "80":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/collectible_20.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/collectible_20.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "81":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cage_2.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/cage_2.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "82":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/grass.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/grass.png",
                  "imageheight":72,
                  "imagewidth":72
                 },
              "83":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/ice_1.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/ice_1.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "84":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/ice_2.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/ice_2.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
              "85":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/plane_breaker.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/plane_breaker.png",
                  "imageheight":115,
                  "imagewidth":115
                 },
@@ -637,7 +637,7 @@
                 },
              "9":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/chocolate_3.png",
+                 "image":"..\/..\/..\/..\/..\/\u5173\u5361\u7f16\u8f91\/sprites\/chocolate_3.png",
                  "imageheight":115,
                  "imagewidth":115
                 }
@@ -656,123 +656,83 @@
             {
              "0":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_1_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_1_4.png"
                 },
              "1":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_2_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_2_4.png"
                 },
              "10":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_11_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_11_4.png"
                 },
              "11":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_12_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_12_4.png"
                 },
              "12":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_13_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_13_4.png"
                 },
              "13":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_14_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_14_4.png"
                 },
              "14":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_15_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_15_4.png"
                 },
              "15":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_16_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_16_4.png"
                 },
              "16":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_17_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_17_4.png"
                 },
              "17":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_18_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_18_4.png"
                 },
              "18":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_19_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_19_4.png"
                 },
              "19":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_20_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_20_4.png"
                 },
              "2":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_3_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_3_4.png"
                 },
              "3":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_4_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_4_4.png"
                 },
              "4":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_5_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_5_4.png"
                 },
              "5":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_6_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_6_4.png"
                 },
              "6":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_7_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_7_4.png"
                 },
              "7":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_8_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_8_4.png"
                 },
              "8":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_9_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_9_4.png"
                 },
              "9":
                 {
-                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_10_4.png",
-                 "imageheight":277,
-                 "imagewidth":278
+                 "image":"..\/..\/..\/..\/svndoc\/\u5173\u5361\u7f16\u8f91\u6837\u4f8b\/sprites\/cake_10_4.png"
                 }
             },
          "tilewidth":278

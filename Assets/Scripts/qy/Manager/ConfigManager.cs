@@ -1,9 +1,7 @@
-﻿
-using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using System.Xml;
+using UnityEngine;
+
 namespace qy.config
 {
     public class ConfigManager
@@ -48,6 +46,15 @@ namespace qy.config
             }
         }
 
+        public StoryheadConfig StoryHeadConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(StoryheadConfig)];
+                return config as StoryheadConfig;
+            }
+        }
+
         public QuestConfig questConfig
         {
             get
@@ -57,8 +64,8 @@ namespace qy.config
             }
         }
 
-        private Dictionary<Type,BaseConfig> dic;
-        private int allCount = 0;
+        public Dictionary<Type, BaseConfig> dic;
+        private int allCount;
         private Action onComplate;
 
         public ConfigManager()
@@ -71,6 +78,7 @@ namespace qy.config
             allCount = 0;
             dic = new Dictionary<Type, BaseConfig>();
             this.onComplate = onComplate;
+
             //以下加载顺序不可变更
             Load<LangrageConfig>(LoadHandle);
             Load<PropsConfig>(LoadHandle);
@@ -88,10 +96,9 @@ namespace qy.config
             allCount++;
             T config = new T();
             string path = FilePathTools.getXmlPath(config.Name);
-            Debug.Log("加载配置文件:"+path);
+            Debug.Log("加载配置文件:" + path);
             AssetsManager.Instance.LoadAssetWithWWW(path, (www) =>
             {
-                
                 config.Read(www.text);
                 dic.Add(typeof(T), config);
                 onComplate();
@@ -101,13 +108,12 @@ namespace qy.config
 
         private void LoadHandle()
         {
-            Debug.Log("配置文件加载进度:"+dic.Count.ToString()+"/"+allCount.ToString());
-            if(dic.Count>=allCount)
+            Debug.Log("配置文件加载进度:" + dic.Count + "/" + allCount);
+            if (dic.Count >= allCount)
             {
                 onComplate();
             }
         }
-
     }
 }
 

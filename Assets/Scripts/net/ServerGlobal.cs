@@ -1,21 +1,15 @@
-﻿//#define NETWORK_LINE
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ServerGlobal
 {
-#if NETWORK_LINE
-    public const string Adr = "xxx.xxx.xxx.xxx";  //外网ip
+    // public static string loginUrl = "http://10.1.9.247:9933"; //测试服务器
+#if RELEASE_FLAG
+    public static string loginUrl = "http://169.44.81.206:9933";//线上海外服务器
 #else
-    public static string Adr = "10.1.15.234";  //内网ip
-    public static int Port = 14120;
+    public static string loginUrl = "http://123.206.90.153:9933"; //线上国内服务器
 #endif
-
-  //  public static string loginUrl_inner = "http://10.1.33.20:8080";
-    public static string loginUrl = "http://123.206.90.153:9933";
-    //public static string loginUrl = "http://10.1.33.220:8080";
-    public static string test = "http://203.195.148.41/homeserver/qzone";
 
    //cmd 
     public  static string LOGIN_CMD = "user.login";
@@ -34,7 +28,8 @@ public class ServerGlobal
 	public 	static string SAVE_OFF_LINE = "offline.save";
 	public  static string SAVE_DAY_INFO = "sevenDay.info";
 	public 	static string SAVE_DAY_AWARD = "sevenDay.award";
-    public static string MAKE_POINT_ELIMINATEGUIDE = "eliminateGuide.makepoint";
+    public  static string MAKE_POINT_ELIMINATEGUIDE = "eliminateGuide.makepoint";
+    public  static string MAKE_POINT_CLICK = "buttonClick.makepoint";
 }
 
 

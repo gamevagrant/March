@@ -12,7 +12,7 @@ public class PlayerData : Singleton<PlayerData>
     private int starNum = 0; //星数
     private int heartNum = 0;//心数
     private int coinNum = 0; //金币
-    private int eliminateLevel = 1; //消除关卡
+    private int eliminateLevel; //消除关卡
     private long time;//时间戳
     private long recoveryLeftTime = 0; //下一次生命恢复剩余时间
     private string questId = "10001";//剧情ID
@@ -21,9 +21,7 @@ public class PlayerData : Singleton<PlayerData>
     private int livePrice = 900; //补满生命金币价格
     private Ability _ability = new Ability();
 
-
-
-    private bool isSaveDayInfo = false;
+	private bool isSaveDayInfo = false;
     private int indexDay = 0; //0-6表示某天
     private int awardState = 1; 
 
@@ -32,7 +30,7 @@ public class PlayerData : Singleton<PlayerData>
     private string gameUid = "";
     private string referrer = "";
     private string afUID= "";
-	private string lang = (Application.systemLanguage == SystemLanguage.Chinese || Application.systemLanguage == SystemLanguage.ChineseSimplified) ? "cn" : "en";
+	private string lang;
     private string gaid = "";
     private int gmLogin = 0;
     private string terminal = "";
@@ -41,6 +39,11 @@ public class PlayerData : Singleton<PlayerData>
     private string isHDLogin = "";
     
     private string recallId = "";
+
+	//道具解锁状态, "0"缺省, "1"表示解锁导弹, 所有下关开始的时候, 道具列表要自动勾选导弹; "2"魔方; "3"飞机
+	private string showUnlockItemStatus = "0";
+	//需要展示了第9关引导
+	private bool needShow9Help = false;
 
 	private bool m_isShowedLoginAward = false;
 
@@ -55,6 +58,12 @@ public class PlayerData : Singleton<PlayerData>
     private quest m_quest;
     public quest Quest { get { if (m_quest == null) { m_quest = DefaultConfig.getInstance().GetConfigByType<quest>(); } return m_quest; } }
 
+
+	public override void Init ()
+	{
+		base.Init ();
+		lang = (Application.systemLanguage == SystemLanguage.Chinese || Application.systemLanguage == SystemLanguage.ChineseSimplified) ? "cn" : "en";
+	}
 
     public void initGameGlobalData()
     {
@@ -86,6 +95,14 @@ public class PlayerData : Singleton<PlayerData>
     {
         return nickName;
     }
+
+	public string getShowUnlockItemStatus() {
+		return showUnlockItemStatus;
+	}
+
+	public void setShowUnlockItemStatus(string status) {
+		showUnlockItemStatus = status;
+	}
 
 	public string getLang()
 	{
@@ -124,6 +141,14 @@ public class PlayerData : Singleton<PlayerData>
     {
         return awardState;
     }
+
+	public void setNeedShow9Help(bool status) {
+		needShow9Help = status;
+	}
+
+	public bool getNeedShow9Help() {
+		return needShow9Help;
+	}
 
 	public void setSaveDayInfo(bool state)
 	{

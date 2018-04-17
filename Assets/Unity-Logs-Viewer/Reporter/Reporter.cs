@@ -291,9 +291,20 @@ public class Reporter : MonoBehaviour
 	{
 		if (!Initialized)
 			Initialize();
+
+#if UNITY_5_4_OR_NEWER
+	    SceneManager.sceneLoaded += sceneLoadedHandler;
+#endif
 	}
 
-	void OnEnable()
+    private void OnDestroy()
+    {
+#if UNITY_5_4_OR_NEWER
+        SceneManager.sceneLoaded -= sceneLoadedHandler;
+#endif
+    }
+
+    void OnEnable()
 	{
 		if (logs.Count == 0)//if recompile while in play mode
 			clear();
@@ -1956,23 +1967,35 @@ public class Reporter : MonoBehaviour
 		}
 	}
 
-	//new scene is loaded
-	void OnLevelWasLoaded()
+#if UNITY_5_4_OR_NEWER
+    private void sceneLoadedHandler(Scene scene, LoadSceneMode mode)
+    {
+        Clearup();
+    }
+#else
+    //new scene is loaded
+    void OnLevelWasLoaded()
 	{
-		if (clearOnNewSceneLoaded)
-			clear();
+        Clearup();
+	}
+#endif
+
+    void Clearup()
+    {
+        if (clearOnNewSceneLoaded)
+            clear();
 
 #if UNITY_CHANGE3
-		currentScene = SceneManager.GetActiveScene().name ;
-		Debug.Log( "Scene " + SceneManager.GetActiveScene().name + " is loaded");
+        currentScene = SceneManager.GetActiveScene().name;
+        Debug.Log("Scene " + SceneManager.GetActiveScene().name + " is loaded");
 #else
 		currentScene = Application.loadedLevelName;
 		Debug.Log("Scene " + Application.loadedLevelName + " is loaded");
 #endif
-	}
+    }
 
-	//save user config
-	void OnApplicationQuit()
+    //save user config
+    void OnApplicationQuit()
 	{
 		PlayerPrefs.SetInt("Reporter_currentView", (int)currentView);
 		PlayerPrefs.SetInt("Reporter_show", (show == true) ? 1 : 0);

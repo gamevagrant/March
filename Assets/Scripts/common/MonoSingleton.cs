@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Common
 {
@@ -11,19 +12,20 @@ namespace Assets.Scripts.Common
         {
             get
             {
-                return MonoSingleton<T>.GetInstance();
+                return GetInstance();
             }
         }
+
         public static T GetInstance()
         {
-            if (MonoSingleton<T>._instance == null && !MonoSingleton<T>._destroyed)
+            if (_instance == null && !_destroyed)
             {
                 Type typeFromHandle = typeof(T);
-                MonoSingleton<T>._instance = (T)((object)UnityEngine.Object.FindObjectOfType(typeFromHandle));
-                if (MonoSingleton<T>._instance == null)
+                _instance = (T)FindObjectOfType(typeFromHandle);
+                if (_instance == null)
                 {
                     GameObject gameObject = new GameObject(typeof(T).Name);
-                    MonoSingleton<T>._instance = gameObject.AddComponent<T>();
+                    _instance = gameObject.AddComponent<T>();
                     GameObject gameObject2 = GameObject.Find("RootObj");
                     if (gameObject2 != null)
                     {
@@ -31,62 +33,76 @@ namespace Assets.Scripts.Common
                     }
                 }
             }
-            return MonoSingleton<T>._instance;
+            return _instance;
         }
+
         public static void DestroyInstance()
         {
-            if (MonoSingleton<T>._instance != null)
+            if (_instance != null)
             {
-                UnityEngine.Object.Destroy(MonoSingleton<T>._instance.gameObject);
+                Destroy(_instance.gameObject);
             }
-            MonoSingleton<T>._destroyed = true;
-            MonoSingleton<T>._instance = (T)((object)null);
+            _destroyed = true;
+            _instance = null;
         }
+
         public static void ClearDestroy()
         {
-            MonoSingleton<T>.DestroyInstance();
-            MonoSingleton<T>._destroyed = false;
+            DestroyInstance();
+            _destroyed = false;
         }
+
         protected virtual void Awake()
         {
-            if (MonoSingleton<T>._instance != null && MonoSingleton<T>._instance.gameObject != base.gameObject)
+            if (_instance != null && _instance.gameObject != gameObject)
             {
                 if (Application.isPlaying)
                 {
-                    UnityEngine.Object.Destroy(base.gameObject);
+                    Destroy(gameObject);
                 }
                 else
                 {
-                    UnityEngine.Object.DestroyImmediate(base.gameObject);
+                    DestroyImmediate(gameObject);
                 }
             }
             else
             {
-                if (MonoSingleton<T>._instance == null)
+                if (_instance == null)
                 {
-                    MonoSingleton<T>._instance = base.GetComponent<T>();
+                    _instance = GetComponent<T>();
                 }
             }
-            UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
-            this.Init();
+            DontDestroyOnLoad(gameObject);
+            Init();
+
+            SceneManager.sceneLoaded += sceneLoadedHandler;
         }
+
         protected virtual void OnDestroy()
         {
-            if (MonoSingleton<T>._instance != null && MonoSingleton<T>._instance.gameObject == base.gameObject)
+            if (_instance != null && _instance.gameObject == gameObject)
             {
-                MonoSingleton<T>._instance = (T)((object)null);
+                _instance = null;
             }
+
+            SceneManager.sceneLoaded -= sceneLoadedHandler;
         }
+
         public static bool HasInstance()
         {
-            return MonoSingleton<T>._instance != null;
+            return _instance != null;
         }
 
         public static bool HasActiveInstance()
         {
-            return MonoSingleton<T>._instance != null && MonoSingleton<T>._instance.gameObject.activeInHierarchy;
+            return _instance != null && _instance.gameObject.activeInHierarchy;
         }
+
         protected virtual void Init()
+        {
+        }
+
+        protected virtual void sceneLoadedHandler(Scene scene, LoadSceneMode mode)
         {
         }
     }

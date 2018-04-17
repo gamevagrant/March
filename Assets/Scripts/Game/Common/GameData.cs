@@ -1,15 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Common;
 using MiniJSON;
-using UnityEngine.SceneManagement;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
-public class GameData : MonoBehaviour
+public class GameData : MonoSingleton<GameData>
 {
-    public static GameData instance = null;
-
     [Header("Data")]
     public int playerCoin;
     public int openedLevel;
@@ -26,40 +23,18 @@ public class GameData : MonoBehaviour
     public int beginRainbow;
     public int beginBombBreaker;
 
-    [Header("Guide")]
-    public GameObject m_settings;
-
     public List<Dictionary<string, object>> levelStatistics = new List<Dictionary<string, object>>();
 
-    void Awake()
+    protected override void Init()
     {
+        base.Init();
 
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
-//        if (!PlayerPrefs.HasKey("GuideEnd") || PlayerPrefs.GetString("GuideEnd") != "Y")
-//        {
-//            if (m_settings != null)
-//                m_settings.SetActive(false);
-//        }
         if (LoadGameData() == null)
         {
             SaveGameData(PrepareGameData());
-
-            return;
         }
     }
-    public void LoadRoom()
-    {
-        //SceneManager.LoadScene("Room1");
-    }
+
     #region Load
 
     string LoadGameData()

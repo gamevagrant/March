@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using March.Core.WindowManager;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -93,9 +93,7 @@ public class Booster : MonoBehaviour
     public void SingleBoosterClick()
     {
 		if (LevelLoader.instance.level < 9) {
-			var go = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/UIAlertPopup"), GameObject.Find("Canvas").transform) as GameObject;
-			go.GetComponent<UIAlertPopup> ().Init (LanguageManager.instance.GetValueByKey ("210134"));//LanguageManager.instance.GetValueByKey ("");
-			go.GetComponent<Popup> ().Open ();
+			WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210134"));
 			return;
 		}
         if (board.state != GAME_STATE.WAITING_USER_SWAP || board.lockSwap == true)
@@ -120,6 +118,8 @@ public class Booster : MonoBehaviour
         if (board.booster == BOOSTER_TYPE.NONE)
         {
             ActiveBooster(BOOSTER_TYPE.SINGLE_BREAKER);
+			Help.instance.Hide ();
+			Help.instance.Show ();
         }
         else
         {
@@ -360,7 +360,7 @@ public class Booster : MonoBehaviour
         if (board.booster == BOOSTER_TYPE.SINGLE_BREAKER)
         {
             CancelBooster(BOOSTER_TYPE.SINGLE_BREAKER);
-
+			Help.instance.Hide ();
             // reduce amount
 
             if (PlayerData.instance.getHasItemCountByItemId("200006") > 0)
@@ -388,8 +388,8 @@ public class Booster : MonoBehaviour
         {
             board.state = GAME_STATE.OPENING_POPUP;
 
-			singleBoosterPopup.popupPrefab.GetComponent<UIBoosterPopup> ().booster = BOOSTER_TYPE.SINGLE_BREAKER;
-            singleBoosterPopup.OpenPopup();
+            var booster = WindowManager.instance.Show<SingleBoosterPopupWindow>().GetComponent<UIBoosterPopup>();
+            booster.booster = BOOSTER_TYPE.SINGLE_BREAKER;
         }
     }
 
@@ -435,8 +435,6 @@ public class Booster : MonoBehaviour
 
     public void refresh()
     {
-        int x = PlayerData.instance.getHasItemCountByItemId("200006");
-
         singleAmount.text = PlayerData.instance.getHasItemCountByItemId("200006").ToString();
     }
 
