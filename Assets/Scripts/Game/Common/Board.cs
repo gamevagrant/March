@@ -3686,16 +3686,7 @@ void GenerateWaffleLayer()
 
         if (allowShowAds == true)
         {
-#if UNITY_EDITOR
-            // Show Unity Ads for testing only
-            //if (Advertisement.IsReady())
-            //{
-            //    Advertisement.Show();
-            //}
-#else
-            // Google Ads on real devices            
-            GoogleAdsController.instance.ShowInterstitial();
-#endif
+            // TODO
         }
     }
 
