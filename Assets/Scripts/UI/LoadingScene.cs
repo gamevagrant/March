@@ -31,6 +31,11 @@ public class LoadingScene : MonoBehaviour
         var go = canvas.transform.Find("ProgressBar_bg");
         m_progressBar_right = go.transform.Find("right").GetComponent<Image>();
 
+        qy.GameMainManager.Instance.configManager.LoadConfig(() =>
+        {
+            LoadScene();
+        });
+
 #if UNITY_ANDROID
         PltformManager.instance.setPlatform("android");
 #endif
