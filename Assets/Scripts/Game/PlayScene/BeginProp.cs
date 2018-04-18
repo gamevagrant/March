@@ -66,28 +66,32 @@ public class BeginProp : MonoBehaviour
         Sprite sp = Resources.Load(string.Format("Sprites/UI/{0}", goodsItem.icon), typeof(Sprite)) as Sprite;
         Icon.sprite = sp;
         Icon.SetNativeSize();
-        Icon.GetComponent<Transform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
-		if (itemid == 200004 && PlayerData.instance.getShowUnlockItemStatus() == "1") {
-			WindowManager.instance.Show<UIFlashPopupWindow> ().Init (LanguageManager.instance.GetValueByKey ("210003"));
-			onUseBtnClick ();
-			PlayerData.instance.setShowUnlockItemStatus ("0");
-		} else if (itemid == 200003 && PlayerData.instance.getShowUnlockItemStatus() == "2") {
-			WindowManager.instance.Show<UIFlashPopupWindow> ().Init (LanguageManager.instance.GetValueByKey ("210004"));
-			onUseBtnClick ();
-			PlayerData.instance.setShowUnlockItemStatus ("0");
-		} else if (itemid == 200005 && PlayerData.instance.getShowUnlockItemStatus() == "3") {
-			WindowManager.instance.Show<UIFlashPopupWindow> ().Init (LanguageManager.instance.GetValueByKey ("210005"));
-			onUseBtnClick ();
-			PlayerData.instance.setShowUnlockItemStatus ("0");
-		}
+        if (itemid == 200004 && PlayerData.instance.getShowUnlockItemStatus() == "1")
+        {
+            WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210003"));
+            onUseBtnClick();
+            PlayerData.instance.setShowUnlockItemStatus("0");
+        }
+        else if (itemid == 200003 && PlayerData.instance.getShowUnlockItemStatus() == "2")
+        {
+            WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210004"));
+            onUseBtnClick();
+            PlayerData.instance.setShowUnlockItemStatus("0");
+        }
+        else if (itemid == 200005 && PlayerData.instance.getShowUnlockItemStatus() == "3")
+        {
+            WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210005"));
+            onUseBtnClick();
+            PlayerData.instance.setShowUnlockItemStatus("0");
+        }
     }
 
     public void onUseBtnClick()
     {
         if (isLock)
         {
-			WindowManager.instance.Show<UIAlertPopupWindow> ().Init (LanguageManager.instance.GetValueByKey ("210134"));
+            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210134"));
 
             return;
         }
