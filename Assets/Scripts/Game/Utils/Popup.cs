@@ -4,29 +4,57 @@ using UnityEngine.UI;
 
 public class Popup : MonoBehaviour
 {
+    public bool AutoClose;
+    public bool NeedBackground = true;
+
+    public float Duration = 1f;
+
     public Color backgroundColor = new Color(10.0f/255.0f, 10.0f/255.0f, 10.0f/255.0f, 0.6f);
 
-	private GameObject m_background;
+    private GameObject background;
+    private bool isOpening;
 
 	public void Open()
 	{
-		AddBackground();
+	    if (isOpening)
+	        return;
+
+	    isOpening = true;
+
+	    if (NeedBackground)
+	    {
+	        AddBackground();
+	    }
+
+        if (AutoClose)
+            Invoke("Close", Duration);
 	}
 
 	public void Close()
 	{
-		var animator = GetComponent<Animator>();
+	    if (!isOpening)
+	        return;
+
+	    isOpening = false;
+
+        var animator = GetComponent<Animator>();
 		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Open"))
 			animator.Play("Close");
 
-		RemoveBackground();
+	    if (NeedBackground)
+	    {
+	        RemoveBackground();
+	    }
 		StartCoroutine(RunPopupDestroy());
 	}
 
 	private IEnumerator RunPopupDestroy()
     {
 		yield return new WaitForSeconds(0.5f);
-        Destroy(m_background);
+        if (background != null)
+        {
+            Destroy(background);
+        }
 		Destroy(gameObject);
 	}
 
@@ -36,8 +64,8 @@ public class Popup : MonoBehaviour
 		bgTex.SetPixel(0, 0, backgroundColor);
 		bgTex.Apply();
 
-		m_background = new GameObject("PopupBackground");
-		var image = m_background.AddComponent<Image>();
+		background = new GameObject("PopupBackground");
+		var image = background.AddComponent<Image>();
 		var rect = new Rect(0, 0, bgTex.width, bgTex.height);
 		var sprite = Sprite.Create(bgTex, rect, new Vector2(0.5f, 0.5f), 1);
 		image.material.mainTexture = bgTex;
@@ -48,15 +76,15 @@ public class Popup : MonoBehaviour
 		image.CrossFadeAlpha(1.0f, 0.4f, false);
 
         var canvas = GameObject.Find("Canvas");
-		m_background.transform.localScale = new Vector3(1, 1, 1);
-        m_background.GetComponent<RectTransform>().sizeDelta = canvas.GetComponent<RectTransform>().sizeDelta;
-		m_background.transform.SetParent(canvas.transform, false);
-		m_background.transform.SetSiblingIndex(transform.GetSiblingIndex());
+		background.transform.localScale = new Vector3(1, 1, 1);
+        background.GetComponent<RectTransform>().sizeDelta = canvas.GetComponent<RectTransform>().sizeDelta;
+		background.transform.SetParent(canvas.transform, false);
+		background.transform.SetSiblingIndex(transform.GetSiblingIndex());
 	}
 
 	private void RemoveBackground()
 	{
-		var image = m_background.GetComponent<Image>();
+		var image = background.GetComponent<Image>();
 		if (image != null)
 			image.CrossFadeAlpha(0.0f, 0.2f, false);
 	}

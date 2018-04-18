@@ -6,7 +6,7 @@ public class Tile : MonoBehaviour
     public TILE_TYPE type;
     public Node node;
 
-    float borderPosition = 0.55f;
+    float borderPosition = 0.52f;
 
     public void SetBorder()
     {

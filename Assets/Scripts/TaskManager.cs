@@ -5,6 +5,7 @@ using BestHTTP;
 using LitJson;
 using UnityEngine;
 using UnityEngine.UI;
+using March.Core.WindowManager;
 
 public class TaskManager : MonoBehaviour
 {
@@ -132,7 +133,7 @@ public class TaskManager : MonoBehaviour
 				return;
 			}
 		}
-        //判断当前条件是否满足
+		//判断当前条件是否满足
 
 		gotoQuestID = _questItem.gotoId;
 		//显示type=1

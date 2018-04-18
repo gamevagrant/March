@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using March.Core.WindowManager;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UISettingsPopup : MonoBehaviour
@@ -19,14 +20,13 @@ public class UISettingsPopup : MonoBehaviour
     public void onQuitBtnClick()
     {
         var board = GameObject.Find("Board").GetComponent<Board>();
-        if (board.isFirstMove == true)
+        if (board.isFirstMove)
         {
             SceneManager.LoadScene("main");
         }
         else
         {
-            Instantiate(Resources.Load("Prefabs/PlayScene/Popup/SureQuitPopup"), transform.parent);
-            gameObject.SetActive(false);
+            WindowManager.instance.Show<SureQuitPopupWindow>();
         }
     }
 }

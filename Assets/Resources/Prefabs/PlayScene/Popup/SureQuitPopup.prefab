@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 114853903537935294}
   - component: {fileID: 114644934540173432}
   - component: {fileID: 95042333916240340}
+  - component: {fileID: 114366634908888972}
   m_Layer: 5
   m_Name: SureQuitPopup
   m_TagString: Untagged
@@ -396,6 +397,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u60A8\u4F1A\u5931\u53BB1\u6761\u751F\u547D"
+--- !u!114 &114366634908888972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1461480531309764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139712f19c052ef4c887e4e1f79ce7f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114370094954275234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -607,6 +619,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114853903537935294}
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114619123086418094
@@ -650,6 +673,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114644934540173432}
         m_MethodName: onContinueClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114853903537935294}
+        m_MethodName: Close
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -820,6 +854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6907d202412ba14992cdc76b4c920ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoClose: 0
+  Duration: 1
   backgroundColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0.6}
 --- !u!114 &114899761903085932
 MonoBehaviour:

@@ -13,6 +13,7 @@ public class TimeMonoManager : MonoSingleton<TimeMonoManager>
     private float totalTime = 30; //30min
     private float intervalTime = 1;
 
+    private float reconnectTime = 0;
   
 
     public float getTotalTime()
@@ -58,25 +59,36 @@ public class TimeMonoManager : MonoSingleton<TimeMonoManager>
 	        }
 	    }
 
-        if (NetManager.instance.isNetWorkStatusGood () && !NetManager.instance.getIsConnected())
-		{
-		    NetManager.instance.setIsConnected(true);
-		    if (!SaveDataManager.instance.HasData(SaveDataDefine.serverdata))
-		    {
-		        return;
-		    }
-            Debug.Log ("网络已链接！");
-			JsonData jsonData = JsonMapper.ToObject (SaveDataManager.instance.GetString (SaveDataDefine.serverdata));
-			PlayerData.instance.userId = jsonData["uid"].ToString();
-			PlayerData.instance.jsonObj = jsonData;
-			PlayerData.instance.jsonObj ["heartTime"] = PlayerData.instance.jsonObj ["heartTime"].ToString ();  //后端没办法解析int，heartTime这个字段只能客户端转换成string了
-			Debug.Log ("heartTime str:" + PlayerData.instance.jsonObj ["heartTime"]);
-			Debug.Log ("当前本地数据" + PlayerData.instance.jsonObj.ToJson ());
-            NetManager.instance.offLineDataSave (PlayerData.instance.jsonObj.ToJson ());  //离线数据
+        if (NetManager.instance.isNetWorkStatusGood())
+        {
+            if (NetManager.instance.needSendDataToServer()) //网络连接失败
+            {
+                if (reconnectTime >= 0)
+                {
+                    reconnectTime -= Time.deltaTime;
+
+                    if (reconnectTime <= 0)
+                    {
+                        reconnectTime = NetManager.instance.m_connectedDeltaTime;
+                        if (!SaveDataManager.instance.HasData(SaveDataDefine.serverdata))
+                        {
+                            return;
+                        }
+                        JsonData jsonData = JsonMapper.ToObject(SaveDataManager.instance.GetString(SaveDataDefine.serverdata));
+                        PlayerData.instance.userId = jsonData["uid"].ToString();
+                        PlayerData.instance.jsonObj = jsonData;
+                        PlayerData.instance.jsonObj["heartTime"] = PlayerData.instance.jsonObj["heartTime"].ToString();  //后端没办法解析int，heartTime这个字段只能客户端转换成string了
+                        Debug.Log("heartTime str:" + PlayerData.instance.jsonObj["heartTime"]);
+                        Debug.Log("当前本地数据" + PlayerData.instance.jsonObj.ToJson());
+                        NetManager.instance.offLineDataSave(PlayerData.instance.jsonObj.ToJson());  //离线数据
+                    }
+                }
+            }
         }
 	}
-
     private void perMinCallback()
     {
+
+
     }
 }

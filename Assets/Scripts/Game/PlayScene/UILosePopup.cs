@@ -1,19 +1,12 @@
-﻿//using System;
-
-using System;
+﻿using March.Core.WindowManager;
 using UnityEngine;
-//using System.Collections;
-//using BestHTTP;
-//using Boo.Lang;
-//using LitJson;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UILosePopup : MonoBehaviour
 {
-
-	public Text m_titleText;
-	public Text m_des;
+    public Text m_titleText;
+    public Text m_des;
 
     public Text keepCost;
     public Text headText;
@@ -24,19 +17,16 @@ public class UILosePopup : MonoBehaviour
     public GameObject loseTargetLayout;
     public GameObject loseSBILayout;
 
-
     private int cost;
     private int addsteps;
     private int times;
     private StepsBuyConfig stepsbuyconfig;
 
-	public PopupOpener shopPopup;
-
     void Start()
     {
-		m_titleText.text = LanguageManager.instance.GetValueByKey ("200019");
-		m_des.text = LanguageManager.instance.GetValueByKey ("210010");
-		//btnText.text = LanguageManager.instance.GetValueByKey ("200016");
+        m_titleText.text = LanguageManager.instance.GetValueByKey("200019");
+        m_des.text = LanguageManager.instance.GetValueByKey("210010");
+        //btnText.text = LanguageManager.instance.GetValueByKey ("200016");
 
         board = GameObject.Find("Board").GetComponent<Board>();
 
@@ -56,23 +46,24 @@ public class UILosePopup : MonoBehaviour
                     if (loseTargetLayout != null)
                     {
                         GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseTargetCell"), loseTargetLayout.transform) as GameObject;
-						cell.GetComponent<UILoseTargetCell>().Init(LevelLoader.instance.targetList[i].Type, board.targetLeftList[i], LevelLoader.instance.targetList[i].color);
+                        cell.GetComponent<UILoseTargetCell>().Init(LevelLoader.instance.targetList[i].Type, board.targetLeftList[i], LevelLoader.instance.targetList[i].color);
                     }
                 }
             }
             var dic = stepsbuyconfig.GetEffectDicByTimes(times);
-			if (dic.Count > 0) {
-				GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
+            if (dic.Count > 0)
+            {
+                GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
 
-				cell.GetComponent<UILoseSBICell>().Init();
-			}
+                cell.GetComponent<UILoseSBICell>().Init();
+            }
             foreach (var tmp in dic)
             {
                 if (loseSBILayout != null)
                 {
                     GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
 
-                    cell.GetComponent<UILoseSBICell>().Init(tmp.Key,tmp.Value);
+                    cell.GetComponent<UILoseSBICell>().Init(tmp.Key, tmp.Value);
                 }
             }
             dic = stepsbuyconfig.GetItemBagDicByTimes(times);
@@ -85,70 +76,12 @@ public class UILosePopup : MonoBehaviour
                     cell.GetComponent<UILoseSBICell>().Init(tmp.Key, tmp.Value);
                 }
             }
-
-
-
-
         }
-
     }
-
-  
-
-//    public void ExitButtonClick()
-//    {
-//        AudioManager.instance.ButtonClickAudio();
-//
-//        toMap.PerformTransition();
-//    }
-
-//    public void ReplayButtonClick()
-//    {
-//        AudioManager.instance.ButtonClickAudio();
-//
-//        Configure.instance.autoPopup = LevelLoader.instance.level;
-//
-//        toMap.PerformTransition();
-//    }
-
-//    public void SkipButtonClick()
-//    {
-//        AudioManager.instance.ButtonClickAudio();
-//
-//        var cost = Configure.instance.skipLevelCost;
-//
-//        // enough coin
-//        if (cost <= GameData.instance.playerCoin)
-//        {
-//            AudioManager.instance.CoinPayAudio();
-//
-//            // reduce coin
-//            GameData.instance.SavePlayerCoin(GameData.instance.playerCoin - cost);
-//
-//            var board = GameObject.Find("Board").GetComponent<Board>();
-//
-//            if (board)
-//            {
-//                // save info
-//                board.SaveLevelInfo();
-//            }
-//
-//            // go to map with auto popup of next level
-//            Configure.instance.autoPopup = LevelLoader.instance.level + 1;
-//
-//            toMap.PerformTransition();
-//        }
-//        else
-//        {
-//            shopPopup.OpenPopup();
-//        }
-//    }
 
     public void KeepButtonClick()
     {
         AudioManager.instance.ButtonClickAudio();
-
-
 
         // enough coin
         if (cost <= PlayerData.instance.getCoinNum())
@@ -181,7 +114,7 @@ public class UILosePopup : MonoBehaviour
                 // reset and call hint
                 board.checkHintCall = 0;
                 board.Hint();
-                
+
             }
 
             // close the popup`
@@ -194,14 +127,8 @@ public class UILosePopup : MonoBehaviour
         }
         else
         {
-			//btnText.text = LanguageManager.instance.GetValueByKey ("200023");
-			shopPopup.OpenPopup();
+            WindowManager.instance.Show<ShopPopupPlayWindow>();
         }
-        // not enough coin
-//        else
-//        {
-//            shopPopup.OpenPopup();
-//        }
     }
 
     public void ReLoadScene()
@@ -211,9 +138,8 @@ public class UILosePopup : MonoBehaviour
 
     public void OnCloseClick()
     {
-        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep,0);
+        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
 
-        var beginPopup = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/BeginPopup"), GameObject.Find("Canvas").transform) as GameObject;
-        Destroy(gameObject);
+        WindowManager.instance.Show<BeginPopupWindow>();
     }
 }

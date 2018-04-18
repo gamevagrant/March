@@ -1,23 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Org.BouncyCastle.Math.EC.Multiplier;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class UIBeginPopup : MonoBehaviour
 {
-
     public Text HeadText;
     public Text NumText;
     public Text BeginBottomText;
     public Text BeginItemText;
     public GameObject BeginItemListLayout;
     public GameObject TargetListLayout;
-	public BeginProp m_BeginProp;
+
+    private Popup popup;
 
 	void Start ()
 	{
-        //todo:改为多语言
-		HeadText.text = LanguageManager.instance.GetValueByKey("200014") + PlayerData.instance.getEliminateLevel().ToString();
+	    popup = GetComponent<Popup>();
+
+        HeadText.text = LanguageManager.instance.GetValueByKey("200014") + PlayerData.instance.getEliminateLevel().ToString();
 		BeginBottomText.text = LanguageManager.instance.GetValueByKey ("200016");
         if (SceneManager.GetActiveScene().name == "Play")
 	    {
@@ -42,37 +42,38 @@ public class UIBeginPopup : MonoBehaviour
 	    {
 			int[] itemids = {200004, 200003, 200005};
 			foreach (int itemid in itemids) {
-				var tmp = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/BeginProp"), BeginItemListLayout.transform) as GameObject;
+				var tmp = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/EnhancementItem"), BeginItemListLayout.transform) as GameObject;
 				tmp.GetComponent<BeginProp>().Init(itemid);
 			}
 	    }
     }
 
-    void Awake()
-    {
-    }
-
     public void onStartGameClick()
     {
         int eliminateHeartNum = 1;
-#if UNITY_EDITOR
 
-#else
-        if (PlayerData.instance.getHeartNum() < eliminateHeartNum)
+        if (!Application.isEditor)
         {
-            BeginBottomText.text = "心数不足！";
-            return;
+            if (PlayerData.instance.getHeartNum() < eliminateHeartNum)
+            {
+                BeginBottomText.text = "心数不足！";
+                return;
+            }
         }
-#endif
+        NetManager.instance.MakePointInEliminateStart();
         SceneManager.LoadScene("Play");
     }
-
-    public void onCloseClick()
+	
+	public void onCloseClick()
     {
         if (SceneManager.GetActiveScene().name != "main")
         {
             SceneManager.LoadScene("main");
         }
-        Destroy(this.gameObject);
+
+        if (popup != null)
+        {
+            popup.Close();
+        }
     }
 }

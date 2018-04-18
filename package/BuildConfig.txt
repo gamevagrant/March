@@ -1,1 +1,1 @@
-{"Name":"march","BundleID":"com.elex.march","Version":"1.0.7","IsForDev":false}
+{"ProductName":"March","CompanyName":"elex","ApplicationId":"com.elex.march","Version":"1.0.5","KeyStorePath":"c:/projects/user.keystore","KeyPassword":"111111","KeyAliasName":"test","IsForDev":false}

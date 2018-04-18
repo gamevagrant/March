@@ -14,7 +14,7 @@ public class PopupOpener : MonoBehaviour
 
 	public virtual GameObject OpenPopup()
 	{
-		var popup = Instantiate(popupPrefab) as GameObject;
+		var popup = Instantiate(popupPrefab);
 		popup.SetActive(true);
 		popup.transform.localScale = Vector3.zero;
 

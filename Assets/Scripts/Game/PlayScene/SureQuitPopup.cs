@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SureQuitPopup : MonoBehaviour
 {
-
     public Text headText;
     public Text QuitBtnText;
     public Text ContinueBtnText;
@@ -15,34 +12,34 @@ public class SureQuitPopup : MonoBehaviour
 
     private Board board;
 
-	void Start () {
+    void Start()
+    {
+		headText.text = LanguageManager.instance.GetValueByKey ("210152");
+		QuitBtnText.text = LanguageManager.instance.GetValueByKey ("210154");
+		ContinueBtnText.text = LanguageManager.instance.GetValueByKey ("210136");
+		showText.text = LanguageManager.instance.GetValueByKey ("210153");
 
-	    board = GameObject.Find("Board").GetComponent<Board>();
-	    if (board != null)
-	    {
-	        for (int i = 0; i < board.targetLeftList.Count; i++)
-	        {
-	            if (board.targetLeftList[i] > 0)
-	            {
-	                if (loseTargetLayout != null)
-	                {
-	                    GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseTargetCell"), loseTargetLayout.transform) as GameObject;
+        board = GameObject.Find("Board").GetComponent<Board>();
+        if (board != null)
+        {
+            for (int i = 0; i < board.targetLeftList.Count; i++)
+            {
+                if (board.targetLeftList[i] > 0)
+                {
+                    if (loseTargetLayout != null)
+                    {
+                        GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseTargetCell"), loseTargetLayout.transform) as GameObject;
 
-	                    cell.GetComponent<UILoseTargetCell>().Init(LevelLoader.instance.targetList[i].Type, board.targetLeftList[i], LevelLoader.instance.targetList[i].color);
-	                }
-	            }
-	        }
-	    }
+                        cell.GetComponent<UILoseTargetCell>().Init(LevelLoader.instance.targetList[i].Type, board.targetLeftList[i], LevelLoader.instance.targetList[i].color);
+                    }
+                }
+            }
+        }
     }
 
     public void onQuitClick()
     {
-        Dictionary<string, int> data = new Dictionary<string, int>();
-        data.Add("result",0);
-        data.Add("step",board.allstep);
-        data.Add("wingold",0);
-        data.Add("minwingold",0);
-        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep,0);
+        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
         SceneManager.LoadScene("main");
     }
 
@@ -54,7 +51,5 @@ public class SureQuitPopup : MonoBehaviour
         }
 
         AudioManager.instance.ButtonClickAudio();
-        Destroy(this.gameObject);
     }
-	
 }

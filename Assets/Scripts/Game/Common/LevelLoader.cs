@@ -1,15 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using Assets.Scripts.Common;
 using MiniJSON;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using UnityEngine;
 
-public class LevelLoader : MonoBehaviour
+public class LevelLoader : MonoSingleton<LevelLoader>
 {
-    public static LevelLoader instance = null;
-
     [Header("Basic")]
     public int level;
     public int column;
@@ -70,20 +67,8 @@ public class LevelLoader : MonoBehaviour
     public int cake;
 
     private matchlevel m_matchlevel;
-    public matchlevel LevelConfig { get { if (m_matchlevel == null) { m_matchlevel = DefaultConfig.getInstance().GetConfigByType<matchlevel>(); } return m_matchlevel; } }
 
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-    }
+    public matchlevel LevelConfig { get { if (m_matchlevel == null) { m_matchlevel = DefaultConfig.getInstance().GetConfigByType<matchlevel>(); } return m_matchlevel; } }
 
     public void LoadLevel()
     {
@@ -99,13 +84,7 @@ public class LevelLoader : MonoBehaviour
 
         Clear();
 
-        //print(jsonString);
-
         var dict = Json.Deserialize(jsonString.text) as Dictionary<string, object>;
-
-        //var str = Json.Serialize(dict);
-
-        //Debug.Log("serialized: " + str);
 
         column = int.Parse(dict["width"].ToString());
         row = int.Parse(dict["height"].ToString());

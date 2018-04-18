@@ -13,13 +13,13 @@
     <ItemSpec id="1000011" level="11" hard="1" star="1" coin="50" itemReward="200104:1:100"/>
     <ItemSpec id="1000012" level="12" hard="1" star="1" coin="50" itemReward="0"/>
     <ItemSpec id="1000013" level="13" hard="2" star="1" coin="50" itemReward="0"/>
-    <ItemSpec id="1000014" level="14" hard="1" star="1" coin="50" itemReward="200104:1:100"/>
+    <ItemSpec id="1000014" level="14" hard="1" star="1" coin="50" itemReward="200104:1:100,200004:3:100"/>
     <ItemSpec id="1000015" level="15" hard="1" star="1" coin="100" itemReward="0"/>
-    <ItemSpec id="1000016" level="16" hard="1" star="1" coin="50" itemReward="0"/>
+    <ItemSpec id="1000016" level="16" hard="1" star="1" coin="50" itemReward="200003:3:100"/>
     <ItemSpec id="1000017" level="17" hard="2" star="1" coin="50" itemReward="0"/>
     <ItemSpec id="1000018" level="18" hard="1" star="1" coin="50" itemReward="0"/>
     <ItemSpec id="1000019" level="19" hard="1" star="1" coin="50" itemReward="0"/>
-    <ItemSpec id="1000020" level="20" hard="1" star="1" coin="100" itemReward="0"/>
+    <ItemSpec id="1000020" level="20" hard="1" star="1" coin="100" itemReward="200005:3:100"/>
     <ItemSpec id="1000021" level="21" hard="2" star="1" coin="50" itemReward="0"/>
     <ItemSpec id="1000022" level="22" hard="1" star="1" coin="50" itemReward="0"/>
     <ItemSpec id="1000023" level="23" hard="1" star="1" coin="50" itemReward="0"/>
@@ -119,5 +119,5 @@
     <ItemSpec id="1000117" level="117" hard="2" star="1" coin="50" itemReward="0"/>
     <ItemSpec id="1000118" level="118" hard="1" star="1" coin="50" itemReward="0"/>
     <ItemSpec id="1000119" level="119" hard="1" star="1" coin="50" itemReward="0"/>
-	    <ItemSpec id="1000999" level="999" hard="1" star="1" coin="50" itemReward="0"/>
+	<ItemSpec id="1000999" level="999" hard="1" star="1" coin="50" itemReward="0"/>
 </Group>

@@ -6,13 +6,10 @@ public class LoadingScene : MonoBehaviour
 {
     private AsyncOperation m_async;
     private Image m_progressBar;
-	private Image m_progressBar_right;
-    // Use this for initialization
+    private Image m_progressBar_right;
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
-
         AddConfig<storyhead>();
         AddConfig<quest>();
         AddConfig<story>();
@@ -23,26 +20,26 @@ public class LoadingScene : MonoBehaviour
         AddConfig<guidesetup>();
 
         LanguageManager.instance.initConfig();
-
-        /*
-        qy.config.ConfigManager.Instance.LoadConfig(()=> {
-            Debug.Log("配置文件初始化完毕");
-        });
-        */
     }
 
     void Start()
     {
         Debug.Log("LoadingScene Start ...");
 
-        //PlayerPrefs.DeleteAll(); //这里测试测试新手
+        qy.config.ConfigManager.Instance.LoadConfig(() =>
+        {
+            Debug.Log("配置文件初始化完毕");
+
+            LoadScene();
+        });
+
         var canvas = FindObjectOfType<Canvas>().gameObject;
         m_progressBar = canvas.transform.Find("ProgressBar").GetComponent<Image>();
-		var go = canvas.transform.Find ("ProgressBar_bg");
-		m_progressBar_right = go.transform.Find ("right").GetComponent<Image> ();
+        var go = canvas.transform.Find("ProgressBar_bg");
+        m_progressBar_right = go.transform.Find("right").GetComponent<Image>();
 
 #if UNITY_ANDROID
-         PltformManager.instance.setPlatform("android");
+        PltformManager.instance.setPlatform("android");
 #endif
 
 #if UNITY_IPHONE
@@ -52,7 +49,6 @@ public class LoadingScene : MonoBehaviour
 #if UNITY_STANDALONE_WIN
         PltformManager.instance.setPlatform("win32");
 #endif        
-        LoadScene();
     }
 
     void Update()
@@ -60,10 +56,11 @@ public class LoadingScene : MonoBehaviour
         if (m_async != null && m_progressBar != null)
         {
             m_progressBar.fillAmount = m_async.progress;
-			Debug.Log ("------" + m_async.progress.ToString ());
-			if (m_async.progress >= 1.0f) {
-				m_progressBar_right.gameObject.SetActive (true);
-			}
+            Debug.Log("------" + m_async.progress.ToString());
+            if (m_async.progress >= 1.0f)
+            {
+                m_progressBar_right.gameObject.SetActive(true);
+            }
         }
     }
 

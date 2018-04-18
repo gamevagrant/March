@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 22432060}
   - component: {fileID: 9511582}
   - component: {fileID: 11447058}
+  - component: {fileID: 114464089053013788}
   m_Layer: 5
   m_Name: ExcellentPopup
   m_TagString: Untagged
@@ -89,6 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6907d202412ba14992cdc76b4c920ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoClose: 1
+  NeedBackground: 0
+  Duration: 1
   backgroundColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!222 &22292048
 CanvasRenderer:
@@ -103,7 +107,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 337, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22480928}
@@ -149,3 +153,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180778}
   m_IsPrefabParent: 1
+--- !u!114 &114464089053013788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5da642ee104a4d4ea30fc5173e54111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

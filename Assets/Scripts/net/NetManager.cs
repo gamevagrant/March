@@ -14,6 +14,9 @@ public class NetManager : Singleton<NetManager>
 
 	private bool m_isConnected = false;
 	private bool m_isLogin = false;
+
+    private bool waitForOffLineSaveRev = false;
+    public float m_connectedDeltaTime = 2;
 //    private bool m_canConnect = true;
 //
 //
@@ -33,6 +36,15 @@ public class NetManager : Singleton<NetManager>
 	{
 		m_isConnected = value;
 	}
+
+    public bool needSendDataToServer()
+    {
+        if (!getIsConnected() && !waitForOffLineSaveRev)
+        {
+            return true;
+        }
+        return false;
+    }
 
 	public bool getIsLogin()
 	{
@@ -92,15 +104,8 @@ public class NetManager : Singleton<NetManager>
 		public int type;
 	}
 
-    class GuideMakePoint
-    {
-        public int level;
-        public int step;
-    }
-
     public bool isNetWorkStatusGood()
     {
-        //todo:加入ping机制 ping不通服务器的话取用本地数据
         if (!(Application.internetReachability == NetworkReachability.NotReachable))
             return true;
         else
@@ -118,6 +123,20 @@ public class NetManager : Singleton<NetManager>
     /// <param name="callback">消息回调</param>
     public void httpSend(string cmd,string data,OnRequestFinishedDelegate callback)
     {
+        //Debug.LogError("网络连接错误");
+        string localCacheData = SaveDataManager.instance.GetString(SaveDataDefine.serverdata);
+        Debug.Log("本地数据：" + localCacheData);
+        if (localCacheData.Equals(""))
+        {
+            MessageBox.Instance.Show("数据错误，请联网同步数据");
+            return;
+        }
+        else
+        {
+            JsonData jsonData = JsonMapper.ToObject(SaveDataManager.instance.GetString(SaveDataDefine.serverdata));
+            PlayerData.instance.RefreshData(jsonData);
+        }
+
         if (isNetWorkStatusGood() && getIsConnected())
         {
             HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, callback);
@@ -125,19 +144,6 @@ public class NetManager : Singleton<NetManager>
             request.AddField("cmd", cmd);
             request.AddField("data", data);
             request.Send();
-        }
-        else
-        {
-			Debug.LogError("网络连接错误");
-			string localCacheData = SaveDataManager.instance.GetString (SaveDataDefine.serverdata);
-			Debug.Log ("本地数据：" + localCacheData);
-			if (localCacheData.Equals (""))
-				MessageBox.Instance.Show ("数据错误，请联网同步数据");
-			else
-			{
-				JsonData jsonData = JsonMapper.ToObject (SaveDataManager.instance.GetString (SaveDataDefine.serverdata));
-				PlayerData.instance.RefreshData (jsonData);
-			}
         }
       
     }
@@ -172,6 +178,12 @@ public class NetManager : Singleton<NetManager>
 
     private void userToolsRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
+
         Debug.Log("userToolsRev response" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
@@ -190,6 +202,11 @@ public class NetManager : Singleton<NetManager>
 
     private void sendQuestIdRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
         Debug.Log("sendQuest Rev :" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
@@ -236,6 +253,11 @@ public class NetManager : Singleton<NetManager>
 
     private void buyItemRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
         Debug.Log("item Buy Rev :" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
@@ -266,6 +288,11 @@ public class NetManager : Singleton<NetManager>
 
     private void eliminateLevelStartRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
         Debug.Log("eliminateLevelStartRev response:" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
@@ -336,6 +363,11 @@ public class NetManager : Singleton<NetManager>
 
     private void eliminateLevelEndRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
         Debug.Log("eliminateLevelEndRev response:" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
@@ -347,17 +379,49 @@ public class NetManager : Singleton<NetManager>
 
     public void MakePointInGuide( int level, int step)
     {
-        GuideMakePoint _point = new GuideMakePoint();
-        _point.level = level;
-        _point.step = step;
-        string pointDataJson = JsonUtility.ToJson(_point);
-        Debug.Log("_point Result:" + pointDataJson);
-        httpSend(ServerGlobal.MAKE_POINT_ELIMINATEGUIDE, pointDataJson, MakePointInGuideRev);
+        JsonData _data = new JsonData();
+        _data["level"] = level;
+        _data["step"] = step;
+        Debug.Log("MakePointInGuide Result:" + _data.ToJson());
+        httpSend(ServerGlobal.MAKE_POINT_ELIMINATEGUIDE, _data.ToJson(), MakePointInGuideRev);
     }
     private void MakePointInGuideRev(HTTPRequest request, HTTPResponse response)
     {
-        Debug.Log("eliminateLevelEndRev response:" + response.DataAsText);
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
+        Debug.Log("MakePointInGuideRev response:" + response.DataAsText);
     }
+
+    public void MakePointInEliminateStart()
+    {
+        MakePointInClickButton("EliminateStart", 1);
+    }
+    public void MakePointInEliminateClick()
+    {
+        MakePointInClickButton("Eliminate",1);
+    }
+
+    public void MakePointInClickButton(string name, int num)
+    {
+        JsonData _point = new JsonData();
+        _point["name"] = name;
+        _point["num"] = num;
+        Debug.Log("MakePointInClickButton Result:" + _point.ToJson());
+        httpSend(ServerGlobal.MAKE_POINT_CLICK, _point.ToJson(), MakePointInClickButtonRev);
+    }
+    private void MakePointInClickButtonRev(HTTPRequest request, HTTPResponse response)
+    {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
+        Debug.Log("MakePointInClickButtonRev response:" + response.DataAsText);
+    }
+
 
     #endregion
 
@@ -387,6 +451,11 @@ public class NetManager : Singleton<NetManager>
 
     private void buyHeartRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
         Debug.Log("buyHeartRev response:" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
@@ -446,6 +515,11 @@ public class NetManager : Singleton<NetManager>
 
     private void modifyNickNameRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
         Debug.Log("modifyNickNameRev response:" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
@@ -460,16 +534,39 @@ public class NetManager : Singleton<NetManager>
 	#region offline data save 
 	public void offLineDataSave(string data)
 	{
-        httpSend(ServerGlobal.SAVE_OFF_LINE, data, offLineDataSaveRev);
-	}
+	    waitForOffLineSaveRev = true;
+	    HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, offLineDataSaveRev);
+	    request.AddField("uid", PlayerData.instance.userId);
+	    request.AddField("cmd", ServerGlobal.SAVE_OFF_LINE);
+	    request.AddField("data", data);
+	    request.Send();
+    }
 
 	private void offLineDataSaveRev(HTTPRequest request,HTTPResponse response)
 	{
-		Debug.Log ("offLineDataSaveRev response:" + response.DataAsText);
+	    Debug.Log("offLineDataSaveRev!");
+        waitForOffLineSaveRev = false;
+        if (response == null)
+	    {
+            setIsConnected(false);
+	        m_connectedDeltaTime *= 2;
+            return;
+	    }
+        Debug.Log ("offLineDataSaveRev response:" + response.DataAsText);
 		if (response.DataAsText != "") {
-			JsonData data = JsonMapper.ToObject(response.DataAsText);
-			PlayerData.instance.RefreshData(data);
-		}
+		    m_connectedDeltaTime = 2;
+		    if (!getIsConnected()) //保证离线模式转为在线模式 等待命令返回期间的数据 同步到服务器上
+		    {
+		        Debug.Log("网络连接成功！");
+		        JsonData Jsontmp = JsonMapper.ToObject(SaveDataManager.instance.GetString(SaveDataDefine.serverdata));
+		        Jsontmp["heartTime"] = Jsontmp["heartTime"].ToString();
+                Debug.Log(Jsontmp);
+                offLineDataSave(Jsontmp.ToJson());
+            }
+		    setIsConnected(true);
+            //            JsonData data = JsonMapper.ToObject(response.DataAsText);
+            //			PlayerData.instance.RefreshData(data);
+        }
 	}
     #endregion
 //    #region save day info 
@@ -494,6 +591,11 @@ public class NetManager : Singleton<NetManager>
 
     private void saveDayAwardRev(HTTPRequest request, HTTPResponse response)
     {
+        if (response == null)
+        {
+            setIsConnected(false);
+            return;
+        }
         Debug.Log("saveDayInfoRev response:" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
