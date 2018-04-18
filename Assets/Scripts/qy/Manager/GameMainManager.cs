@@ -26,6 +26,7 @@ namespace qy
         public IAudioManager audioManager;
         public config.ConfigManager configManager;
         public PlayerData playerData;
+        public IPlayerModel playerModel;
         /// <summary>
         /// //全局脚本，可以使用monobehaviour方法
         /// </summary>
@@ -35,6 +36,7 @@ namespace qy
         public GameMainManager()
         {
             playerData = new PlayerData();
+            playerModel = new PlayerModel(playerData);
             netManager = net.NetManager.Instance;
             configManager = config.ConfigManager.Instance;
             uiManager = ui.UIManager.Instance;
@@ -45,9 +47,10 @@ namespace qy
 
         public void Init()
         {
+
             
 
-           
+
         }
     }
 }

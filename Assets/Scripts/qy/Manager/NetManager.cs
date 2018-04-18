@@ -222,17 +222,6 @@ namespace qy.net
         /// <returns></returns>
         public bool UseTools(string itemID,int count, Action<bool, PlayerDataMessage> callBack)
         {
-            PropItem item = GameMainManager.Instance.playerData.GetPropItem(itemID);
-            if (item == null || item.count<count)
-            {
-                Debug.LogError("物品不存在或数量不足！");
-            }else
-            {
-                GameMainManager.Instance.playerData.RemovePropItem(itemID,count);
-                LocalDatasManager.playerData = GameMainManager.Instance.playerData;
-
-            }
-
             JsonData jd = new JsonData();
             jd["item"] = itemID;
             jd["num"] = count;
@@ -247,7 +236,6 @@ namespace qy.net
         /// <returns></returns>
         public bool UpdateQuestId(string questId, Action<bool, PlayerDataMessage> callBack)
         {
-            LocalDatasManager.playerData = GameMainManager.Instance.playerData;
 
             JsonData jd = new JsonData();
             jd["storyid"] = questId;
@@ -264,22 +252,6 @@ namespace qy.net
         /// <returns></returns>
         public bool BuyItem(string itemId,int num, Action<bool, PlayerDataMessage> callBack)
         {
-            PropItem item = GameMainManager.Instance.configManager.propsConfig.GetItem(itemId);
-            if(item!=null )
-            {
-                int cost = item.price * num;
-                if (GameMainManager.Instance.playerData.coinNum< cost)
-                {
-                    Debug.LogError("金币不足！");
-                }else
-                {
-                    GameMainManager.Instance.playerData.coinNum -= cost;
-                    GameMainManager.Instance.playerData.AddPropItem(itemId,num);
-                    LocalDatasManager.playerData = GameMainManager.Instance.playerData;
-
-                }
-            }
-
             JsonData jd = new JsonData();
             jd["itemId"] = itemId;
             jd["num"] = num;
@@ -297,15 +269,6 @@ namespace qy.net
         public bool LevelStart(Action<bool, PlayerDataMessage> callBack)
         {
             
-            if (GameMainManager.Instance.playerData.heartNum<=0)
-            {
-                Debug.Log("心数不足！");
-            }else
-            {
-                GameMainManager.Instance.playerData.heartNum-= 1;
-                LocalDatasManager.playerData = GameMainManager.Instance.playerData;
-            }
-
             return SendData(LEVEL_START_CMD, null, callBack);
         }
         /// <summary>
@@ -319,27 +282,7 @@ namespace qy.net
         /// <returns></returns>
         public bool LevelEnd(int level, int result, int step, int wingold, Action<bool, PlayerDataMessage> callBack)
         {
-            MatchLevelItem levelItem = GameMainManager.Instance.configManager.matchLevelConfig.GetItem((1000000 + level).ToString());
-            if(result == 1)
-            {
-                GameMainManager.Instance.playerData.coinNum += wingold + levelItem.coin;
-                GameMainManager.Instance.playerData.starNum += levelItem.star;
-                GameMainManager.Instance.playerData.heartNum += 1;
-                GameMainManager.Instance.playerData.eliminateLevel += 1;
-
-                foreach(PropItem propItem in levelItem.itemReward)
-                {
-                    int rate = UnityEngine.Random.Range(1, 101);
-                    if(rate<=propItem.rate)
-                    {
-                        GameMainManager.Instance.playerData.AddPropItem(propItem.id, propItem.count);
-
-                    }
-                }
-
-                LocalDatasManager.playerData = GameMainManager.Instance.playerData;
-
-            }
+           
             JsonData jd = new JsonData();
             jd["succ"] = result;
             jd["step"] = step;
@@ -368,18 +311,6 @@ namespace qy.net
         /// <returns></returns>
         public bool BuyHeart(Action<bool, PlayerDataMessage> callBack)
         {
-            int cost = GameMainManager.Instance.configManager.settingConfig.livesPrice;
-            if(GameMainManager.Instance.playerData.coinNum<cost)
-            {
-                Debug.LogError("金币不足！");
-            }else
-            {
-                GameMainManager.Instance.playerData.coinNum -= cost;
-                GameMainManager.Instance.playerData.heartNum = GameMainManager.Instance.configManager.settingConfig.maxLives;
-                GameMainManager.Instance.playerData.recoveryLeftTime = 0;
-                LocalDatasManager.playerData = GameMainManager.Instance.playerData;
-            }
-
             return SendData(HEART_BUY, null, callBack);
         }
 
@@ -391,23 +322,6 @@ namespace qy.net
         /// <returns></returns>
         public bool EliminateLevelFiveMore(int step,Action<bool, PlayerDataMessage> callBack)
         {
-            int cost = GameMainManager.Instance.configManager.settingConfig.GetPriceWithStep(step);
-            List<PropItem> items = GameMainManager.Instance.configManager.settingConfig.GetBonusItemBagWithStep(step);
-            if (GameMainManager.Instance.playerData.coinNum < cost)
-            {
-                Debug.LogError("金币不足！");
-            }
-            else
-            {
-                GameMainManager.Instance.playerData.coinNum -= cost;
-                foreach(PropItem item in items)
-                {
-                    GameMainManager.Instance.playerData.AddPropItem(item.id,item.count);
-                }
-                
-                LocalDatasManager.playerData = GameMainManager.Instance.playerData;
-            }
-
             return SendData(LEVEL_FIVEMORE, null, callBack);
         }
         /// <summary>
@@ -418,8 +332,6 @@ namespace qy.net
         /// <returns></returns>
         public bool ModifyNickName(string nickName, Action<bool, PlayerDataMessage> callBack)
         {
-            GameMainManager.Instance.playerData.nickName = nickName;
-            GameMainManager.Instance.playerData.SaveData();
 
             JsonData jd = new JsonData();
             jd["nickName"] = nickName;
@@ -435,16 +347,13 @@ namespace qy.net
         /// <returns></returns>
         public bool SaveDayAward( Action<bool, PlayerDataMessage> callBack)
         {
-
             JsonData jd = new JsonData();
-
 
             return SendData(SAVE_DAY_AWARD, jd, callBack);
         }
 
         public bool UserBind(string id, string name, Action<bool, PlayerDataMessage> callBack)
         {
-
             JsonData jd = new JsonData();
             jd["optType"] = 1;
             jd["facebook"] = id;
@@ -455,7 +364,6 @@ namespace qy.net
 
         public bool UserUnBind(Action<bool, PlayerDataMessage> callBack)
         {
-
             JsonData jd = new JsonData();
             jd["type"] = 1;
 

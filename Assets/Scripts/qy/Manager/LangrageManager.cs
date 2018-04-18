@@ -22,7 +22,7 @@ namespace qy
 
         public string GetItemWithID(string id)
         {
-            return ConfigManager.Instance.langrageConfig.GetItem(id);
+            return ConfigManager.Instance.languageConfig.GetItem(id);
         }
     }
 }

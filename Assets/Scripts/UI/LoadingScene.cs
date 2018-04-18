@@ -26,13 +26,6 @@ public class LoadingScene : MonoBehaviour
     {
         Debug.Log("LoadingScene Start ...");
 
-        qy.config.ConfigManager.Instance.LoadConfig(() =>
-        {
-            Debug.Log("配置文件初始化完毕");
-
-            LoadScene();
-        });
-
         var canvas = FindObjectOfType<Canvas>().gameObject;
         m_progressBar = canvas.transform.Find("ProgressBar").GetComponent<Image>();
         var go = canvas.transform.Find("ProgressBar_bg");

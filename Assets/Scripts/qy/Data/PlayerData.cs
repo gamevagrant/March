@@ -43,6 +43,14 @@ namespace qy
         /// //剧情ID
         /// </summary>
         public string questId = "10001";
+
+        public config.QuestItem quest
+        {
+            get
+            {
+                return GameMainManager.Instance.configManager.questConfig.GetItem(questId);
+            }
+        }
         /// <summary>
         /// //心数恢复间隔是30min
         /// </summary>

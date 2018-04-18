@@ -20,7 +20,7 @@ namespace qy.config
         public int maxLives;
 
 
-
+        #region 再买五步 配置
         /// <summary>
         /// 购买五步的价格 同一关 每买一次价格升一次
         /// </summary>
@@ -28,13 +28,14 @@ namespace qy.config
         private List<List<PropItem>> bonusItems;
         private List<List<PropItem>> bonusItemsBag;
         public int addSteps;
+        #endregion
 
         /// <summary>
         /// 最大关卡数
         /// </summary>
         public int max;
 
-
+        #region 道具转化金币
         /// <summary>
         /// 结算时的道具转化为金币奖励 
         /// </summary>
@@ -44,6 +45,18 @@ namespace qy.config
         public int bombbreaker;
         public int rainbow;
         public int maxgold;
+        #endregion
+
+        #region 7日签到
+        public int functionSwitchOpen;
+        public int maxNum;
+        public int showDay;
+        private List<List<PropItem>> item;
+        private List<int> gold;
+        private List<int> star;
+        public int IsTestOpen;
+        public string OpenRegular;
+        #endregion
 
         public override string Name
         {
@@ -72,7 +85,19 @@ namespace qy.config
                 else if(name == "price")
                 {
                     price = ReadPrice(attribute.Value);
-                }else
+                }else if(name == "item")
+                {
+                    this.item = ReadBonusItems(attribute.Value);
+                }
+                else if (name == "gold")
+                {
+                    gold = ReadPrice(attribute.Value);
+                }
+                else if (name == "star")
+                {
+                    star = ReadPrice(attribute.Value);
+                }
+                else
                 {
                     foreach (System.Reflection.PropertyInfo pi in t.GetProperties())
                     {
@@ -91,6 +116,40 @@ namespace qy.config
                 }
             }
 
+        }
+
+        /// <summary>
+        /// 获取七天奖励金币
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public int GetSevenDayGold(int day)
+        {
+            day = Mathf.Max(day,0);
+            day = day % gold.Count;
+            return gold[day];
+        }
+        /// <summary>
+        /// 获取七天奖励星星
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public int GetSevenDayStar(int day)
+        {
+            day = Mathf.Max(day, 0);
+            day = day % star.Count;
+            return star[day];
+        }
+        /// <summary>
+        /// 获取七天奖励道具
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public List<PropItem> GetSevenDayProp(int day)
+        {
+            day = Mathf.Max(day, 0);
+            day = day % star.Count;
+            return item[day];
         }
 
         /// <summary>

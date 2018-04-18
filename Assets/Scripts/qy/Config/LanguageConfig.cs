@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace qy.config
 {
-    public class LangrageConfig : BaseConfig
+    public class LanguageConfig : BaseConfig
     {
 
         private Dictionary<string, string> dic = new Dictionary<string, string>();

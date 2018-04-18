@@ -19,12 +19,12 @@ namespace qy.config
                 return _instance;
             }
         }
-        public LangrageConfig langrageConfig
+        public LanguageConfig languageConfig
         {
             get
             {
-                BaseConfig config = dic[typeof(LangrageConfig)];
-                return config as LangrageConfig;
+                BaseConfig config = dic[typeof(LanguageConfig)];
+                return config as LanguageConfig;
             }
         }
 
@@ -127,7 +127,7 @@ namespace qy.config
             this.onComplate = onComplate;
 
             //以下加载顺序不可变更
-            Load<LangrageConfig>(LoadHandle);
+            Load<LanguageConfig>(LoadHandle);
             Load<PropsConfig>(LoadHandle);
             Load<StorysConfig>(LoadHandle);
             Load<QuestConfig>(LoadHandle);
