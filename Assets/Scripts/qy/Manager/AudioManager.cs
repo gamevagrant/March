@@ -39,7 +39,7 @@ namespace qy
         }
 
         private static IAudioManager _instance;
-        public static IAudioManager instance
+        public static IAudioManager Instance
         {
             get
             {

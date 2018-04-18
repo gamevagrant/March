@@ -5,10 +5,8 @@ public class GameSetting {
 
 
     //------------------全平台一致的配置--------------------------
-    public static string serverPath = "http://api.nutsgamer.com";
-    public static string serverPathDevelop = "https://api.dev.nutsgamer.com";
-    public static string websocketPath = "ws://api.nutsgamer.com/ws/conn";
-    public static string websocketPathDevelop = "wss://api.dev.nutsgamer.com/ws/conn";
+    public static string serverPath = "http://123.206.90.153:9933";
+    public static string serverPathDevelop = "http://203.195.148.41/homeserver/qzone";
 
     public static string shareFinishTaskLink = "https://csll.app.link/ShareFinishTask";
     public static string homePage = "https://www.facebook.com/caishenlaile";

@@ -1,4 +1,5 @@
 ﻿
+
 namespace qy.ui
 {
     public interface IUIManager

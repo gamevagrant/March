@@ -57,6 +57,51 @@ namespace qy.config
             }
         }
 
+        public MatchLevelConfig matchLevelConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(MatchLevelConfig)];
+                return config as MatchLevelConfig;
+            }
+        }
+
+        public ExchangeConfig exchangeConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(ExchangeConfig)];
+                return config as ExchangeConfig;
+            }
+        }
+
+        public GuideSetupConfig guideSetupConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(GuideSetupConfig)];
+                return config as GuideSetupConfig;
+            }
+        }
+
+        public StoryheadConfig storyheadConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(StoryheadConfig)];
+                return config as StoryheadConfig;
+            }
+        }
+
+        public SettingConfig settingConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(SettingConfig)];
+                return config as SettingConfig;
+            }
+        }
+
         private Dictionary<Type,BaseConfig> dic;
         private int allCount = 0;
         private Action onComplate;

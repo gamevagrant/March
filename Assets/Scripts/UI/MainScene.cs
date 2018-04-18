@@ -195,10 +195,19 @@ public class MainScene : MonoBehaviour
 				RefreshPlayerData();  //离线模式下，用本地数据刷新UI
 			}
         }
+
+        Debug.Log("======================");
+        /*
+        qy.GameMainManager.Instance.netManager.Login(new qy.LoginInfo(),(ret,res)=> {
+            Debug.Log("---------------------------------");
+            Debug.Log(qy.GameMainManager.Instance.playerData.nickName);
+        });
+        */
     }
 
     private void LoginRev(HTTPRequest request, HTTPResponse response)
     {
+        
         Debug.Log("Login Rev :" + response.DataAsText);
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         //server 数据合法性验证在RefreshData里面已经统一验证了，这里要判断是否登陆，所以在login接口里面单独判断，先这么处理！！！

@@ -26,7 +26,7 @@ namespace qy.config
             prop.type = item.GetAttribute("type");
             prop.lv = item.GetAttribute("lv");
             prop.lv_limit = item.GetAttribute("lv_limit");
-            prop.price = item.GetAttribute("price");
+            prop.price = int.Parse(item.GetAttribute("price"));
 
             dic.Add(prop.id, prop);
         }
@@ -42,7 +42,7 @@ namespace qy.config
        
     }
 
-    public class PropItem
+    public class PropItem:Cloneable<PropItem>
     {
         /// <summary>
         /// id
@@ -75,7 +75,7 @@ namespace qy.config
         /// <summary>
         /// 价格
         /// </summary>
-        public string price;
+        public int price;
         /// <summary>
         /// 数量
         /// </summary>
@@ -83,6 +83,9 @@ namespace qy.config
         /// <summary>
         /// 获得概率
         /// </summary>
-        public float rate;
+        public int rate;
+
+        public string uuid;
+        public int vanishTime;
     }
 }

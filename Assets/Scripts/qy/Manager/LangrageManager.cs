@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using qy.config;
 
-namespace qy.manager
+namespace qy
 {
     public class LangrageManager
     {

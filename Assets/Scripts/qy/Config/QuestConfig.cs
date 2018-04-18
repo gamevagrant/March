@@ -86,7 +86,7 @@ namespace qy.config
                 string[] data = str.Split(':');
                 string id = data[0];
                 int count = int.Parse(data[1]);
-                float rate = data.Length>2?int.Parse(data[2])/100f:0;
+                int rate = data.Length>2?int.Parse(data[2]):0;
                 PropItem prop = ConfigManager.Instance.propsConfig.GetItem(id);
                 prop.count = count;
                 prop.rate = rate;

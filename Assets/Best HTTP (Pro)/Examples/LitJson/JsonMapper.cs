@@ -388,7 +388,7 @@ namespace LitJson
 #if NETFX_CORE
                 if (inst_type.GetTypeInfo().IsAssignableFrom (json_type.GetTypeInfo()))
 #else
-                if (inst_type.IsAssignableFrom(json_type))
+                if (inst_type.IsAssignableFrom(json_type) || (inst_type == typeof(long) && json_type == typeof(int)))//by qiyu 打各简单的补丁
 #endif
                     return reader.Value;
 
