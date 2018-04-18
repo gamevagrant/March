@@ -298,12 +298,6 @@ public class Board : MonoBehaviour
                 var tileLayerData = LevelLoader.instance.tileLayerData;
 
                 GameObject tile = null;
-
-                if ((i % 2 + j % 2) % 2 == 0)
-                    tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
-                else
-                    tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
-
                 switch (tileLayerData[order])
                 {
                     case TILE_TYPE.NONE:
@@ -318,6 +312,17 @@ public class Board : MonoBehaviour
                     //case TILE_TYPE.DARD_TILE:
                     //    tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
                     //    break;
+                }
+
+                if ((i % 2 + j % 2) % 2 == 0)
+                {
+                    if (tile == null)
+                        tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
+                }
+                else
+                {
+                    if (tile == null)
+                        tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
                 }
 
                 if (tile)

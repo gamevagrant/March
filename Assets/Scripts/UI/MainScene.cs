@@ -142,7 +142,7 @@ public class MainScene : MonoBehaviour
             }
         }
 
-        NewPlayerGuideRefresh();
+        //NewPlayerGuideRefresh();
     }
 
     void Update()
