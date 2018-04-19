@@ -35,13 +35,13 @@ public class HeartRecoverPanelController : MonoBehaviour
         tileText.text = LanguageManager.instance.GetValueByKey("200039");
 		nextText.text = LanguageManager.instance.GetValueByKey("210151");
 
-        buyButton.SetActive(PlayerData.instance.getHeartNum() == 0);
-        buyText.text = PlayerData.instance.getLivePrice().ToString();
+        buyButton.SetActive(qy.GameMainManager.Instance.playerData.heartNum == 0);
+        buyText.text = qy.GameMainManager.Instance.playerData.livePrice.ToString();
     }
 
     void Update()
     {
-		var heartNum = PlayerData.instance.getHeartNum ();
+		var heartNum = qy.GameMainManager.Instance.playerData.heartNum;
 		if (heartNum < 5)
         {
 			allLifeText.gameObject.SetActive (false);
@@ -49,7 +49,7 @@ public class HeartRecoverPanelController : MonoBehaviour
 				buyButton.gameObject.SetActive (true);
 			}
             countDownText.text = string.Format("{0:D2}: {1:D2}", (int)TimeMonoManager.instance.getTotalTime() / 60, (int)TimeMonoManager.instance.getTotalTime() % 60);
-            starText.text = PlayerData.instance.getHeartNum().ToString();
+            starText.text = qy.GameMainManager.Instance.playerData.heartNum.ToString();
         }
         else
         {

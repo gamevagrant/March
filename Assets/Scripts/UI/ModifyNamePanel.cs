@@ -25,7 +25,7 @@ public class ModifyNamePanel : MonoBehaviour
         m_sureBtn.onClick.AddListener(onSureBtn);
         //		m_Placeholder.text = LanguageManager.instance.GetValueByKey ("200028");
         //		m_name.text = PlayerData.instance.getNickName();
-        m_Placeholder.text = PlayerData.instance.getNickName();
+        m_Placeholder.text = qy.GameMainManager.Instance.playerData.nickName;
 
         m_titleText.text = LanguageManager.instance.GetValueByKey("200027");
         m_sureBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200029");

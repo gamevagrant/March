@@ -41,7 +41,7 @@ public class TaskManager : MonoBehaviour
 		if (_questItem != null && _questItem.requireStar != "")
 			star = int.Parse(_questItem.requireStar);
 		//int coin = Item.GetItemByID(_questItem)
-		int playerStar = PlayerData.instance.getStarNum();
+		int playerStar = qy.GameMainManager.Instance.playerData.starNum;
 		playerStar -= star;
 		//播放剧情时条件判断，星数/requireItem
 		/* if (playerStar >= 0)
@@ -62,14 +62,14 @@ public class TaskManager : MonoBehaviour
 			int requireItemCount = int.Parse(_questItem.requireItem.Split(':')[1]);
 			Debug.Log("解锁剧情需要的item:" + requireItemId);
 			Debug.Log("解锁剧情需要的item count:" + requireItemCount);
-			int ownerItemCount = PlayerData.instance.getHasItemCountByItemId(requireItemId);
+			int ownerItemCount = qy.GameMainManager.Instance.playerData.GetPropItem(requireItemId).count;
 			int leftItemCount = ownerItemCount - requireItemCount;
 			if (leftItemCount >= 0)
 			{
 				MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200012"));
 
-				PlayerData.instance.setStarNum(playerStar);
-				PlayerData.instance.goodsMap[requireItemId] = leftItemCount.ToString();
+                qy.GameMainManager.Instance.playerData.starNum = playerStar;
+                qy.GameMainManager.Instance.playerData.AddPropItem(requireItemId,leftItemCount);
 				MainScene.Instance.RefreshPlayerData();
 				// NetManager.instance.userToolsToServer(requireItemId,requireItemCount.ToString());  //消耗道具之后发送http
 			}
@@ -87,7 +87,7 @@ public class TaskManager : MonoBehaviour
 			{
 				questID = gotoQuestID;
 				PlayerPrefs.SetString("QuestID", gotoQuestID);
-				PlayerData.instance.setQuestId(gotoQuestID);
+                qy.GameMainManager.Instance.playerData.questId = gotoQuestID;
 				//NetManager.instance.sendQuestIdToServer(gotoQuestID);
 				gameObject.SetActive(false);
 				onClickTask();
@@ -95,7 +95,7 @@ public class TaskManager : MonoBehaviour
 			return;
 		}
 		gameObject.SetActive(false);
-		NetManager.instance.sendQuestIdToServer(PlayerData.instance.getQuestId());
+		NetManager.instance.sendQuestIdToServer(qy.GameMainManager.Instance.playerData.questId);
         //PlotManager.Instance.ShowPlot();
         qy.ui.UIManager.Instance.OpenWindow(qy.ui.UISettings.UIWindowID.UIDialogueWindow, PlotManager.Instance.m_storyDescribe.id);
 
@@ -108,24 +108,24 @@ public class TaskManager : MonoBehaviour
 		gameObject.SetActive(true);
 		this._questItem = null;
 		//if (PlayerPrefs.HasKey("QuestID"))
-		if(PlayerData.instance.getQuestId()!="")
+		if(qy.GameMainManager.Instance.playerData.questId != "")
 		{
 			// _questItem = Quest.GetItemByID(PlayerPrefs.GetString("QuestID"));
-			Debug.Log("Player Data quest id:"+PlayerData.instance.getQuestId());
-			_questItem =Quest.GetItemByID(PlayerData.instance.getQuestId());
+			Debug.Log("Player Data quest id:"+ qy.GameMainManager.Instance.playerData.questId);
+			_questItem =Quest.GetItemByID(qy.GameMainManager.Instance.playerData.questId);
 			//PlayerData.instance.setQuestId(_questItem.gotoId);
 			if (_questItem == null)
 			{
 				// MessageBox.Instance.Show("当前questID不存在 Prefabs:" + PlayerPrefs.GetString("QuestID"));
 				string temStr = LanguageManager.instance.GetValueByKey("200013");
-				MessageBox.Instance.Show(temStr + PlayerData.instance.getQuestId());
+				MessageBox.Instance.Show(temStr + qy.GameMainManager.Instance.playerData.questId);
 				return;
 			}
 		}
 		else
 		{
 			_questItem = Quest.GetItemByID(questID);
-			PlayerData.instance.setQuestId(_questItem.gotoId);
+            qy.GameMainManager.Instance.playerData.questId = _questItem.gotoId;
 			if (_questItem == null)
 			{
 				string temStr = LanguageManager.instance.GetValueByKey("200013");
@@ -170,7 +170,7 @@ public class TaskManager : MonoBehaviour
 			star.transform.localScale = Vector3.one;
 			star.transform.Find ("Image1").gameObject.SetActive (true);
 			star.transform.Find ("Text").gameObject.SetActive (true);
-			star.transform.Find("Text").GetComponent<Text>().text = string.Format("{0}/{1}",PlayerData.instance.getStarNum(), _questItem.requireStar);
+			star.transform.Find("Text").GetComponent<Text>().text = string.Format("{0}/{1}", qy.GameMainManager.Instance.playerData.starNum, _questItem.requireStar);
 
 			if (coinCount != "0") {
 				var cion = Instantiate(Resources.Load("Prefabs/TaskPanel/TaskRequirementsCell")) as GameObject;
@@ -194,7 +194,7 @@ public class TaskManager : MonoBehaviour
                 Debug.Log("进入关键任务");
                 string storyId = "";
                 string[] data = _questItem.endingPoint.Split(':');
-                if (PlayerData.instance.survival < int.Parse(data[0]))
+                if (qy.GameMainManager.Instance.playerData.survival < int.Parse(data[0]))
                 {
                     Debug.Log("进入结局剧情");
                     storyId = data[1];

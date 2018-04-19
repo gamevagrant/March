@@ -15,7 +15,7 @@ public class XMLDataManager : Singleton<XMLDataManager>
 
 	public string getLanguagePath(DatabaseConfig configPath)
 	{
-		string curLang = PlayerData.instance.getLang ();
+		string curLang = PlayerData.instance.getLang();
 		string path = String.Format(Application.streamingAssetsPath + "/xml/" + configPath.ToString() + "_" +curLang + ".xml");
 		Debug.Log ("当前语言文件读取的是" + path);
 		return path;

@@ -133,7 +133,7 @@ public class UIBoosterPopup : MonoBehaviour
             }
         }
 
-        int coin = PlayerData.instance.getCoinNum();
+        int coin = qy.GameMainManager.Instance.playerData.coinNum;
         // enough coin
         if (cost <= coin)
         {

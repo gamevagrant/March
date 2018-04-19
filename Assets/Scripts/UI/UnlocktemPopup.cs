@@ -13,7 +13,7 @@ public class UnlocktemPopup : MonoBehaviour
     {
         m_titleText.text = LanguageManager.instance.GetValueByKey("210001");
 		m_btnText.text = LanguageManager.instance.GetValueByKey ("210136");
-        if (PlayerData.instance.getEliminateLevel() == 9)
+        if (qy.GameMainManager.Instance.playerData.eliminateLevel == 9)
         {
             string itemReward = DefaultConfig.getInstance().GetConfigByType<matchlevel>().GetItemByID("1000008").itemReward;
             string[] arr = itemReward.Split(new string[] { "," }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -30,9 +30,9 @@ public class UnlocktemPopup : MonoBehaviour
             m_itemImg.sprite = Resources.Load("Sprites/UI/item005", typeof(Sprite)) as Sprite;
             m_itemImg.SetNativeSize();
         }
-        else if (PlayerData.instance.getEliminateLevel() == 15)
+        else if (qy.GameMainManager.Instance.playerData.eliminateLevel == 15)
         {
-			PlayerData.instance.setShowUnlockItemStatus ("1");
+            qy.GameMainManager.Instance.playerData.showUnlockItemStatus = "1";
 
             string itemReward = DefaultConfig.getInstance().GetConfigByType<matchlevel>().GetItemByID("1000014").itemReward;
             string[] arr = itemReward.Split(new string[] { "," }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -49,9 +49,9 @@ public class UnlocktemPopup : MonoBehaviour
             m_itemImg.sprite = Resources.Load("Sprites/UI/item003", typeof(Sprite)) as Sprite;
             m_itemImg.SetNativeSize();
         }
-        else if (PlayerData.instance.getEliminateLevel() == 17)
+        else if (qy.GameMainManager.Instance.playerData.eliminateLevel == 17)
         {
-			PlayerData.instance.setShowUnlockItemStatus ("2");
+            qy.GameMainManager.Instance.playerData.showUnlockItemStatus = "2";
 
             string itemReward = DefaultConfig.getInstance().GetConfigByType<matchlevel>().GetItemByID("1000016").itemReward;
             string[] arr = itemReward.Split(new string[] { "," }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -68,9 +68,9 @@ public class UnlocktemPopup : MonoBehaviour
             m_itemImg.sprite = Resources.Load("Sprites/UI/item002", typeof(Sprite)) as Sprite;
             m_itemImg.SetNativeSize();
         }
-        else if (PlayerData.instance.getEliminateLevel() == 21)
+        else if (qy.GameMainManager.Instance.playerData.eliminateLevel == 21)
         {
-			PlayerData.instance.setShowUnlockItemStatus ("3");
+            qy.GameMainManager.Instance.playerData.showUnlockItemStatus = "3";
 
             string itemReward = DefaultConfig.getInstance().GetConfigByType<matchlevel>().GetItemByID("1000020").itemReward;
             string[] arr = itemReward.Split(new string[] { "," }, System.StringSplitOptions.RemoveEmptyEntries);

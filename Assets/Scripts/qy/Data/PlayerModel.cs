@@ -11,6 +11,7 @@ namespace qy
         public PlayerModel(PlayerData playerData)
         {
             this.playerData = playerData;
+            LoadData();
         }
         public enum ErrType:int
         {
@@ -21,10 +22,15 @@ namespace qy
             QUEST_ID_ERROR,
             PROP_ID_ERROR,
         }
+        
 
         public int BuyFiveMore(int step)
         {
-            GameMainManager.Instance.netManager.EliminateLevelFiveMore(step, (ret, res) => { });
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.EliminateLevelFiveMore(step, (ret, res) => {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
 
             int cost = GameMainManager.Instance.configManager.settingConfig.GetPriceWithStep(step);
             List<PropItem> props = GameMainManager.Instance.configManager.settingConfig.GetBonusItemBagWithStep(step); 
@@ -46,7 +52,11 @@ namespace qy
 
         public int BuyHeart()
         {
-            GameMainManager.Instance.netManager.BuyHeart((ret, res) => { });
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.BuyHeart((ret, res) => {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
             int cost = GameMainManager.Instance.configManager.settingConfig.livesPrice;
             if(playerData.coinNum<cost)
             {
@@ -64,7 +74,11 @@ namespace qy
 
         public int BuyProp(string itemId, int num)
         {
-            GameMainManager.Instance.netManager.BuyItem(itemId,num,(ret, res) => { });
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.BuyItem(itemId,num,(ret, res) => {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
             PropItem item = GameMainManager.Instance.configManager.propsConfig.GetItem(itemId);
             if(item==null)
             {
@@ -87,7 +101,11 @@ namespace qy
 
         public int EndLevel(int level, bool result, int step, int wingold)
         {
-            GameMainManager.Instance.netManager.LevelEnd(level,result?1:0,step, wingold, (ret, res) => { });
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.LevelEnd(level,result?1:0,step, wingold, (ret, res) => {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
             if(result)
             {
                 MatchLevelItem matchItem = GameMainManager.Instance.configManager.matchLevelConfig.GetItem((1000000+level).ToString());
@@ -108,7 +126,11 @@ namespace qy
 
         public int ModifyNickName(string nickName)
         {
-            GameMainManager.Instance.netManager.ModifyNickName(nickName, (ret, res) => { });
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.ModifyNickName(nickName, (ret, res) => {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
             playerData.nickName = nickName;
             SaveData();
             return (int)ErrType.NULL;
@@ -116,7 +138,11 @@ namespace qy
 
         public int QuestComplate(string questId)
         {
-            GameMainManager.Instance.netManager.UpdateQuestId(questId,(ret,res)=> { });
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.UpdateQuestId(questId,(ret,res)=> {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
             config.QuestItem quest = GameMainManager.Instance.configManager.questConfig.GetItem(questId);
             if(quest==null)
             {
@@ -129,7 +155,11 @@ namespace qy
 
         public int StartLevel()
         {
-            GameMainManager.Instance.netManager.LevelStart((ret, res) => { });
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.LevelStart((ret, res) => {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
             if(playerData.heartNum<=0)
             {
                 return (int)ErrType.NOT_ENOUGH_HEART;
@@ -142,6 +172,12 @@ namespace qy
 
         public int UseProp(string itemID, int count)
         {
+            playerData.dirty++;
+            GameMainManager.Instance.netManager.UseTools(itemID, count, (ret, res) =>
+            {
+                playerData.dirty--;
+                TrySynchronizationData();
+            });
             PropItem prop = playerData.GetPropItem(itemID);
             if(prop==null || prop.count<count)
             {
@@ -152,10 +188,30 @@ namespace qy
 
             return (int)ErrType.NULL;
         }
+        /// <summary>
+        /// 尝试进行同步
+        /// </summary>
+        private void TrySynchronizationData()
+        {
+            if(playerData.dirty>5)
+            {
+                GameMainManager.Instance.netManager.UpLoadOffLineData(playerData.ToPlayerDataMessage(), (ret, res) =>
+                {
+                    playerData.dirty = 0;
+
+                });
+            }
+            
+        }
 
         private void SaveData()
         {
             LocalDatasManager.playerData = playerData;
+        }
+
+        private void LoadData()
+        {
+            playerData = LocalDatasManager.playerData;
         }
     }
 }

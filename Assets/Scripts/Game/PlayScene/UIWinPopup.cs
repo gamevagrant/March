@@ -16,7 +16,7 @@ public class UIWinPopup : MonoBehaviour
         //上传结算数据
         NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 1, board.allstep, board.winGold - board.minWinGold);
 
-        PlayerData.instance.setCoinNum(PlayerData.instance.getCoinNum() + board.winGold);
+        qy.GameMainManager.Instance.playerData.coinNum += board.winGold;
         goldNum.text = board.winGold.ToString();
     }
 
@@ -27,7 +27,7 @@ public class UIWinPopup : MonoBehaviour
 
     public void BackToUI()
     {
-        PlayerData.instance.setPlayScene(true);
+        qy.GameMainManager.Instance.playerData.isPlayScene = true;
         SceneManager.LoadScene("main");
     }
 }

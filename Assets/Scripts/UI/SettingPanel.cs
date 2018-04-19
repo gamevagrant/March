@@ -137,8 +137,8 @@ public class SettingPanel : MonoBehaviour
             return;
         }
         Debug.Log("userBindInfoRev response:" + response.DataAsText);
-        JsonData data = JsonMapper.ToObject(response.DataAsText);
-        PlayerData.instance.RefreshData(data);
+        PlayerDataMessage data = JsonMapper.ToObject<PlayerDataMessage>(response.DataAsText);
+        qy.GameMainManager.Instance.playerData.RefreshData(data);
 
 		WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210146"));
 

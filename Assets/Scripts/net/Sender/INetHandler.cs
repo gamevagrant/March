@@ -87,7 +87,7 @@ namespace March.Core.Network
                 return;
             }
 
-            PlayerData.instance.setCoinNum(payRec.gold);
+            qy.GameMainManager.Instance.playerData.coinNum = payRec.gold;
             MainScene.Instance.RefreshPlayerData();
         }
     }

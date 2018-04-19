@@ -43,7 +43,7 @@ public class Booster : MonoBehaviour
 	void Start () 
     {
 		singleBooster.SetActive(true);
-		singleAmount.text = PlayerData.instance.getHasItemCountByItemId("200006").ToString();
+        singleAmount.text = qy.GameMainManager.Instance.playerData.GetPropItem("200006").count.ToString();
 
         // single breaker
         //todo:从表里读取
@@ -106,8 +106,7 @@ public class Booster : MonoBehaviour
         board.dropTime = 1;
 
         // check amount
-        
-        if (PlayerData.instance.getHasItemCountByItemId("200006") <= 0)
+        if(qy.GameMainManager.Instance.playerData.GetPropItem("200006").count<=0)
         {
             // show booster popup
             ShowPopup(BOOSTER_TYPE.SINGLE_BREAKER);
@@ -363,11 +362,11 @@ public class Booster : MonoBehaviour
 			Help.instance.Hide ();
             // reduce amount
 
-            if (PlayerData.instance.getHasItemCountByItemId("200006") > 0)
+            if (qy.GameMainManager.Instance.playerData.GetPropItem("200006").count > 0)
             {
-                Debug.Log(PlayerData.instance.getHasItemCountByItemId("200006"));
+                Debug.Log(qy.GameMainManager.Instance.playerData.GetPropItem("200006").count);
 
-                var amount = PlayerData.instance.getHasItemCountByItemId("200006") - 1;
+                var amount = qy.GameMainManager.Instance.playerData.GetPropItem("200006").count - 1;
 
                 NetManager.instance.userToolsToServer("200006", "1");
 
@@ -435,7 +434,7 @@ public class Booster : MonoBehaviour
 
     public void refresh()
     {
-        singleAmount.text = PlayerData.instance.getHasItemCountByItemId("200006").ToString();
+        singleAmount.text = qy.GameMainManager.Instance.playerData.GetPropItem("200006").count.ToString();
     }
 
 

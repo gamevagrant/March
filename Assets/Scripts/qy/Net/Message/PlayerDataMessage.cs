@@ -17,6 +17,7 @@ public class PlayerDataMessage : NetMessage
     public string name;
     public string lang;
     public List<PropItem> items;
+    public SevenDayData sevenDay;
 
     public class PropItem
     {
@@ -27,5 +28,22 @@ public class PlayerDataMessage : NetMessage
         /// 消失时间
         /// </summary>
         public int vanishTime;
+    }
+
+    public class SevenDayData
+    {
+        public SevenDayInfo sevenDayInfo;
+        public int functionSwitch;
+        public long endTime;
+    }
+
+    public class SevenDayInfo
+    {
+        public string uid;
+        public long rewardTime;
+        public long regTime;
+        public int index;
+        public int state;
+        public long endTime;
     }
 }

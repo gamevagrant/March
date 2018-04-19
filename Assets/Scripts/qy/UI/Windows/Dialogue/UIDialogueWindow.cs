@@ -79,7 +79,7 @@ public class UIDialogueWindow : UIWindowBase {
 
     protected override void EndShowWindow()
     {
-        ShowStory(ConfigManager.Instance.storysConfig.GetItem(beginID));
+        ShowStory(qy.GameMainManager.Instance.configManager.storysConfig.GetItem(beginID));
     }
 
     protected override void EndHideWindow()

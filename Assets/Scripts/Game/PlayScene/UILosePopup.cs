@@ -84,7 +84,7 @@ public class UILosePopup : MonoBehaviour
         AudioManager.instance.ButtonClickAudio();
 
         // enough coin
-        if (cost <= PlayerData.instance.getCoinNum())
+        if (cost <= qy.GameMainManager.Instance.playerData.coinNum)
         {
             AudioManager.instance.CoinPayAudio();
 

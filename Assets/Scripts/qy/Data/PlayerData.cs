@@ -66,12 +66,31 @@ namespace qy
         /// <summary>
         /// 能力值
         /// </summary>
-        public config.Ability _ability = new config.Ability();
-
+        public config.Ability ability = new config.Ability();
+        /// <summary>
+        /// 是否获得7天奖励信息
+        /// </summary>
         public bool isSaveDayInfo = false;
-        public int indexDay = 0; //0-6表示某天
+        /// <summary>
+        /// 7天登录奖励 0-6表示某天
+        /// </summary>
+        public int indexDay = 0;
+        /// <summary>
+        /// 7天奖励 领取状态 0未领取 1已领取
+        /// </summary>
         public int awardState = 1;
         public bool isPlayScene = false;
+        /// <summary>
+        /// 数据每次改变时自增1，和服务器通信一次行为减1，下次正常通信后超过5进行一次同步，归0
+        /// </summary>
+        public int dirty = 0;
+
+        //道具解锁状态, "0"缺省, "1"表示解锁导弹, 所有下关开始的时候, 道具列表要自动勾选导弹; "2"魔方; "3"飞机
+        public string showUnlockItemStatus = "0";
+        //需要展示了第9关引导
+        public bool needShow9Help = false;
+
+        public bool isShowedLoginAward = false;
 
         private Dictionary<string, config.PropItem> propsDic = new Dictionary<string, config.PropItem>();
 
@@ -87,7 +106,7 @@ namespace qy
         {
             get
             {
-                return ((_ability.loyalty + _ability.wisdom + _ability.discipline) / 3 + Mathf.Min(_ability.loyalty, _ability.wisdom, _ability.discipline)) / 2;
+                return ((ability.loyalty + ability.wisdom + ability.discipline) / 3 + Mathf.Min(ability.loyalty, ability.wisdom, ability.discipline)) / 2;
             }
         }
 
@@ -138,6 +157,11 @@ namespace qy
             userId = message.uid;
             eliminateLevel = message.level;
 
+            if(message.sevenDay!=null && message.sevenDay.sevenDayInfo!=null)
+            {
+                indexDay = message.sevenDay.sevenDayInfo.index;
+                awardState = message.sevenDay.sevenDayInfo.state;
+            }
             if (message.heartTime!=0)
             {
                 long temp = hertTimestamp - GameUtils.DateTimeToTimestamp(System.DateTime.Now);
@@ -158,8 +182,6 @@ namespace qy
                 propsDic.Add(item.itemId,prop);
             }
 
-            string str = PlayerPrefs.GetString("ability", "");
-            _ability = string.IsNullOrEmpty(str) ? new config.Ability() : JsonMapper.ToObject<config.Ability>(str);
         }
 
         public PlayerDataMessage ToPlayerDataMessage()
@@ -186,10 +208,12 @@ namespace qy
             return message;
         }
 
-        public void SaveData()
+        public override string ToString()
         {
-            LocalDatasManager.playerData = this;
+            var result = string.Format("star count-{0}\nheart count-{1}\ncoin count-{2}\nmain level-{3}\nquest id-{4}", starNum, heartNum, coinNum, eliminateLevel, questId);
+            return result;
         }
+
     }
 }
 

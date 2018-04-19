@@ -7,6 +7,9 @@ using DG.Tweening;
 using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
+using qy.net;
+using qy.config;
+using qy;
 
 public class MainScene : MonoBehaviour
 {
@@ -37,11 +40,11 @@ public class MainScene : MonoBehaviour
     class LoginInfo
     {
         public string newDeviceId = "";
-        public string gameUid = PlayerData.instance.userId;
+        public string gameUid = GameMainManager.Instance.playerData.userId;
         public string appVersion = Application.version;
         public string gcmRegisterId = "";
         public string referrer = "";
-        public string lang = PlayerData.instance.getLang();
+        public string lang = qy.GameMainManager.Instance.playerData.lang;
         public string afUID = "";
         public string pf = Application.platform.ToString();
         public string pfId = "";
@@ -114,7 +117,33 @@ public class MainScene : MonoBehaviour
 
         FB.Init();
     }
+    private void Start()
+    {
+        m_testPopup.SetActive(false);
 
+        Login();
+
+        m_star.text = qy.GameMainManager.Instance.playerData.starNum.ToString();
+
+        if (GameMainManager.Instance.playerData.isPlayScene)
+        {
+            GameMainManager.Instance.playerData.isPlayScene = false;
+            int level = GameMainManager.Instance.playerData.eliminateLevel;
+            if (level == 9 || level == 15 || level == 17 || level == 21)
+            {
+                if (level == 9)
+                {
+                    GameMainManager.Instance.playerData.needShow9Help = false;
+                }
+                WindowManager.instance.Show<UnlocktemPopupWindow>();
+            }
+            if (level == 10)
+            {
+                LoadSevenDayInfo();
+            }
+        }
+    }
+    /*
     private void Start()
     {
 
@@ -123,6 +152,7 @@ public class MainScene : MonoBehaviour
         m_testPopup.SetActive(false);
 
         login();
+
         m_star.text = PlayerData.instance.getStarNum().ToString();
 
         if (PlayerData.instance.getPlayScene())
@@ -143,11 +173,11 @@ public class MainScene : MonoBehaviour
         }
 
         //NewPlayerGuideRefresh();
-    }
+    }*/
 
     void Update()
     {
-        if (PlayerData.instance.getHeartNum() < 5)
+        if (qy.GameMainManager.Instance.playerData.heartNum < 5)
         {
             m_downTime.text = string.Format("{0:D2}: {1:D2}", (int)TimeMonoManager.instance.getTotalTime() / 60, (int)TimeMonoManager.instance.getTotalTime() % 60);
         }
@@ -161,9 +191,10 @@ public class MainScene : MonoBehaviour
 
     void OnApplicationFocus(bool hasFocus)
     {
-        if (isOnApplicationPause == true && PlayerData.instance.getHeartNum() < 5)
+        if (isOnApplicationPause == true && qy.GameMainManager.Instance.playerData.heartNum < 5)
         {
-            login();
+            //login();
+            Login();
             isOnApplicationPause = false;
         }
     }
@@ -173,8 +204,48 @@ public class MainScene : MonoBehaviour
         isOnApplicationPause = true;
     }
 
+    public void Login()
+    {
+        bool isNetGood = GameMainManager.Instance.netManager.isNetWorkStatusGood;
+        bool isInitPlayer = !string.IsNullOrEmpty(GameMainManager.Instance.playerData.userId);
+        if (isNetGood)
+        {
+            if (!isInitPlayer)
+            {
+                WaitingPopupManager.instance.show(m_Canvas);
+            }
+            GameMainManager.Instance.netManager.Login(new qy.LoginInfo(), (ret, res) => 
+            {
+                LoadSevenDayInfo();
+                WaitingPopupManager.instance.close();
+            });
+        }
+        else if (!isInitPlayer)
+        {
+            if (m_unLoginPop == null)
+            {
+                var alertWindow = WindowManager.instance.Show<UIUnLoginPopupWindow>().GetComponent<UIunLoginPopup>();
+                alertWindow.Init(LanguageManager.instance.GetValueByKey("210157"));
+            }
+        }
+    }
+
+    private void LoadSevenDayInfo()
+    {
+        //获取7天登录数据
+        GameMainManager.Instance.netManager.SaveDayInfo((ret2, res2) =>
+        {
+            if (GameMainManager.Instance.playerData.awardState == 0)
+            {
+                ShowDailyLandingPopup();
+            }
+
+        });
+    }
+    /*
     public void login()
     {
+        
         string localCacheData = SaveDataManager.instance.GetString(SaveDataDefine.serverdata);
         if (localCacheData.Equals(""))
         {
@@ -203,7 +274,10 @@ public class MainScene : MonoBehaviour
             PlayerData.instance.RefreshData(jsonData);
             RefreshPlayerData();  //离线模式下，用本地数据刷新UI
         }
-
+        
+       
+        
+        
         if (NetManager.instance.isNetWorkStatusGood())
         {
             HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, LoginRev);
@@ -231,7 +305,8 @@ public class MainScene : MonoBehaviour
 //			}
 //        }
     }
-
+    */
+    /*
     private void LoginRev(HTTPRequest request, HTTPResponse response)
     {
         Debug.Log("Login Rev :" + response.DataAsText);
@@ -273,7 +348,7 @@ public class MainScene : MonoBehaviour
     {
 		PlayerData.instance.setSaveDayInfo (true);
 		NetManager.instance.httpSend(ServerGlobal.SAVE_DAY_INFO, data, saveDayInfoRev);
-    }
+    } 
 
     private void saveDayInfoRev(HTTPRequest request, HTTPResponse response)
     {
@@ -285,10 +360,11 @@ public class MainScene : MonoBehaviour
         if (0 == PlayerData.instance.getAwardState())
             ShowDailyLandingPopup();
     }
+    */
     private void ShowDailyLandingPopup()
     {
         //登陆后弹出7日登录活动
-        int day = PlayerData.instance.getIndexDay();
+        int day = qy.GameMainManager.Instance.playerData.indexDay;
 		WindowManager.instance.Show<DailyLandingActivitiesPopupWindow> ().GetComponent<DailyLandingActivities> ().Init (day + 1);
     }
 
@@ -301,10 +377,10 @@ public class MainScene : MonoBehaviour
 
     public void RefreshPlayerData()
     {
-        m_coin.text = PlayerData.instance.getCoinNum().ToString();
-        m_heart.text = PlayerData.instance.getHeartNum().ToString();
-        m_star.text = PlayerData.instance.getStarNum().ToString();
-        m_eliminate_text.text = PlayerData.instance.getEliminateLevel().ToString();  //当前消除关卡
+        m_coin.text = qy.GameMainManager.Instance.playerData.coinNum.ToString();
+        m_heart.text = qy.GameMainManager.Instance.playerData.heartNum.ToString();
+        m_star.text = qy.GameMainManager.Instance.playerData.starNum.ToString();
+        m_eliminate_text.text = qy.GameMainManager.Instance.playerData.eliminateLevel.ToString();  //当前消除关卡
     }
 
     //心数恢复的时候刷新心数和状态显示
@@ -312,8 +388,8 @@ public class MainScene : MonoBehaviour
     {
         RefreshPlayerData();
         NewPlayerGuideRefresh();
-        m_heart.text = PlayerData.instance.getHeartNum().ToString();
-        if (5 == PlayerData.instance.getHeartNum())
+        m_heart.text = qy.GameMainManager.Instance.playerData.heartNum.ToString();
+        if (5 == qy.GameMainManager.Instance.playerData.heartNum)
         {
             m_downTime.text = LanguageManager.instance.GetValueByKey("200021");
         }
@@ -324,14 +400,14 @@ public class MainScene : MonoBehaviour
     /// </summary>
     public void onGoldBuyLife()
     {
-        int m_leftCoin = PlayerData.instance.getCoinNum() - PlayerData.instance.getLivePrice();
+        int m_leftCoin = qy.GameMainManager.Instance.playerData.coinNum - qy.GameMainManager.Instance.playerData.livePrice;
         if (m_leftCoin >= 0)
         {
             NetManager.instance.buyHeart();
             //购买成功之后生命值置满
             /*   PlayerData.instance.setHeartNum(PlayerData.instance.getMaxLives());
                PlayerData.instance.setCoinNum(m_leftCoin);*/
-            m_heart.text = PlayerData.instance.getMaxLives().ToString();
+            m_heart.text = qy.GameMainManager.Instance.playerData.maxLives.ToString();
             m_coin.text = m_leftCoin.ToString();
         }
         else
@@ -358,7 +434,7 @@ public class MainScene : MonoBehaviour
         NetManager.instance.MakePointInEliminateClick();
 
         //check 心数是否足够
-        Debug.Log("当前拥有的心数是:" + PlayerData.instance.getHeartNum());
+        Debug.Log("当前拥有的心数是:" + qy.GameMainManager.Instance.playerData.heartNum);
         if (m_GuideHand != null)
         {
             m_GuideHand.SetActive(false);
@@ -368,15 +444,15 @@ public class MainScene : MonoBehaviour
         {
             m_testPopup.SetActive(true);
             m_testPopup.transform.Find("InputField").GetComponent<InputField>().text =
-                PlayerData.instance.getEliminateLevel().ToString();
+                qy.GameMainManager.Instance.playerData.eliminateLevel.ToString();
         }
         else
         {
-            if (PlayerData.instance.getHeartNum() < eliminateHeartNum)
+            if (qy.GameMainManager.Instance.playerData.heartNum < eliminateHeartNum)
             {
 				WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200025"));
             }
-            else if (PlayerData.instance.getEliminateLevel() > Int32.Parse(DefaultConfig.getInstance().GetConfigByType<setting>()
+            else if (qy.GameMainManager.Instance.playerData.eliminateLevel > Int32.Parse(DefaultConfig.getInstance().GetConfigByType<setting>()
                     .GetValueByIDAndKey("maxlevel", "max")))
             {
 				WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200049"));
@@ -405,7 +481,7 @@ public class MainScene : MonoBehaviour
     {
 #if UNITY_EDITOR
         int num = Convert.ToInt32(m_testPopup.transform.Find("InputField").GetComponent<InputField>().textComponent.text);
-        PlayerData.instance.setEliminateLevel(num);
+        qy.GameMainManager.Instance.playerData.eliminateLevel = num;
 
         WindowManager.instance.Show<BeginPopupWindow>();
 #endif
@@ -436,7 +512,7 @@ public class MainScene : MonoBehaviour
 
     private void NewPlayerGuideRefresh()
     {
-        if (PlayerData.instance.getEliminateLevel() == 1)
+        if (qy.GameMainManager.Instance.playerData.eliminateLevel == 1)
         {
             if (!PlayerPrefs.HasKey("Welcome"))
             {

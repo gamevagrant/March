@@ -45,20 +45,20 @@ public class TimeMonoManager : MonoSingleton<TimeMonoManager>
 	            intervalTime += 1;
 	            totalTime--;
 	           // Debug.LogError(string.Format("{0:D2}: {1:D2}",(int)totalTime/60,(int)totalTime%60));
-                if (0 == totalTime && 5 > PlayerData.instance.getHeartNum())
+                if (0 == totalTime && 5 > qy.GameMainManager.Instance.playerData.heartNum)
 	            {
                     Debug.Log("30min倒计时结束");
                     //30min之后heart恢复一个
-                    PlayerData.instance.setHeartNum(PlayerData.instance.getHeartNum()+1);
+                    qy.GameMainManager.Instance.playerData.heartNum += 1;
                     Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
-                    if(PlayerData.instance.getHeartRecoverTime() == 0)
+                    if(qy.GameMainManager.Instance.playerData.heartRecoverTime == 0)
                         totalTime = totalTime * 60;
                     else
-                        totalTime = PlayerData.instance.getHeartRecoverTime() * 60;
+                        totalTime = qy.GameMainManager.Instance.playerData.heartRecoverTime * 60;
 	            }
 	        }
 	    }
-
+        /*
         if (NetManager.instance.isNetWorkStatusGood())
         {
             if (NetManager.instance.needSendDataToServer()) //网络连接失败
@@ -70,10 +70,12 @@ public class TimeMonoManager : MonoSingleton<TimeMonoManager>
                     if (reconnectTime <= 0)
                     {
                         reconnectTime = NetManager.instance.m_connectedDeltaTime;
+                
                         if (!SaveDataManager.instance.HasData(SaveDataDefine.serverdata))
                         {
                             return;
                         }
+                        
                         JsonData jsonData = JsonMapper.ToObject(SaveDataManager.instance.GetString(SaveDataDefine.serverdata));
                         PlayerData.instance.userId = jsonData["uid"].ToString();
                         PlayerData.instance.jsonObj = jsonData;
@@ -81,10 +83,12 @@ public class TimeMonoManager : MonoSingleton<TimeMonoManager>
                         Debug.Log("heartTime str:" + PlayerData.instance.jsonObj["heartTime"]);
                         Debug.Log("当前本地数据" + PlayerData.instance.jsonObj.ToJson());
                         NetManager.instance.offLineDataSave(PlayerData.instance.jsonObj.ToJson());  //离线数据
+                        
+                        qy.GameMainManager.Instance.netManager.UpLoadOffLineData(qy.GameMainManager.Instance.playerData.ToPlayerDataMessage(), (ret, res) => { });
                     }
                 }
             }
-        }
+        }*/
 	}
     private void perMinCallback()
     {

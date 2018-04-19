@@ -27,6 +27,7 @@ namespace qy.net
         public static string SAVE_DAY_INFO = "sevenDay.info";
         public static string SAVE_DAY_AWARD = "sevenDay.award";
         public static string MAKE_POINT_ELIMINATEGUIDE = "eliminateGuide.makepoint";
+        public static string MAKE_POINT_CLICK = "buttonClick.makepoint";
 
         private static NetManager _instance;
         public static NetManager Instance
@@ -93,15 +94,11 @@ namespace qy.net
 
         }
 
-        public bool isNetWorkStatusGood()
+        public bool isNetWorkStatusGood
         {
-            //todo:加入ping机制 ping不通服务器的话取用本地数据
-            if (!(Application.internetReachability == NetworkReachability.NotReachable))
-                return true;
-            else
+            get
             {
-
-                return false;
+                return Application.internetReachability != NetworkReachability.NotReachable;
             }
         }
 
@@ -111,12 +108,13 @@ namespace qy.net
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("cmd", cmd);
             data.Add("uid", uid);
-            data.Add("data",JsonMapper.ToJson(jd ?? "") );
+            data.Add("data", jd == null ? "" : JsonMapper.ToJson(jd));
 
             return HttpProxy.SendPostRequest<PlayerDataMessage>(url, data, (ret, res) =>
             {
                 if (res.isOK)
                 {
+                  
                     GameMainManager.Instance.playerData.RefreshData(res as PlayerDataMessage);
 
                 }
@@ -166,7 +164,7 @@ namespace qy.net
         /// <returns></returns>
         public bool Login(LoginInfo loginInfo, Action<bool, PlayerDataMessage> callBack)
         {
-            if(!isNetWorkStatusGood())
+            if(!isNetWorkStatusGood)
             {
                 PlayerData pd = LocalDatasManager.playerData;
                 if(pd!=null)
@@ -304,6 +302,23 @@ namespace qy.net
             jd["step"] = step;
             return SendData(MAKE_POINT_ELIMINATEGUIDE, jd, callBack);
         }
+
+        public bool MakePointInEliminateStart(Action<bool, PlayerDataMessage> callBack)
+        {
+            return MakePointInClickButton("EliminateStart", 1, callBack);
+        }
+        public bool MakePointInEliminateClick(Action<bool, PlayerDataMessage> callBack)
+        {
+            return MakePointInClickButton("Eliminate", 1, callBack);
+        }
+        public bool MakePointInClickButton(string name, int num, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["name"] = name;
+            jd["num"] = num;
+            Debug.Log("MakePointInClickButton Result:" + jd.ToJson());
+            return SendData(ServerGlobal.MAKE_POINT_CLICK, jd, callBack);
+        }
         /// <summary>
         /// 购买生命
         /// </summary>
@@ -336,7 +351,10 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["nickName"] = nickName;
 
-            return SendData(CHANGE_NAME, jd, callBack);
+            return SendData(CHANGE_NAME, jd, (ret,res)=> {
+                callBack(ret, res);
+                Messenger.Broadcast(ELocalMsgID.CloseModifyPanel);
+            });
         }
 
         /// <summary>
@@ -347,9 +365,15 @@ namespace qy.net
         /// <returns></returns>
         public bool SaveDayAward( Action<bool, PlayerDataMessage> callBack)
         {
-            JsonData jd = new JsonData();
+            return SendData(SAVE_DAY_AWARD, new object(), (ret,res)=> {
+                callBack(ret, res);
+                Messenger.Broadcast(ELocalMsgID.ShowDailyLandingActivites);
+            });
+        }
 
-            return SendData(SAVE_DAY_AWARD, jd, callBack);
+        public bool SaveDayInfo(Action<bool, PlayerDataMessage> callBack)
+        {
+            return SendData(SAVE_DAY_INFO, new object(), callBack);
         }
 
         public bool UserBind(string id, string name, Action<bool, PlayerDataMessage> callBack)

@@ -30,7 +30,7 @@ public class LoadingScene : MonoBehaviour
         m_progressBar = canvas.transform.Find("ProgressBar").GetComponent<Image>();
         var go = canvas.transform.Find("ProgressBar_bg");
         m_progressBar_right = go.transform.Find("right").GetComponent<Image>();
-
+       
         qy.GameMainManager.Instance.configManager.LoadConfig(() =>
         {
             LoadScene();

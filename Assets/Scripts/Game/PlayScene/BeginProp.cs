@@ -28,7 +28,7 @@ public class BeginProp : MonoBehaviour
         isPress = false;
         ItemId = string.Format("{0}", itemid);
 
-        int num = PlayerData.instance.getHasItemCountByItemId(ItemId);
+        int num = qy.GameMainManager.Instance.playerData.GetPropItem(ItemId).count;
         if (num == 0)
         {
             Num.gameObject.SetActive(false);
@@ -67,23 +67,23 @@ public class BeginProp : MonoBehaviour
         Icon.sprite = sp;
         Icon.SetNativeSize();
 
-        if (itemid == 200004 && PlayerData.instance.getShowUnlockItemStatus() == "1")
+        if (itemid == 200004 && qy.GameMainManager.Instance.playerData.showUnlockItemStatus == "1")
         {
             WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210003"));
             onUseBtnClick();
-            PlayerData.instance.setShowUnlockItemStatus("0");
+            qy.GameMainManager.Instance.playerData.showUnlockItemStatus = "0";
         }
-        else if (itemid == 200003 && PlayerData.instance.getShowUnlockItemStatus() == "2")
+        else if (itemid == 200003 && qy.GameMainManager.Instance.playerData.showUnlockItemStatus == "2")
         {
             WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210004"));
             onUseBtnClick();
-            PlayerData.instance.setShowUnlockItemStatus("0");
+            qy.GameMainManager.Instance.playerData.showUnlockItemStatus = "0";
         }
-        else if (itemid == 200005 && PlayerData.instance.getShowUnlockItemStatus() == "3")
+        else if (itemid == 200005 && qy.GameMainManager.Instance.playerData.showUnlockItemStatus == "3")
         {
             WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210005"));
             onUseBtnClick();
-            PlayerData.instance.setShowUnlockItemStatus("0");
+            qy.GameMainManager.Instance.playerData.showUnlockItemStatus = "0";
         }
     }
 
