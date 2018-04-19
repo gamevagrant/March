@@ -2,6 +2,7 @@
 using LitJson;
 using March.Core.Network.Data;
 using UnityEngine;
+using qy;
 
 namespace March.Core.Network
 {
@@ -87,7 +88,7 @@ namespace March.Core.Network
                 return;
             }
 
-            qy.GameMainManager.Instance.playerData.coinNum = payRec.gold;
+            GameMainManager.Instance.playerData.coinNum = payRec.gold;
             MainScene.Instance.RefreshPlayerData();
         }
     }

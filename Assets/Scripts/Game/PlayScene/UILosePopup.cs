@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using qy;
 
 public class UILosePopup : MonoBehaviour
 {
@@ -84,11 +85,12 @@ public class UILosePopup : MonoBehaviour
         AudioManager.instance.ButtonClickAudio();
 
         // enough coin
-        if (cost <= qy.GameMainManager.Instance.playerData.coinNum)
+        if (cost <= GameMainManager.Instance.playerData.coinNum)
         {
             AudioManager.instance.CoinPayAudio();
 
-            NetManager.instance.eliminateLevelFiveMore(cost, stepsbuyconfig.GetItemBagDicByTimes(times));
+            //NetManager.instance.eliminateLevelFiveMore(cost, stepsbuyconfig.GetItemBagDicByTimes(times));
+            GameMainManager.Instance.playerModel.BuyFiveMore(times);
 
             if (board)
             {
@@ -138,7 +140,8 @@ public class UILosePopup : MonoBehaviour
 
     public void OnCloseClick()
     {
-        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
+        //NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
+        GameMainManager.Instance.playerModel.EndLevel(LevelLoader.instance.level, false, board.allstep, 0);
 
         WindowManager.instance.Show<BeginPopupWindow>();
     }

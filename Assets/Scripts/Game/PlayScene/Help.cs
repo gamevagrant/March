@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using qy;
 
 public class Help : MonoBehaviour 
 {
@@ -290,7 +291,8 @@ public class Help : MonoBehaviour
         {
             if (step != 0)
             {
-                NetManager.instance.MakePointInGuide(LevelLoader.instance.level, step);//引导打点
+                //NetManager.instance.MakePointInGuide(LevelLoader.instance.level, step);//引导打点
+                GameMainManager.Instance.netManager.MakePointInGuide(LevelLoader.instance.level, step,(ret,res)=> { });
             }
 
 

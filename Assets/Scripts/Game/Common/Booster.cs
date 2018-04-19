@@ -368,8 +368,8 @@ public class Booster : MonoBehaviour
 
                 var amount = qy.GameMainManager.Instance.playerData.GetPropItem("200006").count - 1;
 
-                NetManager.instance.userToolsToServer("200006", "1");
-
+                //NetManager.instance.userToolsToServer("200006", "1");
+                qy.GameMainManager.Instance.playerModel.UseProp("200006",1);
                 // change text
 
                 singleAmount.text = amount.ToString();

@@ -5,6 +5,7 @@ using March.Core.Network;
 using March.Core.Pay;
 using UnityEngine;
 using UnityEngine.UI;
+using qy;
 
 public class UIShopPopupPlay : MonoBehaviour 
 {
@@ -52,8 +53,8 @@ public class UIShopPopupPlay : MonoBehaviour
             button.onClick.AddListener(() =>
             {
                 actionHandler.PayData.exchangeId = exchangeItem.ID;
-                NetManager.instance.SendRequest(actionHandler);
-
+                //NetManager.instance.SendRequest(actionHandler);
+                GameMainManager.Instance.netManager.SendRequest(actionHandler);
                 iapController.BuyProductID(exchangeItem.ID);
             });
         });

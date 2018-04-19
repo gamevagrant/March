@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 using UnityEngine.Purchasing.MiniJSON;
+using qy;
 
 namespace March.Core.Pay
 {
@@ -38,7 +39,8 @@ namespace March.Core.Pay
 
             Debug.LogWarning("OnPurchaseSuccess: pay data is: " + handler.PayData);
 
-            NetManager.instance.SendRequest(handler);
+            //NetManager.instance.SendRequest(handler);
+            GameMainManager.Instance.netManager.SendRequest(handler);
         }
 
         public void OnPurchaseFail(Product product, PurchaseFailureReason failureReason)

@@ -5424,14 +5424,16 @@ void GenerateWaffleLayer()
         if (isFirstMove == true)
         {
             isFirstMove = false;
-            NetManager.instance.eliminateLevelStart();
+            //NetManager.instance.eliminateLevelStart();
+            qy.GameMainManager.Instance.playerModel.StartLevel();
             //todo：扣除开始道具
             //LevelLoader.instance.beginItemList
 			int j = LevelLoader.instance.beginItemList.Count;
 			for (int i = 0; i < j; i++) {
 				string itemId = LevelLoader.instance.beginItemList [i];
-				NetManager.instance.userToolsToServer (itemId, "1");
-			}
+				//NetManager.instance.userToolsToServer (itemId, "1");
+                qy.GameMainManager.Instance.playerModel.UseProp(itemId,1);
+            }
         }
     }
 

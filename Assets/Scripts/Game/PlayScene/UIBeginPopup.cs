@@ -60,7 +60,8 @@ public class UIBeginPopup : MonoBehaviour
                 return;
             }
         }
-        NetManager.instance.MakePointInEliminateStart();
+        //NetManager.instance.MakePointInEliminateStart();
+        qy.GameMainManager.Instance.netManager.MakePointInEliminateStart((ret,res)=> { });
         SceneManager.LoadScene("Play");
     }
 	

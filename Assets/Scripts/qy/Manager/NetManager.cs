@@ -4,7 +4,8 @@ using UnityEngine;
 using System;
 using LitJson;
 using qy.config;
-
+using March.Core.Network;
+using BestHTTP;
 namespace qy.net
 {
     
@@ -24,8 +25,8 @@ namespace qy.net
         public static string LEVEL_FIVEMORE = "level.fivemore";
         public static string CHANGE_NAME = "user.modify.nickName";
         public static string SAVE_OFF_LINE = "offline.save";
-        public static string SAVE_DAY_INFO = "sevenDay.info";
-        public static string SAVE_DAY_AWARD = "sevenDay.award";
+        public static string SEVEN_DAY_INFO = "sevenDay.info";
+        public static string SEVEN_DAY_AWARD = "sevenDay.award";
         public static string MAKE_POINT_ELIMINATEGUIDE = "eliminateGuide.makepoint";
         public static string MAKE_POINT_CLICK = "buttonClick.makepoint";
 
@@ -126,35 +127,15 @@ namespace qy.net
             });
         }
 
-        /// <summary>
-        /// 发送自定义数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="cmd"></param>
-        /// <param name="obj"></param>
-        /// <param name="callBack"></param>
-        /// <returns></returns>
-        public bool SendQuest<T>(string cmd,object obj, Action<bool, T> callBack)where T:NetMessage
+        public void SendRequest<T>(T handler) where T : INetHandler
         {
-            string url = APIDomain;
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            data.Add("cmd", cmd);
-            data.Add("uid", uid);
-            data.Add("data", JsonMapper.ToJson(obj ?? ""));
-            return HttpProxy.SendPostRequest<T>(url, data, (ret, res) =>
-            {
-                if (res.isOK)
-                {
-                    
-
-                }
-                else
-                {
-                    Debug.Log(GetMsgByErrorCode(res.err));
-                }
-                callBack(ret, res);
-            });
+            HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, handler.OnRecieve);
+            request.AddField("uid", uid);
+            request.AddField("cmd", handler.GetCommand());
+            request.AddField("data", handler.GetData());
+            request.Send();
         }
+ 
 
         /// <summary>
         /// 登录
@@ -363,17 +344,17 @@ namespace qy.net
         /// <param name="nickName"></param>
         /// <param name="callBack"></param>
         /// <returns></returns>
-        public bool SaveDayAward( Action<bool, PlayerDataMessage> callBack)
+        public bool SevenDayAward( Action<bool, PlayerDataMessage> callBack)
         {
-            return SendData(SAVE_DAY_AWARD, new object(), (ret,res)=> {
+            return SendData(SEVEN_DAY_AWARD, new object(), (ret,res)=> {
                 callBack(ret, res);
                 Messenger.Broadcast(ELocalMsgID.ShowDailyLandingActivites);
             });
         }
 
-        public bool SaveDayInfo(Action<bool, PlayerDataMessage> callBack)
+        public bool SevenDayInfo(Action<bool, PlayerDataMessage> callBack)
         {
-            return SendData(SAVE_DAY_INFO, new object(), callBack);
+            return SendData(SEVEN_DAY_INFO, new object(), callBack);
         }
 
         public bool UserBind(string id, string name, Action<bool, PlayerDataMessage> callBack)

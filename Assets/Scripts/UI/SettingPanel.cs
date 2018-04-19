@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
+using qy;
 
 public class SettingPanel : MonoBehaviour
 {
@@ -98,7 +99,13 @@ public class SettingPanel : MonoBehaviour
             string id = result.ResultDictionary["user_id"].ToString();
             if (!string.IsNullOrEmpty(id))
             {
-                NetManager.instance.userBind(id, "fbName", userBindInfoRev);
+                //NetManager.instance.userBind(id, "fbName", userBindInfoRev);
+                GameMainManager.Instance.netManager.UserBind(id, "fbName", (ret,res)=> {
+                    WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210146"));
+
+                    m_linkBtn.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy3btn", typeof(Sprite)) as Sprite;
+                    m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("210150");
+                });
             }
             else
             {
@@ -124,11 +131,17 @@ public class SettingPanel : MonoBehaviour
             else if (FB.IsLoggedIn)
             {
                 FB.LogOut();
-                NetManager.instance.userUnBind(userUnBindInfoRev);
+                //NetManager.instance.userUnBind(userUnBindInfoRev);
+                GameMainManager.Instance.netManager.UserUnBind((ret,res)=> {
+                    WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210148"));
+
+                    m_linkBtn.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy4btn", typeof(Sprite)) as Sprite;
+                    m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200031");
+                });
             }
         }
     }
-
+    /*
     private void userBindInfoRev(HTTPRequest request, HTTPResponse response)
     {
         if (response == null)
@@ -138,14 +151,14 @@ public class SettingPanel : MonoBehaviour
         }
         Debug.Log("userBindInfoRev response:" + response.DataAsText);
         PlayerDataMessage data = JsonMapper.ToObject<PlayerDataMessage>(response.DataAsText);
-        qy.GameMainManager.Instance.playerData.RefreshData(data);
+        GameMainManager.Instance.playerData.RefreshData(data);
 
 		WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210146"));
 
         m_linkBtn.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy3btn", typeof(Sprite)) as Sprite;
         m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("210150");
-    }
-
+    }*/
+    /*
     private void userUnBindInfoRev(HTTPRequest request, HTTPResponse response)
     {
         if (response == null)
@@ -162,7 +175,7 @@ public class SettingPanel : MonoBehaviour
         m_linkBtn.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy4btn", typeof(Sprite)) as Sprite;
         m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200031");
     }
-
+    */
     public void onHelpBtn()
     {
     }

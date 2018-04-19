@@ -233,7 +233,7 @@ public class MainScene : MonoBehaviour
     private void LoadSevenDayInfo()
     {
         //获取7天登录数据
-        GameMainManager.Instance.netManager.SaveDayInfo((ret2, res2) =>
+        GameMainManager.Instance.netManager.SevenDayInfo((ret2, res2) =>
         {
             if (GameMainManager.Instance.playerData.awardState == 0)
             {
@@ -388,8 +388,8 @@ public class MainScene : MonoBehaviour
     {
         RefreshPlayerData();
         NewPlayerGuideRefresh();
-        m_heart.text = qy.GameMainManager.Instance.playerData.heartNum.ToString();
-        if (5 == qy.GameMainManager.Instance.playerData.heartNum)
+        m_heart.text = GameMainManager.Instance.playerData.heartNum.ToString();
+        if (5 == GameMainManager.Instance.playerData.heartNum)
         {
             m_downTime.text = LanguageManager.instance.GetValueByKey("200021");
         }
@@ -400,14 +400,15 @@ public class MainScene : MonoBehaviour
     /// </summary>
     public void onGoldBuyLife()
     {
-        int m_leftCoin = qy.GameMainManager.Instance.playerData.coinNum - qy.GameMainManager.Instance.playerData.livePrice;
+        int m_leftCoin = GameMainManager.Instance.playerData.coinNum - GameMainManager.Instance.playerData.livePrice;
         if (m_leftCoin >= 0)
         {
-            NetManager.instance.buyHeart();
+            //NetManager.instance.buyHeart();
+            GameMainManager.Instance.playerModel.BuyHeart();
             //购买成功之后生命值置满
             /*   PlayerData.instance.setHeartNum(PlayerData.instance.getMaxLives());
                PlayerData.instance.setCoinNum(m_leftCoin);*/
-            m_heart.text = qy.GameMainManager.Instance.playerData.maxLives.ToString();
+            m_heart.text = GameMainManager.Instance.playerData.maxLives.ToString();
             m_coin.text = m_leftCoin.ToString();
         }
         else
@@ -431,8 +432,8 @@ public class MainScene : MonoBehaviour
     public void onEliminateTask()
     {
         int eliminateHeartNum = 1;
-        NetManager.instance.MakePointInEliminateClick();
-
+        //NetManager.instance.MakePointInEliminateClick();
+        GameMainManager.Instance.netManager.MakePointInEliminateClick((ret,res)=> { });
         //check 心数是否足够
         Debug.Log("当前拥有的心数是:" + qy.GameMainManager.Instance.playerData.heartNum);
         if (m_GuideHand != null)

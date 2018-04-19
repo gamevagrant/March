@@ -41,7 +41,7 @@ public class ModifyNamePanel : MonoBehaviour
 
     private void onSureBtn()
     {
-        if (!NetManager.instance.isNetWorkStatusGood())
+        if (!qy.net.NetManager.Instance.isNetWorkStatusGood)
         {
 			WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210145"));
             return;
@@ -52,7 +52,8 @@ public class ModifyNamePanel : MonoBehaviour
         {
             if (Utils.instance.isStrLengthValid(nickName))
             {
-                NetManager.instance.modifyNickName(nickName);
+                //NetManager.instance.modifyNickName(nickName);
+                qy.GameMainManager.Instance.playerModel.ModifyNickName(nickName);
             }
             else
             {

@@ -14,8 +14,8 @@ public class UIWinPopup : MonoBehaviour
         topTxet.text = LanguageManager.instance.GetValueByKey("210135");
 		bottomText.text = LanguageManager.instance.GetValueByKey ("200020");
         //上传结算数据
-        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 1, board.allstep, board.winGold - board.minWinGold);
-
+        //NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 1, board.allstep, board.winGold - board.minWinGold);
+        qy.GameMainManager.Instance.playerModel.EndLevel(LevelLoader.instance.level, true, board.allstep, board.winGold - board.minWinGold);
         qy.GameMainManager.Instance.playerData.coinNum += board.winGold;
         goldNum.text = board.winGold.ToString();
     }

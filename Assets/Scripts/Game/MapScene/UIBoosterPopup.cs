@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
+using qy;
 public class UIBoosterPopup : MonoBehaviour
 {
     public BOOSTER_TYPE booster;
@@ -145,24 +145,29 @@ public class UIBoosterPopup : MonoBehaviour
             {
                 case BOOSTER_TYPE.BEGIN_FIVE_MOVES:
                     GameData.instance.SaveBeginFiveMoves(amount);
-                    NetManager.instance.buyItemToServer("200007", cost.ToString());
+                    //NetManager.instance.buyItemToServer("200007", cost.ToString());
+                    GameMainManager.Instance.playerModel.BuyProp("200007", amount);
                     break;
                 case BOOSTER_TYPE.BEGIN_RAINBOW_BREAKER:
                     GameData.instance.SaveBeginRainbow(amount);
-                    NetManager.instance.buyItemToServer("200003", amount.ToString());
+                    //NetManager.instance.buyItemToServer("200003", amount.ToString());
+                    GameMainManager.Instance.playerModel.BuyProp("200003", amount);
                     break;
                 case BOOSTER_TYPE.BEGIN_BOMB_BREAKER:
                     GameData.instance.SaveBeginBombBreaker(amount);
-                    NetManager.instance.buyItemToServer("200004", amount.ToString());
+                    //NetManager.instance.buyItemToServer("200004", amount.ToString());
+                    GameMainManager.Instance.playerModel.BuyProp("200004", amount);
                     break;
                 case BOOSTER_TYPE.BEGIN_PLANE_BREAKER:
                     GameData.instance.SaveBeginBombBreaker(amount);
-                    NetManager.instance.buyItemToServer("200005", amount.ToString());
+                    //NetManager.instance.buyItemToServer("200005", amount.ToString());
+                    GameMainManager.Instance.playerModel.BuyProp("200005", amount);
                     break;
 
                 case BOOSTER_TYPE.SINGLE_BREAKER:
                     GameData.instance.SaveSingleBreaker(amount);
-                    NetManager.instance.buyItemToServer("200006", amount.ToString());
+                    //NetManager.instance.buyItemToServer("200006", amount.ToString());
+                    GameMainManager.Instance.playerModel.BuyProp("200006", amount);
                     break;
                 case BOOSTER_TYPE.ROW_BREAKER:
                     GameData.instance.SaveRowBreaker(amount);

@@ -95,7 +95,8 @@ public class TaskManager : MonoBehaviour
 			return;
 		}
 		gameObject.SetActive(false);
-		NetManager.instance.sendQuestIdToServer(qy.GameMainManager.Instance.playerData.questId);
+        //NetManager.instance.sendQuestIdToServer(qy.GameMainManager.Instance.playerData.questId);
+        qy.GameMainManager.Instance.playerModel.QuestComplate(gotoQuestID);
         //PlotManager.Instance.ShowPlot();
         qy.ui.UIManager.Instance.OpenWindow(qy.ui.UISettings.UIWindowID.UIDialogueWindow, PlotManager.Instance.m_storyDescribe.id);
 

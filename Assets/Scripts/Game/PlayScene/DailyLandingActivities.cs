@@ -122,7 +122,11 @@ public class DailyLandingActivities : MonoBehaviour
 
     private void getAward()
     {
-        NetManager.instance.saveDayAward("{}");
+        //NetManager.instance.saveDayAward("{}");
+        qy.GameMainManager.Instance.netManager.SevenDayAward((ret, res) =>
+        {
+
+        });
     }
 
     public void Init(int day)
