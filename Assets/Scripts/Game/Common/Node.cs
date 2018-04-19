@@ -702,7 +702,7 @@ public class Node : MonoBehaviour
 
     public bool CanGenerateNewItem()
     {
-        if (CanStoreItem() == true && CanDropIn() && !HasTopBaffle())
+        if (CanStoreItem() && CanDropIn() && !HasTopBaffle())
         {
             for (int row = i - 1; row >= 0; row--)
             {
@@ -936,7 +936,7 @@ public class Node : MonoBehaviour
 
     public void WaffleExplode()
     {
-        if (waffle != null && item != null & (item.IsCookie() == true || item.IsBreaker(item.type) || item.type == ITEM_TYPE.COOKIE_RAINBOW))
+        if (waffle != null && item != null & (item.IsCookie() || item.IsBreaker(item.type) || item.type == ITEM_TYPE.COOKIE_RAINBOW))
         {
             AudioManager.instance.WaffleExplodeAudio();
 
@@ -1394,7 +1394,7 @@ public class Node : MonoBehaviour
 
     public bool IsGrass(bool special = false)
     {
-        if (special == true)
+        if (special)
         {
             return true;
         }

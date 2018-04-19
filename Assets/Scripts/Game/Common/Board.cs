@@ -149,9 +149,9 @@ public class Board : MonoBehaviour
             }
             else
             {
-                if (Configure.instance.touchIsSwallowed == true 
+                if (Configure.instance.touchIsSwallowed 
                     && GameObject.Find("Help") != null 
-                    && GameObject.Find("Help").activeSelf == true
+                    && GameObject.Find("Help").activeSelf
                     )
                 {
                     return;
@@ -788,7 +788,7 @@ void GenerateWaffleLayer()
         {
             var node = GetNode(row - 1, column);
 
-            if (node != null && node.CanStoreItem() == true)
+            if (node != null && node.CanStoreItem())
             {
 				var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
 				if (box)
@@ -1361,7 +1361,7 @@ void GenerateWaffleLayer()
                 }
                 else
                 {
-                    if (MoveGingerbread() == true)
+                    if (MoveGingerbread())
                     {
                         yield return new WaitForSeconds(Configure.instance.swapTime);
 
@@ -1370,7 +1370,7 @@ void GenerateWaffleLayer()
                         FindMatches();
                     }
                     
-                    if (GenerateGingerbread() == true)
+                    if (GenerateGingerbread())
                     {
                         yield return new WaitForSeconds(0.2f);
 
@@ -1480,7 +1480,7 @@ void GenerateWaffleLayer()
                                         {
                                             if (GetNode(k, j).item != null && GetNode(k, j).item.type == ITEM_TYPE.BLANK)
                                             {
-                                                if (GetNode(k, j).CanStoreItem() == true && GetNode(k, j).CanDropIn() && !GetNode(k, j).HasTopBaffle())
+                                                if (GetNode(k, j).CanStoreItem() && GetNode(k, j).CanDropIn() && !GetNode(k, j).HasTopBaffle())
                                                 {
                                                     target = GetNode(k, j);
                                                 }
@@ -1506,7 +1506,7 @@ void GenerateWaffleLayer()
                                 }
 
                                     // after have the target we swap items on nodes
-                                if ((target.item != null && target.item.type == ITEM_TYPE.BLANK)&& target.ice == null && target.CanStoreItem() == true)
+                                if ((target.item != null && target.item.type == ITEM_TYPE.BLANK)&& target.ice == null && target.CanStoreItem())
                                 {
                                     if (target.item != null && target.item.type == ITEM_TYPE.BLANK)
                                     {
@@ -1555,7 +1555,7 @@ void GenerateWaffleLayer()
             {
                 if (GetNode(i, j) != null)
                 {
-                    if (((GetNode(i, j).item != null && GetNode(i, j).item.type == ITEM_TYPE.BLANK)) && GetNode(i, j).CanGenerateNewItem() == true)
+                    if (((GetNode(i, j).item != null && GetNode(i, j).item.type == ITEM_TYPE.BLANK)) && GetNode(i, j).CanGenerateNewItem())
                     {
                         // if target is collectible the new item can be a collectible
                         var collectible = false;
@@ -1575,7 +1575,7 @@ void GenerateWaffleLayer()
                         // check if need to generate a new marshmallow
                         var marshmallow = false;
 
-                        if (CheckGenerateMarshmallow() == true)
+                        if (CheckGenerateMarshmallow())
                         {
                             marshmallow = true;
                         }
@@ -1621,12 +1621,12 @@ void GenerateWaffleLayer()
                         //print("COOKIE: Generate new item");
 
                         // if target is collectible then generate a new collectible item
-                        if (collectible == true && Random.Range(0, 2) == 1)
+                        if (collectible && Random.Range(0, 2) == 1)
                         {
                             GetNode(i, j).GenerateItem(CheckGenerateCollectible()[Random.Range(0, CheckGenerateCollectible().Count)]);
                         }
                         // generate a marshmallow
-                        else if (marshmallow == true && Random.Range(0, 2) == 1 && marshmallowGenerated == false)
+                        else if (marshmallow && Random.Range(0, 2) == 1 && marshmallowGenerated == false)
                         {
                             marshmallowGenerated = true;
 
@@ -1643,7 +1643,7 @@ void GenerateWaffleLayer()
                         var newItem = GetNode(i, j).item;
                         if (newItem != null)
                         {
-                            if (IsDrop == true)
+                            if (IsDrop)
                             {
                                 newItem.gameObject.transform.localPosition = itemPos;
                             }
@@ -2160,7 +2160,7 @@ void GenerateWaffleLayer()
 
             foreach (var item in items)
             {
-                if (item != null && item.Destroyable() == true)
+                if (item != null && item.Destroyable())
                 {
                     //item.type = item.GetCookie(item.type);
                     if (isgrass)
@@ -2410,14 +2410,14 @@ void GenerateWaffleLayer()
 
     private bool CanDestroyNeighbor(Item item)
     {
-        if (item.IsMarshmallow() == true ||
-            item.IsAppleBox() == true ||
-            item.IsCollectible() == true ||
-            item.IsGingerbread() == true ||
-            item.IsChocolate() == true ||
-            item.IsRockCandy() == true ||
-            item.IsCherry() == true ||
-            item.IsBlank() == true ||
+        if (item.IsMarshmallow() ||
+            item.IsAppleBox() ||
+            item.IsCollectible() ||
+            item.IsGingerbread() ||
+            item.IsChocolate() ||
+            item.IsRockCandy() ||
+            item.IsCherry() ||
+            item.IsBlank() ||
             item.node.jelly != null ||
             item.node.packagebox != null
         )
@@ -2431,22 +2431,22 @@ void GenerateWaffleLayer()
     {
         var marshmallows = new List<Item>();
 
-        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null  && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsMarshmallow() == true)
+        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null  && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsMarshmallow())
         {
             marshmallows.Add(item.node.TopNeighbor().item);
         }
 
-        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsMarshmallow() == true)
+        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsMarshmallow())
         {
             marshmallows.Add(item.node.RightNeighbor().item);
         }
 
-        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsMarshmallow() == true)
+        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsMarshmallow())
         {
             marshmallows.Add(item.node.BottomNeighbor().item);
         }
 
-        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsMarshmallow() == true)
+        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsMarshmallow())
         {
             marshmallows.Add(item.node.LeftNeighbor().item);
         }
@@ -2462,22 +2462,22 @@ void GenerateWaffleLayer()
 
         var appleboxes = new List<Item>();
 
-        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsAppleBox() == true)
+        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsAppleBox())
         {
             appleboxes.Add(item.node.TopNeighbor().item);
         }
 
-        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsAppleBox() == true)
+        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsAppleBox())
         {
             appleboxes.Add(item.node.RightNeighbor().item);
         }
 
-        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsAppleBox() == true)
+        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsAppleBox())
         {
             appleboxes.Add(item.node.BottomNeighbor().item);
         }
 
-        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsAppleBox() == true)
+        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsAppleBox())
         {
             appleboxes.Add(item.node.LeftNeighbor().item);
         }
@@ -2494,22 +2494,22 @@ void GenerateWaffleLayer()
         
         var chocolates = new List<Item>();
 
-        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsChocolate() == true)
+        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsChocolate())
         {
             chocolates.Add(item.node.TopNeighbor().item);
         }
 
-        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsChocolate() == true)
+        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsChocolate())
         {
             chocolates.Add(item.node.RightNeighbor().item);
         }
 
-        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsChocolate() == true)
+        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsChocolate())
         {
             chocolates.Add(item.node.BottomNeighbor().item);
         }
 
-        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsChocolate() == true)
+        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsChocolate())
         {
             chocolates.Add(item.node.LeftNeighbor().item);
         }
@@ -2556,22 +2556,22 @@ void GenerateWaffleLayer()
 
         var rocks = new List<Item>();
 
-        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsRockCandy() == true)
+        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsRockCandy())
         {
             rocks.Add(item.node.TopNeighbor().item);
         }
 
-        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsRockCandy() == true)
+        if (item.node.RightNeighbor() != null && item.node.baffleright == null && item.node.RightNeighbor().item != null && item.node.RightNeighbor().item.IsRockCandy())
         {
             rocks.Add(item.node.RightNeighbor().item);
         }
 
-        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsRockCandy() == true)
+        if (item.node.BottomNeighbor() != null && item.node.bafflebottom == null && item.node.BottomNeighbor().item != null && item.node.BottomNeighbor().item.IsRockCandy())
         {
             rocks.Add(item.node.BottomNeighbor().item);
         }
 
-        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsRockCandy() == true)
+        if (item.node.LeftNeighbor() != null && item.node.LeftNeighbor().baffleright == null && item.node.LeftNeighbor().item != null && item.node.LeftNeighbor().item.IsRockCandy())
         {
             rocks.Add(item.node.LeftNeighbor().item);
         }
@@ -2777,7 +2777,7 @@ void GenerateWaffleLayer()
             }
         }
         // column_row_breaker
-        else if (item.IsColumnBreaker(item.type) == true || item.IsRowBreaker(item.type) == true)
+        else if (item.IsColumnBreaker(item.type) || item.IsRowBreaker(item.type))
         {
             for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
             {
@@ -2809,7 +2809,7 @@ void GenerateWaffleLayer()
             }
         }
 		// generic bomb breaker
-		else if (item.IsBombBreaker(item.type) == true)
+		else if (item.IsBombBreaker(item.type))
 		{
 		    for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
 		    {
@@ -2873,7 +2873,7 @@ void GenerateWaffleLayer()
             }
         }
         // rock candy
-        else if (item.IsRockCandy() == true)
+        else if (item.IsRockCandy())
         {
             for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
             {
@@ -3075,7 +3075,7 @@ void GenerateWaffleLayer()
             if (item != null &&
                 (item.node.i == LevelLoader.instance.row - 1) &&
                 LevelLoader.instance.collectibleCollectColumnMarkers.Contains(item.node.j) &&
-                item.IsCollectible() == true)
+                item.IsCollectible())
             {
                 collectable = true;
             }
@@ -3083,12 +3083,12 @@ void GenerateWaffleLayer()
             // collectible marker by node
             if (item != null && 
                 LevelLoader.instance.collectibleCollectNodeMarkers.Contains(NodeOrder(item.node.i, item.node.j)) &&
-                item.IsCollectible() == true)
+                item.IsCollectible())
             {
                 collectable = true;
             }
             
-            if (collectable == true)
+            if (collectable)
             {
                 Debug.Log("收集到cake"+item.node.name+item.type.ToString());
                 GameObject flyingItem = null;
@@ -3689,7 +3689,7 @@ void GenerateWaffleLayer()
         // TODO: check if allow to show ads
         var allowShowAds = true;
 
-        if (allowShowAds == true)
+        if (allowShowAds)
         {
             // TODO
         }
@@ -3743,7 +3743,7 @@ void GenerateWaffleLayer()
             yield return new WaitForSeconds(0.1f);
         }
 
-        while (lockSwap == true)
+        while (lockSwap)
         {
             //Debug.Log("Wait for checking hint because of lock swap");
 
@@ -3753,7 +3753,7 @@ void GenerateWaffleLayer()
         //Debug.Log("Start checking hint");
 
         // check for rainbow item / breaker / color
-        if (GetHintByRainbowItem() == true || GetHintByBreaker() == true || GetHintByColor() == true)
+        if (GetHintByRainbowItem() || GetHintByBreaker() || GetHintByColor())
         {
             StartCoroutine(ShowHint());
 
@@ -3850,7 +3850,7 @@ void GenerateWaffleLayer()
             yield return new WaitForSeconds(0.1f);
         }
 
-        while (lockSwap == true)
+        while (lockSwap)
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -4514,7 +4514,7 @@ void GenerateWaffleLayer()
             return false;
         }
 
-        if (skipGenerateGingerbread == true)
+        if (skipGenerateGingerbread)
         {
             return false;
         }
@@ -4544,7 +4544,7 @@ void GenerateWaffleLayer()
         }
 
         // prevent multiple call
-        if (generatingGingerbread == true)
+        if (generatingGingerbread)
         {
             return false;
         }
@@ -4614,7 +4614,7 @@ void GenerateWaffleLayer()
         }
 
         // prevent multiple call
-        if (movingGingerbread == true)
+        if (movingGingerbread)
         {
             return false;
         }
@@ -5043,7 +5043,7 @@ void GenerateWaffleLayer()
             {
                 var node = GetNode(i, j);
 
-                if (node != null && node.item != null && node.item.IsCollectible() == true)
+                if (node != null && node.item != null && node.item.IsCollectible())
                 {
                     if (color == 0)
                     {
@@ -5115,7 +5115,7 @@ void GenerateWaffleLayer()
             {
                 var node = GetNode(i, j);
 
-                if (node != null && node.item != null && node.item.IsMarshmallow() == true)
+                if (node != null && node.item != null && node.item.IsMarshmallow())
                 {
                     amount++;
                 }
@@ -5338,7 +5338,7 @@ void GenerateWaffleLayer()
         {
             if (item != null)
             {
-                if (item.color == color && item.IsCookie() == true && item.Matchable())
+                if (item.color == color && item.IsCookie() && item.Matchable())
                 {
                     GameObject explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RainbowExplosion()) as GameObject);
 
@@ -5421,7 +5421,7 @@ void GenerateWaffleLayer()
         allstep++;
         UITop.DecreaseMoves(effect);
 
-        if (isFirstMove == true)
+        if (isFirstMove)
         {
             isFirstMove = false;
             NetManager.instance.eliminateLevelStart();

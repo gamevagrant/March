@@ -1,74 +1,75 @@
 ﻿using BestHTTP;
 using Facebook.Unity;
 using LitJson;
-using System.Collections.Generic;
 using March.Core.WindowManager;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour
 {
-    public Button m_linkBtn;
-    public Button m_helpBtn;
-    public Button m_evaluateBtn;
-    public Button m_changeBtn;
-    public Button m_notifyBtn;
-    public Button m_languageBtn;
+    private GameObject facebookButton;
+    private GameObject helpButton;
+    private GameObject evaluateButton;
+    private GameObject changeNameButton;
+    private GameObject notifyButton;
+    private GameObject languageButton;
 
-    public Text m_faceBookDes;
+    private Text facebookText;
 
-    public Image m_effect_01_img;
-    public Image m_effect_02_img;
-    public Image m_music_01_img;
-    public Image m_music_02_img;
+    private GameObject soundOnButton;
+    private GameObject soundOffButton;
+    private GameObject musicOnButton;
+    private GameObject musicOffButton;
 
-    public Text m_titleText;
-    private bool is_effect_on;
-    private bool is_music_on;
+    private Text tileText;
 
-    private GameObject m_modifyNamePanel;
-
-    // Use this for initialization
     void Start()
     {
-        initText();
-        is_effect_on = PlayerPrefs.GetInt("sound_on") == 1;
-        is_music_on = PlayerPrefs.GetInt("music_on") == 1;
+        facebookButton = transform.Find("ButtonPanel/Facebook").gameObject;
+        helpButton = transform.Find("ButtonPanel/Help").gameObject;
+        evaluateButton = transform.Find("ButtonPanel/Evaluate").gameObject;
+        changeNameButton = transform.Find("ButtonPanel/ChangeName").gameObject;
+        notifyButton = transform.Find("ButtonPanel/Notify").gameObject;
+        languageButton = transform.Find("ButtonPanel/Language").gameObject;
+
+        facebookText = transform.Find("BottomLeftPanel/FacebookText").GetComponent<Text>();
+
+        soundOnButton = transform.Find("BottomRightPanel/Sound/On").gameObject;
+        soundOffButton = transform.Find("BottomRightPanel/Sound/Off").gameObject;
+        musicOnButton = transform.Find("BottomRightPanel/Music/On").gameObject;
+        musicOffButton = transform.Find("BottomRightPanel/Music/Off").gameObject;
+
+        tileText = transform.Find("Title/bg/Text").GetComponent<Text>();
+
+        InitText();
 
         if (FB.IsLoggedIn)
         {
-            m_linkBtn.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy3btn", typeof(Sprite)) as Sprite;
-            m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("210150");
+            facebookButton.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy3btn", typeof(Sprite)) as Sprite;
+            facebookButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("210150");
         }
 
-        if (is_effect_on)
-        {
-            m_effect_02_img.gameObject.SetActive(false);
-        }
-        else
-        {
-            m_effect_01_img.gameObject.SetActive(false);
-        }
-        if (is_music_on)
-        {
-            m_music_02_img.gameObject.SetActive(false);
-        }
-        else
-        {
-            m_music_01_img.gameObject.SetActive(false);
-        }
+        OnFlag(soundOnButton, soundOffButton, Configure.instance.SoundOn);
+        OnFlag(musicOnButton, musicOffButton, Configure.instance.MusicOn);
     }
 
-    private void initText()
+    private void OnFlag(GameObject go1, GameObject go2, bool flag)
     {
-        m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200031");
-        m_helpBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200033");
-        m_evaluateBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200035");
-        m_changeBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200032");
-        m_notifyBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200034");
-        m_languageBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200036");
-        m_faceBookDes.text = LanguageManager.instance.GetValueByKey("200037");
-        m_titleText.text = LanguageManager.instance.GetValueByKey("200037");
+        go1.gameObject.SetActive(flag);
+        go2.gameObject.SetActive(!flag);
+    }
+
+    private void InitText()
+    {
+        facebookButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200031");
+        helpButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200033");
+        evaluateButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200035");
+        changeNameButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200032");
+        notifyButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200034");
+        languageButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200036");
+        facebookText.text = LanguageManager.instance.GetValueByKey("200037");
+        tileText.text = LanguageManager.instance.GetValueByKey("200037");
     }
 
     protected void HandleResult(IResult result)
@@ -79,7 +80,6 @@ public class SettingPanel : MonoBehaviour
             return;
         }
 
-        // Some platforms return the empty string instead of null.
         if (!string.IsNullOrEmpty(result.Error))
         {
             Debug.Log("-----------------: " + "Error Response: " + result.Error);
@@ -102,10 +102,8 @@ public class SettingPanel : MonoBehaviour
             }
             else
             {
-				WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210147"));
+                WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210147"));
             }
-            //Debug.Log ("-----------------: " + "Success Response: " + result.ResultDictionary);
-
         }
         else
         {
@@ -119,7 +117,7 @@ public class SettingPanel : MonoBehaviour
         {
             if (!FB.IsLoggedIn)
             {
-                FB.LogInWithReadPermissions(new List<string>() { "public_profile", "email", "user_friends" }, this.HandleResult);
+                FB.LogInWithReadPermissions(new List<string> { "public_profile", "email", "user_friends" }, HandleResult);
             }
             else if (FB.IsLoggedIn)
             {
@@ -140,10 +138,10 @@ public class SettingPanel : MonoBehaviour
         JsonData data = JsonMapper.ToObject(response.DataAsText);
         PlayerData.instance.RefreshData(data);
 
-		WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210146"));
+        WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210146"));
 
-        m_linkBtn.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy3btn", typeof(Sprite)) as Sprite;
-        m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("210150");
+        facebookButton.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy3btn", typeof(Sprite)) as Sprite;
+        facebookButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("210150");
     }
 
     private void userUnBindInfoRev(HTTPRequest request, HTTPResponse response)
@@ -154,13 +152,11 @@ public class SettingPanel : MonoBehaviour
             return;
         }
         Debug.Log("userUnBindInfoRev response:" + response.DataAsText);
-        JsonData data = JsonMapper.ToObject(response.DataAsText);
-        //PlayerData.instance.RefreshData(data);
 
-		WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210148"));
+        WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210148"));
 
-        m_linkBtn.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy4btn", typeof(Sprite)) as Sprite;
-        m_linkBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200031");
+        facebookButton.GetComponent<Image>().sprite = Resources.Load("Sprites/Cookie/UI/General/buy4btn", typeof(Sprite)) as Sprite;
+        facebookButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200031");
     }
 
     public void onHelpBtn()
@@ -169,8 +165,6 @@ public class SettingPanel : MonoBehaviour
 
     public void onEvaluateBtn()
     {
-
-
     }
 
     public void onChangeBtn()
@@ -180,51 +174,27 @@ public class SettingPanel : MonoBehaviour
 
     public void onNotifyBtn()
     {
-
     }
 
     public void onLanguageBtn()
     {
-
     }
 
     public void onEffectBtn()
     {
-        if (PlayerPrefs.GetInt("sound_on") == 1)
-        {
-            m_effect_01_img.gameObject.SetActive(false);
-            m_effect_02_img.gameObject.SetActive(true);
-            PlayerPrefs.SetInt("sound_on", 0);
-            AudioListener.volume = 0;
+        Configure.instance.SoundOn = !Configure.instance.SoundOn;
 
-        }
-        else
-        {
-            m_effect_01_img.gameObject.SetActive(true);
-            m_effect_02_img.gameObject.SetActive(false);
-            PlayerPrefs.SetInt("sound_on", 1);
-            AudioListener.volume = 1;
-        }
+        PlayerPrefs.SetInt(PlayerPrefEnums.SoundOn, Configure.instance.SoundOn ? 1 : 0);
 
+        OnFlag(soundOnButton, soundOffButton, Configure.instance.SoundOn);
     }
 
     public void onMusicBtn()
     {
-        if (PlayerPrefs.GetInt("music_on") == 1)
-        {
-            m_music_01_img.gameObject.SetActive(false);
-            m_music_02_img.gameObject.SetActive(true);
-            var backgroundAudioSource = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
-            backgroundAudioSource.volume = 0;
-            PlayerPrefs.SetInt("music_on", 0);
-        }
-        else
-        {
-            m_music_01_img.gameObject.SetActive(true);
-            m_music_02_img.gameObject.SetActive(false);
-            var backgroundAudioSource = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
-            backgroundAudioSource.volume = 1;
-            PlayerPrefs.SetInt("music_on", 1);
-        }
+        Configure.instance.MusicOn = !Configure.instance.MusicOn;
+
+        PlayerPrefs.SetInt(PlayerPrefEnums.MusicOn, Configure.instance.MusicOn ? 1 : 0);
+
+        OnFlag(musicOnButton, musicOffButton, Configure.instance.MusicOn);
     }
 }

@@ -22,15 +22,26 @@ public class BackgroundMusic : MonoSingleton<BackgroundMusic>
         fadeInAudioSource = CreateAudioSource();
     }
 
+    public void Start()
+    {
+        OnSoundChange();
+
+        Configure.instance.OnSoundChange += OnSoundChange;
+    }
+
     private AudioSource CreateAudioSource()
     {
         var source = gameObject.AddComponent<AudioSource>();
         source.ignoreListenerVolume = true;
         source.loop = true;
-        source.volume = PlayerPrefs.GetInt("music_on");
         return source;
     }
 
+    public void OnSoundChange()
+    {
+        fadeOutAudioSource.enabled = Configure.instance.SoundOn;
+        fadeInAudioSource.enabled = Configure.instance.SoundOn;
+    }
 
 #if UNITY_5_4_OR_NEWER
     protected override void sceneLoadedHandler(Scene scene, LoadSceneMode mode)

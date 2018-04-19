@@ -22,8 +22,7 @@ public class UIunLoginPopup : MonoBehaviour
 
     public void OnCloseClick()
     {
-        MainScene.Instance.m_unLoginPop = null;
-        MainScene.Instance.login();
+        MainScene.Instance.Login();
         GetComponent<Popup>().Close();
     }
 }

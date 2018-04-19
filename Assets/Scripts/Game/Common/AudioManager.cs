@@ -67,11 +67,22 @@ public class AudioManager : MonoSingleton<AudioManager>
     public bool playingChocolateExplode;
     public bool playingRockCandyExplode;
 
-    float delay = 0.3f;
+    private float delay = 0.3f;
+
+    private void Start()
+    {
+        Configure.instance.OnMusicChange += OnMusicChange;
+    }
+
+    private void OnMusicChange()
+    {
+        efxSource.enabled = Configure.instance.MusicOn;
+        AudioListener.volume = Configure.instance.MusicOn ? 1 : 0;
+    }
 
     public void PlaySingleSound(AudioClip clip)
     {
-        if (PlayerPrefs.GetInt("sound_on") == 1)
+        if (Configure.instance.SoundOn)
         {
             efxSource.PlayOneShot(clip);
         }

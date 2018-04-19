@@ -96,7 +96,7 @@ public class Booster : MonoBehaviour
 			WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210134"));
 			return;
 		}
-        if (board.state != GAME_STATE.WAITING_USER_SWAP || board.lockSwap == true)
+        if (board.state != GAME_STATE.WAITING_USER_SWAP || board.lockSwap)
         {
             return;
         }

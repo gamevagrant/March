@@ -1,23 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UseGuide : MonoBehaviour
 {
     private GameObject[] guides;
-    private bool isGuided = false;
+    private bool isGuided;
     private Transform guide;
-    private string currentGuideStep;
     private bool isGuideRight;
-    private int guideIndex = 0;
-    guidesetup _guidesetup;
-    private string[] content = new string[]
-    {
-        "我们的领地被占领了",
-        "让我们夺回属于我们的领地",
-        "开始行动吧",
-    };
+    private int guideIndex;
+    guidesetup guidesetup;
 
     private List<GuideItem> guideItems;
     private void Awake()
@@ -46,7 +38,6 @@ public class UseGuide : MonoBehaviour
         else
         {
             ShowGuideNext();
-            //guide.transform.Find("StartGuidePage1").gameObject.SetActive(true);
         }
     }
     private void ShowGuideNext()
@@ -60,8 +51,7 @@ public class UseGuide : MonoBehaviour
 
         string prefabPath = "Guide/Guide" + (test ? "Right" : "Left");
 
-        GameObject guide = Instantiate(Resources.Load<GameObject>(prefabPath),transform);
-        //guide.transform.Find("Text").GetComponent<Text>().text = content[guideIndex];
+        var guide = Instantiate(Resources.Load<GameObject>(prefabPath), transform);
         guide.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey(guideItems[guideIndex].dialogue);
         guide.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
@@ -74,7 +64,6 @@ public class UseGuide : MonoBehaviour
     public void ShowGuide(string guideName)
     {
         if (isGuided) return;
-        currentGuideStep = guideName;
         if (guideName == "5")
         {
 #if UNITY_ANDROID
