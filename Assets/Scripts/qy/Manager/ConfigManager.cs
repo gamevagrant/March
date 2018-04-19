@@ -92,15 +92,6 @@ namespace qy.config
             }
         }
 
-        public StoryheadConfig storyheadConfig
-        {
-            get
-            {
-                BaseConfig config = dic[typeof(StoryheadConfig)];
-                return config as StoryheadConfig;
-            }
-        }
-
         public SettingConfig settingConfig
         {
             get

@@ -17,8 +17,8 @@ public class LanguageKey : MonoBehaviour {
 	    }
 	    if (key != "")
 	    {
-	        m_Text.text = LanguageManager.instance.Language.GetValueByKey(key);
-	    }
+            m_Text.text = LanguageManager.instance.GetValueByKey(key);
+        }
     }
 	
 	// Update is called once per frame

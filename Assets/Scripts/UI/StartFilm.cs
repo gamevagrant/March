@@ -2,16 +2,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using qy;
 
 public class StartFilm : MonoBehaviour
 {
 
-    private storyhead m_stroy_head;
-    public storyhead Story_Head { get { if (m_stroy_head == null) { m_stroy_head = DefaultConfig.getInstance().GetConfigByType<storyhead>(); } return m_stroy_head; } }
-
-    private language_cn m_language_cn;
-    public language_cn Language_CN { get { if (m_language_cn == null) { m_language_cn = DefaultConfig.getInstance().GetConfigByType<language_cn>(); } return m_language_cn; } }
+    //private storyhead m_stroy_head;
+    //public storyhead Story_Head { get { if (m_stroy_head == null) { m_stroy_head = DefaultConfig.getInstance().GetConfigByType<storyhead>(); } return m_stroy_head; } }
+    
+    //private language_cn m_language_cn;
+    //public language_cn Language_CN { get { if (m_language_cn == null) { m_language_cn = DefaultConfig.getInstance().GetConfigByType<language_cn>(); } return m_language_cn; } }
    
     private Text m_text;
     private Image m_filmBackground;
@@ -21,7 +21,8 @@ public class StartFilm : MonoBehaviour
     //需要显示剧情的图片只需要把图片改成剧情对应的index就行，然后把图片放在Resources/StartFilm
     private Sprite[] m_filmImages;
 
-    private StoryHeadItem m_storyItem;
+    //private StoryHeadItem m_storyItem;
+    private qy.config.StoryHeadItem storyItem;
 
     void Start()
     {
@@ -34,7 +35,8 @@ public class StartFilm : MonoBehaviour
         LoadStartFilmImages();
 
         //开始索引
-        m_storyItem = Story_Head.GetItemByID("1000101");
+        //m_storyItem = Story_Head.GetItemByID("1000101");
+        storyItem = GameMainManager.Instance.configManager.StoryHeadConfig.GetItem("1000101");
 
         PlayStory();
     }
@@ -65,18 +67,18 @@ public class StartFilm : MonoBehaviour
     private void PlayStory()
     {
         //如果当前剧情播放完就加载main场景
-        if (m_storyItem.next=="0")
+        if (storyItem == null)
         {
             LoadMainScene();
             return;
         }
 
-		string story = LanguageManager.instance.GetValueByKey(m_storyItem.dialogue);
+		string story = storyItem.dialogue;
         m_text.text = story;
 
-        LoadFilmImage(ref m_storyItem.bgFile);
+        LoadFilmImage(ref storyItem.bgFile);
 
-        m_storyItem = Story_Head.GetItemByID(m_storyItem.next);
+        storyItem = storyItem.nextStory;
     }
     private void LoadMainScene()
     {

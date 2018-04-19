@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
+using qy.config;
+using qy;
 using Random = UnityEngine.Random;
 
 #if UNITY_EDITOR
@@ -109,11 +111,12 @@ public class Board : MonoBehaviour
         allstep = 0;
 
         string itemid = (1000000 + LevelLoader.instance.level).ToString();
-        LevelItem levelconfig = LevelLoader.instance.LevelConfig.GetItemByID(itemid);
+        //LevelItem levelconfig = LevelLoader.instance.LevelConfig.GetItemByID(itemid);
+        MatchLevelItem levelconfig = GameMainManager.Instance.configManager.matchLevelConfig.GetItem(itemid);
         winGold = 0;
         if (levelconfig != null)
         {
-            winGold = Int32.Parse(levelconfig.coin);
+            winGold = levelconfig.coin;
         }
         else
         {
@@ -3471,9 +3474,10 @@ void GenerateWaffleLayer()
 
     public void WinGoldReward(Item item)
     {
-        var config = DefaultConfig.getInstance().GetConfigByType<setting>().GetDictionaryByID("moviesgold");
-        int maxgold = Int32.Parse(config["maxgold"]);
-
+        //var config = DefaultConfig.getInstance().GetConfigByType<setting>().GetDictionaryByID("moviesgold");
+        SettingConfig config = GameMainManager.Instance.configManager.settingConfig;
+        //int maxgold = Int32.Parse(config["maxgold"]);
+        int maxgold = config.maxgold;
         if (winGold > maxgold)
         {
             winGold = maxgold;
@@ -3482,28 +3486,33 @@ void GenerateWaffleLayer()
 
         if (item.IsPlaneBreaker(item.type))
         {
-            winGold += Int32.Parse(config["planebreaker"]);
+            //winGold += Int32.Parse(config["planebreaker"]);
+            winGold += config.planebreaker;
             //Debug.Log("xxxxxxxxxxxxx: " + winGold.ToString());
             getWinGold(item, winGold);
         }
         else if (item.IsColumnBreaker(item.type))
         {
-            winGold += Int32.Parse(config["columnbreaker"]);
+            //winGold += Int32.Parse(config["columnbreaker"]);
+            winGold += config.columnbreaker;
             getWinGold(item, winGold);
         }
         else if (item.IsRowBreaker(item.type))
         {
-            winGold += Int32.Parse(config["rowbreaker"]);
+            //winGold += Int32.Parse(config["rowbreaker"]);
+            winGold += config.rowbreaker;
             getWinGold(item, winGold);
         }
         else if (item.IsBombBreaker(item.type))
         {
-            winGold += Int32.Parse(config["bombbreaker"]);
+           // winGold += Int32.Parse(config["bombbreaker"]);
+            winGold += config.bombbreaker;
             getWinGold(item, winGold);
         }
         else if (item.type == ITEM_TYPE.COOKIE_RAINBOW)
         {
-            winGold += Int32.Parse(config["rainbow"]);
+            //winGold += Int32.Parse(config["rainbow"]);
+            winGold += config.rainbow;
             getWinGold(item, winGold);
         }
         if (winGold > maxgold)

@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using qy;
+using qy.config;
 
 public class DailyLandingActivities : MonoBehaviour
 {
@@ -18,30 +20,32 @@ public class DailyLandingActivities : MonoBehaviour
 
     private int m_day;
     private int m_functionSwitchOpen = 1;
+    /*
     private int m_maxNum;
     private string[] m_Items;
     private string[] m_Golds;
-
+    
     private setting m_setting;
-
+ 
     public setting Item
     {
         get { return m_item ?? (m_item = DefaultConfig.getInstance().GetConfigByType<setting>()); }
     }
 
     private setting m_item;
-
+    
     public setting Setting
     {
         get { return m_setting ?? (m_setting = DefaultConfig.getInstance().GetConfigByType<setting>()); }
     }
-
+    */
     void Awake()
     {
         m_titleText.text = LanguageManager.instance.GetValueByKey("210137");
         m_des.text = LanguageManager.instance.GetValueByKey("210138");
         m_btnText.text = LanguageManager.instance.GetValueByKey("210136");
 
+        /*
         var setting = Setting.GetDictionaryByID("UserSevenDaySwitch");
         if (null != setting)
         {
@@ -70,7 +74,7 @@ public class DailyLandingActivities : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 
     //奖励列表添加金币
@@ -105,7 +109,8 @@ public class DailyLandingActivities : MonoBehaviour
         item_go.gameObject.SetActive(true);
 
         string itemId = item.Split(':')[0];
-        GoodsItem goodsItem = DefaultConfig.getInstance().GetConfigByType<item>().GetItemByID(itemId);
+        //GoodsItem goodsItem = DefaultConfig.getInstance().GetConfigByType<item>().GetItemByID(itemId);
+        PropItem goodsItem = GameMainManager.Instance.configManager.propsConfig.GetItem(itemId);
         Sprite sp = Resources.Load(string.Format("Sprites/UI/{0}", goodsItem.icon), typeof(Sprite)) as Sprite;
         Image icon = item_go.GetComponent<Image>();
         icon.sprite = sp;
@@ -183,8 +188,9 @@ public class DailyLandingActivities : MonoBehaviour
     {
         var go = transform.Find(string.Format("item{0}", m_day));
         var b_go = go.transform.Find("Button");
-        string item = m_Items[m_day - 1];
-        int itemNum = int.Parse(item.Split(':')[1]);
+        //string item = m_Items[m_day - 1];
+        //int itemNum = int.Parse(item.Split(':')[1]);
+        int itemNum = GameMainManager.Instance.configManager.settingConfig.GetSevenDayProp(m_day - 1)[0].count;
         string i_ = "item";
         if (m_day == 7)
         {
@@ -204,7 +210,8 @@ public class DailyLandingActivities : MonoBehaviour
         getAward();//领奖并关闭界面
         GetComponent<Popup>().Close();
 
-        string golds = m_Golds[m_day - 1];
+        //string golds = m_Golds[m_day - 1];
+        string golds = GameMainManager.Instance.configManager.settingConfig.GetSevenDayGold(m_day - 1).ToString();
         if (m_day == 7)
         {
             setTargetGolds();

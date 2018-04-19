@@ -13,8 +13,8 @@ public class UIBoosterPopup : MonoBehaviour
     public Text itemDes;
     public Text cost2;
 
-    private item m_item;
-    public item Item { get { if (m_item == null) { m_item = DefaultConfig.getInstance().GetConfigByType<item>(); } return m_item; } }
+    //private item m_item;
+    //public item Item { get { if (m_item == null) { m_item = DefaultConfig.getInstance().GetConfigByType<item>(); } return m_item; } }
 
     public bool clicking;
 
@@ -38,26 +38,30 @@ public class UIBoosterPopup : MonoBehaviour
                 cost2.text = Configure.instance.beginFiveMovesCost2.ToString();
                 break;
             case BOOSTER_TYPE.BEGIN_RAINBOW_BREAKER:
-                cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200003").price) * amount);
+                //cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200003").price) * amount);
+                cost1.text = string.Format("{0}",GameMainManager.Instance.configManager.propsConfig.GetItem("200003").price * amount);
                 itemDes.text = LanguageManager.instance.GetValueByKey("210004");
                 itemImage.sprite = Resources.Load("Sprites/UI/item002", typeof(Sprite)) as Sprite;
                 itemImage.SetNativeSize();
                 break;
             case BOOSTER_TYPE.BEGIN_BOMB_BREAKER:
-                cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200004").price) * amount);
+                //cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200004").price) * amount);
+                cost1.text = string.Format("{0}", GameMainManager.Instance.configManager.propsConfig.GetItem("200004").price * amount);
                 itemDes.text = LanguageManager.instance.GetValueByKey("210003");
                 itemImage.sprite = Resources.Load("Sprites/UI/item003", typeof(Sprite)) as Sprite;
                 itemImage.SetNativeSize();
                 break;
             case BOOSTER_TYPE.BEGIN_PLANE_BREAKER:
-                cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200005").price) * amount);
+                //cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200005").price) * amount);
+                cost1.text = string.Format("{0}", GameMainManager.Instance.configManager.propsConfig.GetItem("200005").price * amount);
                 itemDes.text = LanguageManager.instance.GetValueByKey("210005");
                 itemImage.sprite = Resources.Load("Sprites/UI/item004", typeof(Sprite)) as Sprite;
                 itemImage.SetNativeSize();
                 break;
 
             case BOOSTER_TYPE.SINGLE_BREAKER:
-                cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200006").price) * amount);
+                //cost1.text = string.Format("{0}", int.Parse(Item.GetItemByID("200006").price) * amount);
+                cost1.text = string.Format("{0}", GameMainManager.Instance.configManager.propsConfig.GetItem("200006").price * amount);
                 itemDes.text = LanguageManager.instance.GetValueByKey("210002");
                 itemImage.sprite = Resources.Load("Sprites/UI/item005", typeof(Sprite)) as Sprite;
                 itemImage.SetNativeSize();
@@ -102,17 +106,21 @@ public class UIBoosterPopup : MonoBehaviour
                     amount = Configure.instance.package1Amount;
                     break;
                 case BOOSTER_TYPE.BEGIN_RAINBOW_BREAKER:
-                    cost = int.Parse(Item.GetItemByID("200003").price) * amount;
+                    //cost = int.Parse(Item.GetItemByID("200003").price) * amount;
+                    cost = GameMainManager.Instance.configManager.propsConfig.GetItem("200003").price * amount;
                     break;
                 case BOOSTER_TYPE.BEGIN_BOMB_BREAKER:
-                    cost = int.Parse(Item.GetItemByID("200004").price) * amount;
+                    //cost = int.Parse(Item.GetItemByID("200004").price) * amount;
+                    cost = GameMainManager.Instance.configManager.propsConfig.GetItem("200004").price * amount;
                     break;
                 case BOOSTER_TYPE.BEGIN_PLANE_BREAKER:
-                    cost = int.Parse(Item.GetItemByID("200005").price) * amount;
+                    //cost = int.Parse(Item.GetItemByID("200005").price) * amount;
+                    cost = GameMainManager.Instance.configManager.propsConfig.GetItem("200005").price * amount;
                     break;
 
                 case BOOSTER_TYPE.SINGLE_BREAKER:
-                    cost = int.Parse(Item.GetItemByID("200006").price) * amount;
+                    //cost = int.Parse(Item.GetItemByID("200006").price) * amount;
+                    cost = GameMainManager.Instance.configManager.propsConfig.GetItem("200006").price * amount;
                     break;
                 case BOOSTER_TYPE.ROW_BREAKER:
                     cost = Configure.instance.rowBreakerCost1;

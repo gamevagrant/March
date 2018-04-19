@@ -69,7 +69,7 @@ public class MainScene : MonoBehaviour
     }
 
     private language_cn m_language_cn;
-
+    /*
     public item Item
     {
         get
@@ -82,7 +82,7 @@ public class MainScene : MonoBehaviour
         }
     }
     private item m_item;
-
+    */
     public language_cn Language_CN
     {
         get
@@ -239,7 +239,7 @@ public class MainScene : MonoBehaviour
             {
                 ShowDailyLandingPopup();
             }
-
+            ShowDailyLandingPopup();
         });
     }
     /*
@@ -367,14 +367,14 @@ public class MainScene : MonoBehaviour
         int day = qy.GameMainManager.Instance.playerData.indexDay;
 		WindowManager.instance.Show<DailyLandingActivitiesPopupWindow> ().GetComponent<DailyLandingActivities> ().Init (day + 1);
     }
-
+    /*
     public void addStoryListItem(StoryItem storyItem)
     {
         GameObject obj = Instantiate(m_storyListItem, m_storyListLayout.transform);
         obj.GetComponent<StoryListItem>().SetItemContent(storyItem, this);
         m_stroyList.Add(obj);
     }
-
+    */
     public void RefreshPlayerData()
     {
         m_coin.text = qy.GameMainManager.Instance.playerData.coinNum.ToString();
@@ -445,16 +445,16 @@ public class MainScene : MonoBehaviour
         {
             m_testPopup.SetActive(true);
             m_testPopup.transform.Find("InputField").GetComponent<InputField>().text =
-                qy.GameMainManager.Instance.playerData.eliminateLevel.ToString();
+                GameMainManager.Instance.playerData.eliminateLevel.ToString();
         }
         else
         {
-            if (qy.GameMainManager.Instance.playerData.heartNum < eliminateHeartNum)
+            if (GameMainManager.Instance.playerData.heartNum < eliminateHeartNum)
             {
 				WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200025"));
             }
-            else if (qy.GameMainManager.Instance.playerData.eliminateLevel > Int32.Parse(DefaultConfig.getInstance().GetConfigByType<setting>()
-                    .GetValueByIDAndKey("maxlevel", "max")))
+            
+            else if (GameMainManager.Instance.playerData.eliminateLevel > GameMainManager.Instance.configManager.settingConfig.max)
             {
 				WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200049"));
             }

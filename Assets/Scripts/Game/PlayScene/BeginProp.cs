@@ -1,6 +1,8 @@
 ﻿using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
+using qy;
+using qy.config;
 
 public delegate void BuyBtnCallBcak(int num);
 
@@ -62,7 +64,8 @@ public class BeginProp : MonoBehaviour
             }
         }
 
-        GoodsItem goodsItem = DefaultConfig.getInstance().GetConfigByType<item>().GetItemByID(ItemId);
+        //GoodsItem goodsItem = DefaultConfig.getInstance().GetConfigByType<item>().GetItemByID(ItemId);
+        PropItem goodsItem = GameMainManager.Instance.configManager.propsConfig.GetItem(ItemId);
         Sprite sp = Resources.Load(string.Format("Sprites/UI/{0}", goodsItem.icon), typeof(Sprite)) as Sprite;
         Icon.sprite = sp;
         Icon.SetNativeSize();
