@@ -35,7 +35,7 @@ namespace qy
 
         public GameMainManager()
         {
-            playerData = new PlayerData();
+            playerData = LocalDatasManager.playerData;
             playerModel = new PlayerModel(playerData);
             netManager = net.NetManager.Instance;
             configManager = config.ConfigManager.Instance;

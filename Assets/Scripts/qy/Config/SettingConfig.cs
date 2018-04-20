@@ -190,13 +190,9 @@ namespace qy.config
             for(int i =0;i<steps.Length;i++)
             {
                 string step = steps[i];
-                if (string.IsNullOrEmpty(step) || step == "0")
+                List<PropItem> props = new List<PropItem>();
+                if (!string.IsNullOrEmpty(step) && step != "0")
                 {
-                    list.Add(null);
-                }
-                else
-                {
-                    List<PropItem> props = new List<PropItem>();
                     string[] items = step.Split(',');
                     foreach (string item in items)
                     {
@@ -205,8 +201,9 @@ namespace qy.config
                         propItem.count = int.Parse(itemVlues[1]);
                         props.Add(propItem);
                     }
-                    list.Add(props);
                 }
+                
+                list.Add(props);
             }
 
             return list;

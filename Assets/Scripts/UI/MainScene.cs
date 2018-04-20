@@ -123,7 +123,7 @@ public class MainScene : MonoBehaviour
 
         Login();
 
-        m_star.text = qy.GameMainManager.Instance.playerData.starNum.ToString();
+        m_star.text = GameMainManager.Instance.playerData.starNum.ToString();
 
         if (GameMainManager.Instance.playerData.isPlayScene)
         {
@@ -177,7 +177,7 @@ public class MainScene : MonoBehaviour
 
     void Update()
     {
-        if (qy.GameMainManager.Instance.playerData.heartNum < 5)
+        if (GameMainManager.Instance.playerData.heartNum < 5)
         {
             m_downTime.text = string.Format("{0:D2}: {1:D2}", (int)TimeMonoManager.instance.getTotalTime() / 60, (int)TimeMonoManager.instance.getTotalTime() % 60);
         }
@@ -191,10 +191,10 @@ public class MainScene : MonoBehaviour
 
     void OnApplicationFocus(bool hasFocus)
     {
-        if (isOnApplicationPause == true && qy.GameMainManager.Instance.playerData.heartNum < 5)
+        if (isOnApplicationPause == true && GameMainManager.Instance.playerData.heartNum < 5)
         {
             //login();
-            Login();
+            //Login();
             isOnApplicationPause = false;
         }
     }
@@ -239,7 +239,6 @@ public class MainScene : MonoBehaviour
             {
                 ShowDailyLandingPopup();
             }
-            ShowDailyLandingPopup();
         });
     }
     /*

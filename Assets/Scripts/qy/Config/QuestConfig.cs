@@ -46,7 +46,10 @@ namespace qy.config
             string[] data = value.Split(':');
             endingPoint.survival = int.Parse(data[0]);
             endingPoint.story = ConfigManager.Instance.storysConfig.GetItem(data[1]);
-
+            if (endingPoint.story == null)
+            {
+                Debug.LogAssertionFormat("story表中找不到【{0}】id ", data[1]);
+            }
             return endingPoint;
         }
         
@@ -61,15 +64,18 @@ namespace qy.config
             string[] items = value.Split(',');
             foreach (string str in items)
             {
+                if(!string.IsNullOrEmpty(str))
+                {
+                    string[] data = str.Split(':');
+                    SelectItem selectedItem = new SelectItem();
+                    selectedItem.name = GetLanguage(data[0]);
+                    selectedItem.story = ConfigManager.Instance.storysConfig.GetItem(data[1]);
+                    selectedItem.toQuestId = data[2];
+                    string[] ability = data[3].Split('|');
+                    selectedItem.ability = new Ability(int.Parse(ability[0]), int.Parse(ability[1]), int.Parse(ability[2]));
+                    list.Add(selectedItem);
+                }
                 
-                string[] data = str.Split(':');
-                SelectItem selectedItem = new SelectItem();
-                selectedItem.name = GetLanguage(data[0]);
-                selectedItem.story = ConfigManager.Instance.storysConfig.GetItem(data[1]);
-                selectedItem.toQuestId = data[2];
-                string[] ability = data[3].Split('|');
-                selectedItem.ability = new Ability(int.Parse(ability[0]),int.Parse(ability[1]),int.Parse(ability[2]));
-                list.Add(selectedItem);
             }
             return list;
         }

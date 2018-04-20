@@ -81,9 +81,9 @@ namespace qy
         public int awardState = 1;
         public bool isPlayScene = false;
         /// <summary>
-        /// 数据每次改变时自增1，和服务器通信一次行为减1，下次正常通信后超过5进行一次同步，归0
+        /// 数据是否发生改变
         /// </summary>
-        public int dirty = 0;
+        public bool dirty = false;
 
         //道具解锁状态, "0"缺省, "1"表示解锁导弹, 所有下关开始的时候, 道具列表要自动勾选导弹; "2"魔方; "3"飞机
         public string showUnlockItemStatus = "0";
@@ -182,20 +182,23 @@ namespace qy
                 propsDic.Add(item.itemId,prop);
             }
 
+            dirty = false;
+
+            SaveData();
         }
 
-        public PlayerDataMessage ToPlayerDataMessage()
+        public PlayerDataServerMessage ToPlayerDataMessage()
         {
-            PlayerDataMessage message = new PlayerDataMessage();
+            PlayerDataServerMessage message = new PlayerDataServerMessage();
             message.storyid = questId;
-            message.heartTime = hertTimestamp * 1000;
+            message.heartTime = (hertTimestamp * 1000).ToString();
             message.gold = coinNum;
             message.heart = heartNum;
             message.star = starNum;
             message.name = nickName;
             message.uid = userId;
             message.level = eliminateLevel;
-            message.items = new List<PlayerDataMessage.PropItem>();
+            message.items = new List<PlayerDataServerMessage.PropItem>();
             foreach(PropItem item in propsDic.Values)
             {
                 PlayerDataMessage.PropItem prop = new PlayerDataMessage.PropItem();
@@ -214,6 +217,11 @@ namespace qy
             return result;
         }
 
+
+        private void SaveData()
+        {
+            LocalDatasManager.playerData = this;
+        }
     }
 }
 

@@ -105,6 +105,11 @@ namespace qy.net
 
         private bool SendData(string cmd,object jd, Action<bool, PlayerDataMessage> callBack)
         {
+            if(cmd!= SAVE_OFF_LINE)
+            {
+                TrySynchronizationData();
+            }
+            
             string url = APIDomain;
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("cmd", cmd);
@@ -129,6 +134,7 @@ namespace qy.net
 
         public void SendRequest<T>(T handler) where T : INetHandler
         {
+            TrySynchronizationData();
             HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, handler.OnRecieve);
             request.AddField("uid", uid);
             request.AddField("cmd", handler.GetCommand());
@@ -145,7 +151,8 @@ namespace qy.net
         /// <returns></returns>
         public bool Login(LoginInfo loginInfo, Action<bool, PlayerDataMessage> callBack)
         {
-            if(!isNetWorkStatusGood)
+            //TrySynchronizationData();
+            if (!isNetWorkStatusGood)
             {
                 PlayerData pd = LocalDatasManager.playerData;
                 if(pd!=null)
@@ -186,10 +193,20 @@ namespace qy.net
         /// <param name="playerData"></param>
         /// <param name="callBack"></param>
         /// <returns></returns>
-        public bool UpLoadOffLineData(PlayerDataMessage playerData, Action<bool, PlayerDataMessage> callBack)
+        public bool UpLoadOffLineData(PlayerDataServerMessage playerData, Action<bool, PlayerDataMessage> callBack)
         {
 
-            return SendData(SAVE_OFF_LINE, playerData, callBack);
+            return SendData(SAVE_OFF_LINE, playerData, (ret,res)=> {
+                if(res.isOK)
+                {
+                    Debug.Log("上传离线数据成功");
+                }
+                else
+                {
+                    Debug.Log("【上传离线数据失败】"+GetMsgByErrorCode(res.err));
+                }
+                callBack(ret,res);
+            });
         }
 
         /// <summary>
@@ -375,6 +392,22 @@ namespace qy.net
             return SendData(BIND_CMD, jd, callBack);
         }
 
+        /// <summary>
+        /// 尝试进行同步
+        /// </summary>
+        private void TrySynchronizationData()
+        {
+            
+            if (GameMainManager.Instance.playerData.dirty && isNetWorkStatusGood)
+            {
+                Debug.Log("开始同步数据");
+                UpLoadOffLineData(GameMainManager.Instance.playerData.ToPlayerDataMessage(), (ret, res) =>
+                {
+                    GameMainManager.Instance.playerData.dirty = false;
+                });
+            }
+
+        }
 
         private string GetMsgByErrorCode(string errorcode)
         {
