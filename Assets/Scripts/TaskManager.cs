@@ -25,14 +25,15 @@ public class TaskManager : MonoBehaviour
 	[HideInInspector]
 	public GameObject m_panelInfo;
 
-	[HideInInspector]
-	public TaskChoicePanel m_taskChoicePanel;
+	private TaskChoicePanel m_taskChoicePanel;
 
 	void Awake()
 	{
 		Instance = this;
 		m_panelInfo = transform.Find("TaksPanel").gameObject;
-		//PlayerPrefs.DeleteAll();
+
+	    m_taskChoicePanel = transform.Find("TaskListPanel").GetComponent<TaskChoicePanel>();
+	    //PlayerPrefs.DeleteAll();
 	}
 
 	public void onClickCollect()

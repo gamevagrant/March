@@ -2,9 +2,9 @@
 <Group id="item">
     <ItemSpec id="200001" name="200001" icon="item000" description="200003" type="0" lv="1" lv_limit="1" price="500"/>
     <ItemSpec id="200002" name="200002" icon="item001" description="200004" type="0" lv="1" lv_limit="1" price="2000"/>
-    <ItemSpec id="200003" name="200005" icon="item002" description="200005" type="1" lv="1" lv_limit="1" price="600"/>
-    <ItemSpec id="200004" name="200006" icon="item003" description="200006" type="1" lv="1" lv_limit="1" price="600"/>
-    <ItemSpec id="200005" name="200007" icon="item004" description="200007" type="1" lv="1" lv_limit="1" price="600"/>
+    <ItemSpec id="200003" name="200005" icon="item002" description="200005" type="1" lv="1" lv_limit="1" price="900"/>
+    <ItemSpec id="200004" name="200006" icon="item003" description="200006" type="1" lv="1" lv_limit="1" price="900"/>
+    <ItemSpec id="200005" name="200007" icon="item004" description="200007" type="1" lv="1" lv_limit="1" price="900"/>
     <ItemSpec id="200006" name="200008" icon="item005" description="200008" type="1" lv="1" lv_limit="1" price="600"/>
     <ItemSpec id="200007" name="200009" icon="item006" description="200009" type="2" lv="1" lv_limit="1" price="900"/>
     <ItemSpec id="200008" name="200116" icon="item007" description="200116" type="1" lv="1" lv_limit="1" price="900"/>
