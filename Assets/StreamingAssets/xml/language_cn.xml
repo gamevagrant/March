@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
 <Group id="language">
-	<ItemSpec id="101001" value="小同志，你已经报名参加长征了吗？快去军需处领取子弹吧。"/>				
-	<ItemSpec id="101002" value="是的，指战员！"/>				
-	<ItemSpec id="101003" value="是的，指战员！"/>				
-	<ItemSpec id="101004" value="小同志，点击这里，进入三消任务模式。"/>				
-	<ItemSpec id="101005" value="小同志，点击开始游戏，进行三消任务吧。"/>				
-	<ItemSpec id="101006" value="小同志，每当体力不足的时候，就要去做三消任务。"/>				
-	<ItemSpec id="101007" value="指导员，我知道了！"/>				
-
-	<ItemSpec id="100001" value="找布袋装粮食"/>
+   	<ItemSpec id="100001" value="找布袋装粮食"/>
 	<ItemSpec id="100002" value="由于第五次反围剿失利，中央决定战略转移，路途遥远，需要准备大量的粮食，需要你准备布袋，去装老乡送给红军的粮食"/>
 	<ItemSpec id="100003" value="急用布袋"/>
 	<ItemSpec id="100004" value="袋子不够用，旁边老乡家有布袋若干，人不在，但是马上要用袋子，怎么办？"/>
@@ -584,7 +576,13 @@
 	<ItemSpec id="100655" value="计退敌兵"/>
 	<ItemSpec id="100656" value="一块铜板"/>
     <ItemSpec id="100657" value="由于你的轻敌，疏于戒备，结果遭到敌人偷袭，你不幸牺牲……"/>
-
+    <ItemSpec id="101001" value="小同志，你已经报名参加长征了吗？快去军需处领取子弹吧。"/>
+    <ItemSpec id="101002" value="是的，指战员！"/>
+    <ItemSpec id="101003" value="你的体力不足，暂时无法领取子弹。先去完成三消任务，积攒些体力吧。"/>
+    <ItemSpec id="101004" value="小同志，点击这里，进入三消任务模式。"/>
+    <ItemSpec id="101005" value="小同志，点击开始游戏，进行三消任务吧。"/>
+    <ItemSpec id="101006" value="小同志，每当体力不足的时候，就要去做三消任务。"/>
+    <ItemSpec id="101007" value="指导员，我知道了！"/>
 	<ItemSpec id="200001" value="布袋"/>
 	<ItemSpec id="200002" value="五角星"/>
 	<ItemSpec id="200003" value="装粮食用的，可以在特定三消关卡收集"/>
