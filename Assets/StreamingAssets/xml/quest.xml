@@ -39,5 +39,5 @@
     <ItemSpec id="10037" type="2" sectionName="100653" sectionDes="100531" selectList="100532:1000523:10038:0|0|0,100537:1000528:10038:0|0|0" gotoId="10038" requireStar="2" requireItem="0" prize="0" storyId="1000523:1000528"/>
     <ItemSpec id="10038" type="3" sectionName="100654" sectionDes="100546" selectList="100547:1000538:10039:0|0|0,100551:1000542:10039:0|0|0,100632:1000623:10038:30|20|10" gotoId="10039" requireStar="0" requireItem="0" prize="0" storyId="1000538:1000542:1000623"/>
     <ItemSpec id="10039" type="2" sectionName="100655" sectionDes="100568" selectList="100569:1000560:10040:0|0|0,100572:1000563:10040:0|0|0" gotoId="10040" requireStar="2" requireItem="0" prize="0" storyId="1000560:1000563"/>
-    <ItemSpec id="10040" type="2" sectionName="100656" sectionDes="100615" selectList="100616:1000607:10041:0|0|0,100621:1000612:10041:0|0|0," gotoId="10041" requireStar="2" requireItem="0" prize="0" storyId="1000607:1000612"/>
+    <ItemSpec id="10040" type="2" sectionName="100656" sectionDes="100615" selectList="100616:1000607:10041:0|0|0,100621:1000612:10041:0|0|0" gotoId="10041" requireStar="2" requireItem="0" prize="0" storyId="1000607:1000612"/>
 </Group>
