@@ -1,4 +1,4 @@
-﻿#!/bin/sh
+﻿
 echo "Build Start"
 
 # Android Stuff.
@@ -12,7 +12,7 @@ export ANDROID_SDK_ROOT=
 export APK_OUTPUT_DIR=package
 
 # Unity app path.
-export untiy=/Applications/Unity2017_02.3f/Unity.app/Contents/MacOS/Unity
+export untiy=/Applications/Unity_2017.2.0f3/Unity.app/Contents/MacOS/Unity
 
 # Project path.
 export projectPath=.
@@ -22,7 +22,7 @@ echo "version = $Version"
 echo "IsForDev = $IsForDev"
 
 # Check apk output dir.
-if [$APK_OUTPUT_DIR == ""]
+if ["$APK_OUTPUT_DIR" == ""]
 then
 	echo $APK_OUTPUT_DIR is undefined.
 	exit 0
