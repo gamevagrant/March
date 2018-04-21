@@ -1,4 +1,6 @@
-﻿now=$(date +"%T")
+﻿#!/bin/sh 
+
+now=$(date +"%T")
 echo "Build Start: $now"
 
 # Android Stuff.
