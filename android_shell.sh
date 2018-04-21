@@ -22,7 +22,7 @@ echo "version = $Version"
 echo "IsForDev = $IsForDev"
 
 # Check apk output dir.
-if ["$APK_OUTPUT_DIR" == ""]
+if [ "$APK_OUTPUT_DIR" == "" ]
 then
 	echo $APK_OUTPUT_DIR is undefined.
 	exit 0
