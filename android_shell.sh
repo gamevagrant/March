@@ -1,5 +1,5 @@
-﻿
-echo "Build Start"
+﻿now=$(date +"%T")
+echo "Build Start: $now"
 
 # Android Stuff.
 export ANDROID_KEYSTORE_NAME=user.keystore
@@ -34,3 +34,6 @@ fi
 echo "Compiling.. this will take a while"
 echo $untiy -quit -batchmode -projectPath $projectPath -logFile `pwd`/editor.log -executeMethod ProjectBuild.JenkinsBuildAndroid
 $untiy -quit -batchmode -projectPath $projectPath -logFile `pwd`/editor.log -executeMethod ProjectBuild.JenkinsBuildAndroid
+
+now=$(date +"%T")
+echo "Build Complete: $now"
