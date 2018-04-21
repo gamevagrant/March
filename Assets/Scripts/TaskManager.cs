@@ -96,7 +96,7 @@ public class TaskManager : MonoBehaviour
 		}
 		gameObject.SetActive(false);
         //NetManager.instance.sendQuestIdToServer(qy.GameMainManager.Instance.playerData.questId);
-        qy.GameMainManager.Instance.playerModel.QuestComplate(gotoQuestID);
+        //qy.GameMainManager.Instance.playerModel.QuestComplate(gotoQuestID);
         //PlotManager.Instance.ShowPlot();
         qy.ui.UIManager.Instance.OpenWindow(qy.ui.UISettings.UIWindowID.UIDialogueWindow, PlotManager.Instance.m_storyDescribe.id);
 
@@ -106,6 +106,8 @@ public class TaskManager : MonoBehaviour
 	//显示任务界面
 	public void onClickTask()
 	{
+        qy.GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow, qy.GameMainManager.Instance.playerData);
+        return;
 		gameObject.SetActive(true);
 		this._questItem = null;
 		//if (PlayerPrefs.HasKey("QuestID"))

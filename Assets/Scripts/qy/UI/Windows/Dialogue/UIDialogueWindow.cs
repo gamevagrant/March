@@ -44,7 +44,7 @@ public class UIDialogueWindow : UIWindowBase {
     protected override void StartShowWindow(object[] data)
     {
         beginID = data[0].ToString();
-
+        Debug.Log("播放剧情"+beginID.ToString());
         lastDialogue = null;
         curDialogue = null;
         dialogueBox.GetComponent<CanvasGroup>().alpha = 0;

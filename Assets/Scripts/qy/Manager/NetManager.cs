@@ -225,12 +225,12 @@ namespace qy.net
             return SendData(ITEM_DEL_CMD, jd, callBack);
         }
         /// <summary>
-        /// 更新当前任务id
+        /// 完成当前任务
         /// </summary>
         /// <param name="questId"></param>
         /// <param name="callBack"></param>
         /// <returns></returns>
-        public bool UpdateQuestId(string questId, Action<bool, PlayerDataMessage> callBack)
+        public bool ComplateQuestId(string questId, Action<bool, PlayerDataMessage> callBack)
         {
 
             JsonData jd = new JsonData();

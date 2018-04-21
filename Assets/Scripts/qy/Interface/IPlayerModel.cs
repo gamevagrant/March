@@ -11,7 +11,7 @@ namespace qy
         /// </summary>
         /// <param name="questId">下一个任务</param>
         /// <returns></returns>
-        int QuestComplate(string questId);
+        int QuestComplate(out string storyID,string selectedID="");
         /// <summary>
         /// 使用道具
         /// </summary>

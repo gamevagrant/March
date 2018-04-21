@@ -18,6 +18,7 @@ namespace qy
             NOT_ENOUGH_COIN,
             NOT_ENOUGH_HEART,
             NOT_ENOUGH_PROP,
+            NOT_ENOUGH_STAR,
             QUEST_ID_ERROR,
             PROP_ID_ERROR,
         }
@@ -129,18 +130,75 @@ namespace qy
             return (int)ErrType.NULL;
         }
 
-        public int QuestComplate(string questId)
+        public int QuestComplate(out string storyID, string selectedID = "")
         {
-            GameMainManager.Instance.netManager.UpdateQuestId(questId,(ret,res)=> {
-                
+            GameMainManager.Instance.netManager.ComplateQuestId(playerData.questId, (ret, res) => {
+
             });
-            playerData.dirty = true;
-            config.QuestItem quest = GameMainManager.Instance.configManager.questConfig.GetItem(questId);
-            if(quest==null)
+            storyID = "";
+            //检测完成任务条件
+            config.QuestItem questItem = playerData.GetQuest();
+            if (playerData.starNum < questItem.requireStar)
             {
-                return (int)ErrType.QUEST_ID_ERROR;
+                MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200011"));
+                return (int)ErrType.NOT_ENOUGH_STAR;
             }
-            playerData.questId = questId;
+            List<PropItem> needProps = questItem.requireItem;
+            foreach(PropItem item in needProps)
+            {
+                PropItem haveItem = playerData.GetPropItem(item.id);
+                int haveCount = haveItem==null?0: haveItem.count;
+                if(haveCount < item.count)
+                {
+                    return (int)ErrType.NOT_ENOUGH_PROP;
+                }
+            }
+            //扣除完成任务物品
+            playerData.starNum -= questItem.requireStar;
+            foreach(PropItem item in needProps)
+            {
+                playerData.RemovePropItem(item.id,item.count);
+            }
+            MainScene.Instance.RefreshPlayerData();
+
+            //更新下个任务
+            if (questItem.type == config.QuestItem.QuestType.Main)
+            {
+                playerData.nextQuestId = questItem.gotoId;
+                storyID = questItem.storyID;
+            }
+            else if (questItem.type == config.QuestItem.QuestType.Branch)
+            {
+                foreach(SelectItem item in questItem.selectList)
+                {
+                    if(item.id == selectedID)
+                    {
+                        playerData.nextQuestId = item.toQuestId;
+                        storyID = item.storyID;
+                        playerData.ability += item.ability;
+                        break;
+                    }
+                }
+            }
+            else if (questItem.type == config.QuestItem.QuestType.EndingPoint)
+            {
+                if(playerData.survival<questItem.endingPoint.survival)
+                {
+                    //进入分支任务
+                    playerData.nextQuestId = questItem.endingPoint.questID;
+                    storyID = questItem.endingPoint.storyID;
+                }
+                else
+                {
+                    //进入普通任务
+                    playerData.nextQuestId = questItem.gotoId;
+                    storyID = questItem.storyID;
+                }
+            }
+
+            playerData.questId = playerData.nextQuestId;
+            playerData.dirty = true;
+            
             SaveData();
             return (int)ErrType.NULL;
         }

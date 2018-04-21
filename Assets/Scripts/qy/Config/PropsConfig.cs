@@ -36,7 +36,7 @@ namespace qy.config
         {
             PropItem value;
             dic.TryGetValue(id, out value);
-            return value;
+            return value.Clone();
         }
 
        

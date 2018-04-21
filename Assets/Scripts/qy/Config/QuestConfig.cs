@@ -27,13 +27,14 @@ namespace qy.config
             quest.sectionDes = GetLanguage(item.GetAttribute("sectionDes"));
             quest.requireStar = int.Parse(item.GetAttribute("requireStar"));
 
-            quest.story = ConfigManager.Instance.storysConfig.GetItem(item.GetAttribute("storyId"));
+            quest.storyID = item.GetAttribute("storyId");
             quest.gotoId = item.GetAttribute("gotoId");
 
             quest.requireItem = ReadrequireItem(item.GetAttribute("requireItem"));
             quest.prize = ReadrequireItem(item.GetAttribute("prize"));
             quest.selectList = ReadSelectList(item.GetAttribute("selectList"));
             quest.endingPoint = ReadEnding(item.GetAttribute("endingPoint"));
+            dic.Add(quest.id,quest);
         }
 
         private EndingPoint ReadEnding(string value)
@@ -45,11 +46,8 @@ namespace qy.config
             EndingPoint endingPoint = new EndingPoint();
             string[] data = value.Split(':');
             endingPoint.survival = int.Parse(data[0]);
-            endingPoint.story = ConfigManager.Instance.storysConfig.GetItem(data[1]);
-            if (endingPoint.story == null)
-            {
-                Debug.LogAssertionFormat("story表中找不到【{0}】id ", data[1]);
-            }
+            endingPoint.storyID = data[1];
+
             return endingPoint;
         }
         
@@ -68,8 +66,9 @@ namespace qy.config
                 {
                     string[] data = str.Split(':');
                     SelectItem selectedItem = new SelectItem();
-                    selectedItem.name = GetLanguage(data[0]);
-                    selectedItem.story = ConfigManager.Instance.storysConfig.GetItem(data[1]);
+                    selectedItem.id = data[0];
+                    selectedItem.name = GetLanguage(selectedItem.id);
+                    selectedItem.storyID = data[1];
                     selectedItem.toQuestId = data[2];
                     string[] ability = data[3].Split('|');
                     selectedItem.ability = new Ability(int.Parse(ability[0]), int.Parse(ability[1]), int.Parse(ability[2]));
@@ -81,22 +80,22 @@ namespace qy.config
         }
         private List<PropItem> ReadrequireItem(string value)
         {
-            if(string.IsNullOrEmpty(value) || value == "0")
-            {
-                return null;
-            }
             List<PropItem> list = new List<PropItem>();
-            string[] items = value.Split(',');
-            foreach (string str in items)
+
+            if (!string.IsNullOrEmpty(value) && value != "0")
             {
-                string[] data = str.Split(':');
-                string id = data[0];
-                int count = int.Parse(data[1]);
-                int rate = data.Length>2?int.Parse(data[2]):0;
-                PropItem prop = ConfigManager.Instance.propsConfig.GetItem(id);
-                prop.count = count;
-                prop.rate = rate;
-                list.Add(prop);
+                string[] items = value.Split(',');
+                foreach (string str in items)
+                {
+                    string[] data = str.Split(':');
+                    string id = data[0];
+                    int count = int.Parse(data[1]);
+                    int rate = data.Length > 2 ? int.Parse(data[2]) : 0;
+                    PropItem prop = ConfigManager.Instance.propsConfig.GetItem(id);
+                    prop.count = count;
+                    prop.rate = rate;
+                    list.Add(prop);
+                }
             }
 
             return list;
@@ -178,10 +177,17 @@ namespace qy.config
         /// </summary>
         public List<PropItem> prize;
 
+        internal string storyID;
         /// <summary>
         /// 完成任务后播放的剧情
         /// </summary>
-        public StoryItem story;
+        public StoryItem story
+        {
+            get
+            {
+                return ConfigManager.Instance.storysConfig.GetItem(storyID);
+            }
+        }
 
         /// <summary>
         /// 分支任务中选择项 type==Branch时起作用
@@ -195,15 +201,23 @@ namespace qy.config
 
     public class SelectItem
     {
+        public string id;
         /// <summary>
         /// 选项显示的名称
         /// </summary>
         public string name;
 
+        internal string storyID;
         /// <summary>
         /// 选项对应的剧情id
         /// </summary>
-        public StoryItem story;
+        public StoryItem story
+        {
+            get
+            {
+                return ConfigManager.Instance.storysConfig.GetItem(storyID);
+            }
+        }
 
         /// <summary>
         /// 选项对应的下一个任务
@@ -228,10 +242,22 @@ namespace qy.config
         /// 进入结局的最高生存率 
         /// </summary>
         public float survival;
+
+        internal string storyID;
         /// <summary>
         /// 剧情
         /// </summary>
-        public StoryItem story;
+        public StoryItem story
+        {
+            get
+            {
+                return ConfigManager.Instance.storysConfig.GetItem(storyID);
+            }
+        }
+        /// <summary>
+        /// 任务
+        /// </summary>
+        public string questID;
 
     }
 

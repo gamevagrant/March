@@ -43,14 +43,11 @@ namespace qy
         /// //剧情ID
         /// </summary>
         public string questId = "10001";
-
-        public config.QuestItem quest
-        {
-            get
-            {
-                return GameMainManager.Instance.configManager.questConfig.GetItem(questId);
-            }
-        }
+        /// <summary>
+        /// 下一个任务
+        /// </summary>
+        public string nextQuestId;
+        
         /// <summary>
         /// //心数恢复间隔是30min
         /// </summary>
@@ -128,7 +125,7 @@ namespace qy
             }
             else
             {
-                item = GameMainManager.Instance.configManager.propsConfig.GetItem(id).Clone();
+                item = GameMainManager.Instance.configManager.propsConfig.GetItem(id);
                 item.count = num;
                 propsDic.Add(id,item);
             }
@@ -146,6 +143,11 @@ namespace qy
             }
         }
 
+        public config.QuestItem GetQuest()
+        {
+            return GameMainManager.Instance.configManager.questConfig.GetItem(questId);
+        }
+
         public void RefreshData(PlayerDataMessage message)
         {
             questId = message.storyid;
@@ -156,6 +158,10 @@ namespace qy
             nickName = message.name;
             userId = message.uid;
             eliminateLevel = message.level;
+            if(!string.IsNullOrEmpty(nextQuestId))
+            {
+                questId = nextQuestId;
+            }
 
             if(message.sevenDay!=null && message.sevenDay.sevenDayInfo!=null)
             {
@@ -174,7 +180,7 @@ namespace qy
             propsDic = new Dictionary<string, config.PropItem>();
             foreach(PlayerDataMessage.PropItem item in message.items)
             {
-                config.PropItem prop = GameMainManager.Instance.configManager.propsConfig.GetItem(item.itemId).Clone();
+                PropItem prop = GameMainManager.Instance.configManager.propsConfig.GetItem(item.itemId);
                 prop.count = item.count;
                 prop.uuid = item.uuid;
                 prop.vanishTime = item.vanishTime;

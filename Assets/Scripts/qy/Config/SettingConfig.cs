@@ -197,7 +197,7 @@ namespace qy.config
                     foreach (string item in items)
                     {
                         string[] itemVlues = item.Split(':');
-                        PropItem propItem = ConfigManager.Instance.propsConfig.GetItem(itemVlues[0]).Clone();
+                        PropItem propItem = ConfigManager.Instance.propsConfig.GetItem(itemVlues[0]);
                         propItem.count = int.Parse(itemVlues[1]);
                         props.Add(propItem);
                     }

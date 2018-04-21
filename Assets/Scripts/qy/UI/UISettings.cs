@@ -10,6 +10,7 @@ namespace qy.ui
         public enum UIWindowID
         {
             UIDialogueWindow,
+            UITaskWindow,
         }
 
         public enum UIWindowType
@@ -45,7 +46,7 @@ namespace qy.ui
         private static Dictionary<UIWindowID, string> windowPrefabPath = new Dictionary<UIWindowID, string>()
         {
             {UIWindowID.UIDialogueWindow,"UIDialogueWindow"},
-        
+            {UIWindowID.UITaskWindow,"UITaskWindow"},
         };
 
 
