@@ -121,7 +121,8 @@ public class ProjectBuild
 
     private static void BuildPlayer(BuildTarget target, BuildConfig config)
     {
-        var buildName = string.Format("./package/{0}_{1}_{2}{3}.apk", config.ProductName, config.Version, DateTime.Now.ToString(@"yyyyMMdd"), config.IsForDev ? "_dev" : "");
+        var buildName = string.Format("./package/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
+            DateTime.Now.ToString(@"yyyyMMdd"), DateTime.Now.ToString(@"HHmmss"), config.IsForDev ? "_dev" : "");
         var additionOption = BuildOptions.None;
 
         if (config.IsForDev)
