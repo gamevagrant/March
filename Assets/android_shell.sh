@@ -32,4 +32,4 @@ fi
 
 # Unity batch mode build.
 echo "Compiling.. this will take a while"
-$untiy -quit -batchmode -projectPath $projectPath -logFile `pwd`/editor.log -executeMethod ProjectBuild.BuildAndroid
+$untiy -quit -batchmode -projectPath $projectPath -logFile `pwd`/editor.log -executeMethod ProjectBuild.JenkinsBuildAndroid
