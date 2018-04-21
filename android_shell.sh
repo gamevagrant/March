@@ -15,7 +15,7 @@ export APK_OUTPUT_DIR=package
 export untiy=/Applications/Unity_2017.2.0f3/Unity.app/Contents/MacOS/Unity
 
 # Project path.
-export projectPath=.
+export projectPath=`pwd`
 
 # Fetch argments defined in Jenkins.
 echo "version = $Version"
