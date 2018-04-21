@@ -1,4 +1,4 @@
-﻿#!/bin/sh 
+#!/bin/sh
 
 now=$(date +"%T")
 echo "Build Start: $now"
