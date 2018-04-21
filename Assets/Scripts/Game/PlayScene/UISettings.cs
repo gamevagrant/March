@@ -30,7 +30,7 @@ public class UISettings : MonoBehaviour
     {
         if (settingPopup != null && settingPopup.gameObject.activeSelf)
         {
-            settingPopup.onCloseBtnClick();
+            settingPopup.OnCloseBtnClick();
         }
     }
 }

@@ -817,7 +817,7 @@ public class Item : MonoBehaviour
                 }
             }
 
-            if (neighborNode != null && neighborNode.item != null && CheckHelpSwapable(direction) == true && !hasbaffle)
+            if (neighborNode != null && neighborNode.item != null && CheckHelpSwapable(direction) && !hasbaffle)
             {
                 swapItem = neighborNode.item;
 
@@ -921,7 +921,7 @@ public class Item : MonoBehaviour
             special = true;
         }
 
-        if (matchesHere <= 0 && matchesAtNeighbor <= 0 && squareMatchesHere <= 0 && squareMatchesAtNeighbor <= 0 && special == false && Configure.instance.checkSwap == true && forced == false)
+        if (matchesHere <= 0 && matchesAtNeighbor <= 0 && squareMatchesHere <= 0 && squareMatchesAtNeighbor <= 0 && special == false && Configure.instance.checkSwap && forced == false)
         {
             // swap back
             iTween.MoveTo(gameObject, iTween.Hash(
@@ -950,7 +950,7 @@ public class Item : MonoBehaviour
                 board.DecreaseMoveLeft();
             }
 
-            if (special == true)
+            if (special)
             {
                 //如果交换前的位置有草地 特殊块会使交换后的地块变为草地
                 if ((IsBreaker(type)||type == ITEM_TYPE.COOKIE_RAINBOW) && swapItem.node.IsGrass())
@@ -1050,7 +1050,7 @@ public class Item : MonoBehaviour
         AudioManager.instance.SwapBackAudio();
 
         // hide in case the help crash
-        if (Help.instance.gameObject.activeSelf == true)
+        if (Help.instance.gameObject.activeSelf)
         {
             Help.instance.HideOnSwapBack();
         }        
@@ -1469,7 +1469,7 @@ public class Item : MonoBehaviour
 
     public void ChangeToGingerbread(ITEM_TYPE check)
     {
-        if (node.item.IsGingerbread() == true)
+        if (node.item.IsGingerbread())
         {
             return;
         }
@@ -1659,7 +1659,7 @@ public class Item : MonoBehaviour
         }
 
         // prevent multiple calls
-        if (destroying == true) return;
+        if (destroying) return;
         else destroying = true;
 
         beAbleToDestroy--;
@@ -1829,15 +1829,15 @@ public class Item : MonoBehaviour
 
             if (IsBombBreaker(next))
             {
-                if (nextSound == true) AudioManager.instance.BombBreakerAudio();
+                if (nextSound) AudioManager.instance.BombBreakerAudio();
             }
             else if (IsRowBreaker(next) || IsColumnBreaker(next))
             {
-                if (nextSound == true) AudioManager.instance.ColRowBreakerAudio();
+                if (nextSound) AudioManager.instance.ColRowBreakerAudio();
             }
             else if (next == ITEM_TYPE.COOKIE_RAINBOW)
             {
-                if (nextSound == true) AudioManager.instance.RainbowAudio();
+                if (nextSound) AudioManager.instance.RainbowAudio();
             }
 
             // generate a item at position of the node
@@ -1873,12 +1873,12 @@ public class Item : MonoBehaviour
             node.GenerateItem(ITEM_TYPE.BLANK);
         }
 
-        if (destroying == true)
+        if (destroying)
         {
             board.destroyingItems--;
 
             // there is a case when a item is dropping and it is destroyed by other call
-            if (dropping == true) board.droppingItems--;
+            if (dropping) board.droppingItems--;
 
 
             GameObject.Destroy(gameObject);
@@ -3258,7 +3258,7 @@ public class Item : MonoBehaviour
     void ChangeToBig()
     {
         // prevent multiple calls
-        if (changing == true) return;
+        if (changing) return;
         else changing = true;
 
         this.GetComponent<SpriteRenderer>().sortingLayerName = "Effect";

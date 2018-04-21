@@ -1,37 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using March.Core.WindowManager;
-
+using qy;
 public class ModifyNamePanel : MonoBehaviour
 {
-    public Button m_closeBtn;
-    public Button m_sureBtn;
-    public InputField m_inputField;
-    public Text m_Placeholder;
-    public Text m_name;
-    public Text m_titleText;
+    private Button sureButton;
+    private InputField inputField;
+    private Text placeholder;
+    private Text titleText;
 
     private Popup popup;
 
     private void Awake()
     {
+        sureButton = transform.Find("SureButton").GetComponent<Button>();
+        inputField = transform.Find("InputField").GetComponent<InputField>();
+        placeholder = transform.Find("InputField/Placeholder").GetComponent<Text>();
+        titleText = transform.Find("Title/Text").GetComponent<Text>();
+
         popup = GetComponent<Popup>();
 
-        Messenger.AddListener(ELocalMsgID.CloseModifyPanel, onClosedBtn);
+        Messenger.AddListener(ELocalMsgID.CloseModifyPanel, OnClosedBtn);
     }
 
     void Start()
     {
-        m_sureBtn.onClick.AddListener(onSureBtn);
-        //		m_Placeholder.text = LanguageManager.instance.GetValueByKey ("200028");
-        //		m_name.text = PlayerData.instance.getNickName();
-        m_Placeholder.text = qy.GameMainManager.Instance.playerData.nickName;
+        sureButton.onClick.AddListener(OnSureBtn);
+        placeholder.text = GameMainManager.Instance.playerData.nickName;
 
-        m_titleText.text = LanguageManager.instance.GetValueByKey("200027");
-        m_sureBtn.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200029");
+
+        titleText.text = LanguageManager.instance.GetValueByKey("200027");
+        sureButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200029");
     }
 
-    private void onClosedBtn()
+    private void OnClosedBtn()
     {
         if (popup != null)
         {
@@ -39,21 +41,21 @@ public class ModifyNamePanel : MonoBehaviour
         }
     }
 
-    private void onSureBtn()
+    private void OnSureBtn()
     {
         if (!qy.net.NetManager.Instance.isNetWorkStatusGood)
         {
-			WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210145"));
+            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210145"));
             return;
         }
 
-        string nickName = getInputFiledContent();
+        string nickName = GetInputFiledContent();
         if (Utils.instance.isMatchChinese(nickName) || Utils.instance.isMatchNumberOrCharacter(nickName))
         {
             if (Utils.instance.isStrLengthValid(nickName))
             {
                 //NetManager.instance.modifyNickName(nickName);
-                qy.GameMainManager.Instance.playerModel.ModifyNickName(nickName);
+                GameMainManager.Instance.playerModel.ModifyNickName(nickName);
             }
             else
             {
@@ -67,15 +69,15 @@ public class ModifyNamePanel : MonoBehaviour
     }
 
 
-    private string getInputFiledContent()
+    private string GetInputFiledContent()
     {
-        bool _isValid = Utils.instance.isValid(m_inputField.textComponent.text);
-        Debug.Log("输入内容是否有效：" + _isValid);
-        return m_inputField.textComponent.text;
+        bool isValid = Utils.instance.isValid(inputField.textComponent.text);
+        Debug.Log("输入内容是否有效：" + isValid);
+        return inputField.textComponent.text;
     }
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener(ELocalMsgID.CloseModifyPanel, onClosedBtn);
+        Messenger.RemoveListener(ELocalMsgID.CloseModifyPanel, OnClosedBtn);
     }
 }

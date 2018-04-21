@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace qy.config
                 return null;
             }
             EndingPoint endingPoint = new EndingPoint();
-            string[] data = value.Split(':');
+            string[] data = value.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             endingPoint.survival = int.Parse(data[0]);
             endingPoint.storyID = data[1];
 
@@ -59,18 +60,18 @@ namespace qy.config
             }
 
             List<SelectItem> list = new List<SelectItem>();
-            string[] items = value.Split(',');
+            string[] items = value.Split(new [] {','}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string str in items)
             {
                 if(!string.IsNullOrEmpty(str))
                 {
-                    string[] data = str.Split(':');
+                    string[] data = str.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
                     SelectItem selectedItem = new SelectItem();
                     selectedItem.id = data[0];
                     selectedItem.name = GetLanguage(selectedItem.id);
                     selectedItem.storyID = data[1];
                     selectedItem.toQuestId = data[2];
-                    string[] ability = data[3].Split('|');
+                    string[] ability = data[3].Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                     selectedItem.ability = new Ability(int.Parse(ability[0]), int.Parse(ability[1]), int.Parse(ability[2]));
                     list.Add(selectedItem);
                 }
@@ -84,10 +85,10 @@ namespace qy.config
 
             if (!string.IsNullOrEmpty(value) && value != "0")
             {
-                string[] items = value.Split(',');
+                string[] items = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string str in items)
                 {
-                    string[] data = str.Split(':');
+                    string[] data = str.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
                     string id = data[0];
                     int count = int.Parse(data[1]);
                     int rate = data.Length > 2 ? int.Parse(data[2]) : 0;

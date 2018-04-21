@@ -18,6 +18,6 @@ public class StoryListItem : MonoBehaviour
     public void SetItemContent(StoryItem storyItem,MainScene scene)
     {
         m_stroyItemText.text = storyItem.dialogue;
-        m_storyItemBtn.onClick.AddListener(() => { scene.showStory(storyItem); });
+        m_storyItemBtn.onClick.AddListener(() => { scene.ShowStory(storyItem); });
     }
 }

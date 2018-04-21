@@ -4,7 +4,38 @@ using UnityEngine.SceneManagement;
 
 public class UISettingsPopup : MonoBehaviour
 {
-    public void onCloseBtnClick()
+    private SoundButton musicButton;
+    private SoundButton soundButton;
+
+    void Awake()
+    {
+        musicButton = transform.Find("MusicButton").GetComponent<SoundButton>();
+        soundButton = transform.Find("SoundButton").GetComponent<SoundButton>();
+    }
+
+    void Start()
+    {
+        musicButton.IsOn = Configure.instance.MusicOn;
+        musicButton.UpdateUI();
+        soundButton.IsOn = Configure.instance.SoundOn;
+        soundButton.UpdateUI();
+    }
+
+    public void OnMusicButtonClicked()
+    {
+        Configure.instance.MusicOn = !Configure.instance.MusicOn;
+        musicButton.IsOn = Configure.instance.MusicOn;
+        musicButton.UpdateUI();
+    }
+
+    public void OnSoundButtonClicked()
+    {
+        Configure.instance.SoundOn = !Configure.instance.SoundOn;
+        soundButton.IsOn = Configure.instance.SoundOn;
+        soundButton.UpdateUI();
+    }
+
+    public void OnCloseBtnClick()
     {
         AudioManager.instance.ButtonClickAudio();
 
@@ -14,10 +45,9 @@ public class UISettingsPopup : MonoBehaviour
         }
 
         gameObject.SetActive(false);
-        //Destroy(this.gameObject);
     }
 
-    public void onQuitBtnClick()
+    public void OnQuitBtnClick()
     {
         var board = GameObject.Find("Board").GetComponent<Board>();
         if (board.isFirstMove)

@@ -12,7 +12,7 @@ public class WaitingPopupManager : Singleton<WaitingPopupManager>
     private GameObject m_waitingPopup = null;
     private GameObject m_waitingIcon = null;
 
-    public void show(GameObject parent)
+    public void Show(GameObject parent)
     {
         if (m_waitingPopup == null)
         {
@@ -29,7 +29,7 @@ public class WaitingPopupManager : Singleton<WaitingPopupManager>
         m_waitingPopup.SetActive(true);
     }
 
-    public void close()
+    public void Close()
     {
         if (m_waitingPopup != null)
         {

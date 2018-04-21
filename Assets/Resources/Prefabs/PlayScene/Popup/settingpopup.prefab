@@ -54,10 +54,10 @@ GameObject:
   m_Component:
   - component: {fileID: 224519477589192246}
   - component: {fileID: 222621936416380992}
-  - component: {fileID: 114107046610966610}
+  - component: {fileID: 114680906138164250}
   - component: {fileID: 114412098457702298}
   m_Layer: 5
-  m_Name: MusicBtn
+  m_Name: MusicButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 222740214902163956}
   - component: {fileID: 114013615542669996}
   m_Layer: 5
-  m_Name: closeBtn
+  m_Name: CloseBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 114364852037748924}
   - component: {fileID: 114512192920421578}
   m_Layer: 5
-  m_Name: QuitBtn
+  m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 114602174558384862}
   - component: {fileID: 114241518800192048}
   m_Layer: 5
-  m_Name: SoundBtn
+  m_Name: SoundButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,7 +361,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114218926940469252}
-        m_MethodName: onCloseBtnClick
+        m_MethodName: OnCloseBtnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -438,19 +438,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114107046610966610
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1101210898465444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d03e1bb64d4570a4ebfb1ef592239d14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_on_image: {fileID: 114626448923821232}
-  m_off_image: {fileID: 114508056713815492}
 --- !u!114 &114132481511629466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -543,8 +530,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114602174558384862}
-        m_MethodName: Toggle
+      - m_Target: {fileID: 114218926940469252}
+        m_MethodName: OnSoundButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -676,8 +663,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114107046610966610}
-        m_MethodName: Toggle
+      - m_Target: {fileID: 114218926940469252}
+        m_MethodName: OnMusicButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -756,7 +743,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114218926940469252}
-        m_MethodName: onQuitBtnClick
+        m_MethodName: OnQuitBtnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -779,6 +766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18780e7e26375547b0ddab71ef32650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsOn: 0
   m_on_image: {fileID: 114132481511629466}
   m_off_image: {fileID: 114363589438739458}
 --- !u!114 &114626448923821232
@@ -808,6 +796,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114680906138164250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101210898465444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18780e7e26375547b0ddab71ef32650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsOn: 0
+  m_on_image: {fileID: 114626448923821232}
+  m_off_image: {fileID: 114508056713815492}
 --- !u!114 &114885305848852304
 MonoBehaviour:
   m_ObjectHideFlags: 1

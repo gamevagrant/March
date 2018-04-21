@@ -242,6 +242,44 @@ public enum SWAP_DIRECTION
 
 public class Configure : MonoSingleton<Configure>
 {
+    public event Action OnSoundChange;
+    public event Action OnMusicChange; 
+
+    [Header("Global Settings")]
+    private bool musicOn;
+    private bool soundOn;
+
+    public bool SoundOn
+    {
+        get { return soundOn; }
+        set {
+            if (soundOn != value)
+            {
+                soundOn = value;
+                if (OnSoundChange != null)
+                {
+                    OnSoundChange();
+                }
+            }
+
+        }
+    }
+
+    public bool MusicOn
+    {
+        get { return musicOn; }
+        set {
+            if (musicOn != value)
+            {
+                musicOn = value;
+                if (OnMusicChange != null)
+                {
+                    OnMusicChange();
+                }
+            }
+        }
+    }
+
     [Header("Configuration")]
     public float swapTime;
     public float destroyTime;
@@ -252,6 +290,7 @@ public class Configure : MonoSingleton<Configure>
     [Header("")]
     public int scoreItem;
     public int finishedScoreItem;
+
     [Header("")]
     public int bonus1Star;
     public int bonus2Star;
@@ -339,6 +378,7 @@ public class Configure : MonoSingleton<Configure>
 	public int life;
 	public float timer;
 	public string exitDateTime;
+
 	[Header("")]
 	public int maxLife;
 	public int lifeRecoveryHour;
@@ -362,11 +402,6 @@ public class Configure : MonoSingleton<Configure>
     public static string begin_five_moves = "begin_five_moves";
     public static string begin_rainbow = "begin_rainbow";
     public static string begin_bomb_breaker = "begin_bomb_breaker";
-
-	// life
-	public static string exit_date_time = "string_exit_date_time";
-	public static string stringLife = "string_life";
-	public static string stringTimer = "string_timer";
 
     #region Prefab
 
@@ -1360,46 +1395,46 @@ public class Configure : MonoSingleton<Configure>
 
     #endregion
 
-	#region Life
+    protected override void Init()
+    {
+        base.Init();
 
-	void OnApplicationQuit()
+        SoundOn = PlayerPrefs.GetInt(PlayerPrefEnums.SoundOn) == 1;
+        MusicOn = PlayerPrefs.GetInt(PlayerPrefEnums.MusicOn) == 1;
+    }
+
+    void OnApplicationQuit()
 	{
-		//print("Configure: On application quit / Exit date time: " + DateTime.Now.ToString() + " / Life: " + life + " / Timer: " + timer);
-
 		SaveLifeInfo();
 	}
 
 	public void SaveLifeInfo()
 	{
-        PlayerPrefs.SetFloat(Configure.stringTimer, timer);
+        PlayerPrefs.SetFloat(PlayerPrefEnums.Timer, timer);
 
-		PlayerPrefs.SetInt(stringLife, life);
+        PlayerPrefs.SetInt(PlayerPrefEnums.Life, life);
 
-		PlayerPrefs.SetString(exit_date_time, DateTime.Now.ToString());
+        PlayerPrefs.SetString(PlayerPrefEnums.ExitDateTime, DateTime.Now.ToString());
 
-		PlayerPrefs.Save();
+        PlayerPrefs.Save();
 	}
 
     public void OnApplicationPause(bool pauseStatus)
     {
-        if (pauseStatus == true)
+        if (pauseStatus)
         {
-            //android onPause()
             SaveLifeInfo();
         }
         else
         {
-            //android onResume()
             if (GameObject.Find("LifeBar"))
             {
-                Configure.instance.exitDateTime = PlayerPrefs.GetString(Configure.exit_date_time, new DateTime().ToString());
-                Configure.instance.timer = PlayerPrefs.GetFloat(Configure.stringTimer, 0f);
-                Configure.instance.life = PlayerPrefs.GetInt(Configure.stringLife, Configure.instance.maxLife);
+                instance.exitDateTime = PlayerPrefs.GetString(PlayerPrefEnums.ExitDateTime, new DateTime().ToString());
+                instance.timer = PlayerPrefs.GetFloat(PlayerPrefEnums.Timer, 0f);
+                instance.life = PlayerPrefs.GetInt(PlayerPrefEnums.Life, instance.maxLife);
 
                 GameObject.Find("LifeBar").GetComponent<Life>().runTimer = false;
             }
         }
     }
-
-	#endregion
 }

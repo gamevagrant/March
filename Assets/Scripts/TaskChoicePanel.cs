@@ -14,7 +14,6 @@ public class TaskChoicePanel : MonoBehaviour
 
     void Start()
     {
-        TaskManager.Instance.m_taskChoicePanel = this;
         m_title = transform.Find("storyTitle").GetComponent<Text>();
         m_describe = transform.Find("storyDes").GetComponent<Text>();
         m_storyListContent = transform.Find("storyList/Viewport/Content").gameObject;
