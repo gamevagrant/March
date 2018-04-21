@@ -92,8 +92,8 @@ public class ProjectBuild
         config.KeyAliasName = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_NAME");
         config.KeyAliasPassword = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASSWORD");
 
-        config.Version = Environment.GetEnvironmentVariable("$Version");
-        config.IsForDev = bool.Parse(Environment.GetEnvironmentVariable("$IsForDev"));
+        config.Version = Environment.GetEnvironmentVariable("Version");
+        config.IsForDev = bool.Parse(Environment.GetEnvironmentVariable("IsForDev"));
 
         DoAndroidBuild(config);
     }
