@@ -160,7 +160,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.elex.march
   buildNumber: {}
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 1524458957
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -244,7 +244,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: c:/projects/user.keystore
+  AndroidKeystoreName: C:\Users\Administrator\.android\user.keystore
   AndroidKeyaliasName: test
   AndroidTVCompatibility: 1
   AndroidIsGame: 1

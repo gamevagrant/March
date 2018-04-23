@@ -100,6 +100,12 @@ public class ProjectBuild
 
     private static void DoAndroidBuild(BuildConfig config)
     {
+        var root = Application.platform == RuntimePlatform.OSXEditor ||
+                   Application.platform == RuntimePlatform.OSXPlayer
+            ? "~/.android"
+            : Path.Combine(Environment.GetEnvironmentVariable("USERPROFILE"), ".android");
+        config.KeyStorePath = Path.Combine(root, config.KeyStorePath);
+
         try
         {
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, target);
