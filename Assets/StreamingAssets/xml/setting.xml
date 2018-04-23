@@ -11,6 +11,3 @@
 	<ItemSpec id="moviesgold" columnbreaker="1" rowbreaker="1" planebreaker="1" bombbreaker="2" rainbow="5" maxgold="500"/>
 	<ItemSpec id="UserSevenDaySwitch" functionSwitchOpen="1" maxNum="7" showDay="7" item="0|200004:1|200005:1|200006:1|200006:1|200006:1|200006:1" gold="100|0|0|0|0|0|100" star="0|0|0|0|0|0|0" IsTestOpen="0" OpenRegular="UserSevenDaySwitchList"/>
  </Group>
-
- 
- 
