@@ -17,15 +17,15 @@ public class ProjectBuild
         public string KeyStorePath;
         public string KeyPassword;
         public string KeyAliasName;
+        public string KeyAliasPassword;
         public bool IsForDev;
     }
 
     private static BuildTarget target = BuildTarget.Android;
 
-    private const string DefaultProductName = "candy";
+    private const string DefaultProductName = "March";
     private const string DefaultCompanyName = "elex";
-    private const string DefaultApplicationId = "com.elex.candy";
-    private const int DefaultBundleVersionCode = 1;
+    private const string DefaultApplicationId = "com.elex.march";
 
     private const string ConfigName = "BuildConfig.txt";
 
@@ -34,11 +34,11 @@ public class ProjectBuild
         ProductName = DefaultProductName,
         CompanyName = DefaultCompanyName,
         ApplicationId = DefaultApplicationId,
-        //BundleVersionCode = DefaultBundleVersionCode,
         Version = PlayerSettings.bundleVersion,
         KeyStorePath = string.Empty,
         KeyPassword = string.Empty,
         KeyAliasName = string.Empty,
+        KeyAliasPassword = string.Empty,
         IsForDev = false,
     };
 
@@ -60,37 +60,48 @@ public class ProjectBuild
         return names.ToArray();
     }
 
-    [MenuItem("Tools/Build/Android_Release")]
-    public static void BuildRelease()
+    [MenuItem("Tools/Build/Android")]
+    public static void BuildAndroid()
     {
-        Build(false);
+        var configPath = string.Format("./package/{0}", ConfigName);
+        var config = DefaultBuildConfig;
+        if (!File.Exists(configPath))
+        {
+            var str = JsonMapper.ToJson(DefaultBuildConfig);
+            File.WriteAllText(configPath, str);
+        }
+        else
+        {
+            var str = File.ReadAllText(configPath);
+            config = JsonMapper.ToObject<BuildConfig>(str);
+        }
+
+        DoAndroidBuild(config);
     }
 
-    [MenuItem("Tools/Build/Android_Debug")]
-    public static void BuildDebug()
+    /// <summary>
+    /// Jenkins android build.
+    /// </summary>
+    /// <remarks>Pay attention to android_shell.sh</remarks>
+    public static void JenkinsBuildAndroid()
     {
-        Build(true);
+        var config = DefaultBuildConfig;
+
+        config.KeyStorePath = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_NAME");
+        config.KeyPassword = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_PASSWORD");
+        config.KeyAliasName = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_NAME");
+        config.KeyAliasPassword = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASSWORD");
+
+        config.Version = Environment.GetEnvironmentVariable("Version");
+        config.IsForDev = bool.Parse(Environment.GetEnvironmentVariable("IsForDev"));
+
+        DoAndroidBuild(config);
     }
 
-    private static void Build(bool isForDev)
+    private static void DoAndroidBuild(BuildConfig config)
     {
         try
         {
-            var configPath = string.Format("./package/{0}", ConfigName);
-            var config = DefaultBuildConfig;
-            if (!File.Exists(configPath))
-            {
-                var str = JsonMapper.ToJson(DefaultBuildConfig);
-                File.WriteAllText(configPath, str);
-            }
-            else
-            {
-                var str = File.ReadAllText(configPath);
-                config = JsonMapper.ToObject<BuildConfig>(str);
-            }
-
-            config.IsForDev = isForDev;
-
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, target);
             if (EditorUserBuildSettings.activeBuildTarget == target)
             {
@@ -110,25 +121,26 @@ public class ProjectBuild
 
     private static void BuildPlayer(BuildTarget target, BuildConfig config)
     {
-        var buildName = string.Format("./package/{0}_{1}_{2}{3}.apk", config.ProductName, config.Version, DateTime.Now.ToString(@"yyyyMMdd"), config.IsForDev ? "_dev" : "");
+        var buildName = string.Format("./package/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
+            DateTime.Now.ToString(@"yyyyMMdd"), DateTime.Now.ToString(@"HHmmss"), config.IsForDev ? "_dev" : "");
         var additionOption = BuildOptions.None;
-        
+
         if (config.IsForDev)
         {
             additionOption |= BuildOptions.ConnectWithProfiler | BuildOptions.Development;
         }
 
         PlayerSettings.bundleVersion = config.Version;
-        //PlayerSettings.Android.bundleVersionCode = config.BundleVersionCode;
         PlayerSettings.productName = config.ProductName;
         PlayerSettings.companyName = config.CompanyName;
-        //PlayerSettings.applicationIdentifier = string.Format("com.{0}.{1}", config.CompanyName, config.ProductName);
         PlayerSettings.applicationIdentifier = config.ApplicationId;
 
+        //set the internal apk version to the current unix timestamp, so this increases with every build
+        PlayerSettings.Android.bundleVersionCode = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         PlayerSettings.Android.keystoreName = config.KeyStorePath;
         PlayerSettings.Android.keystorePass = config.KeyPassword;
         PlayerSettings.Android.keyaliasName = config.KeyAliasName;
-        PlayerSettings.Android.keyaliasPass = config.KeyPassword;
+        PlayerSettings.Android.keyaliasPass = config.KeyAliasPassword;
 
         EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Internal;
 
