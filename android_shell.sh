@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Update XML from configuration.
-svn co http://svn.xinggeq.com/svn/march/doc/xml/client ./xml
+#svn co http://svn.xinggeq.com/svn/march/doc/xml/client ./xml
 #cd ./xml
 #svn update
 
