@@ -4,6 +4,16 @@ using UnityEngine;
 
 namespace qy
 {
+    public enum PlayerModelErr : int
+    {
+        NULL = 0,
+        NOT_ENOUGH_COIN,
+        NOT_ENOUGH_HEART,
+        NOT_ENOUGH_PROP,
+        NOT_ENOUGH_STAR,
+        QUEST_ID_ERROR,
+        PROP_ID_ERROR,
+    }
     public interface IPlayerModel
     {
         /// <summary>
@@ -11,26 +21,26 @@ namespace qy
         /// </summary>
         /// <param name="questId">下一个任务</param>
         /// <returns></returns>
-        int QuestComplate(out string storyID,string selectedID="");
+        PlayerModelErr QuestComplate(out string storyID,string selectedID="");
         /// <summary>
         /// 使用道具
         /// </summary>
         /// <param name="itemID"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        int UseProp(string itemID, int count);
+        PlayerModelErr UseProp(string itemID, int count);
         /// <summary>
         /// 购买道具
         /// </summary>
         /// <param name="itemId"></param>
         /// <param name="num"></param>
         /// <returns></returns>
-        int BuyProp(string itemId, int num);
+        PlayerModelErr BuyProp(string itemId, int num);
         /// <summary>
         /// 开始任务
         /// </summary>
         /// <returns></returns>
-        int StartLevel();
+        PlayerModelErr StartLevel();
         /// <summary>
         /// 结束任务
         /// </summary>
@@ -39,26 +49,40 @@ namespace qy
         /// <param name="step">使用步数</param>
         /// <param name="wingold">非固定奖励</param>
         /// <returns></returns>
-        int EndLevel(int level, bool result, int step, int wingold);
+        PlayerModelErr EndLevel(int level, bool result, int step, int wingold);
         /// <summary>
         /// 购买生命
         /// </summary>
         /// <returns></returns>
-        int BuyHeart();
+        PlayerModelErr BuyHeart();
         /// <summary>
         /// 购买 再来五步
         /// </summary>
         /// <param name="step"></param>
         /// <returns></returns>
-        int BuyFiveMore(int step);
+        PlayerModelErr BuyFiveMore(int step);
         /// <summary>
         /// 更改昵称
         /// </summary>
         /// <param name="nickName"></param>
         /// <returns></returns>
-        int ModifyNickName(string nickName);
-
-
+        PlayerModelErr ModifyNickName(string nickName);
+        /// <summary>
+        /// 以id指定的角色重新开始游戏
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        PlayerModelErr StartGameWithRole(string id);
+        /// <summary>
+        /// 使用金币复活
+        /// </summary>
+        /// <returns></returns>
+        PlayerModelErr CallBackRoleWithCoin();
+        /// <summary>
+        /// 使用复活卡复活
+        /// </summary>
+        /// <returns></returns>
+        PlayerModelErr CallBackRoleWithCard();
     }
 }
 

@@ -216,6 +216,20 @@ public class MainScene : MonoBehaviour
             var alertWindow = WindowManager.instance.Show<UIUnLoginPopupWindow>().GetComponent<UIunLoginPopup>();
             alertWindow.Init(LanguageManager.instance.GetValueByKey("210157"));
         }
+
+        TrySelectRole();
+    }
+
+    private void TrySelectRole()
+    {
+        qy.config.QuestItem quest = GameMainManager.Instance.playerData.GetQuest();
+        if (quest == null)
+        {
+            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIRoleWindow);
+        }else if(quest.type == qy.config.QuestItem.QuestType.Ending)
+        {
+            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow, quest);
+        }
     }
 
     private void LoadSevenDayInfo()

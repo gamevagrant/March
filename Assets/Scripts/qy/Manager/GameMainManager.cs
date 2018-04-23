@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using qy.ui;
-
 namespace qy
 {
     public class GameMainManager
@@ -77,6 +76,8 @@ namespace qy
 
 
         }
+
+
     }
 }
 

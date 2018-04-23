@@ -42,7 +42,18 @@ namespace qy
         /// <summary>
         /// //剧情ID
         /// </summary>
-        public string questId = "10001";
+        public string questId
+        {
+            get
+            {
+                return role==null?"":role.questID;
+            }
+            set
+            {
+                if (role != null)
+                    role.questID = value;
+            }
+        }
         /// <summary>
         /// 下一个任务
         /// </summary>
@@ -63,7 +74,18 @@ namespace qy
         /// <summary>
         /// 能力值
         /// </summary>
-        public config.Ability ability = new config.Ability();
+        public config.Ability ability
+        {
+            get
+            {
+                return role==null?new qy.config.Ability(): role.ability;
+            }
+            set
+            {
+                if(role!=null)
+                    role.ability = value;
+            }
+        }
         /// <summary>
         /// 是否获得7天奖励信息
         /// </summary>
@@ -81,10 +103,17 @@ namespace qy
         /// 数据是否发生改变
         /// </summary>
         public bool dirty = false;
-
-        //道具解锁状态, "0"缺省, "1"表示解锁导弹, 所有下关开始的时候, 道具列表要自动勾选导弹; "2"魔方; "3"飞机
+        /// <summary>
+        /// 当前角色
+        /// </summary>
+        public RoleItem role;
+        /// <summary>
+        ///  //道具解锁状态, "0"缺省, "1"表示解锁导弹, 所有下关开始的时候, 道具列表要自动勾选导弹; "2"魔方; "3"飞机
+        /// </summary>
         public string showUnlockItemStatus = "0";
-        //需要展示了第9关引导
+        /// <summary>
+        /// //需要展示了第9关引导
+        /// </summary>
         public bool needShow9Help = false;
 
         public bool isShowedLoginAward = false;
@@ -145,7 +174,7 @@ namespace qy
 
         public config.QuestItem GetQuest()
         {
-            return GameMainManager.Instance.configManager.questConfig.GetItem(questId);
+            return GameMainManager.Instance.configManager.questConfig.GetItem(questId??"");
         }
 
         public void RefreshData(PlayerDataMessage message)
@@ -191,6 +220,7 @@ namespace qy
             dirty = false;
 
             SaveData();
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
         }
 
         public PlayerDataServerMessage ToPlayerDataMessage()

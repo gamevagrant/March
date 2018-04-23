@@ -255,7 +255,11 @@ public class UIDialogueWindow : UIWindowBase {
             ShowStory(story);
         }else
         {
-            
+            qy.config.QuestItem nextQuest = qy.GameMainManager.Instance.playerData.GetQuest();
+            if(nextQuest.type == qy.config.QuestItem.QuestType.Ending)
+            {
+                qy.GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow,nextQuest);
+            }
             OnClickClose();
         }
         

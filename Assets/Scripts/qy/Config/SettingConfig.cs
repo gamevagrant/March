@@ -58,13 +58,18 @@ namespace qy.config
         public string OpenRegular;
         #endregion
 
-        public override string Name
+        #region 7日签到
+        /// <summary>
+        /// 复活需要的金币
+        /// </summary>
+        public int callBackPrice;
+
+        #endregion
+
+        public override string Name()
         {
-            get
-            {
-                Debug.Log(Network.player.ipAddress);
-                return "setting.xml";
-            }
+            Debug.Log(Network.player.ipAddress);
+            return "setting.xml";
         }
 
         internal override void ReadItem(XmlElement item)
@@ -99,17 +104,18 @@ namespace qy.config
                 }
                 else
                 {
-                    foreach (System.Reflection.PropertyInfo pi in t.GetProperties())
+                    foreach (System.Reflection.FieldInfo pi in t.GetFields())
                     {
+                        Debug.Log(pi.Name);
                         if (name == pi.Name)
                         {
-                            if (pi.PropertyType == typeof(int))
+                            if (pi.FieldType == typeof(int))
                             {
-                                pi.SetValue(this, int.Parse(attribute.Value), null);
+                                pi.SetValue(this, int.Parse(attribute.Value));
                             }
                             else
                             {
-                                pi.SetValue(this, attribute.Value, null);
+                                pi.SetValue(this, attribute.Value);
                             }
                         }
                     }

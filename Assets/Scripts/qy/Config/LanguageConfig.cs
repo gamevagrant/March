@@ -9,13 +9,10 @@ namespace qy.config
 
         private Dictionary<string, string> dic = new Dictionary<string, string>();
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                string ex = (Application.systemLanguage == SystemLanguage.Chinese || Application.systemLanguage == SystemLanguage.ChineseSimplified) ? "cn" : "en";
-                return "language_" + ex + ".xml";
-            }
+            string ex = (Application.systemLanguage == SystemLanguage.Chinese || Application.systemLanguage == SystemLanguage.ChineseSimplified) ? "cn" : "en";
+            return "language_" + ex + ".xml";
         }
 
         internal override void ReadItem(XmlElement item)

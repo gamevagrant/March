@@ -10,12 +10,9 @@ namespace qy.config
     {
         private Dictionary<string,QuestItem> dic = new Dictionary<string, QuestItem>();
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "quest.xml";
-            }
+            return "quest.xml";
         }
 
         internal override void ReadItem(XmlElement item)
@@ -26,7 +23,10 @@ namespace qy.config
             quest.type = (QuestItem.QuestType)int.Parse(item.GetAttribute("type"));
             quest.sectionName = GetLanguage(item.GetAttribute("sectionName"));
             quest.sectionDes = GetLanguage(item.GetAttribute("sectionDes"));
-            quest.requireStar = int.Parse(item.GetAttribute("requireStar"));
+            string star = item.GetAttribute("requireStar");
+            quest.requireStar = String.IsNullOrEmpty(star) ? 0 : int.Parse(star);
+            string endingType = item.GetAttribute("endingType");
+            quest.endingType = String.IsNullOrEmpty(endingType)?0:int.Parse(endingType) ;
 
             quest.storyID = item.GetAttribute("storyId");
             quest.gotoId = item.GetAttribute("gotoId");
@@ -48,6 +48,7 @@ namespace qy.config
             string[] data = value.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             endingPoint.survival = int.Parse(data[0]);
             endingPoint.storyID = data[1];
+            endingPoint.questID = data[2];
 
             return endingPoint;
         }
@@ -129,7 +130,11 @@ namespace qy.config
             /// <summary>
             /// 关键任务
             /// </summary>
-            EndingPoint,
+            Important,
+            /// <summary>
+            /// 结局任务
+            /// </summary>
+            Ending,
         }
         /// <summary>
         /// id
@@ -198,6 +203,10 @@ namespace qy.config
         /// 关键任务中进入结局剧情的条件和剧情id type==EndingPoint时起作用
         /// </summary>
         public EndingPoint endingPoint;
+        /// <summary>
+        /// 结局任务结果 1:正常结局 2：死亡 
+        /// </summary>
+        public int endingType;
     }
 
     public class SelectItem
@@ -259,13 +268,19 @@ namespace qy.config
         /// 任务
         /// </summary>
         public string questID;
-
+        public QuestItem quest
+        {
+            get
+            {
+                return ConfigManager.Instance.questConfig.GetItem(questID);
+            }
+        }
     }
 
     /// <summary>
     /// 能力值
     /// </summary>
-    public class Ability
+    public class Ability:Cloneable<Ability>
     {
         /// <summary>
         /// 纪律

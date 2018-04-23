@@ -8,12 +8,9 @@ namespace qy.config
     public class PropsConfig : BaseConfig
     {
         private Dictionary<string, PropItem> dic = new Dictionary<string, PropItem>();
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "item.xml";
-            }
+            return "item.xml";
         }
 
         internal override void ReadItem(XmlElement item)

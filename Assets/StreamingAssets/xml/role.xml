@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<Group id="role">
+  <ItemSpec id="10001" name="100100" introduction="100110" headIcon="person1" quest="10001" discipline="20" loyalty="15" wisdom="11"/>
+  <ItemSpec id="10002" name="100101" introduction="100111" headIcon="person2" quest="10002" discipline="8" loyalty="30" wisdom="30"/>
+  <ItemSpec id="10003" name="100102" introduction="100112" headIcon="person3" quest="10003" discipline="20" loyalty="15" wisdom="30"/>
+  <ItemSpec id="10004" name="100103" introduction="100113" headIcon="person2" quest="10004" discipline="10" loyalty="50" wisdom="22"/>
+  <ItemSpec id="10005" name="100104" introduction="100114" headIcon="person1" quest="10005" discipline="20" loyalty="15" wisdom="30"/>
+  <ItemSpec id="10006" name="100105" introduction="100115" headIcon="person3" quest="10006" discipline="33" loyalty="15" wisdom="42"/>
+  <ItemSpec id="10007" name="100106" introduction="100116" headIcon="person1" quest="10007" discipline="20" loyalty="25" wisdom="30"/>
+  <ItemSpec id="10008" name="100107" introduction="100117" headIcon="person2" quest="10008" discipline="50" loyalty="15" wisdom="10"/>
+  <ItemSpec id="10009" name="100108" introduction="100118" headIcon="person3" quest="10009" discipline="20" loyalty="12" wisdom="0"/>
+  <ItemSpec id="10010" name="100109" introduction="100119" headIcon="person1" quest="10001" discipline="11" loyalty="30" wisdom="30"/>
+</Group>

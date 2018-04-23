@@ -10,12 +10,9 @@ namespace qy.config
 
         private Dictionary<string, StoryItem> dic = new Dictionary<string, StoryItem>();
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "story.xml";
-            }
+            return "story.xml";
         }
 
         internal override void ReadItem(XmlElement item)

@@ -12,19 +12,9 @@ namespace qy
         {
             this.playerData = playerData;
         }
-        public enum ErrType:int
-        {
-            NULL=0,
-            NOT_ENOUGH_COIN,
-            NOT_ENOUGH_HEART,
-            NOT_ENOUGH_PROP,
-            NOT_ENOUGH_STAR,
-            QUEST_ID_ERROR,
-            PROP_ID_ERROR,
-        }
         
 
-        public int BuyFiveMore(int step)
+        public PlayerModelErr BuyFiveMore(int step)
         {
             GameMainManager.Instance.netManager.EliminateLevelFiveMore(step, (ret, res) => {
                 
@@ -35,7 +25,7 @@ namespace qy
             if(playerData.coinNum<cost)
             {
                 Debug.LogError("金币不足！");
-                return (int)ErrType.NOT_ENOUGH_COIN;
+                return PlayerModelErr.NOT_ENOUGH_COIN;
             }
 
             playerData.coinNum -= cost;
@@ -45,10 +35,10 @@ namespace qy
             }
             SaveData();
 
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int BuyHeart()
+        public PlayerModelErr BuyHeart()
         {
             GameMainManager.Instance.netManager.BuyHeart((ret, res) => {
                 
@@ -58,7 +48,7 @@ namespace qy
             if(playerData.coinNum<cost)
             {
                 Debug.LogError("金币不足！");
-                return (int)ErrType.NOT_ENOUGH_COIN;
+                return PlayerModelErr.NOT_ENOUGH_COIN;
             }
 
             playerData.coinNum -= cost;
@@ -66,10 +56,10 @@ namespace qy
             playerData.recoveryLeftTime = 0;
             SaveData();
 
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int BuyProp(string itemId, int num)
+        public PlayerModelErr BuyProp(string itemId, int num)
         {
             GameMainManager.Instance.netManager.BuyItem(itemId,num,(ret, res) => {
 
@@ -79,23 +69,23 @@ namespace qy
             if(item==null)
             {
                 Debug.Log("物品不存在");
-                return (int)ErrType.PROP_ID_ERROR;
+                return PlayerModelErr.PROP_ID_ERROR;
             }
             int cost = item.price * num;
             if(playerData.coinNum<cost)
             {
                 Debug.LogError("金币不足！");
-                return (int)ErrType.NOT_ENOUGH_COIN;
+                return PlayerModelErr.NOT_ENOUGH_COIN;
             }
 
             playerData.coinNum -= cost;
             playerData.AddPropItem(itemId,num);
             SaveData();
 
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int EndLevel(int level, bool result, int step, int wingold)
+        public PlayerModelErr EndLevel(int level, bool result, int step, int wingold)
         {
             GameMainManager.Instance.netManager.LevelEnd(level,result?1:0,step, wingold, (ret, res) => {
                 
@@ -116,10 +106,10 @@ namespace qy
                 SaveData();
             }
 
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int ModifyNickName(string nickName)
+        public PlayerModelErr ModifyNickName(string nickName)
         {
             GameMainManager.Instance.netManager.ModifyNickName(nickName, (ret, res) => {
                 Debug.Log("===============修改姓名成功");
@@ -127,10 +117,10 @@ namespace qy
             playerData.dirty = true;
             playerData.nickName = nickName;
             SaveData();
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int QuestComplate(out string storyID, string selectedID = "")
+        public PlayerModelErr QuestComplate(out string storyID, string selectedID = "")
         {
             GameMainManager.Instance.netManager.ComplateQuestId(playerData.questId, (ret, res) => {
 
@@ -141,7 +131,7 @@ namespace qy
             if (playerData.starNum < questItem.requireStar)
             {
                 MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200011"));
-                return (int)ErrType.NOT_ENOUGH_STAR;
+                return PlayerModelErr.NOT_ENOUGH_STAR;
             }
             List<PropItem> needProps = questItem.requireItem;
             foreach(PropItem item in needProps)
@@ -150,7 +140,7 @@ namespace qy
                 int haveCount = haveItem==null?0: haveItem.count;
                 if(haveCount < item.count)
                 {
-                    return (int)ErrType.NOT_ENOUGH_PROP;
+                    return PlayerModelErr.NOT_ENOUGH_PROP;
                 }
             }
             //扣除完成任务物品
@@ -180,7 +170,7 @@ namespace qy
                     }
                 }
             }
-            else if (questItem.type == config.QuestItem.QuestType.EndingPoint)
+            else if (questItem.type == config.QuestItem.QuestType.Important)
             {
                 if(playerData.survival<questItem.endingPoint.survival)
                 {
@@ -200,10 +190,10 @@ namespace qy
             playerData.dirty = true;
             
             SaveData();
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int StartLevel()
+        public PlayerModelErr StartLevel()
         {
             GameMainManager.Instance.netManager.LevelStart((ret, res) => {
                 
@@ -211,15 +201,15 @@ namespace qy
             playerData.dirty = true;
             if (playerData.heartNum<=0)
             {
-                return (int)ErrType.NOT_ENOUGH_HEART;
+                return PlayerModelErr.NOT_ENOUGH_HEART;
             }
             playerData.heartNum -= 1;
             SaveData();
 
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int UseProp(string itemID, int count)
+        public PlayerModelErr UseProp(string itemID, int count)
         {
             GameMainManager.Instance.netManager.UseTools(itemID, count, (ret, res) =>
             {
@@ -229,15 +219,40 @@ namespace qy
             PropItem prop = playerData.GetPropItem(itemID);
             if(prop==null || prop.count<count)
             {
-                return (int)ErrType.NOT_ENOUGH_PROP;
+                return PlayerModelErr.NOT_ENOUGH_PROP;
             }
 
             playerData.RemovePropItem(itemID, count);
+            SaveData();
+            return PlayerModelErr.NULL;
+        }
 
-            return (int)ErrType.NULL;
+        public PlayerModelErr StartGameWithRole(string id)
+        {
+            playerData.dirty = true;
+            RoleItem role = GameMainManager.Instance.configManager.roleConfig.GetItem(id).Clone();
+            playerData.role = role;
+            playerData.nextQuestId = role.questID;
+            SaveData();
+            return PlayerModelErr.NULL;
+        }
+
+        public PlayerModelErr CallBackRoleWithCoin()
+        {
+            int cost = GameMainManager.Instance.configManager.settingConfig.callBackPrice;
+            if(playerData.coinNum<cost)
+            {
+                return PlayerModelErr.NOT_ENOUGH_COIN;
+            }
+            playerData.coinNum -= cost;
+            return StartGameWithRole(playerData.role.id);
+        }
+
+        public PlayerModelErr CallBackRoleWithCard()
+        {
+            return PlayerModelErr.NULL;
         }
        
-
         private void SaveData()
         {
             LocalDatasManager.playerData = playerData;

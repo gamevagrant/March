@@ -33,5 +33,6 @@ public class DebugInfor : MonoBehaviour
         deviceIdInput.text = Utils.instance.getDeviceID();
 
         contentPanel.SetActive(!contentPanel.activeSelf);
+
     }
 }

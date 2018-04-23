@@ -101,6 +101,15 @@ namespace qy.config
             }
         }
 
+        public RoleConfig roleConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(RoleConfig)];
+                return config as RoleConfig;
+            }
+        }
+
         private Dictionary<Type,BaseConfig> dic;
         private int allCount = 0;
 
@@ -127,13 +136,14 @@ namespace qy.config
             Load<ExchangeConfig>(LoadHandle);
             Load<GuideSetupConfig>(LoadHandle);
             Load<SettingConfig>(LoadHandle);
+            Load<RoleConfig>(LoadHandle);
         }
 
         private void Load<T>(Action onComplate) where T : BaseConfig, new()
         {
             allCount++;
             T config = new T();
-            string path = FilePathTools.getXmlPath(config.Name);
+            string path = FilePathTools.getXmlPath(config.Name());
             Debug.Log("加载配置文件:" + path);
             AssetsManager.Instance.LoadAssetWithWWW(path, (www) =>
             {

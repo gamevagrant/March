@@ -7,12 +7,9 @@ namespace qy.config
     public class MatchLevelConfig : BaseConfig
     {
         private Dictionary<string, MatchLevelItem> dic = new Dictionary<string, MatchLevelItem>();
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "matchlevel.xml";
-            }
+            return "matchlevel.xml";
         }
 
         internal override void ReadItem(XmlElement item)

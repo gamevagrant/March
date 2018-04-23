@@ -9,12 +9,9 @@ namespace qy.config
 
         private Dictionary<string, ExchangeItem> dic = new Dictionary<string, ExchangeItem>();
         private List<ExchangeItem> list = new List<ExchangeItem>();
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "exchange.xml";
-            }
+            return "exchange.xml";
         }
 
         internal override void ReadItem(XmlElement item)

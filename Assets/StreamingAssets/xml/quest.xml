@@ -7,10 +7,10 @@
     <ItemSpec id="10004" bg="1000105bg" type="1" sectionName="100102" sectionDes="100112" gotoId="10005" requireStar="1" requireItem="0" prize="0" storyId="1000116"/>
     <ItemSpec id="10005" bg="1000113bg" type="1" sectionName="100103" sectionDes="100113" gotoId="10007" requireStar="1" requireItem="0" prize="0" storyId="0"/>
     <ItemSpec id="10007" bg="1000114bg" type="1" sectionName="100104" sectionDes="100114" gotoId="10008" requireStar="1" requireItem="200102:2" prize="0" storyId="0"/>
-    <ItemSpec id="10008" type="3" sectionName="100104" sectionDes="100114" endingPoint="30:1000110" gotoId="10009" requireStar="0" requireItem="0" prize="0" storyId="1000159"/>
+    <ItemSpec id="10008" type="3" sectionName="100104" sectionDes="100114" endingPoint="30:1000110:10011" gotoId="10009" requireStar="0" requireItem="0" prize="0" storyId="1000159"/>
     <ItemSpec id="10009" bg="1000123bg" type="1" sectionName="100105" sectionDes="100115" gotoId="10010" requireStar="1" requireItem="200103:2" prize="0" storyId="0"/>
     <ItemSpec id="10010" type="2" sectionName="100105" sectionDes="100115" selectList="100126:1000166:10013:30|0|0,100127:1000170:10011:0|0|0" gotoId="10011" requireStar="0" requireItem="0" prize="0" storyId="1000166:1000170"/>
-    <ItemSpec id="10011" bg="1000108bg" type="1" sectionName="100106" sectionDes="100116" gotoId="10012" requireStar="2" requireItem="0" prize="0" storyId="1000130"/>
+    <ItemSpec id="10011" bg="1000108bg" type="4" endingType="2" sectionName="100106" sectionDes="100116" gotoId="10012" requireStar="2" requireItem="0" prize="0" storyId="1000130"/>
     <ItemSpec id="10012" bg="1000119bg" type="1" sectionName="100107" sectionDes="100117" gotoId="10013" requireStar="2" requireItem="0" prize="0" storyId="1000189"/>
     <ItemSpec id="10013" bg="1000116bg" type="1" sectionName="100108" sectionDes="100118" gotoId="10014" requireStar="2" requireItem="200104:2" prize="0" storyId="0"/>
     <ItemSpec id="10014" type="2" sectionName="100108" sectionDes="100118" selectList="100128:1000173:10014:30|30|30,100129:1000176:10015:0|0|0" gotoId="10015" requireStar="0" requireItem="0" prize="0" storyId="1000173:1000176"/>

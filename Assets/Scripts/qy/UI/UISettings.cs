@@ -11,6 +11,10 @@ namespace qy.ui
         {
             UIDialogueWindow,
             UITaskWindow,
+            UIRoleWindow,
+            UIEndingWindow,
+            UIModalBoxWindow,
+            UICallBackWindow,
         }
 
         public enum UIWindowType
@@ -47,6 +51,10 @@ namespace qy.ui
         {
             {UIWindowID.UIDialogueWindow,"UIDialogueWindow"},
             {UIWindowID.UITaskWindow,"UITaskWindow"},
+            {UIWindowID.UIRoleWindow,"UIRoleWindow"},
+            {UIWindowID.UIEndingWindow,"UIEndingWindow"},
+            {UIWindowID.UIModalBoxWindow,"UIModalBoxWindow"},
+            {UIWindowID.UICallBackWindow,"UICallBackWindow"},
         };
 
 

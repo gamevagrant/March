@@ -6,14 +6,12 @@ namespace qy.config
 {
     public class BaseConfig
     {
-        public virtual string Name
+        public string abc;
+        public virtual string Name()
         {
-            get
-            {
-                return "item.xml";
-            }
+            return "item.xml";
         }
-        public bool Read(string xml)
+        public virtual bool Read(string xml)
         {
             if (string.IsNullOrEmpty(xml))
             {
@@ -34,7 +32,7 @@ namespace qy.config
             }
             catch (Exception e)
             {
-                Debug.LogError(e.Message + element.GetAttribute("id") + ", " + Name);
+                Debug.LogError(e.Message + element.GetAttribute("id") + ", " + Name());
             }
 
             return true;

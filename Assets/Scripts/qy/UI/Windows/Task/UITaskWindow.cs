@@ -59,12 +59,12 @@ public class UITaskWindow :  UIWindowBase{
     private void UpdatePanel()
     {
         questItem = playerdata.GetQuest();
-        string headUrl = FilePathTools.GetPersonHeadPath("Person1");
+        string headUrl = FilePathTools.GetPersonHeadPath(playerdata.role.headIcon);
         AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
         {
             roleHeadImage.sprite = sp;
         });
-        roleNameText.text = "帅哥齐";
+        roleNameText.text = playerdata.role.name;
         resurrectionCountText.text = "死亡次数：6";
         loyaltySlider.value = playerdata.ability.loyalty / 100f;
         wisdomSlider.value = playerdata.ability.wisdom / 100f;
@@ -126,12 +126,31 @@ public class UITaskWindow :  UIWindowBase{
         missionTopTF.anchorMin = new Vector2(0,0.35f);
 
         propPool.resetAllTarget();
-        List<PropItem> props = questItem.requireItem;
-        foreach(PropItem item in props)
+        List<PropItem> props = new List<PropItem>()
+        {
+            new PropItem()
+            {
+                id = "1",
+                icon = "starsp",
+                count = questItem.requireStar,
+            }
+        };
+
+        props.AddRange(questItem.requireItem);
+        foreach (PropItem item in props)
         {
             UIPropCell cell = propPool.getIdleTarget<UIPropCell>();
-            PropItem haveProp = playerdata.GetPropItem(item.id);
-            cell.SetData(item, haveProp==null?0: haveProp.count);
+            if (item.id == "1")
+            {
+                //设置显示星星数量
+                cell.SetData(item,playerdata.starNum);
+                
+            }else
+            {
+                PropItem haveProp = playerdata.GetPropItem(item.id);
+                cell.SetData(item, haveProp == null ? 0 : haveProp.count);
+            }
+           
         }
     }
 
@@ -154,8 +173,8 @@ public class UITaskWindow :  UIWindowBase{
         }
         
         string storyID;
-        int err = GameMainManager.Instance.playerModel.QuestComplate(out storyID, selectedID);
-        if((PlayerModel.ErrType)err == PlayerModel.ErrType.NULL)
+        PlayerModelErr err = GameMainManager.Instance.playerModel.QuestComplate(out storyID, selectedID);
+        if(err == PlayerModelErr.NULL)
         {
             if(!string.IsNullOrEmpty(storyID)&&storyID!="0")
             {
