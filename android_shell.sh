@@ -2,13 +2,13 @@
 
 # Update XML from configuration.
 svn co http://svn.xinggeq.com/svn/march/doc/xml/client ./xml
-cd ./xml
-svn update
+#cd ./xml
+#svn update
 
 # Copy configurations from ./xml to ./March
-cd $WORKSPACE
-echo "cp -f -v ../xml/*.xml ./Assets/StreamingAssets/xml"
-cp -f -v ../xml/*.xml ./Assets/StreamingAssets/xml
+#cd $WORKSPACE
+#echo "cp -f -v ../xml/*.xml ./Assets/StreamingAssets/xml"
+#cp -f -v ../xml/*.xml ./Assets/StreamingAssets/xml
 
 now=$(date +"%T")
 echo "Build Start: $now"
