@@ -102,9 +102,11 @@ public class ProjectBuild
     {
         var root = Application.platform == RuntimePlatform.OSXEditor ||
                    Application.platform == RuntimePlatform.OSXPlayer
-            ? "~/.android"
+            ? Path.Combine(Environment.GetEnvironmentVariable("HOME"), ".android")
             : Path.Combine(Environment.GetEnvironmentVariable("USERPROFILE"), ".android");
         config.KeyStorePath = Path.Combine(root, config.KeyStorePath);
+
+        Debug.LogWarning("Key store to : " + config.KeyStorePath);
 
         try
         {
