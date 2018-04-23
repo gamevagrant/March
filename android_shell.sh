@@ -10,10 +10,6 @@ cd $WORKSPACE
 echo "cp -f -v ../xml/*.xml ./Assets/StreamingAssets/xml"
 cp -f -v ../xml/*.xml ./Assets/StreamingAssets/xml
 
-echo $JOB_NAME
-echo $WORKSPACE
-echo $JENKINS_HOME
-
 now=$(date +"%T")
 echo "Build Start: $now"
 

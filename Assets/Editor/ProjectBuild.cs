@@ -129,6 +129,9 @@ public class ProjectBuild
     {
         var buildName = string.Format("./package/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
             DateTime.Now.ToString(@"yyyyMMdd"), DateTime.Now.ToString(@"HHmmss"), config.IsForDev ? "_dev" : "");
+
+        Debug.LogWarning("Build package to : " + buildName);
+
         var additionOption = BuildOptions.None;
 
         if (config.IsForDev)
