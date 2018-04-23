@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class DebugInfor : MonoBehaviour
 {
-    private Button debugButton;
     private GameObject contentPanel;
     private InputField uidInput;
     private InputField deviceIdInput;
+    private InputField urlInput;
     private InputField infoInput;
 
     private string playerdata;
@@ -14,12 +14,12 @@ public class DebugInfor : MonoBehaviour
 
     private void Awake()
     {
-        debugButton = transform.Find("DebugCanvas/Button").GetComponent<Button>();
 		contentPanel = transform.Find("DebugCanvas/Panel").gameObject;
 
         uidInput = contentPanel.transform.Find("Container1/InputField").GetComponent<InputField>();
-        deviceIdInput = contentPanel.transform.Find("Container3/InputField").GetComponent<InputField>();
-        infoInput = contentPanel.transform.Find("Container2/InputField").GetComponent<InputField>();
+        deviceIdInput = contentPanel.transform.Find("Container2/InputField").GetComponent<InputField>();
+        urlInput = contentPanel.transform.Find("Container3/InputField").GetComponent<InputField>();
+        infoInput = contentPanel.transform.Find("Container4/InputField").GetComponent<InputField>();
     }
 
     public void OnDebugClicked()
@@ -29,7 +29,9 @@ public class DebugInfor : MonoBehaviour
 
         playerdata = PlayerData.instance.ToString();
         infoInput.text = playerdata;
-        
+
+        urlInput.text = Configure.instance.ServerUrl;
+
         deviceIdInput.text = Utils.instance.getDeviceID();
 
         contentPanel.SetActive(!contentPanel.activeSelf);

@@ -139,7 +139,7 @@ public class NetManager : Singleton<NetManager>
 
         if (isNetWorkStatusGood() && getIsConnected())
         {
-            HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, callback);
+            HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, callback);
             request.AddField("uid", PlayerData.instance.userId);
             request.AddField("cmd", cmd);
             request.AddField("data", data);
@@ -535,7 +535,7 @@ public class NetManager : Singleton<NetManager>
 	public void offLineDataSave(string data)
 	{
 	    waitForOffLineSaveRev = true;
-	    HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, offLineDataSaveRev);
+	    HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, offLineDataSaveRev);
 	    request.AddField("uid", PlayerData.instance.userId);
 	    request.AddField("cmd", ServerGlobal.SAVE_OFF_LINE);
 	    request.AddField("data", data);

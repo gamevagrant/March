@@ -1,0 +1,17 @@
+{
+  "CurrentIndex": 0,
+  "AvailableList": [
+    {
+      "Name": "Native",
+      "Url": "http://123.206.90.153:9933"
+    },
+    {
+      "Name": "Foreign",
+      "Url": "http://169.44.81.206:9933"
+    },
+    {
+      "Name": "Test",
+      "Url": "http://10.1.9.247:9933"
+    }
+  ]
+}

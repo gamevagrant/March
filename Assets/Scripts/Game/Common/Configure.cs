@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Scripts.Common;
+using Core.March.Config;
 using UnityEngine;
 
 public enum MAP_LEVEL_STATUS
@@ -385,6 +386,8 @@ public class Configure : MonoSingleton<Configure>
 	public int lifeRecoveryMinute;
 	public int lifeRecoverySecond;
     public int recoveryCostPerLife;
+
+    public string ServerUrl; 
 
     // game data
     public static string game_data = "cookie.dat";
@@ -1395,12 +1398,20 @@ public class Configure : MonoSingleton<Configure>
 
     #endregion
 
+    public static string ServerPath()
+    {
+        return "Config/ServerConfig";
+    }
+
     protected override void Init()
     {
         base.Init();
 
         SoundOn = PlayerPrefs.GetInt(PlayerPrefEnums.SoundOn) == 1;
         MusicOn = PlayerPrefs.GetInt(PlayerPrefEnums.MusicOn) == 1;
+
+        var config = JsonUtility.FromJson<ServerConfig>(Resources.Load<TextAsset>(ServerPath()).text);
+        ServerUrl = config.Current.Url;
     }
 
     void OnApplicationQuit()

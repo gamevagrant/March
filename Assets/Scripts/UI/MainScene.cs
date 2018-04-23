@@ -3,6 +3,7 @@ using Facebook.Unity;
 using LitJson;
 using System;
 using System.Collections.Generic;
+using Core.March.Config;
 using DG.Tweening;
 using March.Core.WindowManager;
 using UnityEngine;
@@ -105,7 +106,6 @@ public class MainScene : MonoBehaviour
 
     private void Start()
     {
-
         Debug.Log("------------------------------: 语言: " + Application.systemLanguage.ToString());
 
         MTestPopup.SetActive(false);
@@ -189,7 +189,7 @@ public class MainScene : MonoBehaviour
 
         if (NetManager.instance.isNetWorkStatusGood())
         {
-            HTTPRequest request = new HTTPRequest(new Uri(ServerGlobal.loginUrl), HTTPMethods.Post, LoginRev);
+            HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, LoginRev);
             request.AddField("cmd", ServerGlobal.LOGIN_CMD);
             LoginInfo loginInfo = new LoginInfo();
             string loginInfoJson = JsonUtility.ToJson(loginInfo);
