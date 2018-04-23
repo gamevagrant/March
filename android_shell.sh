@@ -6,6 +6,9 @@ cd ./xml
 svn update
 
 # Copy configurations from ./xml to ./March
+cd $WORKSPACE
+cp -f ../xml/*.xml ./Assets/StreamingAssets/xml
+
 echo $JOB_NAME
 echo $WORKSPACE
 echo $JENKINS_HOME
