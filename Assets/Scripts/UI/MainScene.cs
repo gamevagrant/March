@@ -105,9 +105,11 @@ public class MainScene : MonoBehaviour
 
         MStoryListItem = Resources.Load<GameObject>("Prefabs/UI/StoryItem");
 
-        Messenger.AddListener(ELocalMsgID.RefreshBaseData, RefreshGoldData);
+        //Messenger.AddListener(ELocalMsgID.RefreshBaseData, RefreshGoldData);
 
         FB.Init();
+
+        GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIMainSceneWindow);
     }
     private void Start()
     {
@@ -165,7 +167,7 @@ public class MainScene : MonoBehaviour
         }
 
         //NewPlayerGuideRefresh();
-    }*/
+    }
 
     void Update()
     {
@@ -179,7 +181,7 @@ public class MainScene : MonoBehaviour
             TimeMonoManager.instance.setTotalTime(0);  //心数已满状态的时候totaltime 置为0；
         }
     }
-
+    */
 
     void OnApplicationFocus(bool hasFocus)
     {
@@ -243,6 +245,13 @@ public class MainScene : MonoBehaviour
             }
         });
     }
+
+    private void ShowDailyLandingPopup()
+    {
+        //登陆后弹出7日登录活动
+        int day = GameMainManager.Instance.playerData.indexDay;
+        WindowManager.instance.Show<DailyLandingActivitiesPopupWindow>().GetComponent<DailyLandingActivities>().Init(day + 1);
+    }
     /*
     public void login()
     {
@@ -300,8 +309,7 @@ public class MainScene : MonoBehaviour
         //			}
         //        }
     }
-    */
-    /*
+
     private void LoginRev(HTTPRequest request, HTTPResponse response)
     {
         Debug.Log("Login Rev :" + response.DataAsText);
@@ -358,12 +366,7 @@ public class MainScene : MonoBehaviour
             ShowDailyLandingPopup();
     }
     */
-    private void ShowDailyLandingPopup()
-    {
-        //登陆后弹出7日登录活动
-        int day = GameMainManager.Instance.playerData.indexDay;
-		WindowManager.instance.Show<DailyLandingActivitiesPopupWindow> ().GetComponent<DailyLandingActivities> ().Init (day + 1);
-    }
+
     /*
     public void AddStoryListItem(StoryItem storyItem)
     {
@@ -371,7 +374,7 @@ public class MainScene : MonoBehaviour
         obj.GetComponent<StoryListItem>().SetItemContent(storyItem, this);
         mStroyList.Add(obj);
     }
-    */
+    
     public void RefreshPlayerData()
     {
         MCoin.text = GameMainManager.Instance.playerData.coinNum.ToString();
@@ -392,7 +395,7 @@ public class MainScene : MonoBehaviour
             MDownTime.text = LanguageManager.instance.GetValueByKey("200021");
         }
     }
-
+   
     /// <summary>
     /// 生命不足时用金币补满生命
     /// </summary>
@@ -404,8 +407,8 @@ public class MainScene : MonoBehaviour
             //NetManager.instance.buyHeart();
             GameMainManager.Instance.playerModel.BuyHeart();
             //购买成功之后生命值置满
-            /*   PlayerData.instance.setHeartNum(PlayerData.instance.getMaxLives());
-               PlayerData.instance.setCoinNum(m_leftCoin);*/
+            //  PlayerData.instance.setHeartNum(PlayerData.instance.getMaxLives());
+            //  PlayerData.instance.setCoinNum(m_leftCoin);
 
             MHeart.text = GameMainManager.Instance.playerData.maxLives.ToString();
             MCoin.text = mLeftCoin.ToString();
@@ -510,7 +513,7 @@ public class MainScene : MonoBehaviour
     {
         Messenger.RemoveListener(ELocalMsgID.RefreshBaseData, RefreshGoldData);
     }
-
+     */
     private void NewPlayerGuideRefresh()
     {
         if (GameMainManager.Instance.playerData.eliminateLevel == 1)

@@ -13,6 +13,8 @@ namespace qy
         NOT_ENOUGH_STAR,
         QUEST_ID_ERROR,
         PROP_ID_ERROR,
+        COUNT_DOWN_NOT_END,
+        HEART_IS_FULL,
     }
     public interface IPlayerModel
     {
@@ -83,6 +85,18 @@ namespace qy
         /// </summary>
         /// <returns></returns>
         PlayerModelErr CallBackRoleWithCard();
+        /// <summary>
+        /// 倒计时结束增加生命
+        /// </summary>
+        /// <returns></returns>
+        PlayerModelErr UpdateHeart();
+        /// <summary>
+        /// 获取错误描述
+        /// </summary>
+        /// <param name="err"></param>
+        /// <returns></returns>
+        string GetErrorDes(PlayerModelErr err);
+
     }
 }
 

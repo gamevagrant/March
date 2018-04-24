@@ -51,10 +51,10 @@ public class TimeMonoManager : MonoSingleton<TimeMonoManager>
                     //30min之后heart恢复一个
                     qy.GameMainManager.Instance.playerData.heartNum += 1;
                     Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
-                    if(qy.GameMainManager.Instance.playerData.heartRecoverTime == 0)
+                    if(qy.GameMainManager.Instance.configManager.settingConfig.livesRecoverTime == 0)
                         totalTime = totalTime * 60;
                     else
-                        totalTime = qy.GameMainManager.Instance.playerData.heartRecoverTime * 60;
+                        totalTime = qy.GameMainManager.Instance.configManager.settingConfig.livesRecoverTime * 60;
 	            }
 	        }
 	    }

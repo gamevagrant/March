@@ -36,7 +36,7 @@ public class HeartRecoverPanelController : MonoBehaviour
 		nextText.text = LanguageManager.instance.GetValueByKey("210151");
 
         buyButton.SetActive(qy.GameMainManager.Instance.playerData.heartNum == 0);
-        buyText.text = qy.GameMainManager.Instance.playerData.livePrice.ToString();
+        buyText.text = qy.GameMainManager.Instance.configManager.settingConfig.livesPrice.ToString();
     }
 
     void Update()
@@ -48,7 +48,9 @@ public class HeartRecoverPanelController : MonoBehaviour
 			if (heartNum == 0) {
 				buyButton.gameObject.SetActive (true);
 			}
-            countDownText.text = string.Format("{0:D2}: {1:D2}", (int)TimeMonoManager.instance.getTotalTime() / 60, (int)TimeMonoManager.instance.getTotalTime() % 60);
+            int t = qy.GameMainManager.Instance.playerData.countDown;
+            TimeSpan ts = new TimeSpan(0, 0, t);
+            countDownText.text = string.Format("{0}:{1}", ts.Minutes.ToString("D2"), ts.Seconds.ToString("D2"));
             starText.text = qy.GameMainManager.Instance.playerData.heartNum.ToString();
         }
         else

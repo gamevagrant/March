@@ -89,7 +89,7 @@ namespace March.Core.Network
             }
 
             GameMainManager.Instance.playerData.coinNum = payRec.gold;
-            MainScene.Instance.RefreshPlayerData();
+            //MainScene.Instance.RefreshPlayerData();
         }
     }
 }

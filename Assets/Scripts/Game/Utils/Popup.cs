@@ -75,8 +75,9 @@ public class Popup : MonoBehaviour
 		image.canvasRenderer.SetAlpha(0.0f);
 		image.CrossFadeAlpha(1.0f, 0.4f, false);
 
-        var canvas = GameObject.Find("Canvas");
-		background.transform.localScale = new Vector3(1, 1, 1);
+        //var canvas = GameObject.Find("Canvas");
+        var canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
+        background.transform.localScale = new Vector3(1, 1, 1);
         background.GetComponent<RectTransform>().sizeDelta = canvas.GetComponent<RectTransform>().sizeDelta;
 		background.transform.SetParent(canvas.transform, false);
 		background.transform.SetSiblingIndex(transform.GetSiblingIndex());

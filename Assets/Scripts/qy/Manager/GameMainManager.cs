@@ -6,7 +6,6 @@ namespace qy
 {
     public class GameMainManager
     {
-
         private static GameMainManager _instance;
         public static GameMainManager Instance
         {

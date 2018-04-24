@@ -71,7 +71,7 @@ public class TaskManager : MonoBehaviour
 
                 qy.GameMainManager.Instance.playerData.starNum = playerStar;
                 qy.GameMainManager.Instance.playerData.AddPropItem(requireItemId,leftItemCount);
-				MainScene.Instance.RefreshPlayerData();
+				//MainScene.Instance.RefreshPlayerData();
 				// NetManager.instance.userToolsToServer(requireItemId,requireItemCount.ToString());  //消耗道具之后发送http
 			}
 			else

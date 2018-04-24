@@ -31,14 +31,40 @@ namespace qy
         /// //消除关卡
         /// </summary>
         public int eliminateLevel = 1;
+
+        private long _hertTimestamp;
         /// <summary>
         /// //下次补充生命的时间戳
         /// </summary>
-        public long hertTimestamp;
-        /// <summary>
-        /// //下一次生命恢复剩余时间 秒
-        /// </summary>
-        public long recoveryLeftTime = 0;
+        public long hertTimestamp
+        {
+            get
+            {
+                return _hertTimestamp;
+            }
+            set
+            {
+                _hertTimestamp = value;
+                if (_hertTimestamp != 0)
+                {
+                    recoveryLeftTime = (int)(_hertTimestamp - GameUtils.DateTimeToTimestamp(System.DateTime.Now));
+                    updataTimeTag = Time.unscaledTime;
+                }else
+                {
+                    recoveryLeftTime = 0;
+                    updataTimeTag = 0;
+                }
+            }
+        }
+        private int recoveryLeftTime;
+        private float updataTimeTag;
+        public int countDown
+        {
+            get
+            {
+                return Mathf.Max(0,recoveryLeftTime - (int)(Time.unscaledTime - updataTimeTag));
+            }
+        }
         /// <summary>
         /// //剧情ID
         /// </summary>
@@ -59,18 +85,6 @@ namespace qy
         /// </summary>
         public string nextQuestId;
         
-        /// <summary>
-        /// //心数恢复间隔是30min
-        /// </summary>
-        public int heartRecoverTime = 30;
-        /// <summary>
-        /// //最大生命数
-        /// </summary>
-        public int maxLives = 5;
-        /// <summary>
-        /// //补满生命金币价格
-        /// </summary>
-        public int livePrice = 900; 
         /// <summary>
         /// 能力值
         /// </summary>
@@ -197,15 +211,7 @@ namespace qy
                 indexDay = message.sevenDay.sevenDayInfo.index;
                 awardState = message.sevenDay.sevenDayInfo.state;
             }
-            if (message.heartTime!=0)
-            {
-                long temp = hertTimestamp - GameUtils.DateTimeToTimestamp(System.DateTime.Now);
-                recoveryLeftTime = temp;
-                Debug.Log("系统时间:" + GameUtils.DateTimeToTimestamp(System.DateTime.Now));
-                Debug.Log("下一次心数恢复是:" + hertTimestamp);
-                Debug.Log("下一次心数恢复还剩余时间是:" + recoveryLeftTime.ToString());
-
-            }
+           
             propsDic = new Dictionary<string, config.PropItem>();
             foreach(PlayerDataMessage.PropItem item in message.items)
             {

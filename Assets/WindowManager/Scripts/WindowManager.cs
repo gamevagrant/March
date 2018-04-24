@@ -34,8 +34,9 @@ namespace March.Core.WindowManager
                 Debug.LogError(string.Format("Cannot find window according to type {0}", typeof(T)));
                 return null;
             }
-
-            var canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+            
+            //var canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+            var canvas = GameObject.FindObjectOfType<Canvas>();
             var clone = Instantiate(windowMap[typeof(T)]).GetComponent<T>();
             clone.gameObject.transform.localScale = Vector3.zero;
             clone.gameObject.transform.SetParent(canvas.transform, false);

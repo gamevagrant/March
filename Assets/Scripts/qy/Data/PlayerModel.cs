@@ -11,6 +11,7 @@ namespace qy
         public PlayerModel(PlayerData playerData)
         {
             this.playerData = playerData;
+            
         }
         
 
@@ -34,7 +35,7 @@ namespace qy
                 playerData.AddPropItem(prop.id,prop.count);
             }
             SaveData();
-
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }
 
@@ -53,9 +54,9 @@ namespace qy
 
             playerData.coinNum -= cost;
             playerData.heartNum = GameMainManager.Instance.configManager.settingConfig.maxLives;
-            playerData.recoveryLeftTime = 0;
+            playerData.hertTimestamp = 0;
             SaveData();
-
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }
 
@@ -81,7 +82,7 @@ namespace qy
             playerData.coinNum -= cost;
             playerData.AddPropItem(itemId,num);
             SaveData();
-
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }
 
@@ -149,7 +150,7 @@ namespace qy
             {
                 playerData.RemovePropItem(item.id,item.count);
             }
-            MainScene.Instance.RefreshPlayerData();
+
 
             //更新下个任务
             if (questItem.type == config.QuestItem.QuestType.Main)
@@ -190,6 +191,7 @@ namespace qy
             playerData.dirty = true;
             
             SaveData();
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }
 
@@ -224,6 +226,7 @@ namespace qy
 
             playerData.RemovePropItem(itemID, count);
             SaveData();
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }
 
@@ -245,12 +248,62 @@ namespace qy
                 return PlayerModelErr.NOT_ENOUGH_COIN;
             }
             playerData.coinNum -= cost;
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return StartGameWithRole(playerData.role.id);
         }
 
         public PlayerModelErr CallBackRoleWithCard()
         {
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
+        }
+
+        public PlayerModelErr UpdateHeart()
+        {
+            int maxHeart = GameMainManager.Instance.configManager.settingConfig.maxLives;
+            if (playerData.heartNum>= maxHeart)
+            {
+                return PlayerModelErr.HEART_IS_FULL;
+            }
+
+            long now = GameUtils.DateTimeToTimestamp(System.DateTime.Now);
+            long last = playerData.hertTimestamp;
+            long space = GameMainManager.Instance.configManager.settingConfig.livesRecoverTime * 60;
+            if (now<last)
+            {
+                return PlayerModelErr.COUNT_DOWN_NOT_END;
+            }
+            int addHeart = (int)((now - last) / space)+1;
+            playerData.heartNum = Mathf.Min(maxHeart, playerData.heartNum + addHeart);
+            playerData.hertTimestamp += addHeart * space;
+            
+
+            return PlayerModelErr.NULL;
+        }
+
+        public string GetErrorDes(PlayerModelErr err)
+        {
+            string str = "";
+            switch(err)
+            {
+                case PlayerModelErr.NOT_ENOUGH_COIN:
+                    str = LangrageManager.Instance.GetItemWithID("200044");
+                    break;
+                case PlayerModelErr.NOT_ENOUGH_HEART:
+                    str = LangrageManager.Instance.GetItemWithID("200043");
+                    break;
+                case PlayerModelErr.NOT_ENOUGH_PROP:
+                    str = LangrageManager.Instance.GetItemWithID("200042");
+                    break;
+                case PlayerModelErr.NOT_ENOUGH_STAR:
+                    str = LangrageManager.Instance.GetItemWithID("200045");
+                    break;
+                case PlayerModelErr.PROP_ID_ERROR:
+                    break;
+                case PlayerModelErr.QUEST_ID_ERROR:
+                    break;
+            }
+            return str;
         }
        
         private void SaveData()
