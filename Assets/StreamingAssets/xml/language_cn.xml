@@ -634,7 +634,7 @@
 	<ItemSpec id="200049" value="恭喜您，完成了所有关卡。后续我们会增加新的关卡，敬请期待！"/>
 	<ItemSpec id="200050" value="用户不存在！"/>
 	<ItemSpec id="200051" value="数据异常！"/>
-	<ItemSpec id="200051" value="通知关闭"/>
+	<ItemSpec id="200052" value="通知关闭"/>
 	<ItemSpec id="200110" value="子弹"/>
 	<ItemSpec id="200111" value="大刀"/>
 	<ItemSpec id="200112" value="红军币"/>
