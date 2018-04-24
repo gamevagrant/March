@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿using March.Core.WindowManager;
+using UnityEngine;
 
-public class UISettings : MonoBehaviour 
+public class UISettings : MonoBehaviour
 {
     public Board board;
-
-    private UISettingsPopup settingPopup;
 
     public void SettingsClick()
     {
@@ -12,25 +11,9 @@ public class UISettings : MonoBehaviour
         {
             AudioManager.instance.ButtonClickAudio();
 
-            // cache for better performance.
-            if (settingPopup == null)
-            {
-                settingPopup = (Instantiate(Resources.Load("Prefabs/PlayScene/Popup/settingpopup"), transform.parent) as GameObject).GetComponent<UISettingsPopup>();
-            }
-
-            settingPopup.gameObject.SetActive(true);
+            WindowManager.instance.Show<SettingPopupWindow>();
 
             board.state = GAME_STATE.OPENING_POPUP;
-
-            // ads
-        }
-    }
-
-    public void OnTouchLayerClicked()
-    {
-        if (settingPopup != null && settingPopup.gameObject.activeSelf)
-        {
-            settingPopup.OnCloseBtnClick();
         }
     }
 }

@@ -1371,14 +1371,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/PlayScene/Help/Level18Step1";
     }
 
-
-
-    // Loading Image
-    public static string LoadingImage()
-    {
-        return "Prefabs/MapScene/Loading Image";
-    }
-
     // Progress gold star
     public static string ProgressGoldStar()
     {

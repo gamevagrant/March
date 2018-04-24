@@ -9,8 +9,8 @@ public class UISettingsPopup : MonoBehaviour
 
     void Awake()
     {
-        musicButton = transform.Find("MusicButton").GetComponent<SoundButton>();
-        soundButton = transform.Find("SoundButton").GetComponent<SoundButton>();
+        musicButton = transform.Find("ButtonPanel/MusicButton").GetComponent<SoundButton>();
+        soundButton = transform.Find("ButtonPanel/SoundButton").GetComponent<SoundButton>();
     }
 
     void Start()

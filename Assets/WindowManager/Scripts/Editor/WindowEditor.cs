@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class WindowEditor : MonoBehaviour
 {
-    private const string WindowPrefabPath = "Assets/Resources/Prefabs";
+    private const string WindowPrefabPath = "Assets/Resources/Popup";
     private const string PopupControllerPath = "Assets/Animation/UI/PopupAnimation.controller";
 
     [MenuItem("Tools/WindowManager/Generate Window Map")]
