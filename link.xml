@@ -1,0 +1,11 @@
+<linker>  
+       <assembly fullname="mscorlib">  
+            <type fullname="System.Reflection" preserve="all"/>  
+            <type fullname="System.Security.Cryptography" preserve="all"/>  
+            <type fullname="System.Runtime.CompilerServices" preserve="all"/>  
+            <type fullname="System.Runtime.InteropServices" preserve="all"/>  
+            <type fullname="System.Diagnostics" preserve="all"/>  
+            <type fullname="System.Security" preserve="all"/>  
+            <type fullname="System.Security.Permissions" preserve="all"/>  
+       </assembly>  
+</linker>
