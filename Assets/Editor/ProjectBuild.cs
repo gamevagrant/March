@@ -19,6 +19,7 @@ public class ProjectBuild
         public string KeyAliasName;
         public string KeyAliasPassword;
         public bool IsForDev;
+        public string PredefineSymbols;
     }
 
     private static BuildTarget target = BuildTarget.Android;
@@ -40,6 +41,7 @@ public class ProjectBuild
         KeyAliasName = string.Empty,
         KeyAliasPassword = string.Empty,
         IsForDev = false,
+        PredefineSymbols = string.Empty,
     };
 
     public static string[] GetBuildScenes()
@@ -94,6 +96,7 @@ public class ProjectBuild
 
         config.Version = Environment.GetEnvironmentVariable("Version");
         config.IsForDev = bool.Parse(Environment.GetEnvironmentVariable("IsForDev"));
+        config.PredefineSymbols = Environment.GetEnvironmentVariable("PredeineSymbols");
 
         DoAndroidBuild(config);
     }
@@ -152,6 +155,8 @@ public class ProjectBuild
         PlayerSettings.Android.keystorePass = config.KeyPassword;
         PlayerSettings.Android.keyaliasName = config.KeyAliasName;
         PlayerSettings.Android.keyaliasPass = config.KeyAliasPassword;
+
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, config.PredefineSymbols);
 
         EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Internal;
 

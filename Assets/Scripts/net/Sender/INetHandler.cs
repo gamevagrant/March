@@ -81,7 +81,7 @@ namespace March.Core.Network
 
             if (payRec.status != 0)
             {
-#if UNITY_EDITOR
+#if GAME_DEBUG
                 Toolkit.MessageBox.Show("Status: " + payRec.status, "Pay error");
 #endif
                 return;

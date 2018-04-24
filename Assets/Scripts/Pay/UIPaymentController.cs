@@ -1,11 +1,6 @@
-﻿using System;
-using System.IO;
-using LitJson;
-using March.Core.Network;
-using March.Core.Network.Data;
+﻿using March.Core.Network;
 using UnityEngine;
 using UnityEngine.Purchasing;
-using UnityEngine.Purchasing.Extension;
 using UnityEngine.Purchasing.MiniJSON;
 
 namespace March.Core.Pay
@@ -46,7 +41,7 @@ namespace March.Core.Pay
             var error = string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}",
                 product.definition.storeSpecificId, failureReason);
             Debug.Log(error);
-#if UNITY_EDITOR
+#if GAME_DEBUG
             Toolkit.MessageBox.Show(error, "Purchase Failed");
 #endif
         }

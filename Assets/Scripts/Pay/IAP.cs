@@ -196,7 +196,7 @@ namespace March.Core.Pay
             var information = string.Format("receipt:\n{0}\ndefinition:\nid - {1} type - {2}",
                 e.purchasedProduct.receipt, e.purchasedProduct.definition.id,
                 e.purchasedProduct.definition.type);
-#if UNITY_EDITOR
+#if GAME_DEBUG
             Toolkit.MessageBox.Show(information, "Purchase Information");
 #endif
             Debug.LogWarning(information);
