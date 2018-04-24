@@ -612,17 +612,17 @@
 	<ItemSpec id="200027" value="输入名字！"/>
 	<ItemSpec id="200028" value="输入3-6位字符，汉字或数字！"/>
 	<ItemSpec id="200029" value="确定！"/>
-	<ItemSpec id="200030" value="开始任务！"/>
-	<ItemSpec id="200031" value="连接！"/>
-	<ItemSpec id="200032" value="更改名字！"/>
-	<ItemSpec id="200033" value="帮助与支持！"/>
-	<ItemSpec id="200034" value="通知与开启！"/>
-	<ItemSpec id="200035" value="评价我们！"/>
+	<ItemSpec id="200030" value="开始任务"/>
+	<ItemSpec id="200031" value="连接"/>
+	<ItemSpec id="200032" value="更改名字"/>
+	<ItemSpec id="200033" value="帮助与支持"/>
+	<ItemSpec id="200034" value="通知开启"/>
+	<ItemSpec id="200035" value="评价我们"/>
 	<ItemSpec id="200036" value="语言"/>
-	<ItemSpec id="200037" value="设置！"/>
-	<ItemSpec id="200038" value="任务！"/>
-	<ItemSpec id="200039" value="更多生命！"/>
-	<ItemSpec id="200040" value="购买！"/>
+	<ItemSpec id="200037" value="设置"/>
+	<ItemSpec id="200038" value="任务"/>
+	<ItemSpec id="200039" value="更多生命"/>
+	<ItemSpec id="200040" value="购买"/>
 	<ItemSpec id="200041" value="操作无效！"/>
 	<ItemSpec id="200042" value="道具不足！"/>
 	<ItemSpec id="200043" value="生命值不足！"/>
@@ -632,8 +632,9 @@
 	<ItemSpec id="200047" value="名称含有非法字符！"/>
 	<ItemSpec id="200048" value="输入内容不符合规定长度！"/>
 	<ItemSpec id="200049" value="恭喜您，完成了所有关卡。后续我们会增加新的关卡，敬请期待！"/>
-	<ItemSpec id="200050" value=" 用户不存在！"/>
-	<ItemSpec id="200051" value=" 数据异常！"/>
+	<ItemSpec id="200050" value="用户不存在！"/>
+	<ItemSpec id="200051" value="数据异常！"/>
+	<ItemSpec id="200051" value="通知关闭"/>
 	<ItemSpec id="200110" value="子弹"/>
 	<ItemSpec id="200111" value="大刀"/>
 	<ItemSpec id="200112" value="红军币"/>
@@ -678,11 +679,38 @@
 	<ItemSpec id="210123" value="放飞这两只飞机试试。"/>
 	<ItemSpec id="210124" value="匹配锁链中的图块，即可解除锁链"/>
 	<ItemSpec id="210125" value="铲子可以铲掉任何图块，不消耗步数"/>
-	<ItemSpec id="210126" value="现在用铲子铲一个被纸条包裹的图块。"/>
+	<ItemSpec id="210126" value="现在用铲子铲一个图块。"/>
 	<ItemSpec id="210127" value="消除草莓旁的图块，即可收集草莓。"/>
 	<ItemSpec id="210128" value="恭喜解锁新的道具！"/>
 	<ItemSpec id="210129" value="使用这个免费的道具吧，一个炸弹和一个导弹开始闯关！"/>
 	<ItemSpec id="210130" value="使用这个免费的道具吧，一个魔方开始闯关！"/>
 	<ItemSpec id="210131" value="面包全部移动到底部，即可通关！"/>
 	<ItemSpec id="210132" value="使用这个免费的道具吧，双倍飞机开始闯关！"/>
+	<ItemSpec id="210133" value="提示"/>
+	<ItemSpec id="210134" value="请先解锁道具！"/>
+	<ItemSpec id="210135" value="干得好!"/>
+	<ItemSpec id="210136" value="继续"/>
+	<ItemSpec id="210137" value="每日签到"/>
+	<ItemSpec id="210138" value="忘签需要重新签到"/>
+	<ItemSpec id="210139" value="恭喜您，完成了所有关卡。后续我们会增加新的关卡，敬请期待！ "/>
+	<ItemSpec id="210140" value="功能暂未开放，敬请期待！"/>
+	<ItemSpec id="210141" value="重新开始"/>
+	<ItemSpec id="210142" value="亲爱的玩家，感谢您参与全球首款模拟建造消除游戏的测试。有任何意见和建议，欢迎到我们的facebook主页吐槽。"/>
+	<ItemSpec id="210143" value="欢迎"/>
+	 <ItemSpec id="210144" value="点击这里，开启你的糖果世界吧！"/>
+	 <ItemSpec id="210145" value="请先检查网络状态"/>
+	<ItemSpec id="210146" value="绑定成功"/>
+	<ItemSpec id="210147" value="绑定失败"/>
+	<ItemSpec id="210148" value="解绑成功"/>
+	<ItemSpec id="210149" value="解绑失败"/>
+    <ItemSpec id="210150" value="解绑！"/>
+	<ItemSpec id="210151" value="倒计时:"/>
+	<ItemSpec id="210152" value="退出？"/>
+	<ItemSpec id="210153" value="你将会失去一条生命"/>
+	<ItemSpec id="210154" value="退出"/>
+	<ItemSpec id="210155" value="下一步"/>
+	<ItemSpec id="210156" value="重试"/>
+	<ItemSpec id="210157" value="请检查网络连接"/>
+	<ItemSpec id="210158" value="移动这个图块，就能把地毯铺开！"/>
+	<ItemSpec id="210159" value="这是你的通关目标"/>
 </Group>
