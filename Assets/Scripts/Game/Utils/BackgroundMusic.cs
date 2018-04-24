@@ -66,6 +66,11 @@ public class BackgroundMusic : MonoSingleton<BackgroundMusic>
 
         if (lastLevel != -1)
         {
+            if (ClipLevelList[lastLevel] == ClipLevelList[level])
+            {
+                return;
+            }
+
             fadeOutAudioSource.clip = ClipLevelList[lastLevel];
             fadeOutAudioSource.volume = 1f;
             fadeOutAudioSource.Play();
