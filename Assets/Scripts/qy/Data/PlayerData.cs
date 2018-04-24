@@ -132,7 +132,16 @@ namespace qy
 
         public bool isShowedLoginAward = false;
 
-        private Dictionary<string, config.PropItem> propsDic = new Dictionary<string, config.PropItem>();
+
+        public Dictionary<string, PropItem> propsDic = new Dictionary<string, PropItem>();
+        /// <summary>
+        /// 完成过的任务id
+        /// </summary>
+        public Dictionary<string, int> complatedQuests = new Dictionary<string, int>();
+        /// <summary>
+        /// 分支任务中选过的选项 questID_index
+        /// </summary>
+        public Dictionary<string, int> selectedItems = new Dictionary<string, int>();
 
         public string lang
         {
@@ -189,6 +198,17 @@ namespace qy
         public config.QuestItem GetQuest()
         {
             return GameMainManager.Instance.configManager.questConfig.GetItem(questId??"");
+        }
+
+        /// <summary>
+        ///  分支剧情中 指定的选项是否选择过
+        /// </summary>
+        /// <param name="questID"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public bool ContainsSelected(string questID,string id)
+        {
+            return selectedItems.ContainsKey(questID+"_"+ id);
         }
 
         public void RefreshData(PlayerDataMessage message)

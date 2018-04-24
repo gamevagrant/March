@@ -59,12 +59,14 @@ public class ModifyNamePanel : MonoBehaviour
             }
             else
             {
-                MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200048"));
+                //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200048"));
+                qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("200048"));
             }
         }
         else
         {
-            MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200047"));
+            //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200047"));
+            qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("200047"));
         }
     }
 

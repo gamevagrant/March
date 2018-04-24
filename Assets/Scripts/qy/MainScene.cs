@@ -16,7 +16,7 @@ namespace qy
         void Start()
         {
             Login();
-
+            TrySelectRole();
             if (GameMainManager.Instance.playerData.isPlayScene)
             {
                 GameMainManager.Instance.playerData.isPlayScene = false;
@@ -66,7 +66,7 @@ namespace qy
                 
             }
 
-            TrySelectRole();
+            
         }
 
         private void TrySelectRole()

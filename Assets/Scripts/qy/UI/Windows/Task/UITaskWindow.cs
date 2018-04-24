@@ -126,32 +126,37 @@ public class UITaskWindow :  UIWindowBase{
         missionTopTF.anchorMin = new Vector2(0,0.35f);
 
         propPool.resetAllTarget();
-        List<PropItem> props = new List<PropItem>()
+        if(!playerdata.complatedQuests.ContainsKey(playerdata.questId))
         {
-            new PropItem()
+            List<PropItem> props = new List<PropItem>()
             {
-                id = "1",
-                icon = "starsp",
-                count = questItem.requireStar,
-            }
-        };
+                new PropItem()
+                {
+                    id = "1",
+                    icon = "starsp",
+                    count = questItem.requireStar,
+                }
+            };
 
-        props.AddRange(questItem.requireItem);
-        foreach (PropItem item in props)
-        {
-            UIPropCell cell = propPool.getIdleTarget<UIPropCell>();
-            if (item.id == "1")
+            props.AddRange(questItem.requireItem);
+            foreach (PropItem item in props)
             {
-                //设置显示星星数量
-                cell.SetData(item,playerdata.starNum);
-                
-            }else
-            {
-                PropItem haveProp = playerdata.GetPropItem(item.id);
-                cell.SetData(item, haveProp == null ? 0 : haveProp.count);
+                UIPropCell cell = propPool.getIdleTarget<UIPropCell>();
+                if (item.id == "1")
+                {
+                    //设置显示星星数量
+                    cell.SetData(item, playerdata.starNum);
+
+                }
+                else
+                {
+                    PropItem haveProp = playerdata.GetPropItem(item.id);
+                    cell.SetData(item, haveProp == null ? 0 : haveProp.count);
+                }
+
             }
-           
         }
+        
     }
 
     private void DoTask()
@@ -186,11 +191,15 @@ public class UITaskWindow :  UIWindowBase{
                 //UpdatePanel();
             }
             
-        }else
+        }else if(err == PlayerModelErr.NOT_ENOUGH_PROP)
         {
-            MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
+            //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
+            Alert.Show(LanguageManager.instance.GetValueByKey("200010"));
+        }else if(err == PlayerModelErr.NOT_ENOUGH_STAR)
+        {
+            Alert.Show(LanguageManager.instance.GetValueByKey("200011"));
         }
-
+        
     }
 
     public void OnClickDoBtnHandle()

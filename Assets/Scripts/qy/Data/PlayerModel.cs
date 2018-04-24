@@ -129,28 +129,34 @@ namespace qy
             storyID = "";
             //检测完成任务条件
             config.QuestItem questItem = playerData.GetQuest();
-            if (playerData.starNum < questItem.requireStar)
+            //完成过的任务无消耗
+            if(!playerData.complatedQuests.ContainsKey(questItem.id))
             {
-                MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200011"));
-                return PlayerModelErr.NOT_ENOUGH_STAR;
-            }
-            List<PropItem> needProps = questItem.requireItem;
-            foreach(PropItem item in needProps)
-            {
-                PropItem haveItem = playerData.GetPropItem(item.id);
-                int haveCount = haveItem==null?0: haveItem.count;
-                if(haveCount < item.count)
+                if (playerData.starNum < questItem.requireStar)
                 {
-                    return PlayerModelErr.NOT_ENOUGH_PROP;
+                    return PlayerModelErr.NOT_ENOUGH_STAR;
                 }
-            }
-            //扣除完成任务物品
-            playerData.starNum -= questItem.requireStar;
-            foreach(PropItem item in needProps)
-            {
-                playerData.RemovePropItem(item.id,item.count);
-            }
+                List<PropItem> needProps = questItem.requireItem;
+                foreach (PropItem item in needProps)
+                {
+                    PropItem haveItem = playerData.GetPropItem(item.id);
+                    int haveCount = haveItem == null ? 0 : haveItem.count;
+                    if (haveCount < item.count)
+                    {
+                        return PlayerModelErr.NOT_ENOUGH_PROP;
+                    }
+                }
+                //扣除完成任务物品
+                playerData.starNum -= questItem.requireStar;
+                foreach (PropItem item in needProps)
+                {
+                    playerData.RemovePropItem(item.id, item.count);
+                }
 
+                playerData.complatedQuests.Add(questItem.id,0);
+            }
+           
+            
 
             //更新下个任务
             if (questItem.type == config.QuestItem.QuestType.Main)
@@ -167,6 +173,11 @@ namespace qy
                         playerData.nextQuestId = item.toQuestId;
                         storyID = item.storyID;
                         playerData.ability += item.ability;
+                        string selectID = questItem.id + "_" + item.id;
+                        if(!playerData.selectedItems.ContainsKey(selectID))
+                        {
+                            playerData.selectedItems.Add(selectID,0);
+                        }
                         break;
                     }
                 }
