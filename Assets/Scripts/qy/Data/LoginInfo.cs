@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace qy
 {
@@ -12,7 +10,7 @@ namespace qy
         public string appVersion = "";
         public string gcmRegisterId = "";
         public string referrer = "";
-        public string platform = PltformManager.instance.getPlatform();
+        public string platform = Application.platform.ToString();
         public string lang = "";
         public string afUID = "";
         public string pf = "";

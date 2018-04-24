@@ -34,19 +34,7 @@ public class LoadingScene : MonoBehaviour
         qy.GameMainManager.Instance.configManager.LoadConfig(() =>
         {
             LoadScene();
-        });
-
-#if UNITY_ANDROID
-        PltformManager.instance.setPlatform("android");
-#endif
-
-#if UNITY_IPHONE
-        PltformManager.instance.setPlatform("ios");
-#endif
-
-#if UNITY_STANDALONE_WIN
-        PltformManager.instance.setPlatform("win32");
-#endif        
+        });     
     }
 
     void Update()
