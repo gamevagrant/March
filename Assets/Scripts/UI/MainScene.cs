@@ -1,11 +1,10 @@
 ﻿using BestHTTP;
+using DG.Tweening;
 using Facebook.Unity;
 using LitJson;
+using March.Core.WindowManager;
 using System;
 using System.Collections.Generic;
-using Core.March.Config;
-using DG.Tweening;
-using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,14 +23,11 @@ public class MainScene : MonoBehaviour
 
     public GameObject MStoryListLayout;
 
-    private GameObject MStoryListItem;
-
-    private List<GameObject> mStroyList = new List<GameObject>();
-
-    public GameObject MTestPopup;
-
     public GameObject MCanvas;
 
+    private GameObject MStoryListItem;
+    private List<GameObject> mStroyList = new List<GameObject>();
+    private GameObject levelChoosePanel;
     private GameObject MGuideHand;
 
     class LoginInfo
@@ -108,8 +104,6 @@ public class MainScene : MonoBehaviour
     {
         Debug.Log("------------------------------: 语言: " + Application.systemLanguage.ToString());
 
-        MTestPopup.SetActive(false);
-
         Login();
         MStar.text = PlayerData.instance.getStarNum().ToString();
 
@@ -131,7 +125,9 @@ public class MainScene : MonoBehaviour
             }
         }
 
-        //NewPlayerGuideRefresh();
+#if GAME_DEBUG
+        Instantiate(Resources.Load<GameObject>(Configure.DebugCanvasPath));
+#endif
     }
 
     void Update()
@@ -198,21 +194,6 @@ public class MainScene : MonoBehaviour
             request.AddField("data", loginInfoJson);
             request.Send();
         }
-        //        else
-        //        {
-        //            Debug.LogError("网络连接错误");
-        //			string localCacheData = SaveDataManager.instance.GetString (SaveDataDefine.serverdata);
-        //			Debug.Log ("本地数据：" + localCacheData);
-        //			if (localCacheData.Equals (""))
-        //				MessageBox.Instance.Show ("数据错误，请联网同步数据");
-        //			else
-        //			{
-        //				JsonData jsonData = JsonMapper.ToObject (SaveDataManager.instance.GetString (SaveDataDefine.serverdata));
-        //				PlayerData.instance.jsonObj = jsonData;
-        //				PlayerData.instance.RefreshData (jsonData);
-        //				RefreshPlayerData();  //离线模式下，用本地数据刷新UI
-        //			}
-        //        }
     }
 
     private void LoginRev(HTTPRequest request, HTTPResponse response)
@@ -347,28 +328,28 @@ public class MainScene : MonoBehaviour
             MGuideHand.SetActive(false);
         }
 
-        if (Application.isEditor)
+#if GAME_DEBUG
+        if (levelChoosePanel == null)
         {
-            MTestPopup.SetActive(true);
-            MTestPopup.transform.Find("InputField").GetComponent<InputField>().text =
-                PlayerData.instance.getEliminateLevel().ToString();
+            levelChoosePanel = Instantiate(Resources.Load<GameObject>(Configure.DebugLevelChoosePanelPath),
+                MCanvas.transform);
         }
-        else
+        levelChoosePanel.SetActive(true);
+#else
+        if (PlayerData.instance.getHeartNum() < eliminateHeartNum)
         {
-            if (PlayerData.instance.getHeartNum() < eliminateHeartNum)
-            {
-                WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200025"));
-            }
-            else if (PlayerData.instance.getEliminateLevel() > Int32.Parse(DefaultConfig.getInstance().GetConfigByType<setting>()
-                    .GetValueByIDAndKey("maxlevel", "max")))
-            {
-                WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200049"));
-            }
-            else if (MCanvas != null)
-            {
-                WindowManager.instance.Show<BeginPopupWindow>();
-            }
+            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200025"));
         }
+        else if (PlayerData.instance.getEliminateLevel() > Int32.Parse(DefaultConfig.getInstance().GetConfigByType<setting>()
+                .GetValueByIDAndKey("maxlevel", "max")))
+        {
+            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200049"));
+        }
+        else if (MCanvas != null)
+        {
+            WindowManager.instance.Show<BeginPopupWindow>();
+        }
+#endif
     }
 
 
@@ -382,26 +363,6 @@ public class MainScene : MonoBehaviour
         TaskManager.Instance.gameObject.SetActive(false);
     }
 
-    #region 测试用关卡选择界面
-
-    public void OnTestPopupSureBtn()
-    {
-#if UNITY_EDITOR
-        int num = Convert.ToInt32(MTestPopup.transform.Find("InputField").GetComponent<InputField>().textComponent.text);
-        PlayerData.instance.setEliminateLevel(num);
-
-        WindowManager.instance.Show<BeginPopupWindow>();
-#endif
-    }
-
-    public void OnTestPopupCloseBtn()
-    {
-#if UNITY_EDITOR
-        MTestPopup.SetActive(false);
-#endif
-    }
-
-    #endregion
 
     public void ShowStory(StoryItem storyItem)
     {

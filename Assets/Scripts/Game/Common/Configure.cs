@@ -1398,10 +1398,11 @@ public class Configure : MonoSingleton<Configure>
 
     #endregion
 
-    public static string ServerPath()
-    {
-        return "Config/ServerConfig";
-    }
+    public static string ServerPath = "Config/ServerConfig";
+
+    public static string DebugCanvasPath = "Debug/Debug";
+    public static string DebugLevelChoosePanelPath = "Debug/LevelChoosePanel";
+    public static string ReporterPath = "Debug/Reporter";
 
     protected override void Init()
     {
@@ -1410,7 +1411,7 @@ public class Configure : MonoSingleton<Configure>
         SoundOn = PlayerPrefs.GetInt(PlayerPrefEnums.SoundOn) == 1;
         MusicOn = PlayerPrefs.GetInt(PlayerPrefEnums.MusicOn) == 1;
 
-        var config = JsonUtility.FromJson<ServerConfig>(Resources.Load<TextAsset>(ServerPath()).text);
+        var config = JsonUtility.FromJson<ServerConfig>(Resources.Load<TextAsset>(ServerPath).text);
         ServerUrl = config.Current.Url;
     }
 
