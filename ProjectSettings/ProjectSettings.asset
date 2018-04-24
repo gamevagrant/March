@@ -594,7 +594,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: SOOMLA_OPEN_SOURCE
     4: SOOMLA_OPEN_SOURCE
-    7: UNITY_PURCHASING
+    7: UNITY_PURCHASING;GAME_DEBUG
     13: SOOMLA_OPEN_SOURCE
   platformArchitecture: {}
   scriptingBackend: {}
