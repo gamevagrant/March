@@ -28,7 +28,7 @@ namespace AssetBundles
         private static void BuildBundlesFromResources()
         {
             var path = Path.Combine(Application.dataPath, ResourcePath);
-            var assetList = Directory.GetDirectories(path).ToList()
+            var assetList = Directory.GetFiles(path, "*").Where(str => !str.Contains(".meta")).ToList()
                 .Select(dir => string.Format("Assets{0}", dir.Replace(Application.dataPath, string.Empty))).ToList()
                 .Select(AssetDatabase.LoadAssetAtPath<Object>).ToArray();
             BuildBundles(assetList);
