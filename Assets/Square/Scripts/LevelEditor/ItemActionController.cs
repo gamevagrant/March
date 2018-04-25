@@ -45,7 +45,8 @@ namespace March.Scene
         {
             itemTransform = transform.parent;
             itemCollider = itemTransform.GetComponent<Collider2D>();
-            itemCollider.enabled = false;
+            if (itemCollider != null)
+                itemCollider.enabled = false;
             spriteRenderer = itemTransform.GetComponent<SpriteRenderer>();
             spriteRenderer.flipX = true;
 
