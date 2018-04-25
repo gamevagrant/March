@@ -19,7 +19,7 @@ public class PlayerDataMessage : NetMessage
     public List<PropItem> items;
     public SevenDayData sevenDay;
 
-    public qy.config.RoleItem[] roles;
+    public RoleData[] roles;
     public StoryData[] stories;
     public string roleUuid="";//当前角色uuid
     public int discipline;
@@ -61,6 +61,16 @@ public class PlayerDataMessage : NetMessage
     public class StoryData
     {
         public string storyId;
+    }
+
+    public class RoleData
+    {
+        public string roleId;
+        public string uuid;
+        /// <summary>
+        ///  1死亡 ，2通关    
+        /// </summary>
+        public int status;
     }
 }
 

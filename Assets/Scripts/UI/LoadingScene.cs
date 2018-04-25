@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using qy;
 public class LoadingScene : MonoBehaviour
 {
     private AsyncOperation m_async;
@@ -33,6 +33,7 @@ public class LoadingScene : MonoBehaviour
        
         qy.GameMainManager.Instance.configManager.LoadConfig(() =>
         {
+            Login();
             LoadScene();
         });
 
@@ -72,5 +73,32 @@ public class LoadingScene : MonoBehaviour
     {
         //m_async = SceneManager.LoadSceneAsync("main");
         m_async = SceneManager.LoadSceneAsync("Film");
+    }
+
+    public void Login()
+    {
+        GameMainManager.Instance.playerModel.UpdateHeart();
+        bool isNetGood = GameMainManager.Instance.netManager.isNetWorkStatusGood;
+        bool isInitPlayer = !string.IsNullOrEmpty(GameMainManager.Instance.playerData.userId);
+        if (isNetGood)
+        {
+            if (!isInitPlayer)
+            {
+                //WaitingPopupManager.instance.Show(GameMainManager.Instance.uiManager);
+
+            }
+            GameMainManager.Instance.netManager.Login(new LoginInfo(), (ret, res) =>
+            {
+
+                WaitingPopupManager.instance.Close();
+            });
+        }
+        else if (!isInitPlayer)
+        {
+            qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("210157"));
+
+        }
+
+
     }
 }

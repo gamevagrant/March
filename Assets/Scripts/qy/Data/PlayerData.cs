@@ -326,9 +326,9 @@ namespace qy
             //---------------------------------------
             if(message.roles!=null)
             {
-                foreach (RoleItem item in message.roles)
+                foreach (PlayerDataMessage.RoleData item in message.roles)
                 {
-                    SetRoleState(item.id, (RoleState)item.state);
+                    SetRoleState(item.roleId, (RoleState)item.status);
                 }
             }
             if(message.stories!=null)

@@ -24,15 +24,18 @@ public class UICallBackWindow : UIWindowBase
         }
     }
 
+    private string roleID;
+
     protected override void StartShowWindow(object[] data)
     {
+        roleID = data[0].ToString();
         callBackCost.text = GameMainManager.Instance.configManager.settingConfig.callBackPrice.ToString();
         callBackCardCount.text = "0";
     }
 
     public void OnClickCallBackCoinHandle()
     {
-        PlayerModelErr err = GameMainManager.Instance.playerModel.CallBackRoleWithCoin(GameMainManager.Instance.playerData.role.id);
+        PlayerModelErr err = GameMainManager.Instance.playerModel.CallBackRoleWithCoin(roleID);
         if(err == PlayerModelErr.NOT_ENOUGH_COIN)
         {
             Alert.Show("金币不足\n 快去赚金币吧",Alert.OK,(btn)=> {

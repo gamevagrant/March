@@ -123,14 +123,14 @@ namespace qy
 
         public PlayerModelErr QuestComplate(out string storyID, string selectedID = "")
         {
-            GameMainManager.Instance.netManager.ComplateQuestId(playerData.questId, (ret, res) => {
-
-            });
+            
             storyID = "";
+            qy.config.Ability ability = new config.Ability();
             //检测完成任务条件
             config.QuestItem questItem = playerData.GetQuest();
+
             //完成过的任务无消耗
-            if(!playerData.complatedQuests.ContainsKey(questItem.id))
+            if (!playerData.complatedQuests.ContainsKey(questItem.id))
             {
                 if (playerData.starNum < questItem.requireStar)
                 {
@@ -172,6 +172,7 @@ namespace qy
                     {
                         playerData.nextQuestId = item.toQuestId;
                         storyID = item.storyID;
+                        ability = item.ability;
                         playerData.ability += item.ability;
                         string selectID = questItem.id + "_" + item.id;
                         if(!playerData.selectedItems.ContainsKey(selectID))
@@ -201,9 +202,10 @@ namespace qy
             {
                 return PlayerModelErr.QUEST_ID_ERROR;
             }
-            playerData.questId = playerData.nextQuestId;
-            
+            GameMainManager.Instance.netManager.ComplateQuestId(playerData.questId, ability, (ret, res) => {
 
+            });
+            playerData.questId = playerData.nextQuestId;
             //标记角色状态
             config.QuestItem nextQuest = playerData.GetQuest();
             if (nextQuest.type == config.QuestItem.QuestType.Ending)
@@ -303,8 +305,9 @@ namespace qy
                 return PlayerModelErr.NOT_ENOUGH_COIN;
             }
             playerData.coinNum -= cost;
-            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            playerData.SetRoleState(id, PlayerData.RoleState.Normal);
             SwitchRole(playerData.role.id);
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }
 

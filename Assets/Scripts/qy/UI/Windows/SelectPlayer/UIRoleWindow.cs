@@ -37,11 +37,14 @@ public class UIRoleWindow : UIWindowBase {
     private void Awake()
     {
         scrollView.onSelected += OnSelected;
+
+        Messenger.AddListener(ELocalMsgID.RefreshBaseData, UpdateUI);
     }
 
     private void OnDestroy()
     {
         scrollView.onSelected -= OnSelected;
+        Messenger.RemoveListener(ELocalMsgID.RefreshBaseData, UpdateUI);
     }
 
     private void OnSelected(BaseItemView item)
@@ -50,13 +53,17 @@ public class UIRoleWindow : UIWindowBase {
         SetPanel(roleItem.data);
         selectedRoleID = roleItem.data.id;
     }
+    
 
     protected override void StartShowWindow(object[] data)
+    {
+        UpdateUI();
+    }
+    private void UpdateUI()
     {
         List<RoleItem> roles = GameMainManager.Instance.configManager.roleConfig.GetRoleList();
         scrollView.SetData(roles);
     }
-
     private void SetPanel(RoleItem item)
     {
         string headUrl = FilePathTools.GetPersonHeadPath(item.headIcon);
@@ -90,7 +97,13 @@ public class UIRoleWindow : UIWindowBase {
 
     public void OnClickStartBtnHandle()
     {
-        GameMainManager.Instance.playerModel.StartGameWithRole(selectedRoleID);
-        OnClickClose(); 
+        PlayerModelErr err = GameMainManager.Instance.playerModel.StartGameWithRole(selectedRoleID);
+        if(err == PlayerModelErr.ROLE_IS_DIE)
+        {
+            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UICallBackWindow, selectedRoleID);
+        }else
+        {
+            OnClickClose();
+        }
     }
 }

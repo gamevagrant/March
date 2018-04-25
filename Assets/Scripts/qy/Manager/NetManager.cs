@@ -234,11 +234,12 @@ namespace qy.net
         /// <param name="questId"></param>
         /// <param name="callBack"></param>
         /// <returns></returns>
-        public bool ComplateQuestId(string questId, Action<bool, PlayerDataMessage> callBack)
+        public bool ComplateQuestId(string questId,qy.config.Ability ability, Action<bool, PlayerDataMessage> callBack)
         {
 
             JsonData jd = new JsonData();
             jd["storyid"] = questId;
+            jd["choice"] = string.Format("{0}|{1}|{2}",ability.discipline,ability.loyalty,ability.wisdom);
 
             return SendData(SAVE_STORY_CMD, jd, callBack);
         }
@@ -418,7 +419,7 @@ namespace qy.net
         public bool RecoverRole(string id,int type, Action<bool, PlayerDataMessage> callBack)
         {
             JsonData jd = new JsonData();
-            jd["uuid"] = id;
+            jd["roleId"] = id;
             jd["type"] = type;
             return SendData(ROLE_RECOVER, jd, callBack);
         }
@@ -440,7 +441,7 @@ namespace qy.net
         /// </summary>
         private void TrySynchronizationData()
         {
-            
+            return;
             if (GameMainManager.Instance.playerData.dirty && isNetWorkStatusGood)
             {
                 Debug.Log("开始同步数据");

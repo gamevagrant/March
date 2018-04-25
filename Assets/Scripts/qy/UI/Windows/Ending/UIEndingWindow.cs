@@ -76,7 +76,7 @@ public class UIEndingWindow :  UIWindowBase
     /// </summary>
     public void OnClickResurrection()
     {
-        GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UICallBackWindow);
+        GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UICallBackWindow,GameMainManager.Instance.playerData.role.id);
         OnClickClose();
     }
 }

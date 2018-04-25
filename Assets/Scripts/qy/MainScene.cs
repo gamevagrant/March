@@ -11,12 +11,13 @@ namespace qy
         private void Awake()
         {
             GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIMainSceneWindow);
+            TrySelectRole();
         }
         // Use this for initialization
         void Start()
         {
-            Login();
-            TrySelectRole();
+            //Login();
+            LoadSevenDayInfo();
             if (GameMainManager.Instance.playerData.isPlayScene)
             {
                 GameMainManager.Instance.playerData.isPlayScene = false;
@@ -42,33 +43,6 @@ namespace qy
 
         }
 
-        public void Login()
-        {
-            GameMainManager.Instance.playerModel.UpdateHeart();
-            bool isNetGood = GameMainManager.Instance.netManager.isNetWorkStatusGood;
-            bool isInitPlayer = !string.IsNullOrEmpty(GameMainManager.Instance.playerData.userId);
-            if (isNetGood)
-            {
-                if (!isInitPlayer)
-                {
-                    //WaitingPopupManager.instance.Show(GameMainManager.Instance.uiManager);
-                    
-                }
-                GameMainManager.Instance.netManager.Login(new LoginInfo(), (ret, res) =>
-                {
-                    LoadSevenDayInfo();
-                    WaitingPopupManager.instance.Close();
-                });
-            }
-            else if (!isInitPlayer)
-            {
-                Alert.Show(LanguageManager.instance.GetValueByKey("210157"));
-                
-            }
-
-            
-        }
-
         private void TrySelectRole()
         {
             config.QuestItem quest = GameMainManager.Instance.playerData.GetQuest();
@@ -81,6 +55,10 @@ namespace qy
                 GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow, quest);
             }
         }
+
+        
+
+        
 
         private void LoadSevenDayInfo()
         {
