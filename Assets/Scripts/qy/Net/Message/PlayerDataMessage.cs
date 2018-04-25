@@ -19,6 +19,17 @@ public class PlayerDataMessage : NetMessage
     public List<PropItem> items;
     public SevenDayData sevenDay;
 
+    public qy.config.RoleItem[] roles;
+    public StoryData[] stories;
+    public string roleUuid="";//当前角色uuid
+    public int discipline;
+    public int loyaty;
+    public int wisdom;
+    public string storyExp="0";//总经验
+    public string lvExp="0";//当前等级
+    public int storyLv=1;//等级
+   
+
     public class PropItem
     {
         public string itemId;
@@ -45,6 +56,11 @@ public class PlayerDataMessage : NetMessage
         public int index;
         public int state;
         public long endTime;
+    }
+
+    public class StoryData
+    {
+        public string storyId;
     }
 }
 

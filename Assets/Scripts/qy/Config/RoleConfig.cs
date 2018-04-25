@@ -81,6 +81,10 @@ namespace qy.config
         /// 任务
         /// </summary>
         public string questID;
+        /// <summary>
+        /// 1死亡 ，2通关  用于服务器
+        /// </summary>
+        public int state;
     }
 }
 

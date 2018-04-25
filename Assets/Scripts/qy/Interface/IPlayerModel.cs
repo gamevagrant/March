@@ -107,12 +107,12 @@ namespace qy
         /// 使用金币复活
         /// </summary>
         /// <returns></returns>
-        PlayerModelErr CallBackRoleWithCoin();
+        PlayerModelErr CallBackRoleWithCoin(string id);
         /// <summary>
         /// 使用复活卡复活
         /// </summary>
         /// <returns></returns>
-        PlayerModelErr CallBackRoleWithCard();
+        PlayerModelErr CallBackRoleWithCard(string id);
         /// <summary>
         /// 倒计时结束增加生命
         /// </summary>

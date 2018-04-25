@@ -6,7 +6,6 @@ namespace qy.config
 {
     public class BaseConfig
     {
-        public string abc;
         public virtual string Name()
         {
             return "item.xml";

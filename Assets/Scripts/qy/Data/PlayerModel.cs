@@ -197,6 +197,10 @@ namespace qy
                     storyID = questItem.storyID;
                 }
             }
+            if(string.IsNullOrEmpty(playerData.nextQuestId))
+            {
+                return PlayerModelErr.QUEST_ID_ERROR;
+            }
             playerData.questId = playerData.nextQuestId;
             
 
@@ -204,15 +208,18 @@ namespace qy
             config.QuestItem nextQuest = playerData.GetQuest();
             if (nextQuest.type == config.QuestItem.QuestType.Ending)
             {
-                switch(nextQuest.endingType)
+                GameMainManager.Instance.netManager.EndingRole(nextQuest.endingType, (ret, res) => { });
+                switch (nextQuest.endingType)
                 {
-                    case 1://通关
-                        playerData.SetRoleState(playerData.role.id,PlayerData.RoleState.Pass);
-                        break;
-                    case 2://死亡
+                    case 1://死亡
                         playerData.SetRoleState(playerData.role.id, PlayerData.RoleState.Dide);
                         break;
+                    case 2://通关
+                        playerData.SetRoleState(playerData.role.id,PlayerData.RoleState.Pass);
+                        break;
+                   
                 }
+                
             }
 
             //获得奖励
@@ -277,6 +284,7 @@ namespace qy
 
         public PlayerModelErr StartGameWithRole(string id)
         {
+            GameMainManager.Instance.netManager.SwitchRole(id,(ret,res)=> { });
             if(playerData.GetRoleState(id) == PlayerData.RoleState.Dide)
             {
                 return PlayerModelErr.ROLE_IS_DIE;
@@ -286,8 +294,9 @@ namespace qy
             return PlayerModelErr.NULL;
         }
 
-        public PlayerModelErr CallBackRoleWithCoin()
+        public PlayerModelErr CallBackRoleWithCoin(string id)
         {
+            GameMainManager.Instance.netManager.RecoverRole(id,0, (ret, res) => { });
             int cost = GameMainManager.Instance.configManager.settingConfig.callBackPrice;
             if(playerData.coinNum<cost)
             {
@@ -309,8 +318,9 @@ namespace qy
             SaveData();
         }
 
-        public PlayerModelErr CallBackRoleWithCard()
+        public PlayerModelErr CallBackRoleWithCard(string id)
         {
+            GameMainManager.Instance.netManager.RecoverRole(id, 1, (ret, res) => { });
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }

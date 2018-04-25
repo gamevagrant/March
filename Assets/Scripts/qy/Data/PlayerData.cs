@@ -268,7 +268,7 @@ namespace qy
 
         public config.QuestItem GetQuest()
         {
-            return GameMainManager.Instance.configManager.questConfig.GetItem(questId??"");
+            return string.IsNullOrEmpty(questId)?null:GameMainManager.Instance.configManager.questConfig.GetItem(questId);
         }
 
         /// <summary>
@@ -322,6 +322,35 @@ namespace qy
      
                 propsDic.Add(item.itemId,prop);
             }
+
+            //---------------------------------------
+            if(message.roles!=null)
+            {
+                foreach (RoleItem item in message.roles)
+                {
+                    SetRoleState(item.id, (RoleState)item.state);
+                }
+            }
+            if(message.stories!=null)
+            {
+                foreach (PlayerDataMessage.StoryData story in message.stories)
+                {
+                    if (!complatedQuests.ContainsKey(story.storyId))
+                    {
+                        complatedQuests.Add(story.storyId, 0);
+                    }
+                }
+            }
+
+            if(!string.IsNullOrEmpty(message.roleUuid))
+            {
+                role = GameMainManager.Instance.configManager.roleConfig.GetItem(message.roleUuid);
+            }
+            ability = new config.Ability(message.discipline,message.loyaty,message.wisdom);
+            totalExp = int.Parse(message.storyExp);
+            currExp = int.Parse(message.lvExp);
+            level = message.storyLv;
+            //-----------------------------------
 
             dirty = false;
 

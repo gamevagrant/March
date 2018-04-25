@@ -32,7 +32,7 @@ public class UICallBackWindow : UIWindowBase
 
     public void OnClickCallBackCoinHandle()
     {
-        PlayerModelErr err = GameMainManager.Instance.playerModel.CallBackRoleWithCoin();
+        PlayerModelErr err = GameMainManager.Instance.playerModel.CallBackRoleWithCoin(GameMainManager.Instance.playerData.role.id);
         if(err == PlayerModelErr.NOT_ENOUGH_COIN)
         {
             Alert.Show("金币不足\n 快去赚金币吧",Alert.OK,(btn)=> {

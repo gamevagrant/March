@@ -48,7 +48,7 @@ public class UIEndingWindow :  UIWindowBase
             bgImg.sprite = sp;
         });
 
-        if(quest.endingType==2)
+        if(quest.endingType==1)
         {
             titleText.text = "当前角色光荣牺牲";
             resurrectionBtn.gameObject.SetActive(true);

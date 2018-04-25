@@ -115,6 +115,10 @@ namespace qy.config
         
         public QuestItem GetItem(string id)
         {
+            if(string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
             QuestItem value;
             dic.TryGetValue(id, out value);
             if (value == null)
@@ -216,7 +220,7 @@ namespace qy.config
         /// </summary>
         public EndingPoint endingPoint;
         /// <summary>
-        /// 结局任务结果 1:正常结局 2：死亡 
+        /// 结局任务结果 1:死亡 2：通关 
         /// </summary>
         public int endingType;
         /// <summary>

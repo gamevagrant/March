@@ -30,6 +30,10 @@ namespace qy.net
         public static string MAKE_POINT_ELIMINATEGUIDE = "eliminateGuide.makepoint";
         public static string MAKE_POINT_CLICK = "buttonClick.makepoint";
 
+        public static string ROLE_SWITCH = "role.choose";
+        public static string ROLE_RECOVER = "role.recover";
+        public static string ROLE_END = "role.end";
+
         private static NetManager _instance;
         public static NetManager Instance
         {
@@ -390,6 +394,45 @@ namespace qy.net
             jd["type"] = 1;
 
             return SendData(BIND_CMD, jd, callBack);
+        }
+        /// <summary>
+        /// 选择角色
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="callBack"></param>
+        /// <returns></returns>
+        public bool SwitchRole(string id, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["roleId"] = id;
+
+            return SendData(ROLE_SWITCH, jd, callBack);
+        }
+        /// <summary>
+        /// 复活角色
+        /// </summary>
+        /// <param name="id">角色id</param>
+        /// <param name="type"> 0金币 ，1道具</param>
+        /// <param name="callBack"></param>
+        /// <returns></returns>
+        public bool RecoverRole(string id,int type, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["uuid"] = id;
+            jd["type"] = type;
+            return SendData(ROLE_RECOVER, jd, callBack);
+        }
+        /// <summary>
+        /// 角色结局
+        /// </summary>
+        /// <param name="type"> 1死亡 ，2通关 </param>
+        /// <param name="callBack"></param>
+        /// <returns></returns>
+        public bool EndingRole(int type, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["type"] = type;
+            return SendData(ROLE_END, jd, callBack);
         }
 
         /// <summary>
