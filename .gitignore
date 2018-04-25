@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+AssetBundles/
 
 # Visual Studio cache directory
 /.vs/
