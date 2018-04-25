@@ -34,7 +34,8 @@ namespace qy.config
             }
             catch (Exception e)
             {
-                Debug.LogError(e.Message + element.GetAttribute("id") + ", " + Name);
+                Debug.LogError(element.GetAttribute("id") + ", " + Name);
+                Debug.LogError(e);
             }
 
             return true;
