@@ -178,7 +178,7 @@ public class DailyLandingActivities : MonoBehaviour
         {
             var gold_go = b_go.transform.Find(g);
             gold_go.transform.Find("num").gameObject.SetActive(false);
-            var cloneGold = Instantiate(gold_go.gameObject, GameObject.Find("Canvas").transform);
+            var cloneGold = Instantiate(gold_go.gameObject, GameObject.FindObjectOfType<Canvas>().transform);
             cloneGold.transform.position = gold_go.transform.position;
             target_golds.Add(cloneGold);
         }
@@ -199,7 +199,7 @@ public class DailyLandingActivities : MonoBehaviour
         for (int i = 0; i < itemNum; i++)
         {
             var item_go = b_go.transform.Find(i_);
-            var cloneItem = Instantiate(item_go.gameObject, GameObject.Find("Canvas").transform);
+            var cloneItem = Instantiate(item_go.gameObject, GameObject.FindObjectOfType<Canvas>().transform);
             cloneItem.transform.position = item_go.transform.position;
             target_items.Add(cloneItem);
         }
@@ -228,7 +228,7 @@ public class DailyLandingActivities : MonoBehaviour
                 setTargetItems();
             }
         }
-        var canvas = GameObject.Find("Canvas");
+        var canvas = GameObject.FindObjectOfType<Canvas>();
         var baseinfo = canvas.transform.Find("baseinfo");
         var coin = baseinfo.transform.Find("coin");
         var coinImg = coin.transform.Find("coinImg");

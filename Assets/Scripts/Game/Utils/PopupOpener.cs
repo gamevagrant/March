@@ -9,7 +9,7 @@ public class PopupOpener : MonoBehaviour
 
 	protected void Start()
 	{
-		m_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+		m_canvas = GameObject.FindObjectOfType<Canvas>().GetComponent<Canvas>();
 	}
 
 	public virtual GameObject OpenPopup()
@@ -29,7 +29,7 @@ public class PopupOpener : MonoBehaviour
 #endif
         // END_MECANIM_HACK
 
-        if (!m_canvas) m_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        if (!m_canvas) m_canvas = GameObject.FindObjectOfType<Canvas>();
 
 		popup.transform.SetParent(m_canvas.transform, false);
 		popup.GetComponent<Popup>().Open();

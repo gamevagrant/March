@@ -94,9 +94,13 @@ namespace qy.config
                     int count = int.Parse(data[1]);
                     int rate = data.Length > 2 ? int.Parse(data[2]) : 0;
                     PropItem prop = ConfigManager.Instance.propsConfig.GetItem(id);
-                    prop.count = count;
-                    prop.rate = rate;
-                    list.Add(prop);
+                    if(prop!=null)
+                    {
+                        prop.count = count;
+                        prop.rate = rate;
+                        list.Add(prop);
+                    }
+                    
                 }
             }
 
@@ -109,6 +113,10 @@ namespace qy.config
         {
             QuestItem value;
             dic.TryGetValue(id, out value);
+            if (value == null)
+            {
+                Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1}的项", Name(), id));
+            }
             return value;
         }
 

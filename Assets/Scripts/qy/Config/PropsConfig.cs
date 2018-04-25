@@ -33,7 +33,11 @@ namespace qy.config
         {
             PropItem value;
             dic.TryGetValue(id, out value);
-            return value.Clone();
+            if (value==null)
+            {
+                Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1} 的物品",Name() ,id));
+            }
+            return value!=null?value.Clone():null;
         }
 
        

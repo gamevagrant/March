@@ -26,7 +26,7 @@ namespace qy.config
             dic.TryGetValue(id, out value);
             if(string.IsNullOrEmpty(value))
             {
-                Debug.LogAssertion(string.Format("没有找到id为 {0} 的多语言项",id));
+                Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1} 的多语言项",Name(),id));
             }
             return value;
         }

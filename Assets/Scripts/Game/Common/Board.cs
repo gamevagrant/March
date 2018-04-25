@@ -3538,7 +3538,7 @@ void GenerateWaffleLayer()
 		cloneGold.transform.DOPath(path, 1.0f).SetEase(Ease.InQuad).OnComplete(() => 
 			{
 				Destroy(cloneGold);
-				GameObject.Find("Canvas").transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
+				GameObject.FindObjectOfType<Canvas>().transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
 			}
 		);
     }

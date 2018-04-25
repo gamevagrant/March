@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<Group id="level">
+  <ItemSpec level="1" exp="1000" heart="1" star="1" coin="1000" props="200003:2,200004:1"/>
+  <ItemSpec level="2" exp="1000" heart="1" star="1" coin="1000" props="200003:2,200004:1"/>
+  <ItemSpec level="3" exp="1000" heart="1" star="1" coin="1000" props="200003:2,200004:1"/>
+ </Group>

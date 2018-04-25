@@ -32,6 +32,10 @@ namespace qy.config
         {
             StoryItem value;
             dic.TryGetValue(id, out value);
+            if (value == null)
+            {
+                Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1}的项", Name(), id));
+            }
             return value;
         }
     }
