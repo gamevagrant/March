@@ -197,14 +197,48 @@ namespace qy
                     storyID = questItem.storyID;
                 }
             }
-
             playerData.questId = playerData.nextQuestId;
-            playerData.dirty = true;
             
+
+            //标记角色状态
+            config.QuestItem nextQuest = playerData.GetQuest();
+            if (nextQuest.type == config.QuestItem.QuestType.Ending)
+            {
+                switch(nextQuest.endingType)
+                {
+                    case 1://通关
+                        playerData.SetRoleState(playerData.role.id,PlayerData.RoleState.Pass);
+                        break;
+                    case 2://死亡
+                        playerData.SetRoleState(playerData.role.id, PlayerData.RoleState.Dide);
+                        break;
+                }
+            }
+
+            //获得奖励
+            foreach(PropItem item in questItem.prize)
+            {
+                playerData.AddPropItem(item.id,item.count);
+            }
+            //获得经验值
+            playerData.totalExp += questItem.exp;
+            playerData.currExp += questItem.exp;
+            //判断升级
+            config.LevelItem levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
+            while(levelItem!=null && playerData.currExp>= levelItem.exp)
+            {
+                playerData.level++;
+                playerData.currExp -= levelItem.exp;
+                levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
+            }
+
+            playerData.dirty = true;
             SaveData();
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
         }
+
+       
 
         public PlayerModelErr StartLevel()
         {
@@ -243,11 +277,12 @@ namespace qy
 
         public PlayerModelErr StartGameWithRole(string id)
         {
-            playerData.dirty = true;
-            RoleItem role = GameMainManager.Instance.configManager.roleConfig.GetItem(id).Clone();
-            playerData.role = role;
-            playerData.nextQuestId = role.questID;
-            SaveData();
+            if(playerData.GetRoleState(id) == PlayerData.RoleState.Dide)
+            {
+                return PlayerModelErr.ROLE_IS_DIE;
+            }
+
+            SwitchRole(id);
             return PlayerModelErr.NULL;
         }
 
@@ -260,7 +295,18 @@ namespace qy
             }
             playerData.coinNum -= cost;
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
-            return StartGameWithRole(playerData.role.id);
+            SwitchRole(playerData.role.id);
+            return PlayerModelErr.NULL;
+        }
+
+        private void SwitchRole(string id)
+        {
+            RoleItem role = GameMainManager.Instance.configManager.roleConfig.GetItem(id).Clone();
+            playerData.role = role;
+            playerData.nextQuestId = role.questID;
+            playerData.SetRoleState(id, PlayerData.RoleState.Normal);
+            playerData.dirty = true;
+            SaveData();
         }
 
         public PlayerModelErr CallBackRoleWithCard()
@@ -312,6 +358,8 @@ namespace qy
                 case PlayerModelErr.PROP_ID_ERROR:
                     break;
                 case PlayerModelErr.QUEST_ID_ERROR:
+                    break;
+                case PlayerModelErr.ROLE_IS_DIE:
                     break;
             }
             return str;

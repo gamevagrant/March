@@ -199,11 +199,11 @@ namespace qy.net
             return SendData(SAVE_OFF_LINE, playerData, (ret,res)=> {
                 if(res.isOK)
                 {
-                    Debug.Log("上传离线数据成功");
+                    Debug.Log("===============【上传离线数据成功】==============");
                 }
                 else
                 {
-                    Debug.Log("【上传离线数据失败】"+GetMsgByErrorCode(res.err));
+                    Debug.Log("============【上传离线数据失败】==============" + GetMsgByErrorCode(res.err));
                 }
                 callBack(ret,res);
             });

@@ -65,13 +65,24 @@ public class UITaskWindow :  UIWindowBase{
             roleHeadImage.sprite = sp;
         });
         roleNameText.text = playerdata.role.name;
-        resurrectionCountText.text = "死亡次数：6";
+        resurrectionCountText.text = "";
         loyaltySlider.value = playerdata.ability.loyalty / 100f;
         wisdomSlider.value = playerdata.ability.wisdom / 100f;
         discipline.value = playerdata.ability.discipline / 100f;
-        levelText.text = "等级：30";
-        levelSlider.value = 0.6f;
-        levelProgressText.text = "60%";
+        levelText.text = "等级："+playerdata.level.ToString();
+
+        qy.config.LevelItem levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerdata.level);
+        if(levelItem!=null)
+        {
+            float expProgress = playerdata.currExp / (float)levelItem.exp;
+            levelSlider.value = expProgress;
+            levelProgressText.text = (expProgress*100).ToString("f0")+"%";
+        }else
+        {
+            levelSlider.value = 0;
+            levelProgressText.text = "0%";
+        }
+        
 
         if(!string.IsNullOrEmpty(questItem.bg))
         {
@@ -126,18 +137,19 @@ public class UITaskWindow :  UIWindowBase{
         missionTopTF.anchorMin = new Vector2(0,0.35f);
 
         propPool.resetAllTarget();
-        if(!playerdata.complatedQuests.ContainsKey(playerdata.questId))
+        if(!playerdata.ContainsComplateQuest(playerdata.questId))
         {
-            List<PropItem> props = new List<PropItem>()
+            List<PropItem> props = new List<PropItem>();
+            if(questItem.requireStar>0)
             {
-                new PropItem()
+                props.Add(new PropItem()
                 {
                     id = "1",
                     icon = "starsp",
                     count = questItem.requireStar,
-                }
-            };
-
+                });
+            }
+            
             props.AddRange(questItem.requireItem);
             foreach (PropItem item in props)
             {

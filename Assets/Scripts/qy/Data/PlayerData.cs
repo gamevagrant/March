@@ -7,6 +7,22 @@ namespace qy
 {
     public class PlayerData
     {
+        public enum RoleState:int
+        {
+            /// <summary>
+            /// 正常
+            /// </summary>
+            Normal,
+            /// <summary>
+            /// 死亡
+            /// </summary>
+            Dide,
+            /// <summary>
+            /// 通关
+            /// </summary>
+            Pass,
+        }
+
         /// <summary>
         /// id
         /// </summary>
@@ -84,7 +100,18 @@ namespace qy
         /// 下一个任务
         /// </summary>
         public string nextQuestId;
-        
+        /// <summary>
+        /// 玩家等级
+        /// </summary>
+        public int level = 1;
+        /// <summary>
+        /// 总经验值
+        /// </summary>
+        public int totalExp = 0;
+        /// <summary>
+        /// 当前经验值
+        /// </summary>
+        public int currExp = 0;
         /// <summary>
         /// 能力值
         /// </summary>
@@ -131,8 +158,9 @@ namespace qy
         public bool needShow9Help = false;
 
         public bool isShowedLoginAward = false;
-
-
+        /// <summary>
+        /// 玩家持有的物品列表
+        /// </summary>
         public Dictionary<string, PropItem> propsDic = new Dictionary<string, PropItem>();
         /// <summary>
         /// 完成过的任务id
@@ -142,6 +170,10 @@ namespace qy
         /// 分支任务中选过的选项 questID_index
         /// </summary>
         public Dictionary<string, int> selectedItems = new Dictionary<string, int>();
+        /// <summary>
+        /// 角色状态
+        /// </summary>
+        public Dictionary<string, RoleState> rolesState = new Dictionary<string, RoleState>();
 
         public string lang
         {
@@ -166,7 +198,11 @@ namespace qy
 
             return item;
         }
-
+        /// <summary>
+        /// 给角色加物品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="num"></param>
         public void AddPropItem(string id, int num)
         {
             PropItem item;
@@ -182,6 +218,11 @@ namespace qy
                 propsDic.Add(id,item);
             }
         }
+        /// <summary>
+        /// 给角色减物品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="num"></param>
         public void RemovePropItem(string id,int num)
         {
             PropItem item;
@@ -189,11 +230,41 @@ namespace qy
             if(item!=null && item.count>num)
             {
                 item.count -= num;
-            }else
+                item.count = Mathf.Max(0,item.count);
+            }
+            else
             {
                 propsDic.Remove(id);
             }
         }
+        /// <summary>
+        /// 设置角色状态
+        /// </summary>
+        /// <param name="id">角色id</param>
+        /// <param name="state"></param>
+        public void SetRoleState(string id,RoleState state)
+        {
+            if(rolesState.ContainsKey(id))
+            {
+                rolesState[id] = state;
+            }else
+            {
+                rolesState.Add(id,state);
+            }
+        }
+        /// <summary>
+        /// 获取角色状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public RoleState GetRoleState(string id)
+        {
+            RoleState state = RoleState.Normal;
+            rolesState.TryGetValue(id,out state);
+            return state;
+        }
+
+
 
         public config.QuestItem GetQuest()
         {
@@ -209,6 +280,15 @@ namespace qy
         public bool ContainsSelected(string questID,string id)
         {
             return selectedItems.ContainsKey(questID+"_"+ id);
+        }
+        /// <summary>
+        /// 是否完成过此任务
+        /// </summary>
+        /// <param name="questID"></param>
+        /// <returns></returns>
+        public bool ContainsComplateQuest(string questID)
+        {
+            return complatedQuests.ContainsKey(questId);
         }
 
         public void RefreshData(PlayerDataMessage message)

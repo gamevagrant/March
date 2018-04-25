@@ -17,7 +17,7 @@ namespace qy.config
 
         internal override void ReadItem(XmlElement item)
         {
-            dic.Add(item.GetAttribute("id"), item.GetAttribute("value"));
+            dic.Add(item.GetAttribute("id"), item.GetAttribute("value").Replace("\\n","\n"));
         }
 
         public string GetItem(string id)

@@ -7,14 +7,42 @@ namespace qy
     public enum PlayerModelErr : int
     {
         NULL = 0,
+        /// <summary>
+        /// 金币不足
+        /// </summary>
         NOT_ENOUGH_COIN,
+        /// <summary>
+        /// 生命不足
+        /// </summary>
         NOT_ENOUGH_HEART,
+        /// <summary>
+        /// 物品不足
+        /// </summary>
         NOT_ENOUGH_PROP,
+        /// <summary>
+        /// 星星不足
+        /// </summary>
         NOT_ENOUGH_STAR,
+        /// <summary>
+        /// 任务id错误
+        /// </summary>
         QUEST_ID_ERROR,
+        /// <summary>
+        /// 物品id错误
+        /// </summary>
         PROP_ID_ERROR,
+        /// <summary>
+        /// 倒计时未完成
+        /// </summary>
         COUNT_DOWN_NOT_END,
+        /// <summary>
+        /// //生命满
+        /// </summary>
         HEART_IS_FULL,
+        /// <summary>
+        /// //角色已死亡
+        /// </summary>
+        ROLE_IS_DIE,
     }
     public interface IPlayerModel
     {

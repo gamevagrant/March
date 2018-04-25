@@ -106,7 +106,6 @@ namespace qy.config
                 {
                     foreach (System.Reflection.FieldInfo pi in t.GetFields())
                     {
-                        Debug.Log(pi.Name);
                         if (name == pi.Name)
                         {
                             if (pi.FieldType == typeof(int))

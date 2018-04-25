@@ -30,6 +30,10 @@ namespace qy.config
 
         public StoryItem GetItem(string id)
         {
+            if(string.IsNullOrEmpty(id)||id=="0")
+            {
+                return null;
+            }
             StoryItem value;
             dic.TryGetValue(id, out value);
             if (value == null)

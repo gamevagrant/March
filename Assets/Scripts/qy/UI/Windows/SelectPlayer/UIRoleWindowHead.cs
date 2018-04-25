@@ -9,6 +9,8 @@ public class UIRoleWindowHead : BaseItemView {
 
     public Image head;
     public Image mask;
+    public GameObject stateGO;
+    public Text stateText;
     public RoleItem data;
     public Sprite[] BGsprites;
     public override void SetData(object data)
@@ -20,7 +22,22 @@ public class UIRoleWindowHead : BaseItemView {
         {
             head.sprite = sp;
         });
-        
+
+        qy.PlayerData.RoleState state = qy.GameMainManager.Instance.playerData.GetRoleState(this.data.id);
+        switch (state)
+        {
+            case qy.PlayerData.RoleState.Dide:
+                stateGO.SetActive(true);
+                stateText.text = "已死亡";
+                break;
+            case qy.PlayerData.RoleState.Pass:
+                stateGO.SetActive(true);
+                stateText.text = "已通关";
+                break;
+            default:
+                stateGO.SetActive(false);
+                break;
+        }
     }
 
     public override void OnSelected(bool isSelected)

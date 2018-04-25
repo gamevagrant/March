@@ -23,6 +23,9 @@ namespace qy.config
             quest.type = (QuestItem.QuestType)int.Parse(item.GetAttribute("type"));
             quest.sectionName = GetLanguage(item.GetAttribute("sectionName"));
             quest.sectionDes = GetLanguage(item.GetAttribute("sectionDes"));
+
+            string exp = item.GetAttribute("exp");
+            quest.exp = String.IsNullOrEmpty(exp) ? 0 : int.Parse(exp);
             string star = item.GetAttribute("requireStar");
             quest.requireStar = String.IsNullOrEmpty(star) ? 0 : int.Parse(star);
             string endingType = item.GetAttribute("endingType");
@@ -35,6 +38,7 @@ namespace qy.config
             quest.prize = ReadrequireItem(item.GetAttribute("prize"));
             quest.selectList = ReadSelectList(item.GetAttribute("selectList"));
             quest.endingPoint = ReadEnding(item.GetAttribute("endingPoint"));
+            
             dic.Add(quest.id,quest);
         }
 
@@ -215,6 +219,10 @@ namespace qy.config
         /// 结局任务结果 1:正常结局 2：死亡 
         /// </summary>
         public int endingType;
+        /// <summary>
+        /// 任务经验值
+        /// </summary>
+        public int exp;
     }
 
     public class SelectItem

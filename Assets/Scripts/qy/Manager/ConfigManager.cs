@@ -110,6 +110,15 @@ namespace qy.config
             }
         }
 
+        public LevelConfig levelConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(LevelConfig)];
+                return config as LevelConfig;
+            }
+        }
+
         private Dictionary<Type,BaseConfig> dic;
         private int allCount = 0;
 
@@ -137,6 +146,7 @@ namespace qy.config
             Load<GuideSetupConfig>(LoadHandle);
             Load<SettingConfig>(LoadHandle);
             Load<RoleConfig>(LoadHandle);
+            Load<LevelConfig>(LoadHandle);
         }
 
         private void Load<T>(Action onComplate) where T : BaseConfig, new()

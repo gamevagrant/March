@@ -15,6 +15,8 @@ public class UIRoleWindow : UIWindowBase {
     public Slider discipline;
     public Text roleName;
     public Text introduction;
+    public GameObject stateGO;
+    public Text stateText;
 
     private string selectedRoleID;
 
@@ -68,6 +70,22 @@ public class UIRoleWindow : UIWindowBase {
         discipline.value = item.ability.discipline / 100f;
         roleName.text = item.name;
         introduction.text = item.introduction;
+
+        qy.PlayerData.RoleState state = GameMainManager.Instance.playerData.GetRoleState(item.id);
+        switch(state)
+        {
+            case qy.PlayerData.RoleState.Dide:
+                stateGO.SetActive(true);
+                stateText.text = "已死亡";
+                break;
+            case qy.PlayerData.RoleState.Pass:
+                stateGO.SetActive(true);
+                stateText.text = "已通关";
+                break;
+            default:
+                stateGO.SetActive(false);
+                break;
+        }
     }
 
     public void OnClickStartBtnHandle()
