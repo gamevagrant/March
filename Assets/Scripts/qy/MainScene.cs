@@ -50,7 +50,7 @@ namespace qy
             {
                 GameMainManager.Instance.uiManager.OpenWindow(ui.UISettings.UIWindowID.UIRoleWindow);
             }
-            else if (quest.type == config.QuestItem.QuestType.Ending)
+            else if (GameMainManager.Instance.playerData.roleState == PlayerData.RoleState.Dide )
             {
                 GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow, quest);
             }

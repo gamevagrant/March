@@ -126,7 +126,7 @@ namespace qy.ui
             canvasScaler.matchWidthOrHeight = 0;
 
             go.AddComponent<UIManager>();
-            GameObject.DontDestroyOnLoad(go);
+            //GameObject.DontDestroyOnLoad(go);
         }
 
         private void Awake()

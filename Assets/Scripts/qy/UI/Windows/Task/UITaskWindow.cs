@@ -5,6 +5,7 @@ using qy.ui;
 using qy;
 using qy.config;
 using UnityEngine.UI;
+using March.Core.WindowManager;
 public class UITaskWindow :  UIWindowBase{
 
     public override UIWindowData windowData
@@ -210,11 +211,33 @@ public class UITaskWindow :  UIWindowBase{
         {
             //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
             Alert.Show(LanguageManager.instance.GetValueByKey("200010"));
-        }else if(err == PlayerModelErr.NOT_ENOUGH_STAR)
+            OpenLevelBeginPopupWindow();
+        }
+        else if(err == PlayerModelErr.NOT_ENOUGH_STAR)
         {
             Alert.Show(LanguageManager.instance.GetValueByKey("200011"));
+            OpenLevelBeginPopupWindow();
         }
         
+    }
+    /// <summary>
+    /// 打开关卡面板
+    /// </summary>
+    private void OpenLevelBeginPopupWindow()
+    {
+        GameMainManager.Instance.netManager.MakePointInEliminateClick((ret, res) => { });
+        if (GameMainManager.Instance.playerData.heartNum < 1)
+        {
+            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200025"));
+        }
+        else if (GameMainManager.Instance.playerData.eliminateLevel > GameMainManager.Instance.configManager.settingConfig.max)
+        {
+            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200049"));
+        }
+        else
+        {
+            WindowManager.instance.Show<BeginPopupWindow>();
+        }
     }
 
     public void OnClickDoBtnHandle()

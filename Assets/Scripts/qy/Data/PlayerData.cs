@@ -175,6 +175,14 @@ namespace qy
         /// </summary>
         public Dictionary<string, RoleState> rolesState = new Dictionary<string, RoleState>();
 
+        public RoleState roleState
+        {
+            get
+            {
+                return GetRoleState(role.id);
+            }
+        }
+
         public string lang
         {
             get
@@ -353,7 +361,7 @@ namespace qy
                         roleID = role.roleId;
                     }
                 }
-                role = GameMainManager.Instance.configManager.roleConfig.GetItem(roleID);
+                role = GameMainManager.Instance.configManager.roleConfig.GetItem(roleID).Clone();
             }
             questId = message.storyid;//任务id存到角色数据中有了角色再保存数据
             if (!string.IsNullOrEmpty(nextQuestId))
