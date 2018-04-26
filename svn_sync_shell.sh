@@ -8,3 +8,7 @@ svn co http://svn.xinggeq.com/svn/march/doc/xml/client ./xml
 echo "cp -f -v ./xml/*.xml ./Assets/AssetBundleResources/xml"
 cp -f -v ./xml/*.xml ./Assets/AssetBundleResources/xml
 
+# Commit xmls to current repo.
+git add .
+git commit -m SVN_SYNC
+git push
