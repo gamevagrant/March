@@ -22,7 +22,6 @@ public class ProjectBuild
     }
 
     private static BuildTarget target = BuildTarget.Android;
-
     private const string ConfigName = "BuildConfig.txt";
 
     private static readonly BuildConfig DefaultBuildConfig = new BuildConfig
