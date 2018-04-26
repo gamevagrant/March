@@ -24,18 +24,14 @@ public class ProjectBuild
 
     private static BuildTarget target = BuildTarget.Android;
 
-    private const string DefaultProductName = "March";
-    private const string DefaultCompanyName = "elex";
-    private const string DefaultApplicationId = "com.elex.march";
-
     private const string ConfigName = "BuildConfig.txt";
 
     private static readonly BuildConfig DefaultBuildConfig = new BuildConfig
     {
-        ProductName = DefaultProductName,
-        CompanyName = DefaultCompanyName,
-        ApplicationId = DefaultApplicationId,
-        Version = PlayerSettings.bundleVersion,
+        ProductName = string.Empty,
+        CompanyName = string.Empty,
+        ApplicationId = string.Empty,
+        Version = string.Empty,
         KeyStorePath = string.Empty,
         KeyPassword = string.Empty,
         KeyAliasName = string.Empty,
