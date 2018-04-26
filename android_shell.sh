@@ -11,7 +11,11 @@ cp -f -v ./xml/*.xml ./Assets/StreamingAssets/xml
 now=$(date +"%T")
 echo "Build Start: $now"
 
-# Android Stuff.
+# Build parameters.
+export ProductName=March
+export CompanyName=elex
+export ApplicationId=com.elex.march
+
 export ANDROID_KEYSTORE_NAME=user.keystore
 export ANDROID_KEYSTORE_PASSWORD=111111
 export ANDROID_KEYALIAS_NAME=test

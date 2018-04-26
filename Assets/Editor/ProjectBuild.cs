@@ -83,6 +83,10 @@ public class ProjectBuild
     {
         var config = DefaultBuildConfig;
 
+        config.ProductName = Environment.GetEnvironmentVariable("ProductName");
+        config.CompanyName = Environment.GetEnvironmentVariable("CompanyName");
+        config.ApplicationId = Environment.GetEnvironmentVariable("ApplicationId");
+
         config.KeyStorePath = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_NAME");
         config.KeyPassword = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_PASSWORD");
         config.KeyAliasName = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_NAME");
