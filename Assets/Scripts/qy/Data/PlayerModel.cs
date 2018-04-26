@@ -179,7 +179,7 @@ namespace qy
                     levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
                 }
             }
-           
+
             //更新下个任务
             if (questItem.type == config.QuestItem.QuestType.Main)
             {

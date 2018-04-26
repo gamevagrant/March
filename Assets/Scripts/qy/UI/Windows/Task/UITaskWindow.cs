@@ -210,13 +210,17 @@ public class UITaskWindow :  UIWindowBase{
         }else if(err == PlayerModelErr.NOT_ENOUGH_PROP)
         {
             //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
-            Alert.Show(LanguageManager.instance.GetValueByKey("200010"));
-            OpenLevelBeginPopupWindow();
+            Alert.Show(LanguageManager.instance.GetValueByKey("200010"),Alert.OK,(btn)=>{
+                OpenLevelBeginPopupWindow();
+            });
+            
         }
         else if(err == PlayerModelErr.NOT_ENOUGH_STAR)
         {
-            Alert.Show(LanguageManager.instance.GetValueByKey("200011"));
-            OpenLevelBeginPopupWindow();
+            Alert.Show(LanguageManager.instance.GetValueByKey("200011"), Alert.OK, (btn) => {
+                OpenLevelBeginPopupWindow();
+            });
+           
         }
         
     }

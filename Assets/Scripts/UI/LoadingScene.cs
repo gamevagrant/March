@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 using qy;
 public class LoadingScene : MonoBehaviour
 {
@@ -31,10 +32,9 @@ public class LoadingScene : MonoBehaviour
         var go = canvas.transform.Find("ProgressBar_bg");
         m_progressBar_right = go.transform.Find("right").GetComponent<Image>();
        
-        qy.GameMainManager.Instance.configManager.LoadConfig(() =>
+        GameMainManager.Instance.configManager.LoadConfig(() =>
         {
-            Login();
-            LoadScene();
+            StartCoroutine(LoadScene());
         });
 
 #if UNITY_ANDROID
@@ -69,10 +69,12 @@ public class LoadingScene : MonoBehaviour
         StartCoroutine(XMLDataManager.instance.loadXML(config));
     }
 
-    private void LoadScene()
+    private IEnumerator LoadScene()
     {
         //m_async = SceneManager.LoadSceneAsync("main");
         m_async = SceneManager.LoadSceneAsync("Film");
+        yield return m_async;
+        Login();
     }
 
     public void Login()
