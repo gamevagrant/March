@@ -1,28 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using AssetBundles;
+using March.Scene;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadingScene : MonoBehaviour
 {
+    private LoadingSceneLoader loader;
+
     private AsyncOperation m_async;
     private Image m_progressBar;
     private Image m_progressBar_right;
 
     private void Awake()
     {
-        AddConfig<storyhead>();
-        AddConfig<quest>();
-        AddConfig<story>();
-        AddConfig<item>();
-        AddConfig<setting>();
-        AddConfig<matchlevel>();
-        AddConfig<exchange>();
-        AddConfig<guidesetup>();
-
-        LanguageManager.instance.initConfig();
+        loader = GetComponent<LoadingSceneLoader>();
     }
 
-    void Start()
+    IEnumerator Start()
     {
         Debug.Log("LoadingScene Start ...");
 
@@ -34,6 +30,21 @@ public class LoadingScene : MonoBehaviour
 #if GAME_DEBUG
         Instantiate(Resources.Load<GameObject>(Configure.ReporterPath));
 #endif
+
+        yield return loader.Load();
+
+        AddConfig<storyhead>();
+        AddConfig<quest>();
+        AddConfig<story>();
+        AddConfig<item>();
+        AddConfig<setting>();
+        AddConfig<matchlevel>();
+        AddConfig<exchange>();
+        AddConfig<guidesetup>();
+        //AddConfig<language>();
+
+        LanguageManager.instance.initConfig();
+
         qy.GameMainManager.Instance.configManager.LoadConfig(() =>
         {
             LoadScene();

@@ -1396,6 +1396,10 @@ public class Configure : MonoSingleton<Configure>
     public static string DebugLevelChoosePanelPath = "Debug/LevelChoosePanel";
     public static string ReporterPath = "Debug/Reporter";
 
+    public static string LevelBundlePath = "play/level";
+    public static string ConfigurePath = "core/config";
+    public static string SceneBackgroundPath = "scene/background";
+
     protected override void Init()
     {
         base.Init();

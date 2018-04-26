@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<!-- livesPrice补满生命金币价格,livesRecoverTime恢复1条生命时间，单位分钟；maxLives最大生命值 -->
+<!-- maxlevel当前最大关卡数 -->
+<!-- moviesgold结算时的道具转化为金币奖励 -->
+<!-- 新手七日签到设置和开关-->
+<Group id="setting">
+    <ItemSpec id="life" livesPrice="900" livesRecoverTime="30" maxLives="5" />
+	<ItemSpec id="stepsBuy" price="900|1200|1800|2800|3800" bonusItems ="0|200008:1|200009:1|200003:1,200010:1|200003:1,200008:1,200009:1" bonusItemsBag ="0|0|200006:1|0|0"  addSteps="5" />
+	<ItemSpec id="maxlevel" max="101"  />
+	<ItemSpec id="moviesgold" columnbreaker="1" rowbreaker="1" planebreaker="1" bombbreaker="2" rainbow="5" maxgold="500"/>
+	<ItemSpec id="UserSevenDaySwitch" functionSwitchOpen="1" maxNum="7" showDay="7" item="0|200004:1|200005:1|200006:1|200006:1|200006:1|200006:1" gold="100|0|0|0|0|0|100" star="0|0|0|0|0|0|0" IsTestOpen="0" OpenRegular="UserSevenDaySwitchList"/>
+ </Group>

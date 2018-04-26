@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace March.Scene
 {
@@ -71,28 +72,27 @@ namespace March.Scene
         protected IEnumerator LoadAllPrefabsAsync(string path)
         {
             // This is simply to get the elapsed time for this phase of AssetLoading.
-            float startTime = Time.realtimeSinceStartup;
+            var startTime = Time.realtimeSinceStartup;
 
             var assetBundleName = string.Format("scene/{0}", path.ToLower());
 
             // Load asset from assetBundle.
-            AssetBundleLoadAllAssetOperation request = AssetBundleManager.LoadAllAssetAsync(assetBundleName, typeof(GameObject));
+            var request = AssetBundleManager.LoadAllAssetAsync(assetBundleName, typeof(GameObject));
             if (request == null)
                 yield break;
             yield return StartCoroutine(request);
-
 
             if (!SceneMap.ContainsKey(path))
                 SceneMap.Add(path, new List<PrefabInfo>());
 
             // Get the asset.
-            UnityEngine.Object[] prefabList = request.GetAsset<UnityEngine.Object>();
+            var prefabList = request.GetAsset<Object>();
             SceneMap[path].Clear();
             SceneMap[path].AddRange(prefabList.Select(prefab => new PrefabInfo { Name = prefab.name, Prefab = prefab as GameObject }));
 
             // Calculate and display the elapsed time.
-            float elapsedTime = Time.realtimeSinceStartup - startTime;
-            Debug.Log(assetBundleName + (prefabList == null ? " was not" : " was") + " loaded successfully in " + elapsedTime + " seconds");
+            var elapsedTime = Time.realtimeSinceStartup - startTime;
+            Debug.Log(assetBundleName + (prefabList.Length == 0 ? " was not" : " was") + " loaded successfully in " + elapsedTime + " seconds");
         }
 
         public GameObject InstancePrefab(string path, int index)

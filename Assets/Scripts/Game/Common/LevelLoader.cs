@@ -3,6 +3,7 @@ using MiniJSON;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AssetBundles;
 using UnityEngine;
 
 public class LevelLoader : MonoSingleton<LevelLoader>
@@ -74,11 +75,14 @@ public class LevelLoader : MonoSingleton<LevelLoader>
     {
         TextAsset jsonString;
 
-        jsonString = Resources.Load("Levels/" + level, typeof(TextAsset)) as TextAsset;
+        //jsonString = Resources.Load("Levels/" + level, typeof(TextAsset)) as TextAsset;
+
+        jsonString =
+            March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.LevelBundlePath, "" + level);
 
         if (jsonString == null)
         {
-            print("Can not load level data");
+            Debug.LogError(string.Format("Can not load level {0} data", level));
             return;
         }
 

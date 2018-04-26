@@ -110,32 +110,55 @@ namespace qy.config
             }
         }
 
-        private Dictionary<Type,BaseConfig> dic;
+        private Dictionary<Type, BaseConfig> dic = new Dictionary<Type, BaseConfig>();
         private int allCount = 0;
 
         private Action onComplate;
 
         public ConfigManager()
         {
+            InitTypeDict<LanguageConfig>();
+            InitTypeDict<PropsConfig>();
+            InitTypeDict<StorysConfig>();
+            InitTypeDict<QuestConfig>();
+            InitTypeDict<StoryheadConfig>();
+            InitTypeDict<MatchLevelConfig>();
+            InitTypeDict<ExchangeConfig>();
+            InitTypeDict<GuideSetupConfig>();
+            InitTypeDict<SettingConfig>();
+        }
 
+        private void InitTypeDict<T>() where T : BaseConfig, new()
+        {
+            dic.Add(typeof(T), new T());
         }
 
         public void LoadConfig(Action onComplate)
         {
-            allCount = 0;
-            dic = new Dictionary<Type, BaseConfig>();
             this.onComplate = onComplate;
 
+            foreach (var pair in dic)
+            {
+                var config = pair.Value;
+
+                Debug.Log("加载配置文件:" + config.Name);
+
+                var asset = March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.ConfigurePath, config.Name.Replace(".xml", ""));
+                config.Read(asset.text);
+            }
+
+            onComplate();
+
             //以下加载顺序不可变更
-            Load<LanguageConfig>(LoadHandle);
-            Load<PropsConfig>(LoadHandle);
-            Load<StorysConfig>(LoadHandle);
-            Load<QuestConfig>(LoadHandle);
-            Load<StoryheadConfig>(LoadHandle);
-            Load<MatchLevelConfig>(LoadHandle);
-            Load<ExchangeConfig>(LoadHandle);
-            Load<GuideSetupConfig>(LoadHandle);
-            Load<SettingConfig>(LoadHandle);
+            //Load<LanguageConfig>(LoadHandle);
+            //Load<PropsConfig>(LoadHandle);
+            //Load<StorysConfig>(LoadHandle);
+            //Load<QuestConfig>(LoadHandle);
+            //Load<StoryheadConfig>(LoadHandle);
+            //Load<MatchLevelConfig>(LoadHandle);
+            //Load<ExchangeConfig>(LoadHandle);
+            //Load<GuideSetupConfig>(LoadHandle);
+            //Load<SettingConfig>(LoadHandle);
         }
 
         private void Load<T>(Action onComplate) where T : BaseConfig, new()
@@ -144,13 +167,13 @@ namespace qy.config
             T config = new T();
             string path = FilePathTools.getXmlPath(config.Name);
             Debug.Log("加载配置文件:" + path);
+
             AssetsManager.Instance.LoadAssetWithWWW(path, (www) =>
             {
                 config.Read(www.text);
                 dic.Add(typeof(T), config);
                 onComplate();
             });
-
         }
 
         private void LoadHandle()

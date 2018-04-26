@@ -22,45 +22,63 @@ public class XMLDataManager : Singleton<XMLDataManager>
 	}
     public IEnumerator loadXML(DatabaseConfig tempConfig)
     {
-        string path = getPlatForm(tempConfig);
-        Debug.Log("load xml path is:" + path);
-#if UNITY_EDITOR
-        path = "file://" + path;
-#endif
-        WWW www = new WWW(path);
-        yield return www;
-        if (www.isDone)
+//        string path = getPlatForm(tempConfig);
+//        Debug.Log("load xml path is:" + path);
+//#if UNITY_EDITOR
+//        path = "file://" + path;
+//#endif
+//        WWW www = new WWW(path);
+//        yield return www;
+//        if (www.isDone)
+//        {
+//            tempConfig.Read(www.text);
+//            if (!DefaultConfig.getInstance().configDic.ContainsKey(tempConfig.GetType()))
+//            {
+//                DefaultConfig.getInstance().configDic.Add(tempConfig.GetType(), tempConfig);
+//            }
+//        }
+
+        Debug.Log("load xml path is:" + tempConfig);
+        var asset = March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.ConfigurePath, tempConfig.ToString());
+        tempConfig.Read(asset.text);
+        if (!DefaultConfig.getInstance().configDic.ContainsKey(tempConfig.GetType()))
         {
-            tempConfig.Read(www.text);
-            if (!DefaultConfig.getInstance().configDic.ContainsKey(tempConfig.GetType()))
-            {
-                DefaultConfig.getInstance().configDic.Add(tempConfig.GetType(), tempConfig);
-            }
+            DefaultConfig.getInstance().configDic.Add(tempConfig.GetType(), tempConfig);
         }
 
+        yield return null;
     }
 
-	// language xml read
-	public IEnumerator loadLangXML(DatabaseConfig tempConfig)
+    // language xml read
+    public IEnumerator loadLangXML(DatabaseConfig tempConfig)
 	{
-		string path = getLanguagePath(tempConfig);
-		Debug.Log("load xml path is:" + path);
-		#if UNITY_EDITOR
-		path = "file://" + path;
-		#endif
-		WWW www = new WWW(path);
-		yield return www;
-		if (www.isDone)
-		{
-			tempConfig.Read(www.text);
-			if (!DefaultConfig.getInstance().configDic.ContainsKey(tempConfig.GetType()))
-			{
-				DefaultConfig.getInstance().configDic.Add(tempConfig.GetType(), tempConfig);
-			}
-		}
+        //string path = getLanguagePath(tempConfig);
+        //Debug.Log("load xml path is:" + path);
+        //#if UNITY_EDITOR
+        //path = "file://" + path;
+        //#endif
+        //WWW www = new WWW(path);
+        //yield return www;
+        //if (www.isDone)
+        //{
+        //	tempConfig.Read(www.text);
+        //	if (!DefaultConfig.getInstance().configDic.ContainsKey(tempConfig.GetType()))
+        //	{
+        //		DefaultConfig.getInstance().configDic.Add(tempConfig.GetType(), tempConfig);
+	    //	}
+	    //}
 
-	}
+        var path = tempConfig.ToString() + "_" + PlayerData.instance.getLang();
+        Debug.Log("load xml path is:" + path);
+	    var asset = March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.ConfigurePath, path);
+	    tempConfig.Read(asset.text);
+	    if (!DefaultConfig.getInstance().configDic.ContainsKey(tempConfig.GetType()))
+	    {
+	        DefaultConfig.getInstance().configDic.Add(tempConfig.GetType(), tempConfig);
+	    }
 
+	    yield return null;
+    }
 }
 
 
