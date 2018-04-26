@@ -136,7 +136,7 @@ namespace qy
         /// </summary>
         public int indexDay = 0;
         /// <summary>
-        /// 7天奖励 领取状态 0未领取 1已领取
+        /// 7天奖励 领取状态 0未领取 1已领取 2未开启
         /// </summary>
         public int awardState = 1;
         public bool isPlayScene = false;
@@ -315,6 +315,9 @@ namespace qy
             {
                 indexDay = message.sevenDay.sevenDayInfo.index;
                 awardState = message.sevenDay.sevenDayInfo.state;
+            }else
+            {
+                awardState = 2;
             }
            
             propsDic = new Dictionary<string, config.PropItem>();
