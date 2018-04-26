@@ -607,6 +607,8 @@
  <ItemSpec id="100680" value="在昨夜的大火中，你不幸被烧伤。"/>
  <ItemSpec id="100681" value="在惨烈的湘江之战中，你不幸战死……"/>
  <ItemSpec id="100682" value="红军经过了惨烈的湘江之战，犹如火凤凰浴火重生，而今后必将一飞冲天！"/>
+ <ItemSpec id="100683" value="你被碉堡内的敌人击中，不幸牺牲。"/>
+ <ItemSpec id="100684" value="牺牲"/>
  <ItemSpec id="101001" value="小同志，你已经报名参加长征了吗？\n快去军需处领取子弹吧。"/>
  <ItemSpec id="101002" value="是的，指战员！"/>
  <ItemSpec id="101003" value="是的，指战员！"/>
@@ -676,6 +678,7 @@
  <ItemSpec id="110060" value="烈火余生"/>
  <ItemSpec id="110061" value="血洒湘江"/>
  <ItemSpec id="110062" value="浴火重生"/>
+ <ItemSpec id="110063" value="壮烈牺牲"/>
  <ItemSpec id="200001" value="布袋"/>
  <ItemSpec id="200002" value="五角星"/>
  <ItemSpec id="200003" value="装粮食用的，可以在特定三消关卡收集"/>

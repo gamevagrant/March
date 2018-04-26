@@ -517,40 +517,71 @@
 <ItemSpec id="1000607" questId="10034" bgFile="1000108bg" personFile="person1" dialogue="100616" next="1000608"/>
 <ItemSpec id="1000608" questId="10034" bgFile="1000124bg" personFile="person2" dialogue="100617" next="1000609"/>
 <ItemSpec id="1000609" questId="10034" bgFile="1000105bg" personFile="person3" dialogue="100618" next="1000610"/>
-<ItemSpec id="1000610" questId="10034" dialogue="100619" next="1000611"/>
-<ItemSpec id="1000611" questId="10034" dialogue="100620" next="0"/>
-<ItemSpec id="1000612" questId="10034" dialogue="100621" next="1000613"/>
-<ItemSpec id="1000613" questId="10034" dialogue="100622" next="1000614"/>
-<ItemSpec id="1000614" questId="10034" dialogue="100623" next="0"/>
-<ItemSpec id="1000615" questId="10034" dialogue="100624" next="1000616"/>
-<ItemSpec id="1000616" questId="10034" dialogue="100625" next="1000617"/>
-<ItemSpec id="1000617" questId="10034" dialogue="100626" next="1000618"/>
-<ItemSpec id="1000618" questId="10034" dialogue="100627" next="1000619"/>
-<ItemSpec id="1000619" questId="10034" dialogue="100628" next="1000620"/>
-<ItemSpec id="1000620" questId="10034" dialogue="100629" next="0"/>
-<ItemSpec id="1000621" dialogue="100630" next="0"/>
-<ItemSpec id="1000622" dialogue="100631" next="0"/>
-<ItemSpec id="1000623" dialogue="100632" next="0"/>
-<ItemSpec id="1000624" dialogue="100633" next="0"/>
-<ItemSpec id="1000625" questId="10001" dialogue="100634" next="0"/>
-<ItemSpec id="1000626" questId="10002" dialogue="100635" next="0"/>
-<ItemSpec id="1000627" questId="10003" dialogue="100636" next="0"/>
-<ItemSpec id="1000628" questId="10004" dialogue="100637" next="0"/>
-<ItemSpec id="1000629" questId="10005" dialogue="100638" next="0"/>
-<ItemSpec id="1000630" questId="10006" dialogue="100639" next="0"/>
-<ItemSpec id="1000631" questId="10007" dialogue="100640" next="0"/>
-<ItemSpec id="1000632" questId="10008" dialogue="100641" next="0"/>
-<ItemSpec id="1000633" questId="10009" dialogue="100642" next="0"/>
-<ItemSpec id="1000634" questId="10010" dialogue="100643" next="0"/>
-<ItemSpec id="1000635" questId="10002" dialogue="100644" next="1000142"/>
-<ItemSpec id="1000636" questId="10002" dialogue="100645" next="1000146"/>
-<ItemSpec id="1000637" questId="10004" dialogue="100646" next="1000149"/>
-<ItemSpec id="1000638" questId="10004" dialogue="100647" next="1000154"/>
-<ItemSpec id="1000639" questId="10005" dialogue="100648" next="1000159"/>
-<ItemSpec id="1000640" questId="10005" dialogue="100649" next="1000163"/>
-<ItemSpec id="1000641" questId="10009" dialogue="100650" next="1000173"/>
-<ItemSpec id="1000642" questId="10009" dialogue="100651" next="1000176"/>
-<ItemSpec id="1000643" questId="10010" dialogue="100652" next="1000179"/>
-<ItemSpec id="1000644" questId="10010" dialogue="100653" next="1000182"/>
-<ItemSpec id="1000645" questId="10010" dialogue="100654" next="1000185"/>
+<ItemSpec id="1000610" questId="10034" personFile="person1" dialogue="100619" next="1000611"/>
+<ItemSpec id="1000611" questId="10034" personFile="person2" dialogue="100620" next="0"/>
+<ItemSpec id="1000612" questId="10034" personFile="person3" dialogue="100621" next="1000613"/>
+<ItemSpec id="1000613" questId="10034" personFile="person4" dialogue="100622" next="1000614"/>
+<ItemSpec id="1000614" questId="10034" personFile="person1" dialogue="100623" next="0"/>
+<ItemSpec id="1000615" questId="10034" personFile="person2" dialogue="100624" next="1000616"/>
+<ItemSpec id="1000616" questId="10034" personFile="person3" dialogue="100625" next="1000617"/>
+<ItemSpec id="1000617" questId="10034" personFile="person4" dialogue="100626" next="1000618"/>
+<ItemSpec id="1000618" questId="10034" personFile="person1" dialogue="100627" next="1000619"/>
+<ItemSpec id="1000619" questId="10034" personFile="person2" dialogue="100628" next="1000620"/>
+<ItemSpec id="1000620" questId="10034" personFile="person3" dialogue="100629" next="0"/>
+<ItemSpec id="1000621" personFile="person4" dialogue="100630" next="0"/>
+<ItemSpec id="1000622" personFile="person1" dialogue="100631" next="0"/>
+<ItemSpec id="1000623" personFile="person2" dialogue="100632" next="0"/>
+<ItemSpec id="1000624" personFile="person3" dialogue="100633" next="0"/>
+<ItemSpec id="1000625" questId="10001" personFile="person1" dialogue="100634" next="0"/>
+<ItemSpec id="1000626" questId="10002" personFile="person2" dialogue="100635" next="0"/>
+<ItemSpec id="1000627" questId="10003" personFile="person3" dialogue="100636" next="0"/>
+<ItemSpec id="1000628" questId="10004" personFile="person4" dialogue="100637" next="0"/>
+<ItemSpec id="1000629" questId="10005" personFile="person1" dialogue="100638" next="0"/>
+<ItemSpec id="1000630" questId="10006" personFile="person2" dialogue="100639" next="0"/>
+<ItemSpec id="1000631" questId="10007" personFile="person3" dialogue="100640" next="0"/>
+<ItemSpec id="1000632" questId="10008" personFile="person4" dialogue="100641" next="0"/>
+<ItemSpec id="1000633" questId="10009" personFile="person1" dialogue="100642" next="0"/>
+<ItemSpec id="1000634" questId="10010" personFile="person2" dialogue="100643" next="0"/>
+<ItemSpec id="1000635" questId="10002" personFile="person3" dialogue="100644" next="1000142"/>
+<ItemSpec id="1000636" questId="10002" personFile="person4" dialogue="100645" next="1000146"/>
+<ItemSpec id="1000637" questId="10004" personFile="person1" dialogue="100646" next="1000149"/>
+<ItemSpec id="1000638" questId="10004" personFile="person2" dialogue="100647" next="1000154"/>
+<ItemSpec id="1000639" questId="10005" personFile="person3" dialogue="100648" next="1000159"/>
+<ItemSpec id="1000640" questId="10005" personFile="person1" dialogue="100649" next="1000163"/>
+<ItemSpec id="1000641" questId="10009" personFile="person2" dialogue="100650" next="1000173"/>
+<ItemSpec id="1000642" questId="10009" personFile="person3" dialogue="100651" next="1000176"/>
+<ItemSpec id="1000643" questId="10010" personFile="person4" dialogue="100652" next="1000179"/>
+<ItemSpec id="1000644" questId="10010" personFile="person1" dialogue="100653" next="1000182"/>
+<ItemSpec id="1000645" questId="10010" personFile="person2" dialogue="100654" next="1000185"/>
+<ItemSpec id="1000646" questId="10035" personFile="person3" dialogue="100633"/>
+<ItemSpec id="1000647" questId="10036" personFile="person4" dialogue="100634"/>
+<ItemSpec id="1000648" questId="10037" personFile="person1" dialogue="100635"/>
+<ItemSpec id="1000649" questId="10038" personFile="person2" dialogue="100636"/>
+<ItemSpec id="1000650" questId="10039" personFile="person3" dialogue="100637"/>
+<ItemSpec id="1000651" questId="10040" personFile="person4" dialogue="100638"/>
+<ItemSpec id="1000652" questId="10041" personFile="person1" dialogue="100639"/>
+<ItemSpec id="1000653" questId="10042" personFile="person2" dialogue="100640"/>
+<ItemSpec id="1000654" questId="10043" personFile="person3" dialogue="100641"/>
+<ItemSpec id="1000655" questId="10044" personFile="person1" dialogue="100642"/>
+<ItemSpec id="1000656" questId="10045" personFile="person2" dialogue="100643"/>
+<ItemSpec id="1000657" questId="10046" personFile="person3" dialogue="100644"/>
+<ItemSpec id="1000658" questId="10047" personFile="person4" dialogue="100645"/>
+<ItemSpec id="1000659" questId="10048" personFile="person1" dialogue="100646"/>
+<ItemSpec id="1000660" questId="10049" personFile="person2" dialogue="100647"/>
+<ItemSpec id="1000661" questId="10050" personFile="person3" dialogue="100648"/>
+<ItemSpec id="1000662" questId="10051" personFile="person4" dialogue="100649"/>
+<ItemSpec id="1000663" questId="10052" personFile="person1" dialogue="100650"/>
+<ItemSpec id="1000664" questId="10053" personFile="person2" dialogue="100651"/>
+<ItemSpec id="1000665" questId="10054" personFile="person3" dialogue="100652"/>
+<ItemSpec id="1000666" questId="10055" personFile="person4" dialogue="100653"/>
+<ItemSpec id="1000667" questId="10056" personFile="person1" dialogue="100654"/>
+<ItemSpec id="1000668" questId="10057" personFile="person2" dialogue="100655"/>
+<ItemSpec id="1000669" questId="10058" personFile="person3" dialogue="100656"/>
+<ItemSpec id="1000670" personFile="person1" dialogue="100657"/>
+<ItemSpec id="1000671" questId="10059" personFile="person2" dialogue="100679"/>
+<ItemSpec id="1000672" questId="10060" personFile="person3" dialogue="100680"/>
+<ItemSpec id="1000673" questId="10061" personFile="person4" dialogue="100681"/>
+<ItemSpec id="1000674" questId="10062" personFile="person1" dialogue="100682"/>
+<ItemSpec id="1000675" questId="10063" personFile="person2" dialogue="100683"/>
+<ItemSpec id="1000676" questId="10064" personFile="person4" dialogue="100684"/>
 </Group>

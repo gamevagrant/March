@@ -84,8 +84,11 @@ public class LoadingScene : MonoBehaviour
         {
             if (!isInitPlayer)
             {
-                //WaitingPopupManager.instance.Show(GameMainManager.Instance.uiManager);
-
+                Canvas canvas = GameObject.FindObjectOfType<Canvas>();
+                if(canvas!=null)
+                {
+                    WaitingPopupManager.instance.Show(canvas.gameObject);
+                }
             }
             GameMainManager.Instance.netManager.Login(new LoginInfo(), (ret, res) =>
             {
@@ -95,7 +98,10 @@ public class LoadingScene : MonoBehaviour
         }
         else if (!isInitPlayer)
         {
-            qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("210157"));
+            qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("210157"),qy.ui.Alert.OK,(btn)=> {
+                Debug.Log("----------");
+                Application.Quit() ;
+            });
 
         }
 

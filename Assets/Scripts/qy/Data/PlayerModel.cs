@@ -129,7 +129,7 @@ namespace qy
             //检测完成任务条件
             config.QuestItem questItem = playerData.GetQuest();
 
-            //完成过的任务无消耗
+            //完成过的任务无消耗 无经验
             if (!playerData.complatedQuests.ContainsKey(questItem.id))
             {
                 if (playerData.starNum < questItem.requireStar)
@@ -146,18 +146,40 @@ namespace qy
                         return PlayerModelErr.NOT_ENOUGH_PROP;
                     }
                 }
+
                 //扣除完成任务物品
                 playerData.starNum -= questItem.requireStar;
                 foreach (PropItem item in needProps)
                 {
                     playerData.RemovePropItem(item.id, item.count);
                 }
-
                 playerData.complatedQuests.Add(questItem.id,0);
+
+                //获得奖励物品
+                foreach (PropItem item in questItem.prize)
+                {
+
+                    bool isGet = Random.Range(0, 100)<item.rate;
+                    if(isGet)
+                    {
+                        playerData.AddPropItem(item.id, item.count);
+                    }
+                    
+                }
+
+                //获得经验值
+                playerData.totalExp += questItem.exp;
+                playerData.currExp += questItem.exp;
+                //判断升级
+                config.LevelItem levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
+                while (levelItem != null && playerData.currExp >= levelItem.exp)
+                {
+                    playerData.level++;
+                    playerData.currExp -= levelItem.exp;
+                    levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
+                }
             }
            
-            
-
             //更新下个任务
             if (questItem.type == config.QuestItem.QuestType.Main)
             {
@@ -222,23 +244,6 @@ namespace qy
                    
                 }
                 
-            }
-
-            //获得奖励
-            foreach(PropItem item in questItem.prize)
-            {
-                playerData.AddPropItem(item.id,item.count);
-            }
-            //获得经验值
-            playerData.totalExp += questItem.exp;
-            playerData.currExp += questItem.exp;
-            //判断升级
-            config.LevelItem levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
-            while(levelItem!=null && playerData.currExp>= levelItem.exp)
-            {
-                playerData.level++;
-                playerData.currExp -= levelItem.exp;
-                levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
             }
 
             playerData.dirty = true;
@@ -306,8 +311,9 @@ namespace qy
             }
             playerData.coinNum -= cost;
             playerData.SetRoleState(id, PlayerData.RoleState.Normal);
-            SwitchRole(playerData.role.id);
+            SwitchRole(id);
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            playerData.dirty = true;
             return PlayerModelErr.NULL;
         }
 
@@ -317,7 +323,6 @@ namespace qy
             playerData.role = role;
             playerData.nextQuestId = role.questID;
             playerData.SetRoleState(id, PlayerData.RoleState.Normal);
-            playerData.dirty = true;
             SaveData();
         }
 
@@ -325,6 +330,7 @@ namespace qy
         {
             GameMainManager.Instance.netManager.RecoverRole(id, 1, (ret, res) => { });
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            playerData.dirty = true;
             return PlayerModelErr.NULL;
         }
 

@@ -187,8 +187,11 @@ public class UITaskWindow :  UIWindowBase{
                     break;
                 }
             }
+            if (string.IsNullOrEmpty(selectedID))
+            {
+                return;
+            }
         }
-        
         string storyID;
         PlayerModelErr err = GameMainManager.Instance.playerModel.QuestComplate(out storyID, selectedID);
         if(err == PlayerModelErr.NULL)

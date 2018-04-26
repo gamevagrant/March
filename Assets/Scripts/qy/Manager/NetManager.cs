@@ -103,12 +103,18 @@ namespace qy.net
         {
             get
             {
+                //return false;
                 return Application.internetReachability != NetworkReachability.NotReachable;
             }
         }
 
         private bool SendData(string cmd,object jd, Action<bool, PlayerDataMessage> callBack)
         {
+            if(!isNetWorkStatusGood)
+            {
+                Debug.Log("网络不好 不发送消息");
+                return false;
+            }
             if(cmd!= SAVE_OFF_LINE)
             {
                 TrySynchronizationData();
@@ -442,11 +448,10 @@ namespace qy.net
         /// </summary>
         private void TrySynchronizationData()
         {
-            return;
             if (GameMainManager.Instance.playerData.dirty && isNetWorkStatusGood)
             {
                 Debug.Log("开始同步数据");
-                UpLoadOffLineData(GameMainManager.Instance.playerData.ToPlayerDataMessage(), (ret, res) =>
+                UpLoadOffLineData(new PlayerDataServerMessage(GameMainManager.Instance.playerData), (ret, res) =>
                 {
                     GameMainManager.Instance.playerData.dirty = false;
                 });

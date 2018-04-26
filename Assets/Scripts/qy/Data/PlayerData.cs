@@ -316,9 +316,13 @@ namespace qy
             foreach(PlayerDataMessage.PropItem item in message.items)
             {
                 PropItem prop = GameMainManager.Instance.configManager.propsConfig.GetItem(item.itemId);
-                prop.count = item.count;
-                prop.uuid = item.uuid;
-                prop.vanishTime = item.vanishTime;
+                if(prop!=null)
+                {
+                    prop.count = item.count;
+                    prop.uuid = item.uuid;
+                    prop.vanishTime = item.vanishTime;
+                }
+                
      
                 propsDic.Add(item.itemId,prop);
             }
@@ -349,37 +353,13 @@ namespace qy
             ability = new config.Ability(message.discipline,message.loyaty,message.wisdom);
             totalExp = int.Parse(message.storyExp);
             currExp = int.Parse(message.lvExp);
-            level = message.storyLv;
+            level = message.storyLv == 0?1: message.storyLv;
             //-----------------------------------
 
             dirty = false;
 
             SaveData();
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
-        }
-
-        public PlayerDataServerMessage ToPlayerDataMessage()
-        {
-            PlayerDataServerMessage message = new PlayerDataServerMessage();
-            message.storyid = questId;
-            message.heartTime = (hertTimestamp * 1000).ToString();
-            message.gold = coinNum;
-            message.heart = heartNum;
-            message.star = starNum;
-            message.name = nickName;
-            message.uid = userId;
-            message.level = eliminateLevel;
-            message.items = new List<PlayerDataServerMessage.PropItem>();
-            foreach(PropItem item in propsDic.Values)
-            {
-                PlayerDataMessage.PropItem prop = new PlayerDataMessage.PropItem();
-                prop.itemId = item.id;
-                prop.count = item.count;
-                prop.uuid = item.uuid;
-                prop.vanishTime = item.vanishTime;
-            }
-
-            return message;
         }
 
         public override string ToString()

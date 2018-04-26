@@ -118,6 +118,7 @@ namespace qy.ui
             GameObject go = new GameObject("UIRoot");
             Canvas cavas = go.AddComponent<Canvas>();
             cavas.renderMode = RenderMode.ScreenSpaceOverlay;
+            cavas.sortingOrder = 1;
             CanvasScaler canvasScaler = go.AddComponent<CanvasScaler>();
             go.AddComponent<GraphicRaycaster>();
             canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -125,6 +126,7 @@ namespace qy.ui
             canvasScaler.matchWidthOrHeight = 0;
 
             go.AddComponent<UIManager>();
+            GameObject.DontDestroyOnLoad(go);
         }
 
         private void Awake()

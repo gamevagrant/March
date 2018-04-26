@@ -97,12 +97,14 @@ public class UIRoleWindow : UIWindowBase {
 
     public void OnClickStartBtnHandle()
     {
-        PlayerModelErr err = GameMainManager.Instance.playerModel.StartGameWithRole(selectedRoleID);
-        if(err == PlayerModelErr.ROLE_IS_DIE)
+        qy.PlayerData.RoleState state = GameMainManager.Instance.playerData.GetRoleState(selectedRoleID);
+        if (state == qy.PlayerData.RoleState.Dide)
         {
             GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UICallBackWindow, selectedRoleID);
-        }else
+        }
+        else
         {
+            GameMainManager.Instance.playerModel.StartGameWithRole(selectedRoleID);
             OnClickClose();
         }
     }
