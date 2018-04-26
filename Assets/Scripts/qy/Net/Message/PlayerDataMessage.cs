@@ -21,14 +21,14 @@ public class PlayerDataMessage : NetMessage
 
     public RoleData[] roles;
     public StoryData[] stories;
-    public string roleUuid="";//当前角色uuid
+    public string roleUuId="";//当前角色uuid
     public int discipline;
     public int loyaty;
     public int wisdom;
     public string storyExp="0";//总经验
     public string lvExp="0";//当前等级
     public int storyLv=1;//等级
-   
+    
 
     public class PropItem
     {
@@ -92,7 +92,7 @@ public class PlayerDataServerMessage : NetMessage
 
     public List<PlayerDataMessage.RoleData> roles;
     public List<PlayerDataMessage.StoryData> stories;
-    public string roleUuid = "";//当前角色uuid
+    public string roleUuId = "";//当前角色uuid
     public int discipline;
     public int loyaty;
     public int wisdom;

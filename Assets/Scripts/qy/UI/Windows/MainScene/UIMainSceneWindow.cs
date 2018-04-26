@@ -52,7 +52,15 @@ public class UIMainSceneWindow : UIWindowBase {
     //点击任务按钮
     public void OnClickTaskBtn()
     {
-        GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow, GameMainManager.Instance.playerData);
+        if(GameMainManager.Instance.playerData.GetRoleState(GameMainManager.Instance.playerData.role.id) != qy.PlayerData.RoleState.Normal)
+        {
+            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UICallBackWindow, GameMainManager.Instance.playerData.role.id);
+
+        }else
+        {
+            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow, GameMainManager.Instance.playerData);
+        }
+        
     }
     //点击关卡按钮
     public void OnClickLevelBtn()

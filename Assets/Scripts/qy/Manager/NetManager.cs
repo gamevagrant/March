@@ -138,6 +138,7 @@ namespace qy.net
                 {
                     Debug.Log("-----服务器返回错误："+res.errMsg+"-----");
                     Debug.LogWarning("-----服务器返回错误：" + res.errMsg + "-----");
+                    ui.Alert.Show(GetMsgByErrorCode(res.err));
                 }
                 callBack(ret, res);
             });

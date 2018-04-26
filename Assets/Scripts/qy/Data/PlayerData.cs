@@ -293,7 +293,7 @@ namespace qy
 
         public void RefreshData(PlayerDataMessage message)
         {
-            questId = message.storyid;
+            
             hertTimestamp = message.heartTime/1000;
             coinNum = message.gold;
             heartNum = message.heart;
@@ -301,10 +301,7 @@ namespace qy
             nickName = message.name;
             userId = message.uid;
             eliminateLevel = message.level;
-            if(!string.IsNullOrEmpty(nextQuestId))
-            {
-                questId = nextQuestId;
-            }
+            
 
             if(message.sevenDay!=null && message.sevenDay.sevenDayInfo!=null)
             {
@@ -346,9 +343,22 @@ namespace qy
                 }
             }
 
-            if(!string.IsNullOrEmpty(message.roleUuid))
+            if(!string.IsNullOrEmpty(message.roleUuId))
             {
-                role = GameMainManager.Instance.configManager.roleConfig.GetItem(message.roleUuid);
+                string roleID = "101";
+                foreach(PlayerDataMessage.RoleData role in message.roles)
+                {
+                    if(role.uuid == message.roleUuId)
+                    {
+                        roleID = role.roleId;
+                    }
+                }
+                role = GameMainManager.Instance.configManager.roleConfig.GetItem(roleID);
+            }
+            questId = message.storyid;//任务id存到角色数据中有了角色再保存数据
+            if (!string.IsNullOrEmpty(nextQuestId))
+            {
+                questId = nextQuestId;
             }
             ability = new config.Ability(message.discipline,message.loyaty,message.wisdom);
             totalExp = int.Parse(message.storyExp);
