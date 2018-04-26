@@ -13,7 +13,6 @@ public class ProjectBuild
         public string CompanyName;
         public string ApplicationId;
         public string Version;
-        //public int BundleVersionCode;
         public string KeyStorePath;
         public string KeyPassword;
         public string KeyAliasName;
