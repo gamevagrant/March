@@ -9,7 +9,6 @@ public class UISelectItem : MonoBehaviour {
     public SelectItem data;
     public Text text;
     public GameObject selectedTag;
-    public Toggle toggle;
 
 
     public void SetData(SelectItem data)

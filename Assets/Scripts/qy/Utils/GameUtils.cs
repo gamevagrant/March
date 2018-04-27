@@ -188,4 +188,22 @@ public class GameUtils
             rtf.sizeDelta = new Vector2(rtf.rect.height * (size.x / size.y), 0);
         }
     }
+    /// <summary>
+    /// 固定宽度 等比例设置高度
+    /// </summary>
+    /// <param name="rtf"></param>
+    /// <param name="size"></param>
+    public static void ScalingFixedWithWidth(RectTransform rtf, Vector2 size)
+    {
+        rtf.sizeDelta = new Vector2(0, rtf.rect.width / (size.x / size.y));
+    }
+    /// <summary>
+    /// 固定高度 等比例设置宽度
+    /// </summary>
+    /// <param name="rtf"></param>
+    /// <param name="size"></param>
+    public static void ScalingFixedWithHeight(RectTransform rtf, Vector2 size)
+    {
+        rtf.sizeDelta = new Vector2(rtf.rect.height * (size.x / size.y), 0);
+    }
 }

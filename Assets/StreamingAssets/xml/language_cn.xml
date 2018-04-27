@@ -245,7 +245,7 @@
  <ItemSpec id="100318" value="炊事班的老班长说：“哎呀，菜不够了，你们去买些菜吧。\n快去快回，不要耽误了我们炊事班做饭！”"/>
  <ItemSpec id="100319" value="你和三名战士来到一个铺子，说明来意。"/>
  <ItemSpec id="100320" value="老乡似乎没见过红军，以为我们是军阀的部队，非常紧张，急忙给了我们三个黄橙橙的大南瓜。"/>
- <ItemSpec id="100321" value="1这老乡的觉悟和苏区人民一样啊。谢谢老乡！"/>
+ <ItemSpec id="100321" value="这里老乡的觉悟和苏区人民一样啊。谢谢老乡！"/>
  <ItemSpec id="100322" value="回到炊事班，将南瓜交给老班长。\n老班长问我们花了多少钱？"/>
  <ItemSpec id="100323" value="我自豪的说：“老乡送的，没花钱！”"/>
  <ItemSpec id="100324" value="老班长听了，脸色一沉，严厉的批评了我：“三大纪律八项注意中你犯了两条！”"/>
@@ -700,6 +700,36 @@
  <ItemSpec id="200019" value="步数已用完"/>
  <ItemSpec id="200020" value="点击继续"/>
  <ItemSpec id="200021" value="已满"/>
+ <ItemSpec id="200022" value="你拥有整套生命，玩乐时间开始！"/>
+ <ItemSpec id="200023" value="金币不足"/>
+ <ItemSpec id="200024" value="功能暂未开放！"/>
+ <ItemSpec id="200025" value="心数不足！"/>
+ <ItemSpec id="200026" value="任务目标！"/>
+ <ItemSpec id="200027" value="输入名字！"/>
+ <ItemSpec id="200028" value="输入3-6位字符，汉字或数字！"/>
+ <ItemSpec id="200029" value="确定！"/>
+ <ItemSpec id="200030" value="开始任务！"/>
+ <ItemSpec id="200031" value="连接！"/>
+ <ItemSpec id="200032" value="更改名字！"/>
+ <ItemSpec id="200033" value="帮助与支持！"/>
+ <ItemSpec id="200034" value="通知与开启！"/>
+ <ItemSpec id="200035" value="评价我们！"/>
+ <ItemSpec id="200036" value="语言"/>
+ <ItemSpec id="200037" value="设置！"/>
+ <ItemSpec id="200038" value="任务！"/>
+ <ItemSpec id="200039" value="更多生命！"/>
+ <ItemSpec id="200040" value="购买！"/>
+ <ItemSpec id="200041" value="操作无效！"/>
+ <ItemSpec id="200042" value="道具不足！"/>
+ <ItemSpec id="200043" value="生命值不足！"/>
+ <ItemSpec id="200044" value="金币不足！"/>
+ <ItemSpec id="200045" value="星星不足！"/>
+ <ItemSpec id="200046" value="名称已存在！"/>
+ <ItemSpec id="200047" value="名称含有非法字符！"/>
+ <ItemSpec id="200048" value="输入内容不符合规定长度！"/>
+ <ItemSpec id="200049" value="恭喜您，完成了所有关卡。后续我们会增加新的关卡，敬请期待！"/>
+ <ItemSpec id="200050" value=" 用户不存在！"/>
+ <ItemSpec id="200051" value=" 数据异常！"/>
  <ItemSpec id="200110" value="子弹"/>
  <ItemSpec id="200111" value="大刀"/>
  <ItemSpec id="200112" value="红军币"/>
