@@ -64,6 +64,7 @@ public class UITaskWindow :  UIWindowBase{
         AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
         {
             roleHeadImage.sprite = sp;
+            GameUtils.Scaling(roleHeadImage.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
         });
         roleNameText.text = playerdata.role.name;
         resurrectionCountText.text = "";
@@ -211,37 +212,20 @@ public class UITaskWindow :  UIWindowBase{
         {
             //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
             Alert.Show(LanguageManager.instance.GetValueByKey("200010"),Alert.OK,(btn)=>{
-                OpenLevelBeginPopupWindow();
+                Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
+                OnClickClose();
             });
             
         }
         else if(err == PlayerModelErr.NOT_ENOUGH_STAR)
         {
             Alert.Show(LanguageManager.instance.GetValueByKey("200011"), Alert.OK, (btn) => {
-                OpenLevelBeginPopupWindow();
+                Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
+                OnClickClose();
             });
            
         }
         
-    }
-    /// <summary>
-    /// 打开关卡面板
-    /// </summary>
-    private void OpenLevelBeginPopupWindow()
-    {
-        GameMainManager.Instance.netManager.MakePointInEliminateClick((ret, res) => { });
-        if (GameMainManager.Instance.playerData.heartNum < 1)
-        {
-            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200025"));
-        }
-        else if (GameMainManager.Instance.playerData.eliminateLevel > GameMainManager.Instance.configManager.settingConfig.max)
-        {
-            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200049"));
-        }
-        else
-        {
-            WindowManager.instance.Show<BeginPopupWindow>();
-        }
     }
 
     public void OnClickDoBtnHandle()

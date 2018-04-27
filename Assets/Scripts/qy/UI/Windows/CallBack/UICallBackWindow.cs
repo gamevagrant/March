@@ -41,9 +41,10 @@ public class UICallBackWindow : UIWindowBase
             Alert.Show("金币不足\n 快去赚金币吧",Alert.OK,(btn)=> {
 
                 Debug.Log("赚金币");
-
+                Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
             },"赚金币");
         }
+        GameMainManager.Instance.uiManager.CloseWindow(qy.ui.UISettings.UIWindowID.UIRoleWindow);
         OnClickClose();
     }
 

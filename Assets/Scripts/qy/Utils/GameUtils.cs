@@ -164,4 +164,28 @@ public class GameUtils
         Vector2 offsetMove = new Vector2(offset.x * size.x, offset.y * size.y);
         rt.anchoredPosition += offsetMove;
     }
+
+    /// <summary>
+    /// 等比设置宽高 根据rtf是固定宽度还是高度，用size的值动态设置高度或者宽度
+    /// </summary>
+    /// <param name="rtf"></param>
+    /// <param name="size"></param>
+    public static void Scaling(RectTransform rtf, Vector2 size)
+    {
+        if(rtf.anchorMin == rtf.anchorMax)//居中
+        {
+            rtf.sizeDelta = size;
+        }
+        else if(rtf.anchorMin.x!=rtf.anchorMax.x&&rtf.anchorMin.y!=rtf.anchorMax.y)//四周固定
+        {
+
+        }else if(rtf.anchorMin.x != rtf.anchorMax.x)//固定宽度
+        {
+            rtf.sizeDelta = new Vector2(0, rtf.rect.width / (size.x / size.y));
+        }
+        else if(rtf.anchorMin.y != rtf.anchorMax.y)//固定高度
+        {
+            rtf.sizeDelta = new Vector2(rtf.rect.height * (size.x / size.y), 0);
+        }
+    }
 }

@@ -33,6 +33,7 @@ public class UIDialogueWindow : UIWindowBase {
 
     private qy.config.StoryItem lastDialogue;//上一句对话
     private qy.config.StoryItem curDialogue;//当前对话
+    private bool isMoveing = false;
 
     private string beginID;
 
@@ -58,18 +59,21 @@ public class UIDialogueWindow : UIWindowBase {
 
     protected override void EnterAnimation(Action onComplete)
     {
+        isMoveing = true;
         topBlack.DOSizeDelta(new Vector2(topBlack.sizeDelta.x, 150),0.5f);
         bottomBlack.DOSizeDelta(new Vector2(bottomBlack.sizeDelta.x, 150), 0.5f).OnComplete(()=> {
             onComplete();
+            isMoveing = false;
         });
     }
 
     protected override void ExitAnimation(Action onComplete)
     {
-        
+        isMoveing = true;
         topBlack.DOSizeDelta(new Vector2(topBlack.sizeDelta.x, 0), 0.5f);
         bottomBlack.DOSizeDelta(new Vector2(bottomBlack.sizeDelta.x, 0), 0.5f).OnComplete(() => {
             onComplete();
+            isMoveing = false;
         });
         imgBG.DOFade(0, 0.5f);
         personLeft.DOFade(0, 0.3f);
@@ -132,10 +136,11 @@ public class UIDialogueWindow : UIWindowBase {
     /// <param name="isTurn">是否更换说话者</param>
     private void ShowDialog(string dialog,string talkerPic,string talkerPosition,bool isTurn)
     {
-        DOTween.KillAll();
+        //DOTween.KillAll();
         dialogText.text = "";
         if (isTurn)
         {
+            isMoveing = true;
             Sequence sq = DOTween.Sequence();
             if (dialogueBox.gameObject.activeSelf)
             {
@@ -143,17 +148,19 @@ public class UIDialogueWindow : UIWindowBase {
                 sq.AppendCallback(()=> {
                     HideDialogBox(talkerPosition=="0"?"1":"0");
                 });
-                sq.AppendInterval(0.5f);
+                sq.AppendInterval(0.3f);
             }
             ShowTalker(talkerPic,talkerPosition);
             sq.AppendCallback(() =>
             {
                 ShowDialogBox( talkerPosition);
             });
-            sq.AppendInterval(0.5f);
+            sq.AppendInterval(0.3f);
+            sq.AppendCallback(()=> {
+                isMoveing = false;
+            });
             sq.Append(dialogText.DOText(dialog, 1, true));
-            
-            
+
         }
         else
         {
@@ -206,7 +213,7 @@ public class UIDialogueWindow : UIWindowBase {
        
         CanvasGroup dialogCanvasGroup = dialogueBox.GetComponent<CanvasGroup>();
         //dialogCanvasGroup.alpha = 0.5f;
-        dialogCanvasGroup.DOFade(1, 0.3f);
+        dialogCanvasGroup.DOFade(1, 0.2f);
         dialogueBox.gameObject.SetActive(true);
         
         if (position == "0")
@@ -214,7 +221,7 @@ public class UIDialogueWindow : UIWindowBase {
             dialogueBox.anchorMin = new Vector2(0, 0);
             dialogueBox.anchorMax = new Vector2(0.5f, 0);
 
-            dialogueBox.DOAnchorMax(new Vector2(1, 0), 0.3f);
+            dialogueBox.DOAnchorMax(new Vector2(1, 0), 0.2f);
             
         }
         else
@@ -222,7 +229,7 @@ public class UIDialogueWindow : UIWindowBase {
             dialogueBox.anchorMin = new Vector2(0.5f, 0);
             dialogueBox.anchorMax = new Vector2(1, 0);
 
-            dialogueBox.DOAnchorMin(new Vector2(0, 0), 0.3f);
+            dialogueBox.DOAnchorMin(new Vector2(0, 0), 0.2f);
         }
         
     }
@@ -231,23 +238,33 @@ public class UIDialogueWindow : UIWindowBase {
     {
         
         CanvasGroup dialogCanvasGroup = dialogueBox.GetComponent<CanvasGroup>();
-        dialogCanvasGroup.DOFade(0, 0.3f);
+        dialogCanvasGroup.DOFade(0, 0.2f);
 
         dialogText.text = "";
         if (position == "0")
         {
 
-            dialogueBox.DOAnchorMax(new Vector2(0.5f, 0), 0.3f);
+            dialogueBox.DOAnchorMax(new Vector2(0.5f, 0), 0.2f);
 
         }
         else
         {
-            dialogueBox.DOAnchorMin(new Vector2(0.5f, 0), 0.3f);
+            dialogueBox.DOAnchorMin(new Vector2(0.5f, 0), 0.2f);
         }
     }
 
     public void OnClickHandle()
     {
+        if(isMoveing)
+        {
+            return;
+        }
+        if(DOTween.TotalPlayingTweens()>0)
+        {
+            DOTween.CompleteAll();
+            return;
+        }
+        
         qy.config.StoryItem story = curDialogue.nextStory;
         if(story!=null)
         {

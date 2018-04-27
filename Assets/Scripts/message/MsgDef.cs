@@ -14,6 +14,7 @@ public enum ELocalMsgID
     CloseModifyPanel  = 4,
     EliminateBoosterRefresh = 5,
     ShowDailyLandingActivites = 6,
+    OpenLevelBeginPanel,
 }
 
 /// <summary>
