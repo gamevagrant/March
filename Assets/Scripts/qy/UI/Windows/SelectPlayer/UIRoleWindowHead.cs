@@ -21,6 +21,7 @@ public class UIRoleWindowHead : BaseItemView {
         AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
         {
             head.sprite = sp;
+            GameUtils.Scaling(head.transform as RectTransform, new Vector2(sp.texture.width, sp.texture.height));
         });
 
         qy.PlayerData.RoleState state = qy.GameMainManager.Instance.playerData.GetRoleState(this.data.id);

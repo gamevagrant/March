@@ -30,12 +30,14 @@ public class UIMainSceneWindow : UIWindowBase
     private void Awake()
     {
         Messenger.AddListener(ELocalMsgID.RefreshBaseData, UpdateUI);
+        Messenger.AddListener(ELocalMsgID.OpenLevelBeginPanel, OnClickLevelBtn);
         UpdateUI();
     }
 
     private void OnDestroy()
     {
         Messenger.RemoveListener(ELocalMsgID.RefreshBaseData, UpdateUI);
+        Messenger.RemoveListener(ELocalMsgID.OpenLevelBeginPanel, OnClickLevelBtn);
     }
 
     private void Update()

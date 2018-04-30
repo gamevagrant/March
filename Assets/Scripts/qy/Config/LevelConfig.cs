@@ -56,7 +56,7 @@ namespace qy.config
             dic.TryGetValue(level, out value);
             if (value == null)
             {
-                Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1}的项", Name(), level));
+                //Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1}的项", Name(), level));
             }
             return value;
         }

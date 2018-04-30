@@ -1,13 +1,12 @@
-﻿using March.Core.WindowManager;
-using qy;
-using qy.config;
-using qy.ui;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using qy.ui;
+using qy;
+using qy.config;
 using UnityEngine.UI;
-
-public class UITaskWindow : UIWindowBase
-{
+using March.Core.WindowManager;
+public class UITaskWindow :  UIWindowBase{
 
     public override UIWindowData windowData
     {
@@ -25,7 +24,6 @@ public class UITaskWindow : UIWindowBase
 
     public Image roleHeadImage;
     public Text roleNameText;
-    public Text resurrectionCountText;
     public Slider loyaltySlider;
     public Slider wisdomSlider;
     public Slider discipline;
@@ -39,11 +37,9 @@ public class UITaskWindow : UIWindowBase
     public GameObjectPool selectPool;
     public Text tipsText;
     public Text doBtnText;
-    public RectTransform missionTopTF;
-    public RectTransform missionBottomTF;
-    public RectTransform missionBottomSelectTF;
-    public RectTransform taskBgTF;
-    public RectTransform taskDesTF;
+    public RectTransform missionTF;
+    public RectTransform buttonsTF;
+    public RectTransform actionBtn;
 
     private qy.PlayerData playerdata;
     private qy.config.QuestItem questItem;
@@ -52,9 +48,11 @@ public class UITaskWindow : UIWindowBase
     {
         qy.PlayerData player = data[0] as qy.PlayerData;
         playerdata = player;
-
+        
         UpdatePanel();
+        
     }
+
 
     private void UpdatePanel()
     {
@@ -63,69 +61,59 @@ public class UITaskWindow : UIWindowBase
         AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
         {
             roleHeadImage.sprite = sp;
+            GameUtils.Scaling(roleHeadImage.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
         });
         roleNameText.text = playerdata.role.name;
-        resurrectionCountText.text = "";
         loyaltySlider.value = playerdata.ability.loyalty / 100f;
         wisdomSlider.value = playerdata.ability.wisdom / 100f;
         discipline.value = playerdata.ability.discipline / 100f;
-        levelText.text = "等级：" + playerdata.level.ToString();
+        levelText.text = playerdata.level.ToString();
 
         qy.config.LevelItem levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerdata.level);
-        if (levelItem != null)
+        if(levelItem!=null)
         {
             float expProgress = playerdata.currExp / (float)levelItem.exp;
             levelSlider.value = expProgress;
-            levelProgressText.text = (expProgress * 100).ToString("f0") + "%";
-        }
-        else
+            levelProgressText.text = (expProgress*100).ToString("f0")+"%";
+        }else
         {
             levelSlider.value = 0;
             levelProgressText.text = "0%";
         }
+        
 
-
-        if (!string.IsNullOrEmpty(questItem.bg))
+        if(!string.IsNullOrEmpty(questItem.bg))
         {
-            taskBgTF.anchorMax = new Vector2(0.49f, 1);
-            taskDesTF.anchorMin = new Vector2(0.51f, 0);
+            taskImg.gameObject.SetActive(true);
             string taskBGUrl = FilePathTools.GetStorySpritePath(questItem.bg);
             AssetsManager.Instance.LoadAssetAsync<Sprite>(taskBGUrl, (sp) =>
             {
                 taskImg.sprite = sp;
+                GameUtils.ScalingFixedWithHeight(taskImg.transform as RectTransform, new Vector2(sp.texture.width, sp.texture.height));
             });
-        }
-        else
+        }else
         {
-            taskBgTF.anchorMax = new Vector2(0, 1);
-            taskDesTF.anchorMin = new Vector2(0, 0);
+            taskImg.gameObject.SetActive(false);
         }
 
-
+        
         taskTitle.text = questItem.sectionName;
         taskDesText.text = questItem.sectionDes;
 
 
-
-        if (questItem.type == qy.config.QuestItem.QuestType.Branch)
-        {
-            SetSelectTask();
-        }
-        else
-        {
-            SetMainTask();
-        }
+        SetMainTask();
     }
 
     private void SetSelectTask()
     {
-        missionBottomSelectTF.gameObject.SetActive(true);
-        missionBottomTF.gameObject.SetActive(false);
-        missionTopTF.anchorMin = new Vector2(0, 0.5f);
+        buttonsTF.gameObject.SetActive(true);
+        actionBtn.gameObject.SetActive(false);
+        taskImg.gameObject.SetActive(false);
+        missionTF.anchorMin = new Vector2(0, 0.65f);
 
         selectPool.resetAllTarget();
         List<SelectItem> selects = questItem.selectList;
-        foreach (SelectItem item in selects)
+        foreach(SelectItem item in selects)
         {
             UISelectItem cell = selectPool.getIdleTarget<UISelectItem>();
             cell.SetData(item);
@@ -134,15 +122,15 @@ public class UITaskWindow : UIWindowBase
 
     private void SetMainTask()
     {
-        missionBottomSelectTF.gameObject.SetActive(false);
-        missionBottomTF.gameObject.SetActive(true);
-        missionTopTF.anchorMin = new Vector2(0, 0.35f);
+        buttonsTF.gameObject.SetActive(false);
+        actionBtn.gameObject.SetActive(true);
+        missionTF.anchorMin = new Vector2(0,0.2f);
 
         propPool.resetAllTarget();
-        if (!playerdata.ContainsComplateQuest(playerdata.questId))
+        if(!playerdata.ContainsComplateQuest(playerdata.questId))
         {
             List<PropItem> props = new List<PropItem>();
-            if (questItem.requireStar > 0)
+            if(questItem.requireStar>0)
             {
                 props.Add(new PropItem()
                 {
@@ -151,7 +139,7 @@ public class UITaskWindow : UIWindowBase
                     count = questItem.requireStar,
                 });
             }
-
+            
             props.AddRange(questItem.requireItem);
             foreach (PropItem item in props)
             {
@@ -170,87 +158,61 @@ public class UITaskWindow : UIWindowBase
 
             }
         }
-
+        
     }
 
-    private void DoTask()
+    private void DoTask(string selectedID = "")
     {
-
-        string selectedID = "";
-        if (questItem.type == qy.config.QuestItem.QuestType.Branch)
-        {
-            List<UISelectItem> list = selectPool.getActiveTargets<UISelectItem>();
-            foreach (UISelectItem item in list)
-            {
-                IEnumerable<Toggle> t = item.toggle.group.ActiveToggles();
-                if (item.toggle.isOn)
-                {
-                    selectedID = item.data.id;
-                    break;
-                }
-            }
-            if (string.IsNullOrEmpty(selectedID))
-            {
-                return;
-            }
-        }
+        
         string storyID;
         PlayerModelErr err = GameMainManager.Instance.playerModel.QuestComplate(out storyID, selectedID);
-        if (err == PlayerModelErr.NULL)
+        if(err == PlayerModelErr.NULL)
         {
-            if (!string.IsNullOrEmpty(storyID) && storyID != "0")
+            if(!string.IsNullOrEmpty(storyID)&&storyID!="0")
             {
                 GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIDialogueWindow, storyID);
                 OnClickClose();
-            }
-            else
+            }else
             {
-                GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow, playerdata);
+                GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow,playerdata);
                 //UpdatePanel();
             }
-
-        }
-        else if (err == PlayerModelErr.NOT_ENOUGH_PROP)
+            
+        }else if(err == PlayerModelErr.NOT_ENOUGH_PROP)
         {
             //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
-            Alert.Show(LanguageManager.instance.GetValueByKey("200010"), Alert.OK, (btn) =>
-            {
-                OpenLevelBeginPopupWindow();
+            Alert.Show(LanguageManager.instance.GetValueByKey("200010"),Alert.OK,(btn)=>{
+                Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
+                OnClickClose();
             });
-
+            
         }
-        else if (err == PlayerModelErr.NOT_ENOUGH_STAR)
+        else if(err == PlayerModelErr.NOT_ENOUGH_STAR)
         {
-            Alert.Show(LanguageManager.instance.GetValueByKey("200011"), Alert.OK, (btn) =>
-            {
-                OpenLevelBeginPopupWindow();
+            Alert.Show(LanguageManager.instance.GetValueByKey("200011"), Alert.OK, (btn) => {
+                Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
+                OnClickClose();
             });
-
+           
         }
-
-    }
-    /// <summary>
-    /// 打开关卡面板
-    /// </summary>
-    private void OpenLevelBeginPopupWindow()
-    {
-        GameMainManager.Instance.netManager.MakePointInEliminateClick((ret, res) => { });
-        if (GameMainManager.Instance.playerData.heartNum < 1)
-        {
-            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200025"));
-        }
-        else if (GameMainManager.Instance.playerData.eliminateLevel > GameMainManager.Instance.configManager.settingConfig.max)
-        {
-            WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("200049"));
-        }
-        else
-        {
-            WindowManager.instance.Show<BeginPopupWindow>();
-        }
+        
     }
 
     public void OnClickDoBtnHandle()
     {
-        DoTask();
+        if (questItem.type == qy.config.QuestItem.QuestType.Branch)
+        {
+            SetSelectTask();
+        }else
+        {
+            DoTask();
+        }
+        
+    }
+
+    public void OnClickSelectBtn(UISelectItem btn)
+    {
+
+        DoTask(btn.data.id);
     }
 }

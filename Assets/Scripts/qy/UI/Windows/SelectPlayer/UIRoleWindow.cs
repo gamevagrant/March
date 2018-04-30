@@ -70,6 +70,7 @@ public class UIRoleWindow : UIWindowBase {
         AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
         {
             head.sprite = sp;
+            GameUtils.Scaling(head.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
         });
 
         loyaltySlider.value = item.ability.loyalty/100f;
@@ -107,5 +108,21 @@ public class UIRoleWindow : UIWindowBase {
             GameMainManager.Instance.playerModel.StartGameWithRole(selectedRoleID);
             OnClickClose();
         }
+    }
+
+    public void OnClickHead(UIRoleWindowHead head)
+    {
+        RoleItem selectRole = head.data;
+        List<RoleItem> roles = GameMainManager.Instance.configManager.roleConfig.GetRoleList();
+        for(int i =0;i<roles.Count;i++)
+        {
+            RoleItem role = roles[i];
+            if (role.id == selectRole.id)
+            {
+                scrollView.SetSelected(i);
+                break;
+            }
+        }
+
     }
 }
