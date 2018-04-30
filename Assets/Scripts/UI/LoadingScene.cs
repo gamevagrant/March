@@ -4,7 +4,8 @@ using March.Scene;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using System.Collections;
+using qy;
 public class LoadingScene : MonoBehaviour
 {
     private LoadingSceneLoader loader;
@@ -33,22 +34,10 @@ public class LoadingScene : MonoBehaviour
 
         yield return loader.Load();
 
-        AddConfig<storyhead>();
-        AddConfig<quest>();
-        AddConfig<story>();
-        AddConfig<item>();
-        AddConfig<setting>();
-        AddConfig<matchlevel>();
-        AddConfig<exchange>();
-        AddConfig<guidesetup>();
-        //AddConfig<language>();
-
-        LanguageManager.instance.initConfig();
-
-        qy.GameMainManager.Instance.configManager.LoadConfig(() =>
+        GameMainManager.Instance.configManager.LoadConfig(() =>
         {
-            LoadScene();
-        });     
+            StartCoroutine(LoadScene());
+        });
     }
 
     void Update()
@@ -56,7 +45,7 @@ public class LoadingScene : MonoBehaviour
         if (m_async != null && m_progressBar != null)
         {
             m_progressBar.fillAmount = m_async.progress;
-            Debug.Log("------" + m_async.progress.ToString());
+            Debug.Log("------" + m_async.progress);
             if (m_async.progress >= 1.0f)
             {
                 m_progressBar_right.gameObject.SetActive(true);
@@ -64,15 +53,42 @@ public class LoadingScene : MonoBehaviour
         }
     }
 
-    private void AddConfig<T>() where T : DatabaseConfig, new()
-    {
-        T config = new T();
-        StartCoroutine(XMLDataManager.instance.loadXML(config));
-    }
-
-    private void LoadScene()
+    private IEnumerator LoadScene()
     {
         //m_async = SceneManager.LoadSceneAsync("main");
         m_async = SceneManager.LoadSceneAsync("Film");
+        yield return m_async;
+        Login();
+    }
+
+    public void Login()
+    {
+        GameMainManager.Instance.playerModel.UpdateHeart();
+        bool isNetGood = GameMainManager.Instance.netManager.isNetWorkStatusGood;
+        bool isInitPlayer = !string.IsNullOrEmpty(GameMainManager.Instance.playerData.userId);
+        if (isNetGood)
+        {
+            if (!isInitPlayer)
+            {
+                Canvas canvas = FindObjectOfType<Canvas>();
+                if (canvas != null)
+                {
+                    WaitingPopupManager.instance.Show(canvas.gameObject);
+                }
+            }
+            GameMainManager.Instance.netManager.Login(new LoginInfo(), (ret, res) =>
+            {
+
+                WaitingPopupManager.instance.Close();
+            });
+        }
+        else if (!isInitPlayer)
+        {
+            qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("210157"), qy.ui.Alert.OK, (btn) =>
+            {
+                Debug.Log("----------");
+                Application.Quit();
+            });
+        }
     }
 }

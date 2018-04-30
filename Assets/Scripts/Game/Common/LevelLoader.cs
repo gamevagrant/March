@@ -67,9 +67,9 @@ public class LevelLoader : MonoSingleton<LevelLoader>
     [Header("Cake")]
     public int cake;
 
-    private matchlevel m_matchlevel;
+    //private matchlevel m_matchlevel;
 
-    public matchlevel LevelConfig { get { if (m_matchlevel == null) { m_matchlevel = DefaultConfig.getInstance().GetConfigByType<matchlevel>(); } return m_matchlevel; } }
+    //public matchlevel LevelConfig { get { if (m_matchlevel == null) { m_matchlevel = DefaultConfig.getInstance().GetConfigByType<matchlevel>(); } return m_matchlevel; } }
 
     public void LoadLevel()
     {

@@ -8,22 +8,22 @@ namespace qy.config
     {
 
         private Dictionary<string, ExchangeItem> dic = new Dictionary<string, ExchangeItem>();
-        public override string Name
+        private List<ExchangeItem> list = new List<ExchangeItem>();
+        public override string Name()
         {
-            get
-            {
-                return "exchange.xml";
-            }
+            return "exchange.xml";
         }
 
         internal override void ReadItem(XmlElement item)
         {
-            ExchangeItem matchLevel = new ExchangeItem();
-            matchLevel.id = item.GetAttribute("id");
-            matchLevel.dollar = float.Parse(item.GetAttribute("dollar"));
-            matchLevel.gold = int.Parse(item.GetAttribute("gold_doller"));
+            ExchangeItem exchangeItem = new ExchangeItem();
+            exchangeItem.id = item.GetAttribute("id");
+            exchangeItem.dollar = float.Parse(item.GetAttribute("dollar"));
+            exchangeItem.gold = int.Parse(item.GetAttribute("gold_doller"));
 
-            dic.Add(matchLevel.id, matchLevel);
+            dic.Add(exchangeItem.id, exchangeItem);
+            list.Add(exchangeItem);
+
         }
 
         public ExchangeItem GetItem(string id)
@@ -31,6 +31,11 @@ namespace qy.config
             ExchangeItem value;
             dic.TryGetValue(id, out value);
             return value;
+        }
+
+        public List<ExchangeItem> GetList()
+        {
+            return list;
         }
     }
 

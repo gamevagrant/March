@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using qy;
 
 public class SureQuitPopup : MonoBehaviour
 {
@@ -39,7 +40,8 @@ public class SureQuitPopup : MonoBehaviour
 
     public void onQuitClick()
     {
-        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
+        //NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
+        GameMainManager.Instance.playerModel.EndLevel(LevelLoader.instance.level, false, board.allstep, 0);
         SceneManager.LoadScene("main");
     }
 

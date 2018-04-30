@@ -13,7 +13,7 @@ namespace qy
         {
             get
             {
-                return GetData<PlayerData>("PLAYER_DATA");
+                return GetData<PlayerData>("PLAYER_DATA")??new PlayerData();
             }
             set
             {

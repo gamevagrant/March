@@ -44,7 +44,7 @@ public class UIDialogueWindow : UIWindowBase {
     protected override void StartShowWindow(object[] data)
     {
         beginID = data[0].ToString();
-
+        Debug.Log("播放剧情"+beginID.ToString());
         lastDialogue = null;
         curDialogue = null;
         dialogueBox.GetComponent<CanvasGroup>().alpha = 0;
@@ -79,7 +79,7 @@ public class UIDialogueWindow : UIWindowBase {
 
     protected override void EndShowWindow()
     {
-        ShowStory(ConfigManager.Instance.storysConfig.GetItem(beginID));
+        ShowStory(qy.GameMainManager.Instance.configManager.storysConfig.GetItem(beginID));
     }
 
     protected override void EndHideWindow()
@@ -255,7 +255,14 @@ public class UIDialogueWindow : UIWindowBase {
             ShowStory(story);
         }else
         {
-            
+            qy.config.QuestItem nextQuest = qy.GameMainManager.Instance.playerData.GetQuest();
+            if(nextQuest.type == qy.config.QuestItem.QuestType.Ending)
+            {
+                qy.GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow,nextQuest);
+            }else
+            {
+                qy.GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow,qy.GameMainManager.Instance.playerData);
+            }
             OnClickClose();
         }
         

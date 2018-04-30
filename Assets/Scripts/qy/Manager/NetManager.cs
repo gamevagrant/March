@@ -4,7 +4,8 @@ using UnityEngine;
 using System;
 using LitJson;
 using qy.config;
-
+using March.Core.Network;
+using BestHTTP;
 namespace qy.net
 {
     
@@ -24,9 +25,14 @@ namespace qy.net
         public static string LEVEL_FIVEMORE = "level.fivemore";
         public static string CHANGE_NAME = "user.modify.nickName";
         public static string SAVE_OFF_LINE = "offline.save";
-        public static string SAVE_DAY_INFO = "sevenDay.info";
-        public static string SAVE_DAY_AWARD = "sevenDay.award";
+        public static string SEVEN_DAY_INFO = "sevenDay.info";
+        public static string SEVEN_DAY_AWARD = "sevenDay.award";
         public static string MAKE_POINT_ELIMINATEGUIDE = "eliminateGuide.makepoint";
+        public static string MAKE_POINT_CLICK = "buttonClick.makepoint";
+
+        public static string ROLE_SWITCH = "role.choose";
+        public static string ROLE_RECOVER = "role.recover";
+        public static string ROLE_END = "role.end";
 
         private static NetManager _instance;
         public static NetManager Instance
@@ -93,70 +99,61 @@ namespace qy.net
 
         }
 
-        public bool isNetWorkStatusGood()
+        public bool isNetWorkStatusGood
         {
-            //todo:加入ping机制 ping不通服务器的话取用本地数据
-            if (!(Application.internetReachability == NetworkReachability.NotReachable))
-                return true;
-            else
+            get
             {
-
-                return false;
+                //return false;
+                return Application.internetReachability != NetworkReachability.NotReachable;
             }
         }
 
         private bool SendData(string cmd,object jd, Action<bool, PlayerDataMessage> callBack)
         {
+            if(!isNetWorkStatusGood)
+            {
+                Debug.Log("网络不好 不发送消息");
+                return false;
+            }
+            if(cmd!= SAVE_OFF_LINE)
+            {
+                TrySynchronizationData();
+            }
+            
             string url = APIDomain;
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("cmd", cmd);
             data.Add("uid", uid);
-            data.Add("data",JsonMapper.ToJson(jd ?? "") );
+            data.Add("data", jd == null ? "" : JsonMapper.ToJson(jd));
 
             return HttpProxy.SendPostRequest<PlayerDataMessage>(url, data, (ret, res) =>
             {
                 if (res.isOK)
                 {
+                  
                     GameMainManager.Instance.playerData.RefreshData(res as PlayerDataMessage);
 
                 }
                 else
                 {
-                    Debug.Log(GetMsgByErrorCode(res.err));
+                    Debug.Log("-----服务器返回错误："+res.errMsg+"-----");
+                    Debug.LogWarning("-----服务器返回错误：" + res.errMsg + "-----");
+                    ui.Alert.Show(GetMsgByErrorCode(res.err));
                 }
                 callBack(ret, res);
             });
         }
 
-        /// <summary>
-        /// 发送自定义数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="cmd"></param>
-        /// <param name="obj"></param>
-        /// <param name="callBack"></param>
-        /// <returns></returns>
-        public bool SendQuest<T>(string cmd,object obj, Action<bool, T> callBack)where T:NetMessage
+        public void SendRequest<T>(T handler) where T : INetHandler
         {
-            string url = APIDomain;
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            data.Add("cmd", cmd);
-            data.Add("uid", uid);
-            data.Add("data", JsonMapper.ToJson(obj ?? ""));
-            return HttpProxy.SendPostRequest<T>(url, data, (ret, res) =>
-            {
-                if (res.isOK)
-                {
-                    
-
-                }
-                else
-                {
-                    Debug.Log(GetMsgByErrorCode(res.err));
-                }
-                callBack(ret, res);
-            });
+            TrySynchronizationData();
+            HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, handler.OnRecieve);
+            request.AddField("uid", uid);
+            request.AddField("cmd", handler.GetCommand());
+            request.AddField("data", handler.GetData());
+            request.Send();
         }
+ 
 
         /// <summary>
         /// 登录
@@ -166,7 +163,8 @@ namespace qy.net
         /// <returns></returns>
         public bool Login(LoginInfo loginInfo, Action<bool, PlayerDataMessage> callBack)
         {
-            if(!isNetWorkStatusGood())
+            //TrySynchronizationData();
+            if (!isNetWorkStatusGood)
             {
                 PlayerData pd = LocalDatasManager.playerData;
                 if(pd!=null)
@@ -207,10 +205,20 @@ namespace qy.net
         /// <param name="playerData"></param>
         /// <param name="callBack"></param>
         /// <returns></returns>
-        public bool UpLoadOffLineData(PlayerDataMessage playerData, Action<bool, PlayerDataMessage> callBack)
+        public bool UpLoadOffLineData(PlayerDataServerMessage playerData, Action<bool, PlayerDataMessage> callBack)
         {
 
-            return SendData(SAVE_OFF_LINE, playerData, callBack);
+            return SendData(SAVE_OFF_LINE, playerData, (ret,res)=> {
+                if(res.isOK)
+                {
+                    Debug.Log("===============【上传离线数据成功】==============");
+                }
+                else
+                {
+                    Debug.Log("============【上传离线数据失败】==============" + GetMsgByErrorCode(res.err));
+                }
+                callBack(ret,res);
+            });
         }
 
         /// <summary>
@@ -229,16 +237,17 @@ namespace qy.net
             return SendData(ITEM_DEL_CMD, jd, callBack);
         }
         /// <summary>
-        /// 更新当前任务id
+        /// 完成当前任务
         /// </summary>
         /// <param name="questId"></param>
         /// <param name="callBack"></param>
         /// <returns></returns>
-        public bool UpdateQuestId(string questId, Action<bool, PlayerDataMessage> callBack)
+        public bool ComplateQuestId(string questId,qy.config.Ability ability, Action<bool, PlayerDataMessage> callBack)
         {
 
             JsonData jd = new JsonData();
             jd["storyid"] = questId;
+            jd["choice"] = string.Format("{0}|{1}|{2}",ability.discipline,ability.loyalty,ability.wisdom);
 
             return SendData(SAVE_STORY_CMD, jd, callBack);
         }
@@ -304,6 +313,23 @@ namespace qy.net
             jd["step"] = step;
             return SendData(MAKE_POINT_ELIMINATEGUIDE, jd, callBack);
         }
+
+        public bool MakePointInEliminateStart(Action<bool, PlayerDataMessage> callBack)
+        {
+            return MakePointInClickButton("EliminateStart", 1, callBack);
+        }
+        public bool MakePointInEliminateClick(Action<bool, PlayerDataMessage> callBack)
+        {
+            return MakePointInClickButton("Eliminate", 1, callBack);
+        }
+        public bool MakePointInClickButton(string name, int num, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["name"] = name;
+            jd["num"] = num;
+            Debug.Log("MakePointInClickButton Result:" + jd.ToJson());
+            return SendData(ServerGlobal.MAKE_POINT_CLICK, jd, callBack);
+        }
         /// <summary>
         /// 购买生命
         /// </summary>
@@ -336,7 +362,10 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["nickName"] = nickName;
 
-            return SendData(CHANGE_NAME, jd, callBack);
+            return SendData(CHANGE_NAME, jd, (ret,res)=> {
+                callBack(ret, res);
+                Messenger.Broadcast(ELocalMsgID.CloseModifyPanel);
+            });
         }
 
         /// <summary>
@@ -345,11 +374,17 @@ namespace qy.net
         /// <param name="nickName"></param>
         /// <param name="callBack"></param>
         /// <returns></returns>
-        public bool SaveDayAward( Action<bool, PlayerDataMessage> callBack)
+        public bool SevenDayAward( Action<bool, PlayerDataMessage> callBack)
         {
-            JsonData jd = new JsonData();
+            return SendData(SEVEN_DAY_AWARD, new object(), (ret,res)=> {
+                callBack(ret, res);
+                Messenger.Broadcast(ELocalMsgID.ShowDailyLandingActivites);
+            });
+        }
 
-            return SendData(SAVE_DAY_AWARD, jd, callBack);
+        public bool SevenDayInfo(Action<bool, PlayerDataMessage> callBack)
+        {
+            return SendData(SEVEN_DAY_INFO, new object(), callBack);
         }
 
         public bool UserBind(string id, string name, Action<bool, PlayerDataMessage> callBack)
@@ -369,7 +404,61 @@ namespace qy.net
 
             return SendData(BIND_CMD, jd, callBack);
         }
+        /// <summary>
+        /// 选择角色
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="callBack"></param>
+        /// <returns></returns>
+        public bool SwitchRole(string id, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["roleId"] = id;
 
+            return SendData(ROLE_SWITCH, jd, callBack);
+        }
+        /// <summary>
+        /// 复活角色
+        /// </summary>
+        /// <param name="id">角色id</param>
+        /// <param name="type"> 0金币 ，1道具</param>
+        /// <param name="callBack"></param>
+        /// <returns></returns>
+        public bool RecoverRole(string id,int type, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["roleId"] = id;
+            jd["type"] = type;
+            return SendData(ROLE_RECOVER, jd, callBack);
+        }
+        /// <summary>
+        /// 角色结局
+        /// </summary>
+        /// <param name="type"> 1死亡 ，2通关 </param>
+        /// <param name="callBack"></param>
+        /// <returns></returns>
+        public bool EndingRole(int type, Action<bool, PlayerDataMessage> callBack)
+        {
+            JsonData jd = new JsonData();
+            jd["type"] = type;
+            return SendData(ROLE_END, jd, callBack);
+        }
+
+        /// <summary>
+        /// 尝试进行同步
+        /// </summary>
+        private void TrySynchronizationData()
+        {
+            if (GameMainManager.Instance.playerData.dirty && isNetWorkStatusGood)
+            {
+                Debug.Log("开始同步数据");
+                UpLoadOffLineData(new PlayerDataServerMessage(GameMainManager.Instance.playerData), (ret, res) =>
+                {
+                    GameMainManager.Instance.playerData.dirty = false;
+                });
+            }
+
+        }
 
         private string GetMsgByErrorCode(string errorcode)
         {

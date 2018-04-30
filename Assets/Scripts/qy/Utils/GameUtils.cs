@@ -129,4 +129,39 @@ public class GameUtils
         }
         return str;
     }
+
+    public static Vector2 GetSize(RectTransform tf)
+    {
+        if(tf.anchorMin==tf.anchorMax)
+        {
+            return tf.sizeDelta;
+        }
+        Vector2 parentSize;
+        if (tf.parent == null)
+        {
+            parentSize = new Vector2(Screen.width, Screen.height);
+        }else
+        {
+            parentSize = GetSize(tf.parent as RectTransform);
+        }
+        Vector2 anchor = tf.anchorMax - tf.anchorMin;
+        Vector2 size = new Vector2(anchor.x * parentSize.x, anchor.y * parentSize.y);
+        size -= tf.offsetMin;
+        size -= tf.offsetMax;
+        return new Vector2(tf.sizeDelta.x != 0 ? tf.sizeDelta.x : size.x, tf.sizeDelta.y != 0 ? tf.sizeDelta.y: size.y);
+
+    }
+    /// <summary>
+    /// 改变中心点 不改变位置
+    /// </summary>
+    /// <param name="pivot"></param>
+    public static void SetPivot(RectTransform rt ,Vector2 pivot)
+    {
+        
+        Vector2 offset = pivot - rt.pivot;
+        rt.pivot = pivot;
+        Vector2 size = GameUtils.GetSize(rt);
+        Vector2 offsetMove = new Vector2(offset.x * size.x, offset.y * size.y);
+        rt.anchoredPosition += offsetMove;
+    }
 }

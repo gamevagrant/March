@@ -58,13 +58,18 @@ namespace qy.config
         public string OpenRegular;
         #endregion
 
-        public override string Name
+        #region 7日签到
+        /// <summary>
+        /// 复活需要的金币
+        /// </summary>
+        public int callBackPrice;
+
+        #endregion
+
+        public override string Name()
         {
-            get
-            {
-                Debug.Log(Network.player.ipAddress);
-                return "setting.xml";
-            }
+            Debug.Log(Network.player.ipAddress);
+            return "setting.xml";
         }
 
         internal override void ReadItem(XmlElement item)
@@ -99,17 +104,17 @@ namespace qy.config
                 }
                 else
                 {
-                    foreach (System.Reflection.PropertyInfo pi in t.GetProperties())
+                    foreach (System.Reflection.FieldInfo pi in t.GetFields())
                     {
                         if (name == pi.Name)
                         {
-                            if (pi.PropertyType == typeof(int))
+                            if (pi.FieldType == typeof(int))
                             {
-                                pi.SetValue(this, int.Parse(attribute.Value), null);
+                                pi.SetValue(this, int.Parse(attribute.Value));
                             }
                             else
                             {
-                                pi.SetValue(this, attribute.Value, null);
+                                pi.SetValue(this, attribute.Value);
                             }
                         }
                     }
@@ -190,23 +195,20 @@ namespace qy.config
             for(int i =0;i<steps.Length;i++)
             {
                 string step = steps[i];
-                if (string.IsNullOrEmpty(step) || step == "0")
+                List<PropItem> props = new List<PropItem>();
+                if (!string.IsNullOrEmpty(step) && step != "0")
                 {
-                    list.Add(null);
-                }
-                else
-                {
-                    List<PropItem> props = new List<PropItem>();
                     string[] items = step.Split(',');
                     foreach (string item in items)
                     {
                         string[] itemVlues = item.Split(':');
-                        PropItem propItem = ConfigManager.Instance.propsConfig.GetItem(itemVlues[0]).Clone();
+                        PropItem propItem = ConfigManager.Instance.propsConfig.GetItem(itemVlues[0]);
                         propItem.count = int.Parse(itemVlues[1]);
                         props.Add(propItem);
                     }
-                    list.Add(props);
                 }
+                
+                list.Add(props);
             }
 
             return list;

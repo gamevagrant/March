@@ -1,6 +1,8 @@
 ﻿using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
+using qy;
+using qy.config;
 
 
 public class Booster : MonoBehaviour 
@@ -25,9 +27,6 @@ public class Booster : MonoBehaviour
     [Header("Amount")]
     public Text singleAmount;
 
-    [Header("Popup")]
-    public PopupOpener singleBoosterPopup;
-
     void Awake()
     {
         if (instance == null)
@@ -43,7 +42,8 @@ public class Booster : MonoBehaviour
 	void Start () 
     {
 		singleBooster.SetActive(true);
-		singleAmount.text = PlayerData.instance.getHasItemCountByItemId("200006").ToString();
+        PropItem prop = GameMainManager.Instance.playerData.GetPropItem("200006");
+        singleAmount.text = prop!=null?prop.count.ToString():"0";
 
         // single breaker
         //todo:从表里读取
@@ -106,8 +106,9 @@ public class Booster : MonoBehaviour
         board.dropTime = 1;
 
         // check amount
-        
-        if (PlayerData.instance.getHasItemCountByItemId("200006") <= 0)
+        PropItem prop = GameMainManager.Instance.playerData.GetPropItem("200006");
+        int count = prop != null ? prop.count : 0;
+        if (count<=0)
         {
             // show booster popup
             ShowPopup(BOOSTER_TYPE.SINGLE_BREAKER);
@@ -362,15 +363,16 @@ public class Booster : MonoBehaviour
             CancelBooster(BOOSTER_TYPE.SINGLE_BREAKER);
 			Help.instance.Hide ();
             // reduce amount
-
-            if (PlayerData.instance.getHasItemCountByItemId("200006") > 0)
+            PropItem prop = GameMainManager.Instance.playerData.GetPropItem("200006");
+            int count = prop != null ? prop.count : 0;
+            if (count > 0)
             {
-                Debug.Log(PlayerData.instance.getHasItemCountByItemId("200006"));
+                Debug.Log(count);
 
-                var amount = PlayerData.instance.getHasItemCountByItemId("200006") - 1;
+                var amount = count - 1;
 
-                NetManager.instance.userToolsToServer("200006", "1");
-
+                //NetManager.instance.userToolsToServer("200006", "1");
+                GameMainManager.Instance.playerModel.UseProp("200006",1);
                 // change text
 
                 singleAmount.text = amount.ToString();
@@ -435,7 +437,9 @@ public class Booster : MonoBehaviour
 
     public void refresh()
     {
-        singleAmount.text = PlayerData.instance.getHasItemCountByItemId("200006").ToString();
+        PropItem prop = GameMainManager.Instance.playerData.GetPropItem("200006");
+        int count = prop != null ? prop.count : 0;
+        singleAmount.text = count.ToString();
     }
 
 

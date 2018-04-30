@@ -1,6 +1,8 @@
 ﻿using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
+using qy;
+using qy.config;
 
 public delegate void BuyBtnCallBcak(int num);
 
@@ -28,7 +30,8 @@ public class BeginProp : MonoBehaviour
         isPress = false;
         ItemId = string.Format("{0}", itemid);
 
-        int num = PlayerData.instance.getHasItemCountByItemId(ItemId);
+        PropItem item = GameMainManager.Instance.playerData.GetPropItem(ItemId);
+        int num = item!=null?item.count:0;
         if (num == 0)
         {
             Num.gameObject.SetActive(false);
@@ -62,28 +65,29 @@ public class BeginProp : MonoBehaviour
             }
         }
 
-        GoodsItem goodsItem = DefaultConfig.getInstance().GetConfigByType<item>().GetItemByID(ItemId);
+        //GoodsItem goodsItem = DefaultConfig.getInstance().GetConfigByType<item>().GetItemByID(ItemId);
+        PropItem goodsItem = GameMainManager.Instance.configManager.propsConfig.GetItem(ItemId);
         Sprite sp = Resources.Load(string.Format("Sprites/UI/{0}", goodsItem.icon), typeof(Sprite)) as Sprite;
         Icon.sprite = sp;
         Icon.SetNativeSize();
 
-        if (itemid == 200004 && PlayerData.instance.getShowUnlockItemStatus() == "1")
+        if (itemid == 200004 && GameMainManager.Instance.playerData.showUnlockItemStatus == "1")
         {
             WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210003"));
             onUseBtnClick();
-            PlayerData.instance.setShowUnlockItemStatus("0");
+            GameMainManager.Instance.playerData.showUnlockItemStatus = "0";
         }
-        else if (itemid == 200003 && PlayerData.instance.getShowUnlockItemStatus() == "2")
+        else if (itemid == 200003 && GameMainManager.Instance.playerData.showUnlockItemStatus == "2")
         {
             WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210004"));
             onUseBtnClick();
-            PlayerData.instance.setShowUnlockItemStatus("0");
+            GameMainManager.Instance.playerData.showUnlockItemStatus = "0";
         }
-        else if (itemid == 200005 && PlayerData.instance.getShowUnlockItemStatus() == "3")
+        else if (itemid == 200005 && GameMainManager.Instance.playerData.showUnlockItemStatus == "3")
         {
             WindowManager.instance.Show<UIFlashPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210005"));
             onUseBtnClick();
-            PlayerData.instance.setShowUnlockItemStatus("0");
+            GameMainManager.Instance.playerData.showUnlockItemStatus = "0";
         }
     }
 

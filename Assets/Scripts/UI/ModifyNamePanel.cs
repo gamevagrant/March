@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using March.Core.WindowManager;
-
+using qy;
 public class ModifyNamePanel : MonoBehaviour
 {
     private Button sureButton;
@@ -26,7 +26,8 @@ public class ModifyNamePanel : MonoBehaviour
     void Start()
     {
         sureButton.onClick.AddListener(OnSureBtn);
-        placeholder.text = PlayerData.instance.getNickName();
+        placeholder.text = GameMainManager.Instance.playerData.nickName;
+
 
         titleText.text = LanguageManager.instance.GetValueByKey("200027");
         sureButton.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey("200029");
@@ -42,7 +43,7 @@ public class ModifyNamePanel : MonoBehaviour
 
     private void OnSureBtn()
     {
-        if (!NetManager.instance.isNetWorkStatusGood())
+        if (!qy.net.NetManager.Instance.isNetWorkStatusGood)
         {
             WindowManager.instance.Show<UIAlertPopupWindow>().Init(LanguageManager.instance.GetValueByKey("210145"));
             return;
@@ -53,16 +54,19 @@ public class ModifyNamePanel : MonoBehaviour
         {
             if (Utils.instance.isStrLengthValid(nickName))
             {
-                NetManager.instance.modifyNickName(nickName);
+                //NetManager.instance.modifyNickName(nickName);
+                GameMainManager.Instance.playerModel.ModifyNickName(nickName);
             }
             else
             {
-                MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200048"));
+                //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200048"));
+                qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("200048"));
             }
         }
         else
         {
-            MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200047"));
+            //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200047"));
+            qy.ui.Alert.Show(LanguageManager.instance.GetValueByKey("200047"));
         }
     }
 

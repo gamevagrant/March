@@ -52,7 +52,7 @@ public class PlotManager : MonoBehaviour
 				string dialog = LanguageManager.instance.GetValueByKey(m_storyDescribe.dialogue);
                 if (dialog.Contains("{0}"))
                 {
-                    dialog = string.Format(dialog, PlayerData.instance.getNickName());
+                    dialog = string.Format(dialog, qy.GameMainManager.Instance.playerData.nickName);
                 }
                 m_t = m_contentText.DOText(dialog, 1.5f);
                 print(m_storyDescribe.next);
@@ -109,8 +109,8 @@ public class PlotManager : MonoBehaviour
                 if (dialog.Contains("{0}"))
                 {
                     print(dialog);
-                    print("Nick Name :" + PlayerData.instance.getNickName());
-                    dialog = string.Format(dialog, PlayerData.instance.getNickName());
+                    print("Nick Name :" + qy.GameMainManager.Instance.playerData.nickName);
+                    dialog = string.Format(dialog, qy.GameMainManager.Instance.playerData.nickName);
                 }
                 m_contentText.text = dialog;
                 m_npcLeft.gameObject.SetActive(false);
@@ -139,7 +139,7 @@ public class PlotManager : MonoBehaviour
             {
                 TaskManager.Instance.questID = TaskManager.Instance.gotoQuestID;
                 PlayerPrefs.SetString("QuestID", TaskManager.Instance.gotoQuestID);
-                PlayerData.instance.setQuestId(TaskManager.Instance.questID);
+                qy.GameMainManager.Instance.playerData.questId = TaskManager.Instance.questID;
                 //                NetManager.instance.sendQuestIdToServer(TaskManager.Instance.gotoQuestID);
                 TaskManager.Instance.onClickTask();
             }

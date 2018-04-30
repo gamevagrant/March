@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using March.Core.WindowManager;
 using UnityEngine;
 using UnityEngine.UI;
+using qy.config;
+using qy;
 using Random = UnityEngine.Random;
 
 #if UNITY_EDITOR
@@ -109,11 +111,12 @@ public class Board : MonoBehaviour
         allstep = 0;
 
         string itemid = (1000000 + LevelLoader.instance.level).ToString();
-        LevelItem levelconfig = LevelLoader.instance.LevelConfig.GetItemByID(itemid);
+        //LevelItem levelconfig = LevelLoader.instance.LevelConfig.GetItemByID(itemid);
+        MatchLevelItem levelconfig = GameMainManager.Instance.configManager.matchLevelConfig.GetItem(itemid);
         winGold = 0;
         if (levelconfig != null)
         {
-            winGold = Int32.Parse(levelconfig.coin);
+            winGold = levelconfig.coin;
         }
         else
         {
@@ -3471,9 +3474,10 @@ void GenerateWaffleLayer()
 
     public void WinGoldReward(Item item)
     {
-        var config = DefaultConfig.getInstance().GetConfigByType<setting>().GetDictionaryByID("moviesgold");
-        int maxgold = Int32.Parse(config["maxgold"]);
-
+        //var config = DefaultConfig.getInstance().GetConfigByType<setting>().GetDictionaryByID("moviesgold");
+        SettingConfig config = GameMainManager.Instance.configManager.settingConfig;
+        //int maxgold = Int32.Parse(config["maxgold"]);
+        int maxgold = config.maxgold;
         if (winGold > maxgold)
         {
             winGold = maxgold;
@@ -3482,28 +3486,33 @@ void GenerateWaffleLayer()
 
         if (item.IsPlaneBreaker(item.type))
         {
-            winGold += Int32.Parse(config["planebreaker"]);
+            //winGold += Int32.Parse(config["planebreaker"]);
+            winGold += config.planebreaker;
             //Debug.Log("xxxxxxxxxxxxx: " + winGold.ToString());
             getWinGold(item, winGold);
         }
         else if (item.IsColumnBreaker(item.type))
         {
-            winGold += Int32.Parse(config["columnbreaker"]);
+            //winGold += Int32.Parse(config["columnbreaker"]);
+            winGold += config.columnbreaker;
             getWinGold(item, winGold);
         }
         else if (item.IsRowBreaker(item.type))
         {
-            winGold += Int32.Parse(config["rowbreaker"]);
+            //winGold += Int32.Parse(config["rowbreaker"]);
+            winGold += config.rowbreaker;
             getWinGold(item, winGold);
         }
         else if (item.IsBombBreaker(item.type))
         {
-            winGold += Int32.Parse(config["bombbreaker"]);
+           // winGold += Int32.Parse(config["bombbreaker"]);
+            winGold += config.bombbreaker;
             getWinGold(item, winGold);
         }
         else if (item.type == ITEM_TYPE.COOKIE_RAINBOW)
         {
-            winGold += Int32.Parse(config["rainbow"]);
+            //winGold += Int32.Parse(config["rainbow"]);
+            winGold += config.rainbow;
             getWinGold(item, winGold);
         }
         if (winGold > maxgold)
@@ -3529,7 +3538,7 @@ void GenerateWaffleLayer()
 		cloneGold.transform.DOPath(path, 1.0f).SetEase(Ease.InQuad).OnComplete(() => 
 			{
 				Destroy(cloneGold);
-				GameObject.Find("Canvas").transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
+				GameObject.FindObjectOfType<Canvas>().transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
 			}
 		);
     }
@@ -5424,14 +5433,16 @@ void GenerateWaffleLayer()
         if (isFirstMove)
         {
             isFirstMove = false;
-            NetManager.instance.eliminateLevelStart();
+            //NetManager.instance.eliminateLevelStart();
+            qy.GameMainManager.Instance.playerModel.StartLevel();
             //todo：扣除开始道具
             //LevelLoader.instance.beginItemList
 			int j = LevelLoader.instance.beginItemList.Count;
 			for (int i = 0; i < j; i++) {
 				string itemId = LevelLoader.instance.beginItemList [i];
-				NetManager.instance.userToolsToServer (itemId, "1");
-			}
+				//NetManager.instance.userToolsToServer (itemId, "1");
+                qy.GameMainManager.Instance.playerModel.UseProp(itemId,1);
+            }
         }
     }
 

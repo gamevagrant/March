@@ -41,7 +41,7 @@ public class GameObjectPool : MonoBehaviour {
 		Component comp;
 		for(int i = 0; i < targetlist.Count; i++)
 		{
-			comp = targetlist[index];
+			comp = targetlist[i];
             if (comp.gameObject.activeSelf)
 			{
 				list.Add(comp as T);

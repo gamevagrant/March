@@ -6,15 +6,13 @@ namespace qy.config
 {
     public class BaseConfig
     {
-        public virtual string Name
+        public virtual string Name()
         {
-            get
-            {
-                return "item.xml";
-            }
+            return "item.xml";
         }
-        public bool Read(string xml)
+        public virtual bool Read(string xml)
         {
+            Debug.Log("正在解析"+Name());
             if (string.IsNullOrEmpty(xml))
             {
                 return false;
@@ -34,7 +32,7 @@ namespace qy.config
             }
             catch (Exception e)
             {
-                Debug.LogError(element.GetAttribute("id") + ", " + Name);
+                Debug.LogError(e.Message + element.GetAttribute("id") + ", " + Name());
                 Debug.LogError(e);
             }
 

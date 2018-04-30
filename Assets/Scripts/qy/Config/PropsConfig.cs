@@ -8,12 +8,9 @@ namespace qy.config
     public class PropsConfig : BaseConfig
     {
         private Dictionary<string, PropItem> dic = new Dictionary<string, PropItem>();
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "item.xml";
-            }
+            return "item.xml";
         }
 
         internal override void ReadItem(XmlElement item)
@@ -36,7 +33,11 @@ namespace qy.config
         {
             PropItem value;
             dic.TryGetValue(id, out value);
-            return value;
+            if (value==null)
+            {
+                Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1} 的物品",Name() ,id));
+            }
+            return value!=null?value.Clone():null;
         }
 
        

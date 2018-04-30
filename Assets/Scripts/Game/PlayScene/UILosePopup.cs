@@ -1,7 +1,10 @@
 ﻿using March.Core.WindowManager;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using qy;
+using qy.config;
 
 public class UILosePopup : MonoBehaviour
 {
@@ -20,7 +23,7 @@ public class UILosePopup : MonoBehaviour
     private int cost;
     private int addsteps;
     private int times;
-    private StepsBuyConfig stepsbuyconfig;
+    //private StepsBuyConfig stepsbuyconfig;
 
     void Start()
     {
@@ -30,14 +33,14 @@ public class UILosePopup : MonoBehaviour
 
         board = GameObject.Find("Board").GetComponent<Board>();
 
-        stepsbuyconfig = new StepsBuyConfig();
+        //stepsbuyconfig = new StepsBuyConfig();
 
         if (board != null)
         {
             times = board.FiveMoreTimes;
-            cost = stepsbuyconfig.GetPriceByTimes(times);
+            cost = GameMainManager.Instance.configManager.settingConfig.GetPriceWithStep(times);
             keepCost.text = cost.ToString();
-            addsteps = stepsbuyconfig.GetAddSteps();
+            addsteps = GameMainManager.Instance.configManager.settingConfig.addSteps;
 
             for (int i = 0; i < board.targetLeftList.Count; i++)
             {
@@ -50,30 +53,32 @@ public class UILosePopup : MonoBehaviour
                     }
                 }
             }
-            var dic = stepsbuyconfig.GetEffectDicByTimes(times);
-            if (dic.Count > 0)
+            //var dic = stepsbuyconfig.GetEffectDicByTimes(times);
+            List<qy.config.PropItem> list = GameMainManager.Instance.configManager.settingConfig.GetBonusItemWithStep(times);
+            if (list.Count > 0)
             {
                 GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
 
                 cell.GetComponent<UILoseSBICell>().Init();
             }
-            foreach (var tmp in dic)
+            foreach (var tmp in list)
             {
                 if (loseSBILayout != null)
                 {
                     GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
 
-                    cell.GetComponent<UILoseSBICell>().Init(tmp.Key, tmp.Value);
+                    cell.GetComponent<UILoseSBICell>().Init(tmp.id, tmp.count);
                 }
             }
-            dic = stepsbuyconfig.GetItemBagDicByTimes(times);
-            foreach (var tmp in dic)
+            //dic = stepsbuyconfig.GetItemBagDicByTimes(times);
+            list = GameMainManager.Instance.configManager.settingConfig.GetBonusItemBagWithStep(times);
+            foreach (var tmp in list)
             {
                 if (loseSBILayout != null)
                 {
                     GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
 
-                    cell.GetComponent<UILoseSBICell>().Init(tmp.Key, tmp.Value);
+                    cell.GetComponent<UILoseSBICell>().Init(tmp.id, tmp.count);
                 }
             }
         }
@@ -84,11 +89,12 @@ public class UILosePopup : MonoBehaviour
         AudioManager.instance.ButtonClickAudio();
 
         // enough coin
-        if (cost <= PlayerData.instance.getCoinNum())
+        if (cost <= GameMainManager.Instance.playerData.coinNum)
         {
             AudioManager.instance.CoinPayAudio();
 
-            NetManager.instance.eliminateLevelFiveMore(cost, stepsbuyconfig.GetItemBagDicByTimes(times));
+            //NetManager.instance.eliminateLevelFiveMore(cost, stepsbuyconfig.GetItemBagDicByTimes(times));
+            GameMainManager.Instance.playerModel.BuyFiveMore(times);
 
             if (board)
             {
@@ -103,12 +109,16 @@ public class UILosePopup : MonoBehaviour
 
                 board.FiveMoreTimes++;
 
-                foreach (var tmp in stepsbuyconfig.GetEffectDicByTimes(times))
+                List<PropItem> list = GameMainManager.Instance.configManager.settingConfig.GetBonusItemWithStep(times);
+                //foreach (var tmp in stepsbuyconfig.GetEffectDicByTimes(times))
+                foreach(var tmp in list)
                 {
+                    board.BoosterEffect(tmp.id);
+                    /*
                     for (int i = 0; i < tmp.Value; i++)
                     {
                         board.BoosterEffect(tmp.Key);
-                    }
+                    }*/
                 }
                 Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
                 // reset and call hint
@@ -138,7 +148,8 @@ public class UILosePopup : MonoBehaviour
 
     public void OnCloseClick()
     {
-        NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
+        //NetManager.instance.eliminateLevelEnd(LevelLoader.instance.level, 0, board.allstep, 0);
+        GameMainManager.Instance.playerModel.EndLevel(LevelLoader.instance.level, false, board.allstep, 0);
 
         WindowManager.instance.Show<BeginPopupWindow>();
     }

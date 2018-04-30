@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using qy;
 
 public class Help : MonoBehaviour 
 {
@@ -54,8 +55,8 @@ public class Help : MonoBehaviour
             {
                 help = true;
 				if (LevelLoader.instance.level == 9) {
-					if (PlayerData.instance.getNeedShow9Help()) {
-						PlayerData.instance.setNeedShow9Help (false);
+					if (qy.GameMainManager.Instance.playerData.needShow9Help) {
+                        qy.GameMainManager.Instance.playerData.needShow9Help = false;
 					} else {
 						help = false;
 					}
@@ -290,7 +291,8 @@ public class Help : MonoBehaviour
         {
             if (step != 0)
             {
-                NetManager.instance.MakePointInGuide(LevelLoader.instance.level, step);//引导打点
+                //NetManager.instance.MakePointInGuide(LevelLoader.instance.level, step);//引导打点
+                GameMainManager.Instance.netManager.MakePointInGuide(LevelLoader.instance.level, step,(ret,res)=> { });
             }
 
 

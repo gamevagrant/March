@@ -10,6 +10,12 @@ namespace qy.ui
         public enum UIWindowID
         {
             UIDialogueWindow,
+            UITaskWindow,
+            UIRoleWindow,
+            UIEndingWindow,
+            UIModalBoxWindow,
+            UICallBackWindow,
+            UIMainSceneWindow,
         }
 
         public enum UIWindowType
@@ -45,7 +51,12 @@ namespace qy.ui
         private static Dictionary<UIWindowID, string> windowPrefabPath = new Dictionary<UIWindowID, string>()
         {
             {UIWindowID.UIDialogueWindow,"UIDialogueWindow"},
-        
+            {UIWindowID.UITaskWindow,"UITaskWindow"},
+            {UIWindowID.UIRoleWindow,"UIRoleWindow"},
+            {UIWindowID.UIEndingWindow,"UIEndingWindow"},
+            {UIWindowID.UIModalBoxWindow,"UIModalBoxWindow"},
+            {UIWindowID.UICallBackWindow,"UICallBackWindow"},
+            {UIWindowID.UIMainSceneWindow,"UIMainSceneWindow"},
         };
 
 

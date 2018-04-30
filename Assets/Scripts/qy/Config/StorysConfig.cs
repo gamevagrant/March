@@ -10,12 +10,9 @@ namespace qy.config
 
         private Dictionary<string, StoryItem> dic = new Dictionary<string, StoryItem>();
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "story.xml";
-            }
+            return "story.xml";
         }
 
         internal override void ReadItem(XmlElement item)
@@ -33,8 +30,16 @@ namespace qy.config
 
         public StoryItem GetItem(string id)
         {
+            if(string.IsNullOrEmpty(id)||id=="0")
+            {
+                return null;
+            }
             StoryItem value;
             dic.TryGetValue(id, out value);
+            if (value == null)
+            {
+                Debug.LogAssertion(string.Format("{0}表中没有找到id为 {1}的项", Name(), id));
+            }
             return value;
         }
     }

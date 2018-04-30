@@ -7,13 +7,13 @@ namespace qy
 
         public string newDeviceId = "";
         public string gameUid = "";
-        public string appVersion = "";
+        public string appVersion = Application.version;
         public string gcmRegisterId = "";
         public string referrer = "";
         public string platform = Application.platform.ToString();
         public string lang = "";
         public string afUID = "";
-        public string pf = "";
+        public string pf = Application.platform.ToString();
         public string pfId = "";
         public string fromCountry = "";
         public string gaid = "";

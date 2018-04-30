@@ -110,6 +110,24 @@ namespace qy.config
             }
         }
 
+        public LevelConfig levelConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(LevelConfig)];
+                return config as LevelConfig;
+            }
+        }
+
+        public RoleConfig roleConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(RoleConfig)];
+                return config as RoleConfig;
+            }
+        }
+
         private Dictionary<Type, BaseConfig> dic = new Dictionary<Type, BaseConfig>();
         private int allCount = 0;
 
@@ -126,6 +144,8 @@ namespace qy.config
             InitTypeDict<ExchangeConfig>();
             InitTypeDict<GuideSetupConfig>();
             InitTypeDict<SettingConfig>();
+            InitTypeDict<RoleConfig>();
+            InitTypeDict<LevelConfig>();
         }
 
         private void InitTypeDict<T>() where T : BaseConfig, new()
@@ -141,9 +161,9 @@ namespace qy.config
             {
                 var config = pair.Value;
 
-                Debug.Log("加载配置文件:" + config.Name);
+                Debug.Log("加载配置文件:" + config.Name());
 
-                var asset = March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.ConfigurePath, config.Name.Replace(".xml", ""));
+                var asset = March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.ConfigurePath, config.Name().Replace(".xml", ""));
                 config.Read(asset.text);
             }
 
@@ -165,7 +185,7 @@ namespace qy.config
         {
             allCount++;
             T config = new T();
-            string path = FilePathTools.getXmlPath(config.Name);
+            string path = FilePathTools.getXmlPath(config.Name());
             Debug.Log("加载配置文件:" + path);
 
             AssetsManager.Instance.LoadAssetWithWWW(path, (www) =>

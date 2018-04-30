@@ -52,7 +52,7 @@ public class HttpProxy {
                 string msgStr = (reponse != null && !string.IsNullOrEmpty(reponse.DataAsText)) ? reponse.DataAsText : "";
 
                
-                Debug.Log(msgStr);
+                Debug.Log(msgStr+"|"+ request.Uri);
 
                 if (callback != null)
                 {

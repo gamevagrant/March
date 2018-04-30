@@ -330,4 +330,18 @@ public class FilePathTools
         return str;
     }
 
+    public static string GetPropItemIconPath(string name)
+    {
+        string str = "Sprites/UI/" + name;
+        if (GameSetting.isUseAssetBundle)
+        {
+            str = str.ToLower();
+        }
+        else
+        {
+            str = str + ".png";
+        }
+        return str;
+    }
+
 }

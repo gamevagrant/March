@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Common;
+using qy;
 
 public class LanguageManager : MonoSingleton<LanguageManager> 
 {
-
+    /*
 	private language m_language;
 	public language Language
 	{ 
@@ -19,24 +20,25 @@ public class LanguageManager : MonoSingleton<LanguageManager>
 			return m_language; 
 		}
 	}
-
+    */
 	
 	public void initConfig()
 	{
-		AddLanguageonfig<language>();
+		//AddLanguageonfig<language>();
 
 	}
 
 	public string GetValueByKey(string key)
 	{
-		return DefaultConfig.getInstance ().GetConfigByType<language> ().GetValueByKey(key);
+        //return DefaultConfig.getInstance ().GetConfigByType<language> ().GetValueByKey(key);
+        return GameMainManager.Instance.configManager.languageConfig.GetItem(key);
 	}
 
 
-
+    /*
 	private void AddLanguageonfig<T>() where T : DatabaseConfig, new()
 	{
 		T config = new T();
 		StartCoroutine(XMLDataManager.instance.loadLangXML(config));
-	}
+	}*/
 }

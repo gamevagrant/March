@@ -24,10 +24,10 @@ public class DebugInfor : MonoBehaviour
 
     public void OnDebugClicked()
     {
-        playerid = PlayerData.instance.userId;
+        playerid = qy.GameMainManager.Instance.playerData.userId;
         uidInput.text = playerid;
 
-        playerdata = PlayerData.instance.ToString();
+        playerdata = qy.GameMainManager.Instance.playerData.ToString();
         infoInput.text = playerdata;
 
         urlInput.text = Configure.instance.ServerUrl;
@@ -35,5 +35,6 @@ public class DebugInfor : MonoBehaviour
         deviceIdInput.text = Utils.instance.getDeviceID();
 
         contentPanel.SetActive(!contentPanel.activeSelf);
+
     }
 }

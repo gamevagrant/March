@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using qy;
 
 public class UseGuide : MonoBehaviour
 {
@@ -8,16 +9,24 @@ public class UseGuide : MonoBehaviour
     private bool isGuided;
     private Transform guide;
     private bool isGuideRight;
-    private int guideIndex;
-    guidesetup guidesetup;
 
-    private List<GuideItem> guideItems;
+    private int guideIndex = 0;
+    //guidesetup _guidesetup;
+    private string[] content = new string[]
+    {
+        "我们的领地被占领了",
+        "让我们夺回属于我们的领地",
+        "开始行动吧",
+    };
+
+
+    //private List<GuideItem> guideItems;
     private void Awake()
     {
         guide = transform.Find("Guide");
         guides = new GameObject[guide.childCount];
-        guidesetup guidesetup = DefaultConfig.getInstance().GetConfigByType<guidesetup>();
-        guideItems = guidesetup._guidesetup.guidesetups;
+        //guidesetup guidesetup = DefaultConfig.getInstance().GetConfigByType<guidesetup>();
+        //guideItems = guidesetup._guidesetup.guidesetups;
 
         for (int i = 0; i < guide.childCount; i++)
         {
@@ -51,8 +60,11 @@ public class UseGuide : MonoBehaviour
 
         string prefabPath = "Guide/Guide" + (test ? "Right" : "Left");
 
-        var guide = Instantiate(Resources.Load<GameObject>(prefabPath), transform);
-        guide.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey(guideItems[guideIndex].dialogue);
+        GameObject guide = Instantiate(Resources.Load<GameObject>(prefabPath),transform);
+        //guide.transform.Find("Text").GetComponent<Text>().text = content[guideIndex];
+        //guide.transform.Find("Text").GetComponent<Text>().text = LanguageManager.instance.GetValueByKey(guideItems[guideIndex].dialogue);
+        guide.transform.Find("Text").GetComponent<Text>().text = GameMainManager.Instance.configManager.guideSetupConfig.GetItem(guideIndex.ToString()).dialogue;
+
         guide.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
             guide.SetActive(false);

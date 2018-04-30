@@ -11,27 +11,22 @@ namespace qy
         public PlayerModel(PlayerData playerData)
         {
             this.playerData = playerData;
+            
         }
-        public enum ErrType:int
-        {
-            NULL=0,
-            NOT_ENOUGH_COIN,
-            NOT_ENOUGH_HEART,
-            NOT_ENOUGH_PROP,
-            QUEST_ID_ERROR,
-            PROP_ID_ERROR,
-        }
+        
 
-        public int BuyFiveMore(int step)
+        public PlayerModelErr BuyFiveMore(int step)
         {
-            GameMainManager.Instance.netManager.EliminateLevelFiveMore(step, (ret, res) => { });
-
+            GameMainManager.Instance.netManager.EliminateLevelFiveMore(step, (ret, res) => {
+                
+            });
+            playerData.dirty = true;
             int cost = GameMainManager.Instance.configManager.settingConfig.GetPriceWithStep(step);
             List<PropItem> props = GameMainManager.Instance.configManager.settingConfig.GetBonusItemBagWithStep(step); 
             if(playerData.coinNum<cost)
             {
                 Debug.LogError("金币不足！");
-                return (int)ErrType.NOT_ENOUGH_COIN;
+                return PlayerModelErr.NOT_ENOUGH_COIN;
             }
 
             playerData.coinNum -= cost;
@@ -40,55 +35,64 @@ namespace qy
                 playerData.AddPropItem(prop.id,prop.count);
             }
             SaveData();
-
-            return (int)ErrType.NULL;
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            return PlayerModelErr.NULL;
         }
 
-        public int BuyHeart()
+        public PlayerModelErr BuyHeart()
         {
-            GameMainManager.Instance.netManager.BuyHeart((ret, res) => { });
+            GameMainManager.Instance.netManager.BuyHeart((ret, res) => {
+                
+            });
+            playerData.dirty = true;
             int cost = GameMainManager.Instance.configManager.settingConfig.livesPrice;
             if(playerData.coinNum<cost)
             {
                 Debug.LogError("金币不足！");
-                return (int)ErrType.NOT_ENOUGH_COIN;
+                return PlayerModelErr.NOT_ENOUGH_COIN;
             }
 
             playerData.coinNum -= cost;
             playerData.heartNum = GameMainManager.Instance.configManager.settingConfig.maxLives;
-            playerData.recoveryLeftTime = 0;
+            playerData.hertTimestamp = 0;
             SaveData();
-
-            return (int)ErrType.NULL;
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            return PlayerModelErr.NULL;
         }
 
-        public int BuyProp(string itemId, int num)
+        public PlayerModelErr BuyProp(string itemId, int num)
         {
-            GameMainManager.Instance.netManager.BuyItem(itemId,num,(ret, res) => { });
+            GameMainManager.Instance.netManager.BuyItem(itemId,num,(ret, res) => {
+
+            });
+            playerData.dirty = true;
             PropItem item = GameMainManager.Instance.configManager.propsConfig.GetItem(itemId);
             if(item==null)
             {
                 Debug.Log("物品不存在");
-                return (int)ErrType.PROP_ID_ERROR;
+                return PlayerModelErr.PROP_ID_ERROR;
             }
             int cost = item.price * num;
             if(playerData.coinNum<cost)
             {
                 Debug.LogError("金币不足！");
-                return (int)ErrType.NOT_ENOUGH_COIN;
+                return PlayerModelErr.NOT_ENOUGH_COIN;
             }
 
             playerData.coinNum -= cost;
             playerData.AddPropItem(itemId,num);
             SaveData();
-
-            return (int)ErrType.NULL;
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            return PlayerModelErr.NULL;
         }
 
-        public int EndLevel(int level, bool result, int step, int wingold)
+        public PlayerModelErr EndLevel(int level, bool result, int step, int wingold)
         {
-            GameMainManager.Instance.netManager.LevelEnd(level,result?1:0,step, wingold, (ret, res) => { });
-            if(result)
+            GameMainManager.Instance.netManager.LevelEnd(level,result?1:0,step, wingold, (ret, res) => {
+                
+            });
+            playerData.dirty = true;
+            if (result)
             {
                 MatchLevelItem matchItem = GameMainManager.Instance.configManager.matchLevelConfig.GetItem((1000000+level).ToString());
                 playerData.coinNum += wingold + matchItem.coin;
@@ -103,60 +107,288 @@ namespace qy
                 SaveData();
             }
 
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int ModifyNickName(string nickName)
+        public PlayerModelErr ModifyNickName(string nickName)
         {
-            GameMainManager.Instance.netManager.ModifyNickName(nickName, (ret, res) => { });
+            GameMainManager.Instance.netManager.ModifyNickName(nickName, (ret, res) => {
+                Debug.Log("===============修改姓名成功");
+            });
+            playerData.dirty = true;
             playerData.nickName = nickName;
             SaveData();
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int QuestComplate(string questId)
+        public PlayerModelErr QuestComplate(out string storyID, string selectedID = "")
         {
-            GameMainManager.Instance.netManager.UpdateQuestId(questId,(ret,res)=> { });
-            config.QuestItem quest = GameMainManager.Instance.configManager.questConfig.GetItem(questId);
-            if(quest==null)
+            
+            storyID = "";
+            qy.config.Ability ability = new config.Ability();
+            //检测完成任务条件
+            config.QuestItem questItem = playerData.GetQuest();
+
+            //完成过的任务无消耗 无经验
+            if (!playerData.complatedQuests.ContainsKey(questItem.id))
             {
-                return (int)ErrType.QUEST_ID_ERROR;
+                if (playerData.starNum < questItem.requireStar)
+                {
+                    return PlayerModelErr.NOT_ENOUGH_STAR;
+                }
+                List<PropItem> needProps = questItem.requireItem;
+                foreach (PropItem item in needProps)
+                {
+                    PropItem haveItem = playerData.GetPropItem(item.id);
+                    int haveCount = haveItem == null ? 0 : haveItem.count;
+                    if (haveCount < item.count)
+                    {
+                        return PlayerModelErr.NOT_ENOUGH_PROP;
+                    }
+                }
+
+                //扣除完成任务物品
+                playerData.starNum -= questItem.requireStar;
+                foreach (PropItem item in needProps)
+                {
+                    playerData.RemovePropItem(item.id, item.count);
+                }
+                playerData.complatedQuests.Add(questItem.id,0);
+
+                //获得奖励物品
+                foreach (PropItem item in questItem.prize)
+                {
+
+                    bool isGet = Random.Range(0, 100)<item.rate;
+                    if(isGet)
+                    {
+                        playerData.AddPropItem(item.id, item.count);
+                    }
+                    
+                }
+
+                //获得经验值
+                playerData.totalExp += questItem.exp;
+                playerData.currExp += questItem.exp;
+                //判断升级
+                config.LevelItem levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
+                while (levelItem != null && playerData.currExp >= levelItem.exp)
+                {
+                    playerData.level++;
+                    playerData.currExp -= levelItem.exp;
+                    levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerData.level);
+                }
             }
-            playerData.questId = questId;
+
+            //更新下个任务
+            if (questItem.type == config.QuestItem.QuestType.Main)
+            {
+                playerData.nextQuestId = questItem.gotoId;
+                storyID = questItem.storyID;
+            }
+            else if (questItem.type == config.QuestItem.QuestType.Branch)
+            {
+                foreach(SelectItem item in questItem.selectList)
+                {
+                    if(item.id == selectedID)
+                    {
+                        playerData.nextQuestId = item.toQuestId;
+                        storyID = item.storyID;
+                        ability = item.ability;
+                        playerData.ability += item.ability;
+                        string selectID = questItem.id + "_" + item.id;
+                        if(!playerData.selectedItems.ContainsKey(selectID))
+                        {
+                            playerData.selectedItems.Add(selectID,0);
+                        }
+                        break;
+                    }
+                }
+            }
+            else if (questItem.type == config.QuestItem.QuestType.Important)
+            {
+                if(playerData.survival<questItem.endingPoint.survival)
+                {
+                    //进入分支任务
+                    playerData.nextQuestId = questItem.endingPoint.questID;
+                    storyID = questItem.endingPoint.storyID;
+                }
+                else
+                {
+                    //进入普通任务
+                    playerData.nextQuestId = questItem.gotoId;
+                    storyID = questItem.storyID;
+                }
+            }
+            if(string.IsNullOrEmpty(playerData.nextQuestId))
+            {
+                return PlayerModelErr.QUEST_ID_ERROR;
+            }
+            GameMainManager.Instance.netManager.ComplateQuestId(playerData.questId, ability, (ret, res) => {
+
+            });
+            playerData.questId = playerData.nextQuestId;
+            //标记角色状态
+            config.QuestItem nextQuest = playerData.GetQuest();
+            if (nextQuest.type == config.QuestItem.QuestType.Ending)
+            {
+                GameMainManager.Instance.netManager.EndingRole(nextQuest.endingType, (ret, res) => { });
+                switch (nextQuest.endingType)
+                {
+                    case 1://死亡
+                        playerData.SetRoleState(playerData.role.id, PlayerData.RoleState.Dide);
+                        break;
+                    case 2://通关
+                        playerData.SetRoleState(playerData.role.id,PlayerData.RoleState.Pass);
+                        break;
+                   
+                }
+                
+            }
+
+            playerData.dirty = true;
             SaveData();
-            return (int)ErrType.NULL;
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            return PlayerModelErr.NULL;
         }
 
-        public int StartLevel()
+       
+
+        public PlayerModelErr StartLevel()
         {
-            GameMainManager.Instance.netManager.LevelStart((ret, res) => { });
-            if(playerData.heartNum<=0)
+            GameMainManager.Instance.netManager.LevelStart((ret, res) => {
+                
+            });
+            playerData.dirty = true;
+            if (playerData.heartNum<=0)
             {
-                return (int)ErrType.NOT_ENOUGH_HEART;
+                return PlayerModelErr.NOT_ENOUGH_HEART;
             }
             playerData.heartNum -= 1;
             SaveData();
 
-            return (int)ErrType.NULL;
+            return PlayerModelErr.NULL;
         }
 
-        public int UseProp(string itemID, int count)
+        public PlayerModelErr UseProp(string itemID, int count)
         {
+            GameMainManager.Instance.netManager.UseTools(itemID, count, (ret, res) =>
+            {
+                
+            });
+            playerData.dirty = true;
             PropItem prop = playerData.GetPropItem(itemID);
             if(prop==null || prop.count<count)
             {
-                return (int)ErrType.NOT_ENOUGH_PROP;
+                return PlayerModelErr.NOT_ENOUGH_PROP;
             }
 
             playerData.RemovePropItem(itemID, count);
-
-            return (int)ErrType.NULL;
+            SaveData();
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            return PlayerModelErr.NULL;
         }
 
+        public PlayerModelErr StartGameWithRole(string id)
+        {
+            GameMainManager.Instance.netManager.SwitchRole(id,(ret,res)=> { });
+            if(playerData.GetRoleState(id) == PlayerData.RoleState.Dide)
+            {
+                return PlayerModelErr.ROLE_IS_DIE;
+            }
+
+            SwitchRole(id);
+            return PlayerModelErr.NULL;
+        }
+
+        public PlayerModelErr CallBackRoleWithCoin(string id)
+        {
+            GameMainManager.Instance.netManager.RecoverRole(id,0, (ret, res) => { });
+            int cost = GameMainManager.Instance.configManager.settingConfig.callBackPrice;
+            if(playerData.coinNum<cost)
+            {
+                return PlayerModelErr.NOT_ENOUGH_COIN;
+            }
+            playerData.coinNum -= cost;
+            playerData.SetRoleState(id, PlayerData.RoleState.Normal);
+            SwitchRole(id);
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            playerData.dirty = true;
+            return PlayerModelErr.NULL;
+        }
+
+        private void SwitchRole(string id)
+        {
+            RoleItem role = GameMainManager.Instance.configManager.roleConfig.GetItem(id).Clone();
+            playerData.role = role;
+            playerData.nextQuestId = role.questID;
+            playerData.SetRoleState(id, PlayerData.RoleState.Normal);
+            SaveData();
+        }
+
+        public PlayerModelErr CallBackRoleWithCard(string id)
+        {
+            GameMainManager.Instance.netManager.RecoverRole(id, 1, (ret, res) => { });
+            Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+            playerData.dirty = true;
+            return PlayerModelErr.NULL;
+        }
+
+        public PlayerModelErr UpdateHeart()
+        {
+            int maxHeart = GameMainManager.Instance.configManager.settingConfig.maxLives;
+            if (playerData.heartNum>= maxHeart)
+            {
+                return PlayerModelErr.HEART_IS_FULL;
+            }
+
+            long now = GameUtils.DateTimeToTimestamp(System.DateTime.Now);
+            long last = playerData.hertTimestamp;
+            long space = GameMainManager.Instance.configManager.settingConfig.livesRecoverTime * 60;
+            if (now<last)
+            {
+                return PlayerModelErr.COUNT_DOWN_NOT_END;
+            }
+            int addHeart = (int)((now - last) / space)+1;
+            playerData.heartNum = Mathf.Min(maxHeart, playerData.heartNum + addHeart);
+            playerData.hertTimestamp += addHeart * space;
+            
+
+            return PlayerModelErr.NULL;
+        }
+
+        public string GetErrorDes(PlayerModelErr err)
+        {
+            string str = "";
+            switch(err)
+            {
+                case PlayerModelErr.NOT_ENOUGH_COIN:
+                    str = LangrageManager.Instance.GetItemWithID("200044");
+                    break;
+                case PlayerModelErr.NOT_ENOUGH_HEART:
+                    str = LangrageManager.Instance.GetItemWithID("200043");
+                    break;
+                case PlayerModelErr.NOT_ENOUGH_PROP:
+                    str = LangrageManager.Instance.GetItemWithID("200042");
+                    break;
+                case PlayerModelErr.NOT_ENOUGH_STAR:
+                    str = LangrageManager.Instance.GetItemWithID("200045");
+                    break;
+                case PlayerModelErr.PROP_ID_ERROR:
+                    break;
+                case PlayerModelErr.QUEST_ID_ERROR:
+                    break;
+                case PlayerModelErr.ROLE_IS_DIE:
+                    break;
+            }
+            return str;
+        }
+       
         private void SaveData()
         {
             LocalDatasManager.playerData = playerData;
         }
+
     }
 }
 

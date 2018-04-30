@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Common;
 using System;
 using System.Collections.Generic;
+using qy.ui;
 using UnityEngine;
 
 namespace March.Core.WindowManager
@@ -35,7 +36,7 @@ namespace March.Core.WindowManager
                 return null;
             }
 
-            var canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+            var canvas = ((MonoBehaviour)UIManager.Instance).gameObject ?? FindObjectOfType<Canvas>().gameObject;
             var clone = Instantiate(windowMap[typeof(T)]).GetComponent<T>();
             clone.gameObject.transform.localScale = Vector3.zero;
             clone.gameObject.transform.SetParent(canvas.transform, false);

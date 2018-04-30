@@ -7,12 +7,9 @@ namespace qy.config
     public class MatchLevelConfig : BaseConfig
     {
         private Dictionary<string, MatchLevelItem> dic = new Dictionary<string, MatchLevelItem>();
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return "matchlevel.xml";
-            }
+            return "matchlevel.xml";
         }
 
         internal override void ReadItem(XmlElement item)
@@ -43,9 +40,12 @@ namespace qy.config
                 int count = int.Parse(data[1]);
                 int rate = data.Length > 2 ? int.Parse(data[2])  : 0;
                 PropItem prop = ConfigManager.Instance.propsConfig.GetItem(id);
-                prop.count = count;
-                prop.rate = rate;
-                list.Add(prop);
+                if (prop!=null)
+                {
+                    prop.count = count;
+                    prop.rate = rate;
+                    list.Add(prop);
+                }
             }
 
             return list;

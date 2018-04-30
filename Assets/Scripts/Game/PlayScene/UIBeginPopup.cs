@@ -17,7 +17,7 @@ public class UIBeginPopup : MonoBehaviour
 	{
 	    popup = GetComponent<Popup>();
 
-        HeadText.text = LanguageManager.instance.GetValueByKey("200014") + PlayerData.instance.getEliminateLevel().ToString();
+        HeadText.text = LanguageManager.instance.GetValueByKey("200014") + qy.GameMainManager.Instance.playerData.eliminateLevel.ToString();
 		BeginBottomText.text = LanguageManager.instance.GetValueByKey ("200016");
         if (SceneManager.GetActiveScene().name == "Play")
 	    {
@@ -25,7 +25,7 @@ public class UIBeginPopup : MonoBehaviour
 	    }
 		BeginItemText.text = LanguageManager.instance.GetValueByKey ("200017");
 
-	    LevelLoader.instance.level = PlayerData.instance.getEliminateLevel();
+	    LevelLoader.instance.level = qy.GameMainManager.Instance.playerData.eliminateLevel;
 	    LevelLoader.instance.LoadLevel();
 
 	    if (TargetListLayout != null)
@@ -54,13 +54,14 @@ public class UIBeginPopup : MonoBehaviour
 
         if (!Application.isEditor)
         {
-            if (PlayerData.instance.getHeartNum() < eliminateHeartNum)
+            if (qy.GameMainManager.Instance.playerData.heartNum < eliminateHeartNum)
             {
                 BeginBottomText.text = "心数不足！";
                 return;
             }
         }
-        NetManager.instance.MakePointInEliminateStart();
+        //NetManager.instance.MakePointInEliminateStart();
+        qy.GameMainManager.Instance.netManager.MakePointInEliminateStart((ret,res)=> { });
         SceneManager.LoadScene("Play");
     }
 	

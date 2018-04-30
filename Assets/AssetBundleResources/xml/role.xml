@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<Group id="role">
+  <ItemSpec id="101" name="101" introduction="1001" headIcon="person1" quest="10001" discipline="47" loyalty="45" wisdom="52"/>
+  <ItemSpec id="102" name="102" introduction="1002" headIcon="person2" quest="10001" discipline="33" loyalty="40" wisdom="30"/>
+  <ItemSpec id="103" name="103" introduction="1003" headIcon="person3" quest="10001" discipline="20" loyalty="15" wisdom="30"/>
+ </Group>

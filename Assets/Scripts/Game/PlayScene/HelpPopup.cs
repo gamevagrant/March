@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using qy;
 
 public class HelpPopup : MonoBehaviour 
 {
@@ -205,7 +206,8 @@ public class HelpPopup : MonoBehaviour
         {
             if (step != 0)
             {
-                NetManager.instance.MakePointInGuide(LevelLoader.instance.level, step);//引导打点
+                //NetManager.instance.MakePointInGuide(LevelLoader.instance.level, step);//引导打点
+                GameMainManager.Instance.netManager.MakePointInGuide(LevelLoader.instance.level, step,(ret,res)=> { });
             }
             prefab.gameObject.transform.SetParent(gameObject.transform.parent.gameObject.transform);
             prefab.GetComponent<RectTransform>().localScale = Vector3.one;

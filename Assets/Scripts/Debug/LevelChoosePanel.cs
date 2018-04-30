@@ -1,5 +1,6 @@
 ﻿using March.Core.WindowManager;
 using System;
+using qy;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,19 +11,19 @@ public class LevelChoosePanel : MonoBehaviour
     void Awake()
     {
         input = transform.Find("InputField").GetComponent<InputField>();
-        input.text = PlayerData.instance.getEliminateLevel().ToString();
+        input.text = GameMainManager.Instance.playerData.eliminateLevel.ToString();
     }
 
     public void OnOkayButtonClick()
     {
         var num = Convert.ToInt32(input.text);
-        PlayerData.instance.setEliminateLevel(num);
+        GameMainManager.Instance.playerData.eliminateLevel = num;
 
         WindowManager.instance.Show<BeginPopupWindow>();
     }
 
     public void OnCloseButtonClick()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
