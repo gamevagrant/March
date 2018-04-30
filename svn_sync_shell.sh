@@ -12,4 +12,4 @@ cp -f -v ./xml/*.xml ./Assets/AssetBundleResources/xml
 # Commit xmls to current repo.
 git add .
 git commit -m SVN_SYNC
-git push
+git push origin HEAD:svn_sync
