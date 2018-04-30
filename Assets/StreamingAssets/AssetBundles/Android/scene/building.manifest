@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 3788673583
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f0ccd5bcf54bf63eda2a0c76b77365fd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3fe79793f66304e9b58fe99f24bc456a
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: d9cd693d2c5dc7a4caaf1cf9061ebfc2, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Square/Prefabs/Scene/Building/2.prefab
+- Assets/Square/Prefabs/Scene/Building/5.prefab
+- Assets/Square/Prefabs/Scene/Building/3.prefab
+- Assets/Square/Prefabs/Scene/Building/1.prefab
+- Assets/Square/Prefabs/Scene/Building/4.prefab
+Dependencies: []

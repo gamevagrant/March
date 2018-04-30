@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 1489841119
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: scene/player
+      Dependencies: {}
+    Info_1:
+      Name: scene/building
+      Dependencies: {}
+    Info_2:
+      Name: scene/background
+      Dependencies: {}
+    Info_3:
+      Name: scene/npc
+      Dependencies: {}
+    Info_4:
+      Name: play/level
+      Dependencies: {}
+    Info_5:
+      Name: core/config
+      Dependencies: {}
