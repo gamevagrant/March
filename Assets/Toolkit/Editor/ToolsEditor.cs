@@ -19,7 +19,7 @@ public class ToolsEditor : MonoBehaviour
         return PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab;
     }
 
-    [MenuItem("Tools/EditorPrefs/Clear all Editor Preferences")]
+    [MenuItem("Tools/EditorPrefs/Clear all Player Preferences")]
     static void DeleteAllExample()
     {
         if (EditorUtility.DisplayDialog("Delete all editor preferences.",
@@ -27,7 +27,6 @@ public class ToolsEditor : MonoBehaviour
             "This action cannot be undone.", "Yes", "No"))
         {
             PlayerPrefs.DeleteAll();
-            EditorPrefs.DeleteAll();
         }
     }
 }
