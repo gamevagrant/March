@@ -5253,9 +5253,9 @@ void GenerateWaffleLayer()
         var spr = new Sprite();
         spr = Resources.Load(Configure.ChoseIcon(),spr.GetType()) as Sprite;
         kuang.GetComponent<SpriteRenderer>().sprite = spr;
-        float loopTime = 0.5f;
+        //float loopTime = 0.5f;
         //kuang.transform.DOScale(new Vector3(1.1f, 1.1f, 1.0f), loopTime).SetLoops(-1, LoopType.Yoyo);
-        kuang.GetComponent<SpriteRenderer>().material.DOFade(0.4f, loopTime).SetLoops(-1, LoopType.Yoyo);
+        //kuang.GetComponent<SpriteRenderer>().material.DOFade(0.4f, loopTime).SetLoops(-1, LoopType.Yoyo);
     }
 
     #endregion
