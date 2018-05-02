@@ -4,6 +4,8 @@
 echo "version = $Version"
 echo "IsForDev = $IsForDev"
 
+export gitlabBranch
+
 echo "$gitlabBranch"
 echo "$gitlabSourceBranch"
 echo $gitlabActionType
