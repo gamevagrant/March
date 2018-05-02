@@ -10,16 +10,21 @@ echo $COMMIT_MESSAGE
 
 echo $CHANGES_SINCE_LAST_BUILD
 
+# Variables file to env.txt
 file="./env.txt"
 
 if [ -f "$file" ]
 then
 	echo "$file found."
     
-    COMMIT_MESSAGE=$(cat "$file")
-    echo $COMMIT_MESSAGE
-    
-    cat $COMMIT_MESSAGE
+    export LAST_COMMIT=$(cat "$file")
+    echo $LAST_COMMIT
+	if [ "$LAST_COMMIT" == "$COMMIT_MESSAGE" ]
+	then
+		echo "No change."
+	else
+		echo "Changed"
+	fi
 
 else
 	echo "$file not found."
