@@ -12,7 +12,7 @@ echo $CHANGES_SINCE_LAST_BUILD
 
 # Variables file to env.txt
 file="./env.txt"
-touch $file
+rm $file && touch $file
 
 if [ -f "$file" ]
 then
