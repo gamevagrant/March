@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
 <Group id="storyhead">
+  
 	<ItemSpec id="1000101" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100110" next="1000102"/>
 	<ItemSpec id="1000102" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100111" next="1000103"/>
 	<ItemSpec id="1000103" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100112" next="1000104"/>
@@ -9,4 +10,5 @@
 	<ItemSpec id="1000106" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100115" next="1000107"/>
 	<ItemSpec id="1000107" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100116" next="1000108"/>
 	<ItemSpec id="1000108" bgmFile="testbgm" bgFile="1000126bg" personLocation="100:300" dialogue="100117" next="0"/>
+
 </Group>
