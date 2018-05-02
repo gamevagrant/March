@@ -17,3 +17,4 @@ export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
 echo $COMMIT_MESSAGE
 
 export LAST_COMMIT=$GIT_COMMIT
+echo "Last commit=$LAST_COMMIT"
