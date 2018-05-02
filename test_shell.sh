@@ -12,7 +12,7 @@ echo $CHANGES_SINCE_LAST_BUILD
 
 # Variables file to env.txt
 file="./env.txt"
-rm $file && touch $file
+touch $file
 
 if [ -f "$file" ]
 then
@@ -25,6 +25,8 @@ then
 		echo "No change."
 	else
 		echo "Changed"
+		
+		rm $file && touch $file
 		echo $COMMIT_MESSAGE>>$file
 	fi
 
