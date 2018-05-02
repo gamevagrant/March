@@ -11,6 +11,7 @@ echo $gitlabUserName
 echo $gitlabUserEmail
 echo $GIT_COMMIT
 
-echo "export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> ~/.bashrc
+#echo "export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> ~/.bashrc
 
+echo "export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\""
 echo $COMMIT_MESSAGE
