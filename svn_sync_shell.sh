@@ -9,6 +9,6 @@ echo "cp -f -v ./xml/*.xml ./Assets/AssetBundleResources/xml"
 cp -f -v ./xml/*.xml ./Assets/AssetBundleResources/xml
 
 # Commit xmls to current repo.
-git add .
+git add ./Assets/AssetBundleResources/xml/\*.xml
 git commit -m SVN_SYNC
 git push origin HEAD:$NODE_NAME

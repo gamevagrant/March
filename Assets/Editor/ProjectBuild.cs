@@ -111,7 +111,7 @@ public class ProjectBuild
             assetbundleBuild ? BuildConfig.BuildType.AsestBundle : BuildConfig.BuildType.Apk;
         var assetbunldeCommit = Environment.GetEnvironmentVariable("COMMIT_MESSAGE")
             .Contains(Environment.GetEnvironmentVariable("BUILD_AB_COMMIT"));
-        var jenkinsCommit = Environment.GetEnvironmentVariable("gitlabUserName").Equals("Jenkins");
+        var jenkinsCommit = Environment.GetEnvironmentVariable("gitlabUserName").Equals("jenkins");
         // override config build type if build is triggered by jenkins push or an ab request push.
         config.Build = assetbunldeCommit || jenkinsCommit
             ? BuildConfig.BuildType.AsestBundle

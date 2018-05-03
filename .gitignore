@@ -5,6 +5,9 @@
 [Bb]uilds/
 /AssetBundles/
 
+# svn repo
+.svn/
+
 # Visual Studio cache directory
 /.vs/
 
