@@ -33,8 +33,8 @@ export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
 export BUILD_AB_COMMIT="build ab"
 
 # Unity batch mode build.
-echo "Compiling.. this will take a while"
-echo $untiy -quit -batchmode -projectPath $projectPath -logFile `pwd`/editor.log -executeMethod ProjectBuild.JenkinsBuildAndroid
+echo "Compiling.. this will take a while, redirect log file to console..."
+echo $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 
 now=$(date +"%T")
