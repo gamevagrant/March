@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Update XML from configuration.
+rm -f ./xml
 svn co http://svn.xinggeq.com/svn/march/doc/xml/client ./xml
 
 # Copy configurations from ./xml to ./March
