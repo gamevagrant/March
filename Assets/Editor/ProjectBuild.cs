@@ -9,6 +9,13 @@ public class ProjectBuild
 {
     class BuildConfig
     {
+        public enum BuildType
+        {
+            Apk = 1,
+            AsestBundle = 2,
+            All = 4,
+        }
+
         public string ProductName;
         public string CompanyName;
         public string ApplicationId;
@@ -19,6 +26,7 @@ public class ProjectBuild
         public string KeyAliasPassword;
         public bool IsForDev;
         public string PredefineSymbols;
+        public BuildType Build;
     }
 
     private static BuildTarget target = BuildTarget.Android;
@@ -36,6 +44,7 @@ public class ProjectBuild
         KeyAliasPassword = string.Empty,
         IsForDev = false,
         PredefineSymbols = string.Empty,
+        Build = BuildConfig.BuildType.Apk,
     };
 
     public static string[] GetBuildScenes()
@@ -96,6 +105,16 @@ public class ProjectBuild
         config.IsForDev = bool.Parse(Environment.GetEnvironmentVariable("IsForDev"));
         config.PredefineSymbols = Environment.GetEnvironmentVariable("PredeineSymbols");
 
+        config.Build = (BuildConfig.BuildType)(int.Parse(Environment.GetEnvironmentVariable("BuildAssetBundle")) &
+                                    int.Parse(Environment.GetEnvironmentVariable("BuildApk")));
+        var assetbunldeCommit = Environment.GetEnvironmentVariable("COMMIT_MESSAGE")
+            .Contains(Environment.GetEnvironmentVariable("BUILD_AB_COMMIT"));
+        var jenkinsCommit = Environment.GetEnvironmentVariable("gitlabUserName").Equals("Jenkins");
+        // override config build type if build is triggered by jenkins push or an ab request push.
+        config.Build = assetbunldeCommit || jenkinsCommit
+            ? BuildConfig.BuildType.AsestBundle
+            : config.Build;
+
         DoAndroidBuild(config);
     }
 
@@ -130,11 +149,6 @@ public class ProjectBuild
 
     private static void BuildPlayer(BuildTarget target, BuildConfig config)
     {
-        var buildName = string.Format("./package/{2}/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
-            DateTime.Now.ToString(@"yyyyMMdd"), DateTime.Now.ToString(@"HHmmss"), config.IsForDev ? "_dev" : "");
-
-        Debug.LogWarning("Build package to : " + new FileInfo(buildName).FullName);
-
         var additionOption = BuildOptions.None;
 
         if (config.IsForDev)
@@ -160,10 +174,28 @@ public class ProjectBuild
 
         if (target == BuildTarget.Android)
         {
-            BuildPipeline.BuildPlayer(GetBuildScenes(),
-                buildName,
-                target,
-                BuildOptions.None | additionOption);
+            if (config.Build == BuildConfig.BuildType.AsestBundle || config.Build == BuildConfig.BuildType.All)
+            {
+                var buildName = string.Format("./package/{2}/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
+                    DateTime.Now.ToString(@"yyyyMMdd"), DateTime.Now.ToString(@"HHmmss"), config.IsForDev ? "_dev" : "");
+
+                Debug.LogWarning("Build package to : " + new FileInfo(buildName).FullName);
+
+                BuildPipeline.BuildPlayer(GetBuildScenes(),
+                    buildName,
+                    target,
+                    BuildOptions.None | additionOption);
+            }
+            else if (config.Build == BuildConfig.BuildType.AsestBundle || config.Build == BuildConfig.BuildType.All)
+            {
+                Debug.LogWarning("Build asset bundles.");
+
+                AssetBundles.BuildScript.BuildAssetBundles();
+            }
+            else
+            {
+                Debug.LogWarning("You choose nothing to build, bro!");
+            }
         }
     }
 }

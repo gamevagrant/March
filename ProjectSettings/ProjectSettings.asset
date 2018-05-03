@@ -160,7 +160,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.elex.march
   buildNumber: {}
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 1525269912
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -244,7 +244,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: c:/projects/user.keystore
+  AndroidKeystoreName: C:\Users\Administrator\.android\user.keystore
   AndroidKeyaliasName: test
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
@@ -594,7 +594,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: SOOMLA_OPEN_SOURCE
     4: SOOMLA_OPEN_SOURCE
-    7: UNITY_PURCHASING;GAME_DEBUG
+    7: 
     13: SOOMLA_OPEN_SOURCE
   platformArchitecture: {}
   scriptingBackend: {}

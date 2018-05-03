@@ -34,15 +34,11 @@ export projectPath=`pwd`
 # Fetch argments defined in Jenkins.
 echo "version = $Version"
 echo "IsForDev = $IsForDev"
+echo "output dir is $APK_OUTPUT_DIR."
 
-# Check apk output dir.
-if [ "$APK_OUTPUT_DIR" == "" ]
-then
-	echo $APK_OUTPUT_DIR is undefined.
-	exit 0
-else
-	echo output dir is $APK_OUTPUT_DIR.
-fi
+# Get git commit comment.
+export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
+export BUILD_AB_COMMIT="build ab"
 
 # Unity batch mode build.
 echo "Compiling.. this will take a while"

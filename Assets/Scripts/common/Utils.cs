@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Utils : MonoSingleton<Utils>
 {
-    public string DeviceId = SystemInfo.deviceUniqueIdentifier;
+    public string DeviceId;
 
     public const string A = "^[0-9]+$";//纯数字检测
     public const string B = "^[A-Za-z0-9]+$"; //.数字或英文
     public const string C = "^[\u4e00-\u9fa5]+$"; //纯汉字
+
+    protected override void Init()
+    {
+        base.Init();
+
+        DeviceId = SystemInfo.deviceUniqueIdentifier;
+    }
 
     /// <summary>
     /// 获取当前设备id

@@ -1,1 +1,1 @@
-{"ProductName":"March","CompanyName":"elex","ApplicationId":"com.elex.march","Version":"1.0.5","KeyStorePath":"user.keystore","KeyPassword":"111111","KeyAliasName":"test","KeyAliasPassword":"111111","IsForDev":false,"PredeineSymbols":"UNITY_PURCHASING;GAME_DEBUG"}
+{"ProductName":"March","CompanyName":"elex","ApplicationId":"com.elex.march","Version":"1.0.5","KeyStorePath":"user.keystore","KeyPassword":"111111","KeyAliasName":"test","KeyAliasPassword":"111111","IsForDev":false,"PredeineSymbols":"UNITY_PURCHASING;GAME_DEBUG","BuideType":0}
