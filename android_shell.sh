@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Update XML from configuration.
-svn co http://svn.xinggeq.com/svn/march/doc/xml/client ./xml
-
 now=$(date +"%T")
 echo "Build Start: $now"
 
