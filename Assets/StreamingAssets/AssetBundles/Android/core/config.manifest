@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3118372526
+CRC: 4151937723
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a8748120eec22b950c52b52b23a63015
+    Hash: 9d0a28c54a1471b4f77f9fb546ba571e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -15,10 +15,11 @@ Assets:
 - Assets/AssetBundleResources/xml/quest.xml
 - Assets/AssetBundleResources/xml/role.xml
 - Assets/AssetBundleResources/xml/guidesetup.xml
+- Assets/AssetBundleResources/xml/guide.xml
 - Assets/AssetBundleResources/xml/setting.xml
-- Assets/AssetBundleResources/xml/story.xml
 - Assets/AssetBundleResources/xml/level.xml
 - Assets/AssetBundleResources/xml/matchlevel.xml
+- Assets/AssetBundleResources/xml/story.xml
 - Assets/AssetBundleResources/xml/language_en.xml
 - Assets/AssetBundleResources/xml/storyhead.xml
 - Assets/AssetBundleResources/xml/item.xml
