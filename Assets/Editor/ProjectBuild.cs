@@ -188,15 +188,12 @@ public class ProjectBuild
                     target,
                     BuildOptions.None | additionOption);
             }
-            else if (config.Build == BuildConfig.BuildType.AsestBundle || config.Build == BuildConfig.BuildType.All)
+
+            if (config.Build == BuildConfig.BuildType.AsestBundle || config.Build == BuildConfig.BuildType.All)
             {
                 Debug.LogWarning("Build asset bundles.");
 
                 AssetBundles.BuildScript.BuildAssetBundles();
-            }
-            else
-            {
-                Debug.LogWarning("You choose nothing to build, bro!");
             }
         }
     }
