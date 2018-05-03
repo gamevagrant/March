@@ -35,7 +35,7 @@ export BUILD_AB_COMMIT="build ab"
 # Unity batch mode build.
 echo "Compiling.. this will take a while"
 echo $untiy -quit -batchmode -projectPath $projectPath -logFile `pwd`/editor.log -executeMethod ProjectBuild.JenkinsBuildAndroid
-$untiy -quit -batchmode -projectPath $projectPath -logFile `pwd`/editor.log -executeMethod ProjectBuild.JenkinsBuildAndroid
+$untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 
 now=$(date +"%T")
 echo "Build Complete: $now"
