@@ -105,8 +105,10 @@ public class ProjectBuild
         config.IsForDev = bool.Parse(Environment.GetEnvironmentVariable("IsForDev"));
         config.PredefineSymbols = Environment.GetEnvironmentVariable("PredeineSymbols");
 
-        config.Build = (BuildConfig.BuildType)(int.Parse(Environment.GetEnvironmentVariable("BuildAssetBundle")) &
-                                    int.Parse(Environment.GetEnvironmentVariable("BuildApk")));
+        var assetbundleBuild = bool.Parse(Environment.GetEnvironmentVariable("BuildAssetBundle"));
+        var apkBuild = bool.Parse(Environment.GetEnvironmentVariable("BuildApk"));
+        config.Build = assetbundleBuild && apkBuild ? BuildConfig.BuildType.All :
+            assetbundleBuild ? BuildConfig.BuildType.AsestBundle : BuildConfig.BuildType.Apk;
         var assetbunldeCommit = Environment.GetEnvironmentVariable("COMMIT_MESSAGE")
             .Contains(Environment.GetEnvironmentVariable("BUILD_AB_COMMIT"));
         var jenkinsCommit = Environment.GetEnvironmentVariable("gitlabUserName").Equals("Jenkins");
@@ -162,7 +164,7 @@ public class ProjectBuild
         PlayerSettings.applicationIdentifier = config.ApplicationId;
 
         //set the internal apk version to the current unix timestamp, so this increases with every build
-        PlayerSettings.Android.bundleVersionCode = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+        PlayerSettings.Android.bundleVersionCode = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         PlayerSettings.Android.keystoreName = config.KeyStorePath;
         PlayerSettings.Android.keystorePass = config.KeyPassword;
         PlayerSettings.Android.keyaliasName = config.KeyAliasName;
