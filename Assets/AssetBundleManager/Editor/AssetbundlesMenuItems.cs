@@ -11,6 +11,8 @@ namespace AssetBundles
         private const string kSimulationMode = "Tools/AssetBundles/Simulation Mode";
         private const string ResourcePath = "Resources";
 
+        private const string CopyToStreamingAssetStr = "Tools/AssetBundles/Copy to Streaming Asset Folder";
+
         [MenuItem(kSimulationMode)]
         public static void ToggleSimulationMode()
         {
@@ -24,7 +26,20 @@ namespace AssetBundles
             return true;
         }
 
-        [MenuItem("Tools/AssetBundles/Build AssetBundles from Resources")]
+        [MenuItem(CopyToStreamingAssetStr)]
+        public static void ToggleCopyToStreamingAssetFolder()
+        {
+            BuildScript.CopyToStreamingAsset = !BuildScript.CopyToStreamingAsset;
+        }
+
+        [MenuItem(CopyToStreamingAssetStr, true)]
+        public static bool ToggleCopyToStreamingAssetFolderValidate()
+        {
+            Menu.SetChecked(CopyToStreamingAssetStr, BuildScript.CopyToStreamingAsset);
+            return true;
+        }
+
+        //[MenuItem("Tools/AssetBundles/Build AssetBundles from Resources")]
         private static void BuildBundlesFromResources()
         {
             var path = Path.Combine(Application.dataPath, ResourcePath);
@@ -40,13 +55,13 @@ namespace AssetBundles
             BuildScript.BuildAssetBundles();
         }
 
-        [MenuItem("Tools/AssetBundles/Build Player (for use with engine code stripping)")]
+        //[MenuItem("Tools/AssetBundles/Build Player (for use with engine code stripping)")]
         static public void BuildPlayer()
         {
             BuildScript.BuildPlayer();
         }
 
-        [MenuItem("Tools/AssetBundles/Build AssetBundles from Selection")]
+        //[MenuItem("Tools/AssetBundles/Build AssetBundles from Selection")]
         private static void BuildBundlesFromSelection()
         {
             BuildBundles(Selection.objects);

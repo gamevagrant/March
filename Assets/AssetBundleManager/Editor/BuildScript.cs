@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -10,6 +11,7 @@ namespace AssetBundles
     public class BuildScript
     {
         public static string overloadedDevelopmentServerURL = "";
+        public static bool CopyToStreamingAsset = true;
 
         static public string CreateAssetBundleDirectory()
         {
@@ -57,12 +59,20 @@ namespace AssetBundles
             {
                 BuildPipeline.BuildAssetBundles(outputPath, builds, options, EditorUserBuildSettings.activeBuildTarget);
             }
+
+            if (CopyToStreamingAsset)
+            {
+                var desPath = Path.Combine(Application.streamingAssetsPath, Utility.AssetBundlesOutputPath);
+                if (!Directory.Exists(desPath))
+                    Directory.CreateDirectory(desPath);
+                DirectoryCopy(Utility.AssetBundlesOutputPath, desPath);
+            }
         }
 
         public static void WriteServerURL()
         {
             string downloadURL;
-            if (string.IsNullOrEmpty(overloadedDevelopmentServerURL) == false)
+            if (String.IsNullOrEmpty(overloadedDevelopmentServerURL) == false)
             {
                 downloadURL = overloadedDevelopmentServerURL;
             }
@@ -198,13 +208,13 @@ namespace AssetBundles
             string outputFolder = Utility.GetPlatformName();
 
             // Setup the source folder for assetbundles.
-            var source = Path.Combine(Path.Combine(System.Environment.CurrentDirectory, Utility.AssetBundlesOutputPath), outputFolder);
-            if (!System.IO.Directory.Exists(source))
+            var source = Path.Combine(Path.Combine(Environment.CurrentDirectory, Utility.AssetBundlesOutputPath), outputFolder);
+            if (!Directory.Exists(source))
                 Debug.Log("No assetBundle output folder, try to build the assetBundles first.");
 
             // Setup the destination folder for assetbundles.
-            var destination = System.IO.Path.Combine(outputPath, outputFolder);
-            if (System.IO.Directory.Exists(destination))
+            var destination = Path.Combine(outputPath, outputFolder);
+            if (Directory.Exists(destination))
                 FileUtil.DeleteFileOrDirectory(destination);
 
             FileUtil.CopyFileOrDirectory(source, destination);
@@ -226,6 +236,29 @@ namespace AssetBundles
         {
             var relativeAssetBundlesOutputPathForPlatform = Path.Combine(Utility.AssetBundlesOutputPath, Utility.GetPlatformName());
             return Path.Combine(relativeAssetBundlesOutputPathForPlatform,  Utility.GetPlatformName()) + ".manifest";
+        }
+
+        private static void DirectoryCopy(string sourceDirName, string destDirName)
+        {
+            // If the destination directory doesn't exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            foreach (string folderPath in Directory.GetDirectories(sourceDirName, "*", SearchOption.AllDirectories))
+            {
+                if (!Directory.Exists(folderPath.Replace(sourceDirName, destDirName)))
+                    Directory.CreateDirectory(folderPath.Replace(sourceDirName, destDirName));
+            }
+
+            foreach (string filePath in Directory.GetFiles(sourceDirName, "*.*", SearchOption.AllDirectories))
+            {
+                string newFilePath = Path.Combine(Path.GetDirectoryName(filePath).Replace(sourceDirName, destDirName),
+                    Path.GetFileName(filePath));
+
+                File.Copy(filePath, newFilePath, true);
+            }
         }
     }
 }
