@@ -210,6 +210,10 @@ namespace qy
                         guideID = "10012";
                     }
                 }
+                if(string.IsNullOrEmpty(guideID) || displayedGuides.ContainsKey(guideID))
+                {
+                    guideID = "10020";
+                }
             }
             if(!string.IsNullOrEmpty(guideID) )
             {
