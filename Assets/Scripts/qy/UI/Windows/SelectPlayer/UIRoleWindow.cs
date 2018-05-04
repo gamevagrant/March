@@ -70,6 +70,7 @@ public class UIRoleWindow : UIWindowBase {
         AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
         {
             head.sprite = sp;
+            head.type = Image.Type.Simple;
             GameUtils.Scaling(head.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
         });
 
