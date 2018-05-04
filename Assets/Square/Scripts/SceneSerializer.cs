@@ -46,6 +46,9 @@ namespace March.Scene
             //yield return SceneUtils.ScanAndLoad();
             yield return Loader.Load();
 
+            int chapter = qy.GameMainManager.Instance.playerData.GetQuest().chapter;
+            Data = Resources.Load<TextAsset>("Level_" + chapter);
+
             if (AutoLoad)
             {
                 SceneLevel = JsonMapper.ToObject<SceneLevel>(Data.text);
