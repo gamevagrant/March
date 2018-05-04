@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Group>
-	<ItemSpec id="10001" type="1" person="person1" dialog="halou" ui="UIRoleWindow" next="10002"/>
-	<ItemSpec id="10002" type="2" person="person1" dialog="halou" ui="UIRoleWindow" btn="Button" next="10003"/>
-	<ItemSpec id="10003" type="2" person="person1" dialog="halou" ui="UIRoleWindow" btn="Button" next="10004"/>
-	<ItemSpec id="10004" type="1" person="person1" dialog="halou" ui="UIRoleWindow" next="10005"/>
-	<ItemSpec id="10005" type="1" person="person1" dialog="halou" ui="UIRoleWindow" next="0"/>
+	<ItemSpec id="10001" type="1" person="person1" dialog="100009" ui="UIRoleWindow" next="0"/>
+	<ItemSpec id="10002" type="1" person="person1" dialog="100010" ui="UIRoleWindow" next="10003"/>
+	<ItemSpec id="10003" type="2" person="person1" dialog="100011" ui="UIRoleWindow" next="0" btn="FixedRoot/UIRoleWindow/Panel/Button"/>
+	<ItemSpec id="10004" type="1" person="person1" dialog="100012" ui="UIRoleWindow" next="10005"/>
+	<ItemSpec id="10005" type="1" person="person1" dialog="100013" ui="UIRoleWindow" next="0"/>
 </Group>
