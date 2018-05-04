@@ -1818,15 +1818,8 @@ public class Item : MonoBehaviour
             board.score += Configure.instance.scoreItem * board.dropTime;
         }
 
-        board.UITop.UpdateProgressBar(board.score);
-
-        board.UITop.UpdateScoreAmount(board.score);
-
-
         if (next != ITEM_TYPE.NONE)
         {
-            //print("next type: " + next);
-
             if (IsBombBreaker(next))
             {
                 if (nextSound) AudioManager.instance.BombBreakerAudio();

@@ -3,7 +3,12 @@ using UnityEngine;
 
 public class UISettings : MonoBehaviour
 {
-    public Board board;
+    private Board board;
+
+    private void Start()
+    {
+        board = GameObject.Find("Board").GetComponent<Board>();
+    }
 
     public void SettingsClick()
     {
