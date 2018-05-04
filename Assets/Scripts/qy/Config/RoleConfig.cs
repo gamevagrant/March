@@ -32,6 +32,7 @@ namespace qy.config
         */
         internal override void ReadItem(XmlElement item)
         {
+            Debug.Log("RoleConfig Read"+dic.Values.Count.ToString());
             RoleItem role = new RoleItem();
             role.id = item.GetAttribute("id");
             role.name = GetLanguage(item.GetAttribute("name"));
@@ -52,6 +53,11 @@ namespace qy.config
         public List<RoleItem> GetRoleList()
         {
             return new List<RoleItem>(dic.Values);
+        }
+
+        public override string ToString()
+        {
+            return "data count:"+ dic.Values.Count.ToString();
         }
     }
 

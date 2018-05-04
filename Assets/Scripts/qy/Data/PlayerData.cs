@@ -368,6 +368,8 @@ namespace qy
                         roleID = role.roleId;
                     }
                 }
+                Debug.Log("============"+roleID.ToString());
+                Debug.Log("----------"+GameMainManager.Instance.configManager.roleConfig.ToString());
                 role = GameMainManager.Instance.configManager.roleConfig.GetItem(roleID).Clone();
             }
             questId = message.storyid;//任务id存到角色数据中有了角色再保存数据
