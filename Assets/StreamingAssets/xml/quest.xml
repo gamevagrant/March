@@ -2,7 +2,7 @@
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
 <Group id="quest">
 <ItemSpec id="10001" bg="1000124bg" type="1" sectionName="110001" sectionDes="100658" gotoId="10002" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000191"/>
-<ItemSpec id="10002" bg="1000111bg" type="2" sectionName="110002" sectionDes="100659" selectList="100668:1000141:10003:5|5|5,100669:1000145:10003:0|0|0" gotoId="10003" requireStar="0" requireItem="200101:2" prize="0" exp="100" storyId="0"/>
+<ItemSpec id="10002" bg="1000111bg" type="2" sectionName="110002" sectionDes="100659" selectList="100668:1000141:10003:5|5|5,100669:1000145:10003:0|0|0" gotoId="10003" requireStar="0" requireItem="0" prize="0" exp="100" storyId="0"/>
 <ItemSpec id="10003" bg="1000105bg" type="1" sectionName="110003" sectionDes="100660" gotoId="10004" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000114"/>
 <ItemSpec id="10004" bg="1000113bg" type="2" sectionName="110004" sectionDes="100661" selectList="100670:1000149:10005:9|9|9,100671:1000154:10005:0|0|0" gotoId="10005" requireStar="0" requireItem="0" prize="0" exp="100" storyId="0"/>
 <ItemSpec id="10005" bg="1000114bg" type="2" sectionName="110005" sectionDes="100662" selectList="100672:1000159:10006:7|7|7,100673:1000163:10006:0|0|0" gotoId="10006" requireStar="0" requireItem="0" prize="0" exp="100" storyId="0"/>

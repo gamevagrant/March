@@ -94,6 +94,21 @@ public class EditorTools  {
         AssetDatabase.SaveAssets();
     }
 
+    [MenuItem("Tools/输出对象路径")]
+    public static void ShowSelectedPath()
+    {
+        Debug.Log(GetPath(Selection.activeTransform));
+    }
+
+    private static string GetPath(Transform tf)
+    {
+        string path = tf.name;
+        if(tf.parent!=null && tf.parent.gameObject.GetComponent<Canvas>() == null)
+        {
+            path = GetPath(tf.parent) + "/" + path;
+        }
+        return path;
+    }
     /*
     [MenuItem("GameObject/UI/Image")]
     static void CreatImage()

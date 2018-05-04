@@ -16,6 +16,7 @@ namespace qy.ui
             UIModalBoxWindow,
             UICallBackWindow,
             UIMainSceneWindow,
+            UINickNameWindow,
         }
 
         public enum UIWindowType
@@ -57,6 +58,7 @@ namespace qy.ui
             {UIWindowID.UIModalBoxWindow,"UIModalBoxWindow"},
             {UIWindowID.UICallBackWindow,"UICallBackWindow"},
             {UIWindowID.UIMainSceneWindow,"UIMainSceneWindow"},
+            {UIWindowID.UINickNameWindow,"UINickNameWindow"},
         };
 
 

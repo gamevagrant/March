@@ -262,10 +262,11 @@ public class UIDialogueWindow : UIWindowBase {
         if(DOTween.TotalPlayingTweens()>0)
         {
             DOTween.CompleteAll();
+            DOTween.KillAll();
             return;
         }
         
-        qy.config.StoryItem story = curDialogue.nextStory;
+        qy.config.StoryItem story = curDialogue.next;
         if(story!=null)
         {
 

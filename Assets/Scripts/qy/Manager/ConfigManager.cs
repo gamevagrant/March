@@ -91,6 +91,14 @@ namespace qy.config
                 return config as GuideSetupConfig;
             }
         }
+        public GuideConfig guideConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(GuideConfig)];
+                return config as GuideConfig;
+            }
+        }
 
         public SettingConfig settingConfig
         {
@@ -147,6 +155,7 @@ namespace qy.config
             Load<SettingConfig>(LoadHandle);
             Load<RoleConfig>(LoadHandle);
             Load<LevelConfig>(LoadHandle);
+            Load<GuideConfig>(LoadHandle);
         }
 
         private void Load<T>(Action onComplate) where T : BaseConfig, new()

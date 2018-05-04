@@ -78,6 +78,14 @@ namespace qy.ui
             }
         }
 
+        public RectTransform root
+        {
+            get
+            {
+                return transform as RectTransform;
+            }
+        }
+
         public UIWindowBase curWindow
         {
             get
@@ -298,6 +306,8 @@ namespace qy.ui
                     {
                         onComplate();
                     }
+
+                    Messenger.Broadcast<UISettings.UIWindowID>(ELocalMsgID.CloseUI, id);
                 }, needTransform);
 
 
@@ -379,6 +389,7 @@ namespace qy.ui
                     {
                         onComplate();
                     }
+                    Messenger.Broadcast<UISettings.UIWindowID>(ELocalMsgID.OpenUI, id);
                 }, needTransform, data));
             }
             else
@@ -399,6 +410,7 @@ namespace qy.ui
             if (window == null)
             {
                 GameObject windowGO = GameObject.Instantiate(go);
+                windowGO.name = id.ToString();
                 windowGO.SetActive(false);
                 window = windowGO.GetComponent<UIWindowBase>();
                 UIWindowData windowData = window.windowData;

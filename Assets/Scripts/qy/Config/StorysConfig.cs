@@ -23,7 +23,7 @@ namespace qy.config
             story.bgFile = item.GetAttribute("bgFile");
             story.personFile = item.GetAttribute("personFile");
             story.dialogue = GetLanguage(item.GetAttribute("dialogue"));
-            story.nextStoryId = item.GetAttribute("next");
+            story.nextId = item.GetAttribute("next");
             story.personLocation = item.GetAttribute("personLocation");
             dic.Add(story.id, story);
         }
@@ -70,15 +70,15 @@ namespace qy.config
         /// 对话
         /// </summary>
         public string dialogue;
-        internal string nextStoryId;
+        internal string nextId;
         /// <summary>
         /// 下一个story
         /// </summary>
-        public StoryItem nextStory
+        public virtual StoryItem next
         {
             get
             {
-                return ConfigManager.Instance.storysConfig.GetItem(nextStoryId);
+                return ConfigManager.Instance.storysConfig.GetItem(nextId);
             }
         }
     }
