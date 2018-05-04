@@ -200,6 +200,7 @@ namespace qy
                 if (quest.type == config.QuestItem.QuestType.Branch)
                 {
                     guideID = "10016";
+
                 }
                 else
                 {
@@ -246,9 +247,9 @@ namespace qy
 
         public void OnClickPanel()
         {
-            HideDialog();
             if (guideItem!=null && guideItem.type== config.GuideConfig.GuideType.Dialog)
             {
+                HideDialog();
                 Next();
             }
             
