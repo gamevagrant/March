@@ -1,62 +1,57 @@
-﻿using qy.config;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using qy;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartFilm : MonoBehaviour
 {
+    private GameObject story;
+    private Text storyText;
+    private GameObject storyHead;
+    private Text storyHeadText;
+    private Image background;
 
-    //private storyhead m_stroy_head;
-    //public storyhead Story_Head { get { if (m_stroy_head == null) { m_stroy_head = DefaultConfig.getInstance().GetConfigByType<storyhead>(); } return m_stroy_head; } }
-    
-    //private language_cn m_language_cn;
-    //public language_cn Language_CN { get { if (m_language_cn == null) { m_language_cn = DefaultConfig.getInstance().GetConfigByType<language_cn>(); } return m_language_cn; } }
-   
-    private Text m_text;
-    private Image m_filmBackground;
+    private Dictionary<string, Sprite> spriteMap;
 
-    public Button m_skipBtn;
-
-    //需要显示剧情的图片只需要把图片改成剧情对应的index就行，然后把图片放在Resources/StartFilm
-    private Sprite[] m_filmImages;
-
-    //private StoryHeadItem m_storyItem;
     private qy.config.StoryHeadItem storyItem;
+    private Tweener tweener;
 
     void Start()
     {
-        m_text = transform.Find("Story/Text").GetComponent<Text>();
-        m_filmBackground = GetComponent<Image>();
+        story = transform.Find("Story").gameObject;
+        storyText = transform.Find("Story/Text").GetComponent<Text>();
 
-        transform.Find("Button").GetComponent<Button>().onClick.AddListener(PlayStory);
-        transform.Find("skip_btn").GetComponent<Button>().onClick.AddListener(SkipStory);
+        storyHead = transform.Find("StoryHead").gameObject;
+        storyHeadText = transform.Find("StoryHead/Text").GetComponent<Text>();
 
-        LoadStartFilmImages();
+        background = GetComponent<Image>();
 
-        //开始索引
-        //m_storyItem = Story_Head.GetItemByID("1000101");
-        storyItem = GameMainManager.Instance.configManager.StoryHeadConfig.GetItem("1000101");
+        var clickButton = transform.Find("ClickButton").GetComponent<Button>();
+        clickButton.onClick.AddListener(PlayStory);
 
-        PlayStory();
+        var skipButton = transform.Find("SkipButton").GetComponent<Button>();
+        skipButton.onClick.AddListener(SkipStory);
+
+        spriteMap = March.Core.ResourceManager.ResourceManager.instance.LoadAll<Sprite>(Configure.FilmBackgroundPath)
+            .ToDictionary(v => v.name, v => v);
+
+        storyItem = GameMainManager.Instance.configManager.StoryHeadConfig.GetItem(Utils.instance.StoryHeadId);
+
+        PlayStoryHead();
     }
-    //加载播放时需要的图片
-    private void LoadStartFilmImages()
+
+    private void PlayStoryHead()
     {
-        Sprite[] sprites = Resources.LoadAll<Sprite>("StartFilm");
-        m_filmImages = sprites;
-    }
-    //显示剧情对应的背景图片
-    private void LoadFilmImage(ref string bgName)
-    {
-        for (int i = 0; i < m_filmImages.Length; i++)
-        {
-            if (m_filmImages[i].name == bgName)
-            {
-                m_filmBackground.sprite = m_filmImages[i];
-                return;
-            }
-        }
+        story.SetActive(false);
+        storyHead.SetActive(true);
+
+        storyHeadText.text = string.Empty;
+        tweener = storyHeadText.DOText(storyItem.dialogue, 1.5f);
+
+        storyItem = storyItem.nextStory;
     }
 
     private void SkipStory()
@@ -66,17 +61,24 @@ public class StartFilm : MonoBehaviour
 
     private void PlayStory()
     {
-        //如果当前剧情播放完就加载main场景
+        story.SetActive(true);
+        storyHead.SetActive(false);
+
+        if (tweener != null)
+            tweener.Kill(true);
+
+        // end of all story head xml.
         if (storyItem == null)
         {
             LoadMainScene();
             return;
         }
 
-		string story = storyItem.dialogue;
-        m_text.text = story;
+        storyText.text = string.Empty;
 
-        LoadFilmImage(ref storyItem.bgFile);
+        tweener = storyText.DOText(storyItem.dialogue, 1);
+
+        background.sprite = spriteMap[storyItem.bgFile];
 
         storyItem = storyItem.nextStory;
     }
@@ -84,5 +86,4 @@ public class StartFilm : MonoBehaviour
     {
         SceneManager.LoadScene("main");
     }
-
 }

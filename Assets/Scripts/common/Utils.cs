@@ -1,10 +1,10 @@
 ﻿using Assets.Scripts.Common;
 using System.Text.RegularExpressions;
-using UnityEngine;
 
 public class Utils : MonoSingleton<Utils>
 {
     public string DeviceId;
+    public string StoryHeadId;
 
     public const string A = "^[0-9]+$";//纯数字检测
     public const string B = "^[A-Za-z0-9]+$"; //.数字或英文
@@ -14,7 +14,9 @@ public class Utils : MonoSingleton<Utils>
     {
         base.Init();
 
+#if !GAME_DEBUG
         DeviceId = SystemInfo.deviceUniqueIdentifier;
+#endif
     }
 
     /// <summary>
@@ -46,11 +48,10 @@ public class Utils : MonoSingleton<Utils>
 
     public bool isStrLengthValid(string _content)
     {
-        int length = _content.Length;
+        var length = _content.Length;
         if (3 <= length && length <= 16)
             return true;
-        else
-            return false;
+        return false;
     }
 
 }
