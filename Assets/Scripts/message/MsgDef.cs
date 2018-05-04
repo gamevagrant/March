@@ -15,6 +15,9 @@ public enum ELocalMsgID
     EliminateBoosterRefresh = 5,
     ShowDailyLandingActivites = 6,
     OpenLevelBeginPanel,
+    OpenUI,
+    CloseUI,
+    LoadScene,
 }
 
 /// <summary>

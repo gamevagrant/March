@@ -91,6 +91,14 @@ namespace qy.config
                 return config as GuideSetupConfig;
             }
         }
+        public GuideConfig guideConfig
+        {
+            get
+            {
+                BaseConfig config = dic[typeof(GuideConfig)];
+                return config as GuideConfig;
+            }
+        }
 
         public StoryheadConfig storyheadConfig
         {
@@ -143,6 +151,7 @@ namespace qy.config
             InitTypeDict<MatchLevelConfig>();
             InitTypeDict<ExchangeConfig>();
             InitTypeDict<GuideSetupConfig>();
+            InitTypeDict<GuideSetupConfig>();
             InitTypeDict<SettingConfig>();
             InitTypeDict<RoleConfig>();
             InitTypeDict<LevelConfig>();
@@ -168,17 +177,6 @@ namespace qy.config
             }
 
             onComplate();
-
-            //以下加载顺序不可变更
-            //Load<LanguageConfig>(LoadHandle);
-            //Load<PropsConfig>(LoadHandle);
-            //Load<StorysConfig>(LoadHandle);
-            //Load<QuestConfig>(LoadHandle);
-            //Load<StoryheadConfig>(LoadHandle);
-            //Load<MatchLevelConfig>(LoadHandle);
-            //Load<ExchangeConfig>(LoadHandle);
-            //Load<GuideSetupConfig>(LoadHandle);
-            //Load<SettingConfig>(LoadHandle);
         }
 
         private void Load<T>(Action onComplate) where T : BaseConfig, new()

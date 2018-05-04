@@ -60,12 +60,14 @@ namespace qy
         {
             playerData = LocalDatasManager.playerData;
             playerModel = new PlayerModel(playerData);
+            GuideManager guide = GuideManager.Instance;
             //netManager = net.NetManager.Instance;
             //configManager = config.ConfigManager.Instance;
             //uiManager = ui.UIManager.Instance;
             //audioManager = AudioManager.Instance;
             audioManager.SetSoundPathProxy(FilePathTools.getAudioPath);
             audioManager.SetMusicPathProxy(FilePathTools.getAudioPath);
+            
         }
 
         public void Init()

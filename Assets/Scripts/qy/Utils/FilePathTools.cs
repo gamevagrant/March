@@ -15,7 +15,7 @@ public class FilePathTools
 	
 	public static string assetsRootPath = Application.dataPath + "/Export/";//资源文件夹绝对路径
 	
-	public static string exportRoot = Application.streamingAssetsPath +"/" + targetName +"/";//打包资源的输出文件夹
+	public static string exportRoot = Application.streamingAssetsPath + "/";//打包资源的输出文件夹
 	
 	public static string downLoadSavePath = Application.persistentDataPath + "/DownLoad/"+targetName+"/";//下载远程资源数据保存的位置
 
@@ -245,7 +245,7 @@ public class FilePathTools
 
     public static string getXmlPath(string name)
     {
-        return Application.streamingAssetsPath + "/xml/" + name;
+        return downLoadRootPath + "/xml/" + name;
     }
 
 	public static string getConfigPath(string name)

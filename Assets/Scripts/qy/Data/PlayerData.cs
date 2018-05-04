@@ -179,7 +179,11 @@ namespace qy
         {
             get
             {
-                return GetRoleState(role.id);
+                if(role!=null)
+                {
+                    return GetRoleState(role.id);
+                }
+                return RoleState.Normal;
             }
         }
 

@@ -23,6 +23,7 @@ namespace qy.config
             quest.type = (QuestItem.QuestType)int.Parse(item.GetAttribute("type"));
             quest.sectionName = GetLanguage(item.GetAttribute("sectionName"));
             quest.sectionDes = GetLanguage(item.GetAttribute("sectionDes"));
+            quest.chapter = int.Parse(item.GetAttribute("chapter"));
 
             string exp = item.GetAttribute("exp");
             quest.exp = String.IsNullOrEmpty(exp) ? 0 : int.Parse(exp);
@@ -164,6 +165,10 @@ namespace qy.config
         /// 类型
         /// </summary>
         public QuestType type;
+        /// <summary>
+        /// 章节
+        /// </summary>
+        public int chapter;
         /// <summary>
         /// 任务标题
         /// </summary>

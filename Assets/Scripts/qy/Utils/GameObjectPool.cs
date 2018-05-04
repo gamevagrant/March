@@ -53,6 +53,7 @@ public class GameObjectPool : MonoBehaviour {
 	T createNewTarget<T>()where T:Component
 	{
 		GameObject go = Instantiate (target) as GameObject;
+        go.name = target.name;
 		go.transform.SetParent (transform);
 		go.transform.localPosition = Vector3.zero;
 		go.transform.localRotation = Quaternion.identity;

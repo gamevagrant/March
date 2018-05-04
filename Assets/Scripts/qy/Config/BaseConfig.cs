@@ -46,6 +46,10 @@ namespace qy.config
 
         protected string GetLanguage(string id)
         {
+            if(string.IsNullOrEmpty(id))
+            {
+                return "";
+            }
             return ConfigManager.Instance.languageConfig.GetItem(id);
         }
     }

@@ -249,6 +249,12 @@ namespace qy
             playerData.dirty = true;
             SaveData();
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
+
+            if(questItem.chapter!=nextQuest.chapter)
+            {
+                Messenger.Broadcast<string>(ELocalMsgID.LoadScene, "Film");
+            }
+
             return PlayerModelErr.NULL;
         }
 

@@ -20,6 +20,20 @@ namespace qy
                 SaveData("PLAYER_DATA", value);
             }
         }
+        /// <summary>
+        /// 展示过的新手引导
+        /// </summary>
+        public static Dictionary<string, string> displayedGuides
+        {
+            get
+            {
+                return GetData<Dictionary<string, string>>("SHOWED_GUIDE")??new Dictionary<string, string>();
+            }
+            set
+            {
+                SaveData("SHOWED_GUIDE", value);
+            }
+        }
 
         /// <summary>
         /// 邀请过的好友

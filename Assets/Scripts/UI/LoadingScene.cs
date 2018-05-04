@@ -17,6 +17,13 @@ public class LoadingScene : MonoBehaviour
     private void Awake()
     {
         loader = GetComponent<LoadingSceneLoader>();
+
+        Messenger.AddListener<string>(ELocalMsgID.LoadScene, OnLoadSceneHandle);
+
+    }
+    private void OnDestroy()
+    {
+        Messenger.RemoveListener<string>(ELocalMsgID.LoadScene, OnLoadSceneHandle);
     }
 
     IEnumerator Start()
@@ -27,6 +34,11 @@ public class LoadingScene : MonoBehaviour
         m_progressBar = canvas.transform.Find("ProgressBar").GetComponent<Image>();
         var go = canvas.transform.Find("ProgressBar_bg");
         m_progressBar_right = go.transform.Find("right").GetComponent<Image>();
+       
+        GameMainManager.Instance.configManager.LoadConfig(() =>
+        {
+            StartCoroutine(LoadScene("Film"));
+        });
 
 #if GAME_DEBUG
         Instantiate(Resources.Load<GameObject>(Configure.ReporterPath));
@@ -53,10 +65,16 @@ public class LoadingScene : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadScene()
+    private void AddConfig<T>() where T : DatabaseConfig, new()
+    {
+        T config = new T();
+        StartCoroutine(XMLDataManager.instance.loadXML(config));
+    }
+
+    private IEnumerator LoadScene(string scene)
     {
         //m_async = SceneManager.LoadSceneAsync("main");
-        m_async = SceneManager.LoadSceneAsync("Film");
+        m_async = SceneManager.LoadSceneAsync(scene);
         yield return m_async;
         Login();
     }
@@ -90,5 +108,10 @@ public class LoadingScene : MonoBehaviour
                 Application.Quit();
             });
         }
+    }
+
+    private void OnLoadSceneHandle(string scene)
+    {
+        StartCoroutine(LoadScene(scene));
     }
 }
