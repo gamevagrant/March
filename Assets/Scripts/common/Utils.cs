@@ -15,9 +15,7 @@ public class Utils : MonoSingleton<Utils>
     {
         base.Init();
 
-#if !GAME_DEBUG
         DeviceId = SystemInfo.deviceUniqueIdentifier;
-#endif
     }
 
     /// <summary>
