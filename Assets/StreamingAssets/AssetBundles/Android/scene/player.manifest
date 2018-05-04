@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2102875224
+CRC: 2108085244
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -40,6 +40,6 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Square/Prefabs/Scene/Player/2.prefab
-- Assets/Square/Prefabs/Scene/Player/1.prefab
+- Assets/AssetBundleResources/Scene/Player/2.prefab
+- Assets/AssetBundleResources/Scene/Player/1.prefab
 Dependencies: []

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3788673583
+CRC: 3125672629
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -30,9 +30,9 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Square/Prefabs/Scene/Building/2.prefab
-- Assets/Square/Prefabs/Scene/Building/5.prefab
-- Assets/Square/Prefabs/Scene/Building/3.prefab
-- Assets/Square/Prefabs/Scene/Building/1.prefab
-- Assets/Square/Prefabs/Scene/Building/4.prefab
+- Assets/AssetBundleResources/Scene/Building/2.prefab
+- Assets/AssetBundleResources/Scene/Building/5.prefab
+- Assets/AssetBundleResources/Scene/Building/3.prefab
+- Assets/AssetBundleResources/Scene/Building/1.prefab
+- Assets/AssetBundleResources/Scene/Building/4.prefab
 Dependencies: []
