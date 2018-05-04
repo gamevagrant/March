@@ -83,6 +83,7 @@ public class FilePathTools
 
     public static string GetDownLoadMainVersonPath(string name)
     {
+        Debug.Log("加载地址:"+downLoadRootPath + targetName);
         return downLoadRootPath + targetName;
     }
 

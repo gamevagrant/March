@@ -13,6 +13,7 @@ namespace qy.config
         public virtual bool Read(string xml)
         {
             Debug.Log("正在解析"+Name());
+            Debug.Log(xml);
             if (string.IsNullOrEmpty(xml))
             {
                 return false;
