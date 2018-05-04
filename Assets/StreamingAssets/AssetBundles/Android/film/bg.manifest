@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1543402165
+CRC: 2276418352
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f4fb00dda51042aeb9efbc8b1bf100fc
+    Hash: 94988dce4fc4d1bea43c0e49617de54d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 460b4f5d62b6facbccf7c01637df8f00
@@ -16,6 +16,7 @@ ClassTypes:
 Assets:
 - Assets/AssetBundleResources/Background/1000125bg.png
 - Assets/AssetBundleResources/Background/1000126bg.png
+- Assets/AssetBundleResources/Background/1000202bg.jpg
 - Assets/AssetBundleResources/Background/1000101bg.png
 - Assets/AssetBundleResources/Background/1000127bg.png
 Dependencies: []

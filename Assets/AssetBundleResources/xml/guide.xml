@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Group>
-	<ItemSpec id="10001" type="1" person="person1" dialog="100009" ui="UIRoleWindow" next="0"/>
-	<ItemSpec id="10002" type="1" person="person1" dialog="100010" ui="UIRoleWindow" next="10003"/>
-	<ItemSpec id="10003" type="2" person="person1" dialog="100011" ui="UIRoleWindow" next="0" btn="FixedRoot/UIRoleWindow/Panel/Button"/>
-	<ItemSpec id="10004" type="1" person="person1" dialog="100012" ui="UIRoleWindow" next="10005"/>
-	<ItemSpec id="10005" type="1" person="person1" dialog="100013" ui="UIRoleWindow" next="0"/>
+	<ItemSpec id="10001" type="1" person="person1" dialog="220001" ui="UIRoleWindow" next="0"/>
+	<ItemSpec id="10002" type="1" person="person1" dialog="220002" ui="UIRoleWindow" next="10003"/>
+	<ItemSpec id="10003" type="2" person="person1" ui="UIRoleWindow" highlight="FixedRoot/UIRoleWindow/Panel/Button" next="10004"/>
+	<ItemSpec id="10004" type="1" person="person1" dialog="220003" ui="UIMainSceneWindow" next="10005"/>
+	<ItemSpec id="10005" type="2" person="person1" ui="UIMainSceneWindow" highlight="FixedRoot/UIMainSceneWindow/Bottom/TaskBtn" next="0"/>
+	<ItemSpec id="10006" type="1" person="person1" dialog="220004" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/CenterMission/Mission/TopMission" next="10007" position="-361:-389"/>
+	<ItemSpec id="10007" type="1" person="person1" dialog="220005" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/CenterMission/Button/PropItems" next="10008"/>
+	<ItemSpec id="10008" type="2" person="person1" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/CenterMission/Button" next="0"/>
+	<ItemSpec id="10009" type="1" person="person1" dialog="220007" ui="UIMainSceneWindow" highlight="FixedRoot/UIMainSceneWindow/Bottom/LevelBtn" next="10010"/>
+	<ItemSpec id="10010" type="1" person="person1" dialog="220008" ui="UIMainSceneWindow" next="10011"/>
+	<ItemSpec id="10011" type="2" person="person1" ui="UIMainSceneWindow" highlight="FixedRoot/UIMainSceneWindow/Bottom/TaskBtn" next="0"/>
+	<ItemSpec id="10012" type="1" person="person1" dialog="220009" ui="UITaskWindow" next="10013"/>
+	<ItemSpec id="10013" type="2" person="person1" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/CenterMission/Button" next="0"/>
+	<ItemSpec id="10014" type="1" person="person1" dialog="220010" ui="UITaskWindow" next="10015"/>
+	<ItemSpec id="10015" type="2" person="person1" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/CenterMission/Button" next="10016"/>
+	<ItemSpec id="10016" type="1" person="person1" dialog="220011" ui="UITaskWindow" next="10017"/>
+	<ItemSpec id="10017" type="1" person="person1" dialog="220012" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/Left/GameObject" next="10018"/>
+	<ItemSpec id="10018" type="2" person="person1" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/CenterMission/Button" next="0"/>
+	<ItemSpec id="10019" type="2" person="person1" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/CenterMission/BottomSelect" next="0"/>
+	<ItemSpec id="10020" type="1" person="person1" dialog="220013" ui="UITaskWindow" next="10021"/>
+	<ItemSpec id="10021" type="1" person="person1" dialog="220014" ui="UITaskWindow" highlight="PopUpRoot/UITaskWindow/Left/GameObject" next="0"/>
 </Group>

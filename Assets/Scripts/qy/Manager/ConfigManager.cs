@@ -150,6 +150,7 @@ namespace qy.config
             InitTypeDict<StoryheadConfig>();
             InitTypeDict<MatchLevelConfig>();
             InitTypeDict<ExchangeConfig>();
+            InitTypeDict<GuideConfig>();
             InitTypeDict<GuideSetupConfig>();
             InitTypeDict<SettingConfig>();
             InitTypeDict<RoleConfig>();

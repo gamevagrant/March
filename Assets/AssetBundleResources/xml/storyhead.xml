@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
 <Group id="storyhead">
-  <ItemSpec id="1000101" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100110" next="1000102"/>
-  <ItemSpec id="1000102" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100111" next="1000103"/>
-  <ItemSpec id="1000103" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100112" next="1000104"/>
-  <ItemSpec id="1000104" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100113" next="1000105"/>
-  <ItemSpec id="1000105" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100114" next="1000106"/>
-  <ItemSpec id="1000106" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100115" next="1000107"/>
-  <ItemSpec id="1000107" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100116" next="1000108"/>
-  <ItemSpec id="1000108" bgmFile="testbgm" bgFile="1000126bg" personLocation="100:300" dialogue="100117" next="0"/>
-
-  <ItemSpec id="1000111" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100120" next="1000112"/>
-  <ItemSpec id="1000112" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100121" next="1000113"/>
-  <ItemSpec id="1000113" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100122" next="1000114"/>
-  <ItemSpec id="1000114" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100123" next="1000115"/>
-  <ItemSpec id="1000115" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100124" next="1000116"/>
-  <ItemSpec id="1000116" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100125" next="1000117"/>
-  <ItemSpec id="1000117" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100126" next="1000118"/>
-  <ItemSpec id="1000118" bgmFile="testbgm" bgFile="1000126bg" personLocation="100:300" dialogue="100127" next="0"/>
-
-  <ItemSpec id="1000121" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100130" next="1000122"/>
-  <ItemSpec id="1000122" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100131" next="1000123"/>
-  <ItemSpec id="1000123" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100132" next="1000124"/>
-  <ItemSpec id="1000124" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100133" next="1000125"/>
-  <ItemSpec id="1000125" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100134" next="1000126"/>
-  <ItemSpec id="1000126" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100135" next="1000127"/>
-  <ItemSpec id="1000127" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100136" next="1000128"/>
-  <ItemSpec id="1000128" bgmFile="testbgm" bgFile="1000126bg" personLocation="100:300" dialogue="100137" next="0"/>
+	<ItemSpec id="1010000" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="110069" next="1010001"/>
+	<ItemSpec id="1010001" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100110" next="1010002"/>
+	<ItemSpec id="1010002" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100111" next="1010003"/>
+	<ItemSpec id="1010003" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100112" next="1010004"/>
+	<ItemSpec id="1010004" bgmFile="testbgm" bgFile="1000101bg" personLocation="100:300" dialogue="100113" next="1010005"/>
+	<ItemSpec id="1010005" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100114" next="1010006"/>
+	<ItemSpec id="1010006" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100115" next="1010007"/>
+	<ItemSpec id="1010007" bgmFile="testbgm" bgFile="1000125bg" personLocation="100:300" dialogue="100116" next="1010008"/>
+	<ItemSpec id="1010008" bgmFile="testbgm" bgFile="1000126bg" personLocation="100:300" dialogue="100117" next="0"/>
+	
+	<ItemSpec id="1020001" bgmFile="testbgm" bgFile="1000201bg" personLocation="100:300" dialogue="110064" next="1020002"/>
+	<ItemSpec id="1020002" bgmFile="testbgm" bgFile="1000202bg" personLocation="100:300" dialogue="110065" next="1020003"/>
+	<ItemSpec id="1020003" bgmFile="testbgm" bgFile="1000202bg" personLocation="100:300" dialogue="110066" next="1020004"/>
+	<ItemSpec id="1020004" bgmFile="testbgm" bgFile="1000202bg" personLocation="100:300" dialogue="110067" next="1020005"/>
+	<ItemSpec id="1020005" bgmFile="testbgm" bgFile="1000202bg" personLocation="100:300" dialogue="110068" next="0"/>
 </Group>

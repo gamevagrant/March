@@ -38,7 +38,8 @@ public class StartFilm : MonoBehaviour
         spriteMap = March.Core.ResourceManager.ResourceManager.instance.LoadAll<Sprite>(Configure.FilmBackgroundPath)
             .ToDictionary(v => v.name, v => v);
 
-        storyItem = GameMainManager.Instance.configManager.StoryHeadConfig.GetItem(Utils.instance.StoryHeadId);
+        int chapter = GameMainManager.Instance.playerData.GetQuest().chapter;
+        storyItem = GameMainManager.Instance.configManager.StoryHeadConfig.GetFirstWithChapter(chapter);
 
         PlayStoryHead();
     }
