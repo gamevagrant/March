@@ -35,10 +35,6 @@ public class LoadingScene : MonoBehaviour
         var go = canvas.transform.Find("ProgressBar_bg");
         m_progressBar_right = go.transform.Find("right").GetComponent<Image>();
        
-        GameMainManager.Instance.configManager.LoadConfig(() =>
-        {
-            StartCoroutine(LoadScene("Film"));
-        });
 
 #if GAME_DEBUG
         Instantiate(Resources.Load<GameObject>(Configure.ReporterPath));
@@ -48,7 +44,7 @@ public class LoadingScene : MonoBehaviour
 
         GameMainManager.Instance.configManager.LoadConfig(() =>
         {
-            StartCoroutine(LoadScene());
+            StartCoroutine(LoadScene("Film"));
         });
     }
 
