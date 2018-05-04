@@ -17,6 +17,7 @@ public enum ELocalMsgID
     OpenLevelBeginPanel,
     OpenUI,
     CloseUI,
+    LoadScene,
 }
 
 /// <summary>

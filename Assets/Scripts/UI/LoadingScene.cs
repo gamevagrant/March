@@ -21,6 +21,12 @@ public class LoadingScene : MonoBehaviour
         AddConfig<guidesetup>();
 
         LanguageManager.instance.initConfig();
+        Messenger.AddListener<string>(ELocalMsgID.LoadScene, OnLoadSceneHandle);
+
+    }
+    private void OnDestroy()
+    {
+        Messenger.RemoveListener<string>(ELocalMsgID.LoadScene, OnLoadSceneHandle);
     }
 
     void Start()
@@ -34,7 +40,7 @@ public class LoadingScene : MonoBehaviour
        
         GameMainManager.Instance.configManager.LoadConfig(() =>
         {
-            StartCoroutine(LoadScene());
+            StartCoroutine(LoadScene("Film"));
         });
 
 #if UNITY_ANDROID
@@ -69,10 +75,10 @@ public class LoadingScene : MonoBehaviour
         StartCoroutine(XMLDataManager.instance.loadXML(config));
     }
 
-    private IEnumerator LoadScene()
+    private IEnumerator LoadScene(string scene)
     {
         //m_async = SceneManager.LoadSceneAsync("main");
-        m_async = SceneManager.LoadSceneAsync("Film");
+        m_async = SceneManager.LoadSceneAsync(scene);
         yield return m_async;
         Login();
     }
@@ -108,5 +114,10 @@ public class LoadingScene : MonoBehaviour
         }
 
 
+    }
+
+    private void OnLoadSceneHandle(string scene)
+    {
+        StartCoroutine(LoadScene(scene));
     }
 }

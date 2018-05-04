@@ -31,6 +31,16 @@ namespace qy.config
             dic.TryGetValue(id, out value);
             return value;
         }
+        /// <summary>
+        /// 根据章节 选择章节中第一条数据
+        /// </summary>
+        /// <param name="chapter"></param>
+        /// <returns></returns>
+        public StoryHeadItem GetFirstWithChapter(int chapter)
+        {
+            string id = string.Format("1{0}0001",chapter.ToString("D2"));
+            return GetItem(id);
+        }
     }
 
     public class StoryHeadItem

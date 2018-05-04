@@ -1,67 +1,66 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
-<Group id="quest">
-<ItemSpec id="10001" bg="1000124bg" type="1" sectionName="110001" sectionDes="100658" gotoId="10002" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000191"/>
-<ItemSpec id="10002" bg="1000111bg" type="2" sectionName="110002" sectionDes="100659" selectList="100668:1000141:10003:5|5|5,100669:1000145:10003:0|0|0" gotoId="10003" requireStar="0" requireItem="0" prize="0" exp="100" storyId="0"/>
-<ItemSpec id="10003" bg="1000105bg" type="1" sectionName="110003" sectionDes="100660" gotoId="10004" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000114"/>
-<ItemSpec id="10004" bg="1000113bg" type="2" sectionName="110004" sectionDes="100661" selectList="100670:1000149:10005:9|9|9,100671:1000154:10005:0|0|0" gotoId="10005" requireStar="0" requireItem="0" prize="0" exp="100" storyId="0"/>
-<ItemSpec id="10005" bg="1000114bg" type="2" sectionName="110005" sectionDes="100662" selectList="100672:1000159:10006:7|7|7,100673:1000163:10006:0|0|0" gotoId="10006" requireStar="0" requireItem="0" prize="0" exp="100" storyId="0"/>
-<ItemSpec id="10006" bg="1000123bg" type="1" sectionName="110006" sectionDes="100663" gotoId="10007" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000122"/>
-<ItemSpec id="10007" bg="1000108bg" type="1" sectionName="110007" sectionDes="100664" gotoId="10008" requireStar="1" requireItem="200102:2" prize="0" exp="100" storyId="1000195"/>
-<ItemSpec id="10008" bg="1000119bg" type="1" sectionName="110008" sectionDes="100665" gotoId="10009" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000189"/>
-<ItemSpec id="10009" bg="1000116bg" type="2" sectionName="110009" sectionDes="100666" selectList="100674:1000173:10010:3|3|10,100675:1000176:10010:0|0|0" gotoId="10010" requireStar="0" requireItem="200103:2" prize="0" exp="100" storyId="0"/>
-<ItemSpec id="10010" bg="1000118bg" type="2" sectionName="110010" sectionDes="100667" selectList="100676:1000179:10035:0|0|0,100677:1000182:10035:30|30|30,100678:1000185:10035:30|20|10" gotoId="10035" requireStar="0" requireItem="0" prize="0" exp="100" storyId="0"/>
-<ItemSpec id="10011" bg="1000109bg" type="2" sectionName="110011" sectionDes="100214" selectList="100215:1000207:10037:0|0|0,100217:1000209:10037:0|0|0,100683:1000675:10063:0|0|0" gotoId="10037" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000205:1000221"/>
-<ItemSpec id="10012" bg="1000104bg" type="2" sectionName="110012" sectionDes="100225" selectList="100226:1000218:10038:0|0|0,100230:1000222:10038:0|0|0" gotoId="10038" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000217:1000221"/>
-<ItemSpec id="10013" type="2" sectionName="110013" sectionDes="100243" selectList="100244:1000236:10039:0|0|0,100246:1000238:10039:0|0|0" gotoId="10039" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000235:1000237"/>
-<ItemSpec id="10014" type="2" sectionName="110014" sectionDes="100260" selectList="100261:1000253:10040:0|0|0,100265:1000257:10040:0|0|0" gotoId="10040" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000252:1000256"/>
-<ItemSpec id="10015" type="2" sectionName="110015" sectionDes="100274" selectList="100275:1000267:10016:0|0|0,100290:1000282:10041:0|0|0" gotoId="10016" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000266:1000281"/>
-<ItemSpec id="10016" type="2" sectionName="110016" sectionDes="100279" selectList="100280:1000272:10041:0|0|0,100286:1000278:10041:0|0|0" gotoId="10041" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000271:1000277"/>
-<ItemSpec id="10017" type="2" sectionName="110017" sectionDes="100302" selectList="100303:1000295:10042:0|0|0,100308:1000300:10042:0|0|0" gotoId="10042" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000295:1000299"/>
-<ItemSpec id="10018" type="2" sectionName="110018" sectionDes="100320" selectList="100321:1000313:10043:0|0|0,100329:1000321:10043:0|0|0" gotoId="10043" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000312:1000320"/>
-<ItemSpec id="10019" type="2" sectionName="110019" sectionDes="100338" selectList="100339:1000331:10020:0|0|0,100351:1000343:10044:0|0|0" gotoId="10020" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000330:1000342"/>
-<ItemSpec id="10020" type="2" sectionName="110020" sectionDes="100342" selectList="100343:1000335:10063:0|0|0,100346:1000338:10044:0|0|0" gotoId="10044" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000334:1000337:1000621"/>
-<ItemSpec id="10021" type="2" sectionName="110021" sectionDes="100357" selectList="100358:1000350:10045:0|0|0,100362:1000354:10045:0|0|0" gotoId="10045" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000349:1000353"/>
-<ItemSpec id="10022" type="2" sectionName="110022" sectionDes="100374" selectList="100375:1000367:10046:0|0|0,100380:1000372:10046:0|0|0" gotoId="10046" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000366:1000371"/>
-<ItemSpec id="10023" type="2" sectionName="110023" sectionDes="100388" selectList="100389:1000381:10047:0|0|0,100393:1000385:10047:0|0|0" gotoId="10047" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000380:1000384"/>
-<ItemSpec id="10024" type="2" sectionName="110024" sectionDes="100404" selectList="100405:1000394:10048:0|0|0,100408:1000400:10048:0|0|0" gotoId="10048" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000396:1000399:1000622"/>
-<ItemSpec id="10025" type="2" sectionName="110025" sectionDes="100417" selectList="100418:1000410:10049:0|0|0,100425:1000417:10049:0|0|0" gotoId="10049" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000409:1000416"/>
-<ItemSpec id="10026" type="2" sectionName="110026" sectionDes="100435" selectList="100436:1000428:10050:0|0|0,100440:1000432:10050:0|0|0" gotoId="10050" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000427:1000431"/>
-<ItemSpec id="10027" type="2" sectionName="110027" sectionDes="100447" selectList="100448:1000440:10051:0|0|0,100452:1000444:10051:0|0|0" gotoId="10051" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000439:1000443:100633"/>
-<ItemSpec id="10028" type="2" sectionName="110028" sectionDes="100467" selectList="100468:1000460:10052:0|0|0,100471:1000463:10052:0|0|0" gotoId="10052" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000459:1000462"/>
-<ItemSpec id="10029" type="2" sectionName="110029" sectionDes="100482" selectList="100483:1000475:10053:0|0|0,100486:1000478:10053:0|0|0,100489:1000481:10053:0|0|0" gotoId="10053" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000474:1000477:1000480"/>
-<ItemSpec id="10030" type="2" sectionName="110030" sectionDes="100496" selectList="100497:1000489:10054:0|0|0,100500:1000492:10054:0|0|0" gotoId="10054" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000488:1000491"/>
-<ItemSpec id="10031" type="2" sectionName="110031" sectionDes="100531" selectList="100532:1000524:10055:0|0|0,100537:1000529:10055:0|0|0" gotoId="10055" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000523:1000528"/>
-<ItemSpec id="10032" type="2" sectionName="110032" sectionDes="100546" selectList="100547:1000539:10056:0|0|0,100551:1000543:10056:0|0|0" gotoId="10056" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000538:1000542:1000623"/>
-<ItemSpec id="10033" type="2" sectionName="110033" sectionDes="100568" selectList="100569:1000561:10057:0|0|0,100572:1000564:10057:0|0|0" gotoId="10057" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000560:1000563"/>
-<ItemSpec id="10034" type="2" sectionName="110034" sectionDes="100615" selectList="100616:1000608:10058:0|0|0,100621:1000613:10058:0|0|0" gotoId="10058" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000607:1000612"/>
-<ItemSpec id="10035" type="1" sectionName="110035" sectionDes="100633" gotoId="10036" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000140"/>
-<ItemSpec id="10036" type="1" sectionName="110036" sectionDes="100634" gotoId="10011" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000199"/>
-<ItemSpec id="10037" type="1" sectionName="110037" sectionDes="100635" gotoId="10012" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000211"/>
-<ItemSpec id="10038" type="1" sectionName="110038" sectionDes="100636" gotoId="10013" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000225"/>
-<ItemSpec id="10039" type="1" sectionName="110039" sectionDes="100637" gotoId="10014" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000241"/>
-<ItemSpec id="10040" type="1" sectionName="110040" sectionDes="100638" gotoId="10015" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000260"/>
-<ItemSpec id="10041" type="1" sectionName="110041" sectionDes="100639" gotoId="10017" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000287"/>
-<ItemSpec id="10042" type="1" sectionName="110042" sectionDes="100640" gotoId="10018" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000307"/>
-<ItemSpec id="10043" type="1" sectionName="110043" sectionDes="100641" gotoId="10019" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000323"/>
-<ItemSpec id="10044" type="1" sectionName="110044" sectionDes="100642" gotoId="10021" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000346"/>
-<ItemSpec id="10045" type="1" sectionName="110045" sectionDes="100643" gotoId="10022" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000358"/>
-<ItemSpec id="10046" type="1" sectionName="110046" sectionDes="100644" gotoId="10023" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000375"/>
-<ItemSpec id="10047" type="1" sectionName="110047" sectionDes="100645" gotoId="10024" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000387"/>
-<ItemSpec id="10048" type="1" sectionName="110048" sectionDes="100646" gotoId="10025" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000404"/>
-<ItemSpec id="10049" type="1" sectionName="110049" sectionDes="100647" gotoId="10026" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000420"/>
-<ItemSpec id="10050" type="1" sectionName="110050" sectionDes="100648" gotoId="10027" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000435"/>
-<ItemSpec id="10051" type="1" sectionName="110051" sectionDes="100649" gotoId="10028" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000447"/>
-<ItemSpec id="10052" type="1" sectionName="110052" sectionDes="100650" gotoId="10029" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000466"/>
-<ItemSpec id="10053" type="1" sectionName="110053" sectionDes="100651" gotoId="10030" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000483"/>
-<ItemSpec id="10054" type="1" sectionName="110054" sectionDes="100652" gotoId="10031" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000495"/>
-<ItemSpec id="10055" type="1" sectionName="110055" sectionDes="100653" gotoId="10032" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000531"/>
-<ItemSpec id="10056" type="1" sectionName="110056" sectionDes="100654" gotoId="10033" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000546"/>
-<ItemSpec id="10057" type="1" sectionName="110057" sectionDes="100655" gotoId="10034" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000569"/>
-<ItemSpec id="10058" type="1" sectionName="110058" sectionDes="100656" gotoId="10062" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000615"/>
-<ItemSpec id="10059" type="3" sectionName="110059" sectionDes="100679" endingPoint="30:1000646:10011" gotoId="10020" requireStar="1" requireItem="0" prize="0" exp="100" storyId="0"/>
-<ItemSpec id="10060" type="3" sectionName="110060" sectionDes="100680" endingPoint="30:1000647:10019" gotoId="10043" requireStar="1" requireItem="0" prize="0" exp="100" storyId="0"/>
-<ItemSpec id="10061" type="4" sectionName="110061" sectionDes="100681" endingType="1" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000673"/>
-<ItemSpec id="10062" type="4" sectionName="110062" sectionDes="100682" endingType="2" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000674"/>
-<ItemSpec id="10063" type="4" sectionName="110063" sectionDes="100683" endingType="1" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000675"/>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Group>
+	<ItemSpec id="10001" type="1" chapter="1" bg="1000124bg" sectionName="110001" sectionDes="100658" storyId="1000191" gotoId="10002" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10002" type="2" chapter="1" bg="1000111bg" sectionName="110002" sectionDes="100659" storyId="0" gotoId="10003" requireStar="0" requireItem="200101:2" prize="0" exp="100" selectList="100668:1000141:10003:5|5|5,100669:1000145:10003:0|0|0"/>
+	<ItemSpec id="10003" type="1" chapter="1" bg="1000105bg" sectionName="110003" sectionDes="100660" storyId="1000114" gotoId="10004" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10004" type="2" chapter="1" bg="1000113bg" sectionName="110004" sectionDes="100661" storyId="0" gotoId="10005" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100670:1000149:10005:9|9|9,100671:1000154:10005:0|0|0"/>
+	<ItemSpec id="10005" type="2" chapter="1" bg="1000114bg" sectionName="110005" sectionDes="100662" storyId="0" gotoId="10006" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100672:1000159:10006:7|7|7,100673:1000163:10006:0|0|0"/>
+	<ItemSpec id="10006" type="1" chapter="1" bg="1000123bg" sectionName="110006" sectionDes="100663" storyId="1000122" gotoId="10007" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10007" type="1" chapter="1" bg="1000108bg" sectionName="110007" sectionDes="100664" storyId="1000195" gotoId="10008" requireStar="1" requireItem="200102:2" prize="0" exp="100"/>
+	<ItemSpec id="10008" type="1" chapter="1" bg="1000119bg" sectionName="110008" sectionDes="100665" storyId="1000189" gotoId="10009" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10009" type="2" chapter="1" bg="1000116bg" sectionName="110009" sectionDes="100666" storyId="0" gotoId="10010" requireStar="0" requireItem="200103:2" prize="0" exp="100" selectList="100674:1000173:10010:3|3|10,100675:1000176:10010:0|0|0"/>
+	<ItemSpec id="10010" type="2" chapter="1" bg="1000118bg" sectionName="110010" sectionDes="100667" storyId="0" gotoId="10035" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100676:1000179:10035:0|0|0,100677:1000182:10035:30|30|30,100678:1000185:10035:30|20|10"/>
+	<ItemSpec id="10011" type="2" chapter="2" bg="1000109bg" sectionName="110011" sectionDes="100214" storyId="1000205:1000221" gotoId="10037" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100215:1000207:10037:0|0|0,100217:1000209:10037:0|0|0,100683:1000675:10063:0|0|0"/>
+	<ItemSpec id="10012" type="2" chapter="2" bg="1000104bg" sectionName="110012" sectionDes="100225" storyId="1000217:1000221" gotoId="10038" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100226:1000218:10038:0|0|0,100230:1000222:10038:0|0|0"/>
+	<ItemSpec id="10013" type="2" chapter="2" sectionName="110013" sectionDes="100243" storyId="1000235:1000237" gotoId="10039" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100244:1000236:10039:0|0|0,100246:1000238:10039:0|0|0"/>
+	<ItemSpec id="10014" type="2" chapter="2" sectionName="110014" sectionDes="100260" storyId="1000252:1000256" gotoId="10040" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100261:1000253:10040:0|0|0,100265:1000257:10040:0|0|0"/>
+	<ItemSpec id="10015" type="2" chapter="2" sectionName="110015" sectionDes="100274" storyId="1000266:1000281" gotoId="10016" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100275:1000267:10016:0|0|0,100290:1000282:10041:0|0|0"/>
+	<ItemSpec id="10016" type="2" chapter="2" sectionName="110016" sectionDes="100279" storyId="1000271:1000277" gotoId="10041" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100280:1000272:10041:0|0|0,100286:1000278:10041:0|0|0"/>
+	<ItemSpec id="10017" type="2" chapter="2" sectionName="110017" sectionDes="100302" storyId="1000295:1000299" gotoId="10042" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100303:1000295:10042:0|0|0,100308:1000300:10042:0|0|0"/>
+	<ItemSpec id="10018" type="2" chapter="2" sectionName="110018" sectionDes="100320" storyId="1000312:1000320" gotoId="10043" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100321:1000313:10043:0|0|0,100329:1000321:10043:0|0|0"/>
+	<ItemSpec id="10019" type="2" chapter="2" sectionName="110019" sectionDes="100338" storyId="1000330:1000342" gotoId="10020" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100339:1000331:10020:0|0|0,100351:1000343:10044:0|0|0"/>
+	<ItemSpec id="10020" type="2" chapter="2" sectionName="110020" sectionDes="100342" storyId="1000334:1000337:1000621" gotoId="10044" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100343:1000335:10063:0|0|0,100346:1000338:10044:0|0|0"/>
+	<ItemSpec id="10021" type="2" chapter="2" sectionName="110021" sectionDes="100357" storyId="1000349:1000353" gotoId="10045" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100358:1000350:10045:0|0|0,100362:1000354:10045:0|0|0"/>
+	<ItemSpec id="10022" type="2" chapter="2" sectionName="110022" sectionDes="100374" storyId="1000366:1000371" gotoId="10046" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100375:1000367:10046:0|0|0,100380:1000372:10046:0|0|0"/>
+	<ItemSpec id="10023" type="2" chapter="2" sectionName="110023" sectionDes="100388" storyId="1000380:1000384" gotoId="10047" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100389:1000381:10047:0|0|0,100393:1000385:10047:0|0|0"/>
+	<ItemSpec id="10024" type="2" chapter="2" sectionName="110024" sectionDes="100404" storyId="1000396:1000399:1000622" gotoId="10048" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100405:1000394:10048:0|0|0,100408:1000400:10048:0|0|0"/>
+	<ItemSpec id="10025" type="2" chapter="2" sectionName="110025" sectionDes="100417" storyId="1000409:1000416" gotoId="10049" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100418:1000410:10049:0|0|0,100425:1000417:10049:0|0|0"/>
+	<ItemSpec id="10026" type="2" chapter="2" sectionName="110026" sectionDes="100435" storyId="1000427:1000431" gotoId="10050" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100436:1000428:10050:0|0|0,100440:1000432:10050:0|0|0"/>
+	<ItemSpec id="10027" type="2" chapter="2" sectionName="110027" sectionDes="100447" storyId="1000439:1000443:100633" gotoId="10051" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100448:1000440:10051:0|0|0,100452:1000444:10051:0|0|0"/>
+	<ItemSpec id="10028" type="2" chapter="2" sectionName="110028" sectionDes="100467" storyId="1000459:1000462" gotoId="10052" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100468:1000460:10052:0|0|0,100471:1000463:10052:0|0|0"/>
+	<ItemSpec id="10029" type="2" chapter="2" sectionName="110029" sectionDes="100482" storyId="1000474:1000477:1000480" gotoId="10053" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100483:1000475:10053:0|0|0,100486:1000478:10053:0|0|0,100489:1000481:10053:0|0|0"/>
+	<ItemSpec id="10030" type="2" chapter="2" sectionName="110030" sectionDes="100496" storyId="1000488:1000491" gotoId="10054" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100497:1000489:10054:0|0|0,100500:1000492:10054:0|0|0"/>
+	<ItemSpec id="10031" type="2" chapter="2" sectionName="110031" sectionDes="100531" storyId="1000523:1000528" gotoId="10055" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100532:1000524:10055:0|0|0,100537:1000529:10055:0|0|0"/>
+	<ItemSpec id="10032" type="2" chapter="2" sectionName="110032" sectionDes="100546" storyId="1000538:1000542:1000623" gotoId="10056" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100547:1000539:10056:0|0|0,100551:1000543:10056:0|0|0"/>
+	<ItemSpec id="10033" type="2" chapter="2" sectionName="110033" sectionDes="100568" storyId="1000560:1000563" gotoId="10057" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100569:1000561:10057:0|0|0,100572:1000564:10057:0|0|0"/>
+	<ItemSpec id="10034" type="2" chapter="2" sectionName="110034" sectionDes="100615" storyId="1000607:1000612" gotoId="10058" requireStar="0" requireItem="0" prize="0" exp="100" selectList="100616:1000608:10058:0|0|0,100621:1000613:10058:0|0|0"/>
+	<ItemSpec id="10035" type="1" chapter="2" sectionName="110035" sectionDes="100633" storyId="1000140" gotoId="10036" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10036" type="1" chapter="2" sectionName="110036" sectionDes="100634" storyId="1000199" gotoId="10011" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10037" type="1" chapter="2" sectionName="110037" sectionDes="100635" storyId="1000211" gotoId="10012" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10038" type="1" chapter="2" sectionName="110038" sectionDes="100636" storyId="1000225" gotoId="10013" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10039" type="1" chapter="2" sectionName="110039" sectionDes="100637" storyId="1000241" gotoId="10014" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10040" type="1" chapter="2" sectionName="110040" sectionDes="100638" storyId="1000260" gotoId="10015" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10041" type="1" chapter="2" sectionName="110041" sectionDes="100639" storyId="1000287" gotoId="10017" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10042" type="1" chapter="2" sectionName="110042" sectionDes="100640" storyId="1000307" gotoId="10018" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10043" type="1" chapter="2" sectionName="110043" sectionDes="100641" storyId="1000323" gotoId="10019" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10044" type="1" chapter="2" sectionName="110044" sectionDes="100642" storyId="1000346" gotoId="10021" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10045" type="1" chapter="2" sectionName="110045" sectionDes="100643" storyId="1000358" gotoId="10022" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10046" type="1" chapter="2" sectionName="110046" sectionDes="100644" storyId="1000375" gotoId="10023" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10047" type="1" chapter="2" sectionName="110047" sectionDes="100645" storyId="1000387" gotoId="10024" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10048" type="1" chapter="2" sectionName="110048" sectionDes="100646" storyId="1000404" gotoId="10025" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10049" type="1" chapter="2" sectionName="110049" sectionDes="100647" storyId="1000420" gotoId="10026" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10050" type="1" chapter="2" sectionName="110050" sectionDes="100648" storyId="1000435" gotoId="10027" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10051" type="1" chapter="2" sectionName="110051" sectionDes="100649" storyId="1000447" gotoId="10028" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10052" type="1" chapter="2" sectionName="110052" sectionDes="100650" storyId="1000466" gotoId="10029" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10053" type="1" chapter="2" sectionName="110053" sectionDes="100651" storyId="1000483" gotoId="10030" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10054" type="1" chapter="2" sectionName="110054" sectionDes="100652" storyId="1000495" gotoId="10031" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10055" type="1" chapter="2" sectionName="110055" sectionDes="100653" storyId="1000531" gotoId="10032" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10056" type="1" chapter="2" sectionName="110056" sectionDes="100654" storyId="1000546" gotoId="10033" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10057" type="1" chapter="2" sectionName="110057" sectionDes="100655" storyId="1000569" gotoId="10034" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10058" type="1" chapter="2" sectionName="110058" sectionDes="100656" storyId="1000615" gotoId="10062" requireStar="1" requireItem="0" prize="0" exp="100"/>
+	<ItemSpec id="10059" type="3" chapter="2" sectionName="110059" sectionDes="100679" storyId="0" gotoId="10020" requireStar="1" requireItem="0" prize="0" exp="100" endingPoint="30:1000646:10011"/>
+	<ItemSpec id="10060" type="3" chapter="2" sectionName="110060" sectionDes="100680" storyId="0" gotoId="10043" requireStar="1" requireItem="0" prize="0" exp="100" endingPoint="30:1000647:10019"/>
+	<ItemSpec id="10061" type="4" chapter="2" sectionName="110061" sectionDes="100681" storyId="1000673" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" endingType="1"/>
+	<ItemSpec id="10062" type="4" chapter="2" sectionName="110062" sectionDes="100682" storyId="1000674" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" endingType="2"/>
+	<ItemSpec id="10063" type="4" chapter="2" sectionName="110063" sectionDes="100683" storyId="1000675" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" endingType="1"/>
 </Group>
