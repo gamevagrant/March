@@ -16,7 +16,7 @@ public class Booster : MonoBehaviour
 	public Image numBg;
 
     [Header("Board")]
-    public Board board;
+    private Board board;
 
     [Header("Booster")]
     public GameObject singleBooster;
@@ -39,9 +39,11 @@ public class Booster : MonoBehaviour
         }
     }
 
-	void Start () 
-    {
-		singleBooster.SetActive(true);
+	void Start ()
+	{
+	    board = GameObject.Find("Board").GetComponent<Board>();
+
+        singleBooster.SetActive(true);
         PropItem prop = GameMainManager.Instance.playerData.GetPropItem("200006");
         singleAmount.text = prop!=null?prop.count.ToString():"0";
 
