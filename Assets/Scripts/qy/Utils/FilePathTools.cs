@@ -83,7 +83,7 @@ public class FilePathTools
 
     public static string GetDownLoadMainVersonPath(string name)
     {
-        Debug.Log("加载地址:"+downLoadRootPath + targetName);
+       
         return downLoadRootPath + targetName;
     }
 
@@ -246,7 +246,8 @@ public class FilePathTools
 
     public static string getXmlPath(string name)
     {
-        return downLoadRootPath + "/xml/" + name;
+        Debug.Log("加载地址:" + downLoadRootPath + targetName);
+        return downLoadRootPath + "xml/" + name;
     }
 
 	public static string getConfigPath(string name)
