@@ -33,7 +33,7 @@ export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
 export BUILD_AB_COMMIT="build ab"
 
 # Pre handle asset bundles.
-if [[ $PredeineSymbols ~= *GAME_DEBUG* ]]; then
+if [[ $PredeineSymbols != *GAME_DEBUG* ]]; then
 	# Remove asset bundle from streaming asset folder.
 	AssetBundleStreamingRoot="$WORKSPACE/Assets/StreamingAssets/AssetBundles"
 	if [ -d "$AssetBundleStreamingRoot" ]; then
@@ -47,7 +47,7 @@ echo $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod P
 $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 
 # Post handle asset bundles.
-if [[ $PredeineSymbols ~= *GAME_DEBUG* ]]; then
+if [[ $PredeineSymbols != *GAME_DEBUG* ]]; then
 	# copy asset bundles to web server.
 	AssetBundleRoot="$WORKSPACE/AssetBundles"
 	WebServerRoot="$JENKINS_HOME/AssetBundleServer/AssetBundles"
