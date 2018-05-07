@@ -147,8 +147,9 @@ public class GameUtils
         Vector2 anchor = tf.anchorMax - tf.anchorMin;
         Vector2 size = new Vector2(anchor.x * parentSize.x, anchor.y * parentSize.y);
         size -= tf.offsetMin;
-        size -= tf.offsetMax;
-        return new Vector2(tf.sizeDelta.x != 0 ? tf.sizeDelta.x : size.x, tf.sizeDelta.y != 0 ? tf.sizeDelta.y: size.y);
+        size += tf.offsetMax;
+        Debug.Log(tf.name+":"+ new Vector2(tf.sizeDelta.x != 0 ? tf.sizeDelta.x : size.x, tf.sizeDelta.y != 0 ? tf.sizeDelta.y : size.y));
+        return new Vector2(tf.sizeDelta.x > 0 ? tf.sizeDelta.x : size.x, tf.sizeDelta.y > 0 ? tf.sizeDelta.y: size.y);
 
     }
 
