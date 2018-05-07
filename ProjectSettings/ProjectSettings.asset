@@ -160,7 +160,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.elex.march
   buildNumber: {}
-  AndroidBundleVersionCode: 1525269912
+  AndroidBundleVersionCode: 1525689277
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -594,7 +594,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: SOOMLA_OPEN_SOURCE
     4: SOOMLA_OPEN_SOURCE
-    7: UNITY_PURCHASING;GAME_DEBUG
+    7: UNITY_PURCHASING;ENABLE_BUNDLE_SERVER;GAME_DEBUG
     13: SOOMLA_OPEN_SOURCE
   platformArchitecture: {}
   scriptingBackend: {}

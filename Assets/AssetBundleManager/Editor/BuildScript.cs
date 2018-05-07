@@ -199,7 +199,7 @@ namespace AssetBundles
             }
         }
 
-        static void CopyAssetBundlesTo(string outputPath)
+        public static void CopyAssetBundlesTo(string outputPath)
         {
             // Clear streaming assets folder.
             FileUtil.DeleteFileOrDirectory(Application.streamingAssetsPath);

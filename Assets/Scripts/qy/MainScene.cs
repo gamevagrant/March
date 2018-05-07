@@ -35,6 +35,9 @@ namespace qy
                     LoadSevenDayInfo();
                 }
             }
+#if GAME_DEBUG
+        Instantiate(Resources.Load<GameObject>(Configure.DebugCanvasPath));
+#endif
         }
 
         // Update is called once per frame
