@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
 {
+    public bool isRaycast = true;
     [SerializeField]
     private RectTransform _target;
     private Vector3 _targetMin = Vector3.zero;
@@ -32,7 +33,7 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         if (!_canRefresh)
             return;
         _canRefresh = false;
-        if (null == _target)
+        if (null == _target || !_target.gameObject.activeSelf)
         {
             _SetTarget(Vector3.zero, Vector3.zero);
             SetAllDirty();
@@ -87,7 +88,9 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
     }
     bool ICanvasRaycastFilter.IsRaycastLocationValid(Vector2 screenPos, Camera eventCamera)
     {
+
         if (null == _target) return true; // 将目标对象范围内的事件镂空（使其穿过） 
+        if (!isRaycast) return true;
         return !RectTransformUtility.RectangleContainsScreenPoint(_target, screenPos, eventCamera);
     }
     protected override void Awake()

@@ -50,6 +50,7 @@ namespace qy
             _instance = this;
             mask.gameObject.SetActive(false);
             arrow.gameObject.SetActive(false);
+            hollowOffRect.gameObject.SetActive(false);
             HideDialog();
             GameObject.DontDestroyOnLoad(gameObject);
             Messenger.AddListener<ui.UISettings.UIWindowID>(ELocalMsgID.OpenUI, OnOpenUIHandle);
@@ -139,13 +140,13 @@ namespace qy
                 hollowOffRect.sizeDelta = targetSize;
                 hollowOffRect.position = target.position;
                 hollowOffRect.gameObject.SetActive(true);
-
+                mask.GetComponent<HollowOutMask>().isRaycast = false;
                 if (guideItem.type == config.GuideConfig.GuideType.Click)
                 {
                     EventTriggerListener.GetListener(go).onPointerClick += OnClickTargetHandle;
                     SetArrow(go.transform as RectTransform,arrow);
-                    //arrow.position = go.transform.position;
                     arrow.gameObject.SetActive(true);
+                    mask.GetComponent<HollowOutMask>().isRaycast = true;
                 }
             }));
 
@@ -239,43 +240,7 @@ namespace qy
             
 
             return guide;
-            string guideID = "";
-            if (id == ui.UISettings.UIWindowID.UITaskWindow)
-            {
-                config.QuestItem quest = GameMainManager.Instance.playerData.GetQuest();
-                string[] ids = new string[] { "10006", "10012", "10014", "10020" };
-                if (quest.type == config.QuestItem.QuestType.Branch)
-                {
-                    guideID = "10014";
 
-                }
-                else
-                {
-                    guideID = "10006";
-                    if (displayedGuides.ContainsKey(guideID))
-                    {
-                        guideID = "10012";
-                    }
-                }
-                if (string.IsNullOrEmpty(guideID) || displayedGuides.ContainsKey(guideID))
-                {
-                    guideID = "10020";
-                }
-            }
-            if (!string.IsNullOrEmpty(guideID))
-            {
-                if (!displayedGuides.ContainsKey(guideID))
-                {
-                    return GameMainManager.Instance.configManager.guideConfig.GetItem(guideID);
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
-
-            return null;
         }
 
         private void OnClickTargetHandle(GameObject go)
@@ -311,7 +276,7 @@ namespace qy
             Vector2 pos;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, target.position, canvas.worldCamera,out pos);
 
-            Vector2 point = new Vector2(0.5f,pos.y<0?1:0);
+            Vector2 point = new Vector2(0.5f,0.5f);
             
             Vector2 targetSize = GameUtils.GetSize(target);
             Vector2 offset = (point - target.pivot);
