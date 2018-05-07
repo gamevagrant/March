@@ -37,6 +37,7 @@ if [[ $PredeineSymbols != *GAME_DEBUG* ]]; then
 	# Remove asset bundle from streaming asset folder.
 	AssetBundleStreamingRoot="$WORKSPACE/Assets/StreamingAssets/AssetBundles"
 	if [ -d "$AssetBundleStreamingRoot" ]; then
+		echo "rm -rvf $AssetBundleStreamingRoot"
 		rm -rvf $AssetBundleStreamingRoot
 	fi
 fi
@@ -52,9 +53,12 @@ if [[ $PredeineSymbols != *GAME_DEBUG* ]]; then
 	AssetBundleRoot="$WORKSPACE/AssetBundles"
 	WebServerRoot="$JENKINS_HOME/AssetBundleServer/AssetBundles"
 	if [ ! -d "$WebServerRoot" ]; then
+		echo "mkdir "$WebServerRoot""
 		mkdir "$WebServerRoot"
 	fi
+	echo "rm -rvf $WebServerRoot"
 	rm -rvf $WebServerRoot
+	echo "cp -rvf $AssetBundleRoot $WebServerRoot"
 	cp -rvf $AssetBundleRoot $WebServerRoot
 fi
 
