@@ -32,10 +32,35 @@ echo "output dir is $APK_OUTPUT_DIR."
 export COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
 export BUILD_AB_COMMIT="build ab"
 
+# Pre handle asset bundles.
+if [[ $PredeineSymbols != *GAME_DEBUG* ]]; then
+	# Remove asset bundle from streaming asset folder.
+	AssetBundleStreamingRoot="$WORKSPACE/Assets/StreamingAssets/AssetBundles"
+	if [ -d "$AssetBundleStreamingRoot" ]; then
+		echo "rm -rvf $AssetBundleStreamingRoot"
+		rm -rvf $AssetBundleStreamingRoot
+	fi
+fi
+
 # Unity batch mode build.
 echo "Compiling.. this will take a while, redirect log file to console..."
 echo $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
+
+# Post handle asset bundles.
+if [[ $PredeineSymbols != *GAME_DEBUG* ]]; then
+	# copy asset bundles to web server.
+	AssetBundleRoot="$WORKSPACE/AssetBundles"
+	WebServerRoot="$JENKINS_HOME/AssetBundleServer/AssetBundles"
+	if [ ! -d "$WebServerRoot" ]; then
+		echo "mkdir "$WebServerRoot""
+		mkdir "$WebServerRoot"
+	fi
+	echo "rm -rvf $WebServerRoot"
+	rm -rvf $WebServerRoot
+	echo "cp -rvf $AssetBundleRoot $WebServerRoot"
+	cp -rvf $AssetBundleRoot $WebServerRoot
+fi
 
 now=$(date +"%T")
 echo "Build Complete: $now"

@@ -387,7 +387,8 @@ public class Configure : MonoSingleton<Configure>
 	public int lifeRecoverySecond;
     public int recoveryCostPerLife;
 
-    public string ServerUrl; 
+    public string ServerUrl;
+    public string AssetBundleServerUrl;
 
     // game data
     public static string game_data = "cookie.dat";
@@ -1410,6 +1411,7 @@ public class Configure : MonoSingleton<Configure>
 
         var config = JsonUtility.FromJson<ServerConfig>(Resources.Load<TextAsset>(ServerPath).text);
         ServerUrl = config.Current.Url;
+        AssetBundleServerUrl = config.AssetBundleServer.Url;
     }
 
     void OnApplicationQuit()

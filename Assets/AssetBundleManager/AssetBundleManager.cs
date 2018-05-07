@@ -195,6 +195,8 @@ namespace AssetBundles
             }
 
             BaseDownloadingURL = absolutePath + Utility.GetPlatformName() + "/";
+
+            Debug.LogWarning("AssetBundle Url: " + BaseDownloadingURL);
         }
 
         /// <summary>
