@@ -38,12 +38,13 @@ namespace qy.config
             }
             dic.Add(guide.id, guide);
 
-            if(uiNameDic.ContainsKey(guide.ui))
+            if(!uiNameDic.ContainsKey(guide.ui))
             {
-                uiNameDic[guide.ui].Add(guide);
+                uiNameDic[guide.ui] = new List<GuideItem>() { guide };
+                
             }else
             {
-                uiNameDic[guide.ui] = new List<GuideItem>() {guide };
+                uiNameDic[guide.ui].Add(guide);
             }
         }
 

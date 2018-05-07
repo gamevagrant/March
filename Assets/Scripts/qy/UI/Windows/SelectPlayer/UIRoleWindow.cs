@@ -107,7 +107,9 @@ public class UIRoleWindow : UIWindowBase {
         else
         {
             GameMainManager.Instance.playerModel.StartGameWithRole(selectedRoleID);
+            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIMainSceneWindow);
             OnClickClose();
+            
         }
     }
 

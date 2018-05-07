@@ -1130,14 +1130,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.509}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.509}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 98126be91900c624d881f3635caa0b85, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5141dc055239604697f40bf170486f4, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1917,7 +1917,7 @@ MonoBehaviour:
   stateText: {fileID: 114049711345799744}
   BGsprites:
   - {fileID: 21300000, guid: e0acbef5c7d655845957cb0d750e501b, type: 3}
-  - {fileID: 21300000, guid: a5141dc055239604697f40bf170486f4, type: 3}
+  - {fileID: 21300000, guid: 982bb0318e1ae124e992becea3390d19, type: 3}
 --- !u!114 &114821704582021452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2132,7 +2132,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 982bb0318e1ae124e992becea3390d19, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1ba2867d1710e449bb81cbc3cb7941f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

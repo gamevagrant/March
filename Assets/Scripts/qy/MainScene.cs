@@ -10,7 +10,7 @@ namespace qy
     {
         private void Awake()
         {
-            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIMainSceneWindow);
+            
             TrySelectRole();
         }
         // Use this for initialization
@@ -49,11 +49,16 @@ namespace qy
             if (quest == null)
             {
                 GameMainManager.Instance.uiManager.OpenWindow(ui.UISettings.UIWindowID.UIRoleWindow);
-            }
-            else if (GameMainManager.Instance.playerData.roleState == PlayerData.RoleState.Dide )
+            }else
             {
-                GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow, quest);
+                GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIMainSceneWindow);
+                if (GameMainManager.Instance.playerData.roleState == PlayerData.RoleState.Dide)
+                {
+
+                    GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow, quest);
+                }
             }
+
         }
 
         

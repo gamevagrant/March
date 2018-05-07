@@ -46,7 +46,8 @@ namespace March.Scene
             //yield return SceneUtils.ScanAndLoad();
             yield return Loader.Load();
 
-            int chapter = qy.GameMainManager.Instance.playerData.GetQuest().chapter;
+            qy.config.QuestItem quest = qy.GameMainManager.Instance.playerData.GetQuest();
+            int chapter = quest!=null? quest.chapter:1;
             Data = Resources.Load<TextAsset>("Level_" + chapter);
 
             if (AutoLoad)
