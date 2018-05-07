@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿using AssetBundles;
+using LitJson;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -174,6 +175,14 @@ public class ProjectBuild
 
         if (target == BuildTarget.Android)
         {
+            if (config.Build == BuildConfig.BuildType.AsestBundle || config.Build == BuildConfig.BuildType.All)
+            {
+                Debug.LogWarning("Build asset bundles.");
+
+                BuildScript.BuildAssetBundles();
+                BuildScript.CopyAssetBundlesTo(Path.Combine(Application.streamingAssetsPath, Utility.AssetBundlesOutputPath));
+            }
+
             if (config.Build == BuildConfig.BuildType.Apk || config.Build == BuildConfig.BuildType.All)
             {
                 var buildName = string.Format("./package/{2}/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
@@ -185,13 +194,6 @@ public class ProjectBuild
                     buildName,
                     target,
                     BuildOptions.None | additionOption);
-            }
-
-            if (config.Build == BuildConfig.BuildType.AsestBundle || config.Build == BuildConfig.BuildType.All)
-            {
-                Debug.LogWarning("Build asset bundles.");
-
-                AssetBundles.BuildScript.BuildAssetBundles();
             }
         }
     }
