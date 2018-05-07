@@ -30,7 +30,7 @@ namespace qy
         public RectTransform mask;
         public Text text;
 
-        private config.GuideConfig guideConfig;
+        private string guideStepID;//每个阶段的id 用于判断是否完成此次引导步骤
         private config.GuideItem guideItem;
         private Dictionary<string, string> displayedGuides;//展示过的引导id
         private GameObject maskClickGO;
@@ -67,9 +67,10 @@ namespace qy
         {
             Debug.Log("打开面板"+uiID.ToString());
             config.GuideItem item = GetUnDisplayedGuideWithUIid(uiID);
-
-            if(item!=null)
+            
+            if (item!=null)
             {
+                guideStepID = item.id;
                 Show(item);
             }
         }
@@ -78,11 +79,7 @@ namespace qy
         {
             Debug.Log("关闭面板" + uiID.ToString());
             //关闭ui时的处理
-            if(uiID == ui.UISettings.UIWindowID.UINickNameWindow && guideItem.id == "10001")
-            {
-                config.GuideItem item = GetUnDisplayedGuideWithUIid(ui.UISettings.UIWindowID.UIRoleWindow);
-                Show(item);
-            }
+
         }
 
         private void OnGuideItemEnd(config.GuideItem item)
@@ -119,13 +116,14 @@ namespace qy
             {
                 return;
             }
-            AddDisplayedGuide(guideItem.id);
+            
             config.GuideItem nextItem = guideItem.next as config.GuideItem;
             if (nextItem !=null)
             {
                 Show(nextItem);
             }else
             {
+                AddDisplayedGuide(guideStepID);
                 OnGuideItemEnd(guideItem);
             }
         }
@@ -192,14 +190,62 @@ namespace qy
 
         private config.GuideItem GetUnDisplayedGuideWithUIid(ui.UISettings.UIWindowID id)
         {
+            config.GuideItem guide = null;
+            //除了特殊情况 从配置表里遍历寻找没有展示过的 当前面板的引导
+            List<config.GuideItem> allItems = GameMainManager.Instance.configManager.guideConfig.GetItemWithWindowName(id.ToString());
+            List<config.GuideItem> list = new List<config.GuideItem>();//步骤id 每个步骤起始引导的id
+            if (allItems!=null)
+            {
+                //查找每个步骤的起始id
+                for (int i = 0; i < allItems.Count; i++)
+                {
+                    config.GuideItem item = allItems[i];
+                    if (i > 0)
+                    {
+                        config.GuideItem lastItem = allItems[i - 1];
+                        if (lastItem.nextId == item.id)
+                        {
+                            continue;
+                        }
+                    }
+                    list.Add(item);
+                }
+            }
+
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!displayedGuides.ContainsKey(list[i].id))
+                {
+                    guide = list[i];
+                    break;
+                }
+
+            }
+            if (guide == null)
+            {
+                return null;
+            }
             //特殊处理
+            if(id == ui.UISettings.UIWindowID.UITaskWindow)
+            {
+                config.QuestItem quest = GameMainManager.Instance.playerData.GetQuest();
+                if (quest.type == config.QuestItem.QuestType.Branch && guide.id != "10014")
+                {
+                    return null;
+                }
+            }
+            
+
+            return guide;
             string guideID = "";
             if (id == ui.UISettings.UIWindowID.UITaskWindow)
             {
                 config.QuestItem quest = GameMainManager.Instance.playerData.GetQuest();
+                string[] ids = new string[] { "10006", "10012", "10014", "10020" };
                 if (quest.type == config.QuestItem.QuestType.Branch)
                 {
-                    guideID = "10016";
+                    guideID = "10014";
 
                 }
                 else
@@ -210,37 +256,24 @@ namespace qy
                         guideID = "10012";
                     }
                 }
-                if(string.IsNullOrEmpty(guideID) || displayedGuides.ContainsKey(guideID))
+                if (string.IsNullOrEmpty(guideID) || displayedGuides.ContainsKey(guideID))
                 {
                     guideID = "10020";
                 }
             }
-            if(!string.IsNullOrEmpty(guideID) )
+            if (!string.IsNullOrEmpty(guideID))
             {
-                if(!displayedGuides.ContainsKey(guideID))
+                if (!displayedGuides.ContainsKey(guideID))
                 {
                     return GameMainManager.Instance.configManager.guideConfig.GetItem(guideID);
-                }else
+                }
+                else
                 {
                     return null;
                 }
-                
+
             }
 
-            //除了特殊情况 从配置表里遍历寻找没有展示过的 当前面板的引导
-            List<config.GuideItem> list = GameMainManager.Instance.configManager.guideConfig.GetItemWithWindowName(id.ToString());
-            if(list!=null)
-            {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if (!displayedGuides.ContainsKey(list[i].id))
-                    {
-                        return list[i];
-                    }
-
-                }
-            }
-            
             return null;
         }
 
