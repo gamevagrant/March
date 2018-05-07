@@ -40,7 +40,7 @@ namespace March.Scene
             return;
         }
 #endif
-#if GAME_DEBUG || UNITY_EDITOR
+#if !ENABLE_BUNDLE_SERVER || UNITY_EDITOR
             // With this code, when in-editor or using a development builds: Always use the AssetBundle Server
             // (This is very dependent on the production workflow of the project.
             //      Another approach would be to make this configurable in the standalone player.)
