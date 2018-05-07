@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 222865628765303134}
   - component: {fileID: 114259558705360104}
   m_Layer: 5
-  m_Name: discipline
+  m_Name: wisdom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 222427089213912092}
   - component: {fileID: 114591077207808298}
   m_Layer: 5
-  m_Name: loyalty
+  m_Name: discipline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 222362614076952048}
   - component: {fileID: 114067345908189014}
   m_Layer: 5
-  m_Name: wisdom
+  m_Name: loyalty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1667,9 +1667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollView: {fileID: 114127959469008972}
   head: {fileID: 114203627554691604}
-  loyaltySlider: {fileID: 114148780490276602}
-  wisdomSlider: {fileID: 114857351101563774}
-  discipline: {fileID: 114426698928598796}
+  loyaltySlider: {fileID: 114857351101563774}
+  wisdomSlider: {fileID: 114426698928598796}
+  discipline: {fileID: 114148780490276602}
   roleName: {fileID: 114875329639044766}
   introduction: {fileID: 114700137828115244}
   stateGO: {fileID: 1974081440852458}

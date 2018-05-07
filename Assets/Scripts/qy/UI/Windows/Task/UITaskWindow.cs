@@ -24,9 +24,11 @@ public class UITaskWindow :  UIWindowBase{
 
     public Image roleHeadImage;
     public Text roleNameText;
+
+    public Slider discipline;
     public Slider loyaltySlider;
     public Slider wisdomSlider;
-    public Slider discipline;
+    
     public Text levelText;
     public Slider levelSlider;
     public Text levelProgressText;
@@ -127,36 +129,35 @@ public class UITaskWindow :  UIWindowBase{
         missionTF.anchorMin = new Vector2(0,0.2f);
 
         propPool.resetAllTarget();
-        if(!playerdata.ContainsComplateQuest(playerdata.questId))
+
+        bool isComplate = playerdata.ContainsComplateQuest(playerdata.questId);
+        List<PropItem> props = new List<PropItem>();
+        if (questItem.requireStar > 0)
         {
-            List<PropItem> props = new List<PropItem>();
-            if(questItem.requireStar>0)
+            props.Add(new PropItem()
             {
-                props.Add(new PropItem()
-                {
-                    id = "1",
-                    icon = "starsp",
-                    count = questItem.requireStar,
-                });
-            }
-            
-            props.AddRange(questItem.requireItem);
-            foreach (PropItem item in props)
-            {
-                UIPropCell cell = propPool.getIdleTarget<UIPropCell>();
-                if (item.id == "1")
-                {
-                    //设置显示星星数量
-                    cell.SetData(item, playerdata.starNum);
+                id = "1",
+                icon = "XingXing",
+                count = questItem.requireStar,
+            });
+        }
 
-                }
-                else
-                {
-                    PropItem haveProp = playerdata.GetPropItem(item.id);
-                    cell.SetData(item, haveProp == null ? 0 : haveProp.count);
-                }
+        props.AddRange(questItem.requireItem);
+        foreach (PropItem item in props)
+        {
+            UIPropCell cell = propPool.getIdleTarget<UIPropCell>();
+            if (item.id == "1")
+            {
+                //设置显示星星数量
+                cell.SetData(item, playerdata.starNum, isComplate);
 
             }
+            else
+            {
+                PropItem haveProp = playerdata.GetPropItem(item.id);
+                cell.SetData(item, haveProp == null ? 0 : haveProp.count, isComplate);
+            }
+
         }
         
     }

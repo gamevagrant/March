@@ -23,7 +23,7 @@ public class PlayerDataMessage : NetMessage
     public StoryData[] stories;
     public string roleUuId="";//当前角色uuid
     public int discipline;
-    public int loyaty;
+    public int loyalty;
     public int wisdom;
     public string storyExp="0";//总经验
     public string lvExp="0";//当前等级

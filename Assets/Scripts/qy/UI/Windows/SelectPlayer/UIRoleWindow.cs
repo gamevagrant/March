@@ -10,9 +10,9 @@ public class UIRoleWindow : UIWindowBase {
 
     public AutoScrollView scrollView;
     public Image head;
-    public Slider loyaltySlider;
-    public Slider wisdomSlider;
     public Slider discipline;
+    public Slider wisdomSlider;
+    public Slider loyaltySlider;
     public Text roleName;
     public Text introduction;
     public GameObject stateGO;

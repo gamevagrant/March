@@ -377,7 +377,7 @@ namespace qy
             {
                 questId = nextQuestId;
             }
-            ability = new config.Ability(message.discipline,message.loyaty,message.wisdom);
+            ability = new config.Ability(message.discipline,message.loyalty,message.wisdom);
             totalExp = int.Parse(message.storyExp);
             currExp = int.Parse(message.lvExp);
             level = message.storyLv == 0?1: message.storyLv;
