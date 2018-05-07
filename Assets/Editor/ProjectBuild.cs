@@ -104,7 +104,7 @@ public class ProjectBuild
 
         config.Version = Environment.GetEnvironmentVariable("Version");
         config.IsForDev = bool.Parse(Environment.GetEnvironmentVariable("IsForDev"));
-        config.PredefineSymbols = Environment.GetEnvironmentVariable("PredeineSymbols");
+        config.PredefineSymbols = Environment.GetEnvironmentVariable("PredefineSymbols");
 
         var assetbundleBuild = bool.Parse(Environment.GetEnvironmentVariable("BuildAssetBundle"));
         var apkBuild = bool.Parse(Environment.GetEnvironmentVariable("BuildApk"));
