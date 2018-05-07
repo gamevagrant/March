@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 222786895367568306}
   - component: {fileID: 114279589547941286}
   m_Layer: 5
-  m_Name: discipline
+  m_Name: wisdom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 222263231765593042}
   - component: {fileID: 114213128960521658}
   m_Layer: 5
-  m_Name: wisdom
+  m_Name: loyalty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 222113050649899922}
   - component: {fileID: 114039533629030064}
   m_Layer: 5
-  m_Name: loyalty
+  m_Name: discipline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

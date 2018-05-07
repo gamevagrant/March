@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 222824861193857092}
   - component: {fileID: 114400731095564296}
   m_Layer: 5
-  m_Name: wisdom
+  m_Name: loyalty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -670,6 +670,23 @@ GameObject:
   - component: {fileID: 114229165930671042}
   m_Layer: 5
   m_Name: CloseButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1695970096188542
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224414248727625516}
+  - component: {fileID: 222614541596767164}
+  - component: {fileID: 114246005419028548}
+  m_Layer: 5
+  m_Name: ComplateImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -789,7 +806,7 @@ GameObject:
   - component: {fileID: 222488051940038138}
   - component: {fileID: 114864146477062552}
   m_Layer: 5
-  m_Name: loyalty
+  m_Name: discipline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +856,7 @@ GameObject:
   - component: {fileID: 222803814893199902}
   - component: {fileID: 114615813002643204}
   m_Layer: 5
-  m_Name: discipline
+  m_Name: wisdom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1016,9 +1033,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleHeadImage: {fileID: 114125449215892734}
   roleNameText: {fileID: 114015853516600864}
-  loyaltySlider: {fileID: 114903557273965486}
-  wisdomSlider: {fileID: 114664259462884422}
-  discipline: {fileID: 114855500765560338}
+  loyaltySlider: {fileID: 114664259462884422}
+  wisdomSlider: {fileID: 114855500765560338}
+  discipline: {fileID: 114903557273965486}
   levelText: {fileID: 114646586106002382}
   levelSlider: {fileID: 114872476289354740}
   levelProgressText: {fileID: 114997220515442304}
@@ -1343,6 +1360,33 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114246005419028548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695970096188542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 2ac1b0f7b0f5d39408991ee4ebf163f3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114283702865487932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2378,6 +2422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   img: {fileID: 114322451756838546}
   text: {fileID: 114316017988509522}
+  complateImg: {fileID: 1695970096188542}
 --- !u!114 &114847163976649550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2936,6 +2981,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1204091164609152}
+--- !u!222 &222614541596767164
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695970096188542}
 --- !u!222 &222631178088364596
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -3556,6 +3607,24 @@ RectTransform:
   m_AnchoredPosition: {x: 23.8, y: 7.515}
   m_SizeDelta: {x: -47.6, y: -15.03}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224414248727625516
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695970096188542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224635080004431820}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 150, y: 0}
+  m_SizeDelta: {x: 57, y: 58}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224430122842467936
 RectTransform:
   m_ObjectHideFlags: 1
@@ -3738,6 +3807,7 @@ RectTransform:
   m_Children:
   - {fileID: 224160315678830556}
   - {fileID: 224756263707648522}
+  - {fileID: 224414248727625516}
   m_Father: {fileID: 224049416714327746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
