@@ -1,6 +1,0 @@
-diff a/Assets/Square/Data/LevelEditor/Resources/Level_1.txt b/Assets/Square/Data/LevelEditor/Resources/Level_1.txt	(rejected hunks)
-@@ -0 +0 @@
--{"Level":1,"Background":[{"Position":{"X":0.0,"Y":0.0,"Z":0.0},"ID":0}],"Player":[],"BuildingList":[],"NPCList":[]}
-\ No newline at end of file
-+{"Level":1,"Background":[{"Position":{"X":0.0,"Y":0.0,"Z":0.0},"ID":0}],"Player":[{"Position":{"X":-2.65280270576477,"Y":0.35925167798996,"Z":-0.00336165283806622},"ID":0}],"BuildingList":[],"NPCList":[{"Position":{"X":-5.72842931747437,"Y":0.732598781585693,"Z":-0.00586968287825584},"ID":0}]}
-\ No newline at end of file
