@@ -180,7 +180,9 @@ public class ProjectBuild
                 Debug.LogWarning("Build asset bundles.");
 
                 BuildScript.BuildAssetBundles();
-                BuildScript.CopyAssetBundlesTo(Path.Combine(Application.streamingAssetsPath, Utility.AssetBundlesOutputPath));
+#if ENABLE_BUNDLE_SERVER
+                FileUtil.DeleteFileOrDirectory(Application.streamingAssetsPath);
+#endif
             }
 
             if (config.Build == BuildConfig.BuildType.Apk || config.Build == BuildConfig.BuildType.All)
