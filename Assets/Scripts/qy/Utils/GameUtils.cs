@@ -151,6 +151,8 @@ public class GameUtils
         return new Vector2(tf.sizeDelta.x != 0 ? tf.sizeDelta.x : size.x, tf.sizeDelta.y != 0 ? tf.sizeDelta.y: size.y);
 
     }
+
+
     /// <summary>
     /// 改变中心点 不改变位置
     /// </summary>

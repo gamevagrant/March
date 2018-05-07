@@ -28,6 +28,7 @@ namespace qy
         public RectTransform dialog;
         public RectTransform arrow;
         public RectTransform mask;
+        public RectTransform hollowOffRect;
         public Text text;
 
         private string guideStepID;//每个阶段的id 用于判断是否完成此次引导步骤
@@ -131,18 +132,20 @@ namespace qy
         private void ShowHightLight(string widgtName)
         {
             StartCoroutine(FindTarget(widgtName,(go)=> {
-
-                
                 maskClickGO = go;
-                Canvas canvas = go.AddComponent<Canvas>();
-                canvas.overrideSorting = true;
-                canvas.sortingOrder = 3;
-                go.AddComponent<GraphicRaycaster>();
+                RectTransform target = go.transform as RectTransform;
+                Vector2 targetSize = GameUtils.GetSize(target);
+                hollowOffRect.pivot = target.pivot;
+                hollowOffRect.sizeDelta = targetSize;
+                hollowOffRect.position = target.position;
+                hollowOffRect.gameObject.SetActive(true);
+
                 if (guideItem.type == config.GuideConfig.GuideType.Click)
                 {
                     EventTriggerListener.GetListener(go).onPointerClick += OnClickTargetHandle;
+                    SetArrow(go.transform as RectTransform,arrow);
                     //arrow.position = go.transform.position;
-                    //arrow.gameObject.SetActive(true);
+                    arrow.gameObject.SetActive(true);
                 }
             }));
 
@@ -169,10 +172,8 @@ namespace qy
             }
             GameObject target = maskClickGO;
             mask.gameObject.SetActive(false);
-            Destroy(target.GetComponent<GraphicRaycaster>());
-            Destroy(target.GetComponent<Canvas>());
             arrow.gameObject.SetActive(false);
-            
+            hollowOffRect.gameObject.SetActive(false);
             EventTriggerListener.GetListener(target).onPointerClick -= OnClickTargetHandle;
             maskClickGO = null;
         }
@@ -302,6 +303,21 @@ namespace qy
         {
             dialog.gameObject.SetActive(false);
             mask.gameObject.SetActive(false);
+        }
+
+        private void SetArrow(RectTransform target,RectTransform arrow)
+        {
+            Canvas canvas = arrow.root.GetComponent<Canvas>();
+            Vector2 pos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, target.position, canvas.worldCamera,out pos);
+
+            Vector2 point = new Vector2(0.5f,pos.y<0?1:0);
+            
+            Vector2 targetSize = GameUtils.GetSize(target);
+            Vector2 offset = (point - target.pivot);
+            arrow.anchoredPosition = pos +  new Vector2(targetSize.x * offset.x, targetSize.y * offset.y) + new Vector2(arrow.sizeDelta.x,arrow.sizeDelta.y/2);
+
+
         }
     }
 }
