@@ -22,6 +22,7 @@ namespace March.Scene
 
         public SceneLevel SceneLevel;
         public SceneAssetLoader Loader;
+        public SceneLoader SceneLoader;
 
         public List<GameObject> ListenerList;
 
@@ -44,7 +45,8 @@ namespace March.Scene
             });
 
             //yield return SceneUtils.ScanAndLoad();
-            yield return Loader.Load();
+            if (SceneLoader != null)
+                yield return SceneLoader.Load();
 
             qy.config.QuestItem quest = qy.GameMainManager.Instance.playerData.GetQuest();
             int chapter = quest!=null? quest.chapter:1;
@@ -116,6 +118,10 @@ namespace March.Scene
                     //    DefaultSceneDataMap[key].Scale, DefaultSceneDataMap[key].SortingOrder, isModifiable);
                     var position = new Vector3((float)gameInfo.Position.X, (float)gameInfo.Position.Y, (float)gameInfo.Position.Z);
                     var go = Loader.CreateIdentifyGameObject(SceneLayerMap[key], gameInfo.ID, position);
+                    if (SceneLoader != null)
+                    {
+                        go = SceneLoader.CreateIdentifyGameObject(SceneLayerMap[key], gameInfo.ID, position);
+                    }
                     GoMap[pair.Key].Add(go);
                 }
             }
