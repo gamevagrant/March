@@ -48,13 +48,12 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
     {
 
         if (null == target) return true; // 将目标对象范围内的事件镂空（使其穿过） 
-        if (!isRaycast) return true;
+        if (!isRaycast || !target.gameObject.activeSelf) return true;
         return !RectTransformUtility.RectangleContainsScreenPoint(target, screenPos, eventCamera);
     }
 
     protected override void OnPopulateMesh(VertexHelper vh)
     {
-        Debug.Log("--");
 
         Vector2 selfPiovt = rectTransform.pivot;
         Rect selfRect = rectTransform.rect;
