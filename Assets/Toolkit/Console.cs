@@ -43,15 +43,15 @@ public class Console : MonoBehaviour
 
 	void OnEnable ()
 	{
-		Application.RegisterLogCallback(HandleLog);
+	    Application.logMessageReceived += HandleLog;
 	}
 
 	void OnDisable ()
 	{
-		Application.RegisterLogCallback(null);
+	    Application.logMessageReceived -= HandleLog;
 	}
 
-	void Update ()
+    void Update ()
 	{
 		if (Input.GetKeyDown(toggleKey)) {
 			show = !show;

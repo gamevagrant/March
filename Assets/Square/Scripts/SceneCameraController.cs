@@ -34,7 +34,6 @@ namespace March.Scene
         private CharacterController player;
         private Tween playerTweener;
         private Tween flipTweener;
-        private Tween backTweener;
         private Sequence sequence;
 
         private void Awake()
@@ -109,7 +108,7 @@ namespace March.Scene
             {
                 var direction = (Camera.main.transform.position.x > 0) ? -1 : 1;
                 step = direction * step;
-                backTweener = Camera.main.transform.DOLocalMoveX(Camera.main.transform.localPosition.x + step, BackDuration).SetEase(BackEase);
+                Camera.main.transform.DOLocalMoveX(Camera.main.transform.localPosition.x + step, BackDuration).SetEase(BackEase);
             }
 
             MovePlayer();

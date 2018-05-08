@@ -7,10 +7,14 @@ public class UISettingsPopup : MonoBehaviour
     private SoundButton musicButton;
     private SoundButton soundButton;
 
+    private Board board;
+
     void Awake()
     {
         musicButton = transform.Find("ButtonPanel/MusicButton").GetComponent<SoundButton>();
         soundButton = transform.Find("ButtonPanel/SoundButton").GetComponent<SoundButton>();
+
+        board = GameObject.Find("Board").GetComponent<Board>();
     }
 
     void Start()
@@ -39,9 +43,9 @@ public class UISettingsPopup : MonoBehaviour
     {
         AudioManager.instance.ButtonClickAudio();
 
-        if (GameObject.Find("Board"))
+        if (board != null)
         {
-            GameObject.Find("Board").GetComponent<Board>().state = GAME_STATE.WAITING_USER_SWAP;
+            board.state = GAME_STATE.WAITING_USER_SWAP;
         }
 
         gameObject.SetActive(false);
@@ -49,8 +53,7 @@ public class UISettingsPopup : MonoBehaviour
 
     public void OnQuitBtnClick()
     {
-        var board = GameObject.Find("Board").GetComponent<Board>();
-        if (board.isFirstMove)
+        if (board != null && board.isFirstMove)
         {
             SceneManager.LoadScene("main");
         }

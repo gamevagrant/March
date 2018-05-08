@@ -59,12 +59,19 @@ public class UITaskWindow :  UIWindowBase{
     private void UpdatePanel()
     {
         questItem = playerdata.GetQuest();
-        string headUrl = FilePathTools.GetPersonHeadPath(playerdata.role.headIcon);
-        AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
-        {
-            roleHeadImage.sprite = sp;
-            GameUtils.Scaling(roleHeadImage.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
-        });
+
+        var sp =
+            March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryPerson,
+                playerdata.role.headIcon);
+        roleHeadImage.sprite = sp;
+        GameUtils.Scaling(roleHeadImage.transform as RectTransform, new Vector2(sp.texture.width, sp.texture.height));
+
+        //string headUrl = FilePathTools.GetPersonHeadPath(playerdata.role.headIcon);
+        //AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
+        //{
+        //    roleHeadImage.sprite = sp;
+        //    GameUtils.Scaling(roleHeadImage.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
+        //});
         roleNameText.text = playerdata.role.name;
         loyaltySlider.value = playerdata.ability.loyalty / 100f;
         wisdomSlider.value = playerdata.ability.wisdom / 100f;
@@ -87,12 +94,19 @@ public class UITaskWindow :  UIWindowBase{
         if(!string.IsNullOrEmpty(questItem.bg))
         {
             taskImg.gameObject.SetActive(true);
-            string taskBGUrl = FilePathTools.GetStorySpritePath(questItem.bg);
-            AssetsManager.Instance.LoadAssetAsync<Sprite>(taskBGUrl, (sp) =>
-            {
-                taskImg.sprite = sp;
-                GameUtils.ScalingFixedWithHeight(taskImg.transform as RectTransform, new Vector2(sp.texture.width, sp.texture.height));
-            });
+
+            var sprite =
+                March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground,
+                    questItem.bg);
+            taskImg.sprite = sprite;
+            GameUtils.ScalingFixedWithHeight(taskImg.transform as RectTransform, new Vector2(sprite.texture.width, sprite.texture.height));
+
+            //string taskBGUrl = FilePathTools.GetStorySpritePath(questItem.bg);
+            //AssetsManager.Instance.LoadAssetAsync<Sprite>(taskBGUrl, (sp) =>
+            //{
+            //    taskImg.sprite = sp;
+            //    GameUtils.ScalingFixedWithHeight(taskImg.transform as RectTransform, new Vector2(sp.texture.width, sp.texture.height));
+            //});
         }else
         {
             taskImg.gameObject.SetActive(false);

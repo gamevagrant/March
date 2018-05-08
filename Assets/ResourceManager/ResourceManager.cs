@@ -14,14 +14,8 @@ namespace March.Core.ResourceManager
         {
             if (EnableAssetBundle)
             {
-                string error;
-                var loaded = AssetBundleManager.GetLoadedAssetBundle(bundle, out error);
-                if (!string.IsNullOrEmpty(error))
-                {
-                    Debug.LogError(error);
-                    return null;
-                }
-                return loaded.m_AssetBundle.LoadAsset<T>(asset);
+                var loaded = GetLoadedBundle(bundle);
+                return (loaded == null) ? null : loaded.m_AssetBundle.LoadAsset<T>(asset);
             }
 
             return Resources.Load<T>(bundle);
@@ -31,12 +25,30 @@ namespace March.Core.ResourceManager
         {
             if (EnableAssetBundle)
             {
-                string error;
-                var loaded = AssetBundleManager.GetLoadedAssetBundle(bundle, out error);
-                return loaded.m_AssetBundle.LoadAllAssets<T>().ToList();
+                var loaded = GetLoadedBundle(bundle);
+                return (loaded == null) ? null : loaded.m_AssetBundle.LoadAllAssets<T>().ToList();
             }
 
             return Resources.LoadAll<T>(bundle).ToList();
+        }
+
+        private LoadedAssetBundle GetLoadedBundle(string bundle)
+        {
+            string error;
+            var loaded = AssetBundleManager.GetLoadedAssetBundle(bundle, out error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                Debug.LogError(error + " in bundle: " + bundle);
+                return null;
+            }
+
+            if (loaded == null || loaded.m_AssetBundle == null)
+            {
+                Debug.LogError("Cannot find bundle with name: " + bundle);
+                return null;
+            }
+
+            return loaded;
         }
     }
 }

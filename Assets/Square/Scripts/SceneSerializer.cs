@@ -110,12 +110,8 @@ namespace March.Scene
                 var key = pair.Key;
                 var list = pair.Value;
                 GoMap.Add(key, new List<GameObject>());
-                var isModifiable = SceneLayerMap[pair.Key].Modifiable;
                 foreach (var gameInfo in list)
                 {
-                    //var go = SceneUtils.CreateIdentifyGameObject(key, gameInfo.ID, ParentMap[key],
-                    //    new Vector3((float)gameInfo.Position.X, (float)gameInfo.Position.Y, (float)gameInfo.Position.Z),
-                    //    DefaultSceneDataMap[key].Scale, DefaultSceneDataMap[key].SortingOrder, isModifiable);
                     var position = new Vector3((float)gameInfo.Position.X, (float)gameInfo.Position.Y, (float)gameInfo.Position.Z);
                     var go = Loader.CreateIdentifyGameObject(SceneLayerMap[key], gameInfo.ID, position);
                     if (SceneLoader != null)

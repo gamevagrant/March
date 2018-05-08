@@ -179,6 +179,7 @@ public class ProjectBuild
             {
                 Debug.LogWarning("Build asset bundles.");
 
+                BuildScript.CopyToStreamingAsset = true;
                 BuildScript.BuildAssetBundles();
 #if ENABLE_BUNDLE_SERVER
                 FileUtil.DeleteFileOrDirectory(Application.streamingAssetsPath);

@@ -107,18 +107,30 @@ public class UIDialogueWindow : UIWindowBase {
         }
         else if (lastDialogue == null || curDialogue.bgFile != lastDialogue.bgFile)
         {
-            AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetStorySpritePath(curDialogue.bgFile), (sp) =>
-            {
-                if (sp != null)
-                {
-                    imgBG.sprite = sp;
-                    imgBG.DOFade(1, 0.5f);
-                    RectTransform imgRectTF = imgBG.transform as RectTransform;
-                    imgRectTF.sizeDelta = new Vector2(0, imgRectTF.rect.width / (sp.texture.width / (float)sp.texture.height));
-                    imgBG.gameObject.SetActive(true);
-                }
+            //AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetStorySpritePath(curDialogue.bgFile), (sp) =>
+            //{
+            //    if (sp != null)
+            //    {
+            //        imgBG.sprite = sp;
+            //        imgBG.DOFade(1, 0.5f);
+            //        RectTransform imgRectTF = imgBG.transform as RectTransform;
+            //        imgRectTF.sizeDelta = new Vector2(0, imgRectTF.rect.width / (sp.texture.width / (float)sp.texture.height));
+            //        imgBG.gameObject.SetActive(true);
+            //    }
 
-            });
+            //});
+
+            var sp =
+                March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground,
+                    curDialogue.bgFile);
+            if (sp != null)
+            {
+                imgBG.sprite = sp;
+                imgBG.DOFade(1, 0.5f);
+                RectTransform imgRectTF = imgBG.transform as RectTransform;
+                imgRectTF.sizeDelta = new Vector2(0, imgRectTF.rect.width / (sp.texture.width / (float)sp.texture.height));
+                imgBG.gameObject.SetActive(true);
+            }
         }
 
         string dialog = curDialogue.dialogue;
@@ -180,16 +192,26 @@ public class UIDialogueWindow : UIWindowBase {
         }
         else
         {
-            AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetPersonHeadPath(talkerPic), (sp) => {
+            var sp =
+                March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryPerson,
+                    talkerPic);
+            if (sp != null)
+            {
+                img.sprite = sp;
+                img.SetNativeSize();
+                img.gameObject.SetActive(true);
+            }
 
-                if(sp!=null)
-                {
-                    img.sprite = sp;
-                    img.SetNativeSize();
-                    img.gameObject.SetActive(true);
-                }
+            //AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetPersonHeadPath(talkerPic), (sp) => {
+
+            //    if(sp!=null)
+            //    {
+            //        img.sprite = sp;
+            //        img.SetNativeSize();
+            //        img.gameObject.SetActive(true);
+            //    }
                 
-            });
+            //});
 
             img.DOColor(Color.white, 0.5f);
             img.transform.DOScale(1.1f, 0.5f);

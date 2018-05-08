@@ -38,7 +38,7 @@ echo $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod P
 $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 
 # Post handle asset bundles.
-if [[ $PredeineSymbols == *ENABLE_BUNDLE_SERVER* ]]; then
+if [[ $PredefineSymbols == *ENABLE_BUNDLE_SERVER* ]]; then
 	# copy asset bundles to web server.
 	AssetBundleRoot="$WORKSPACE/AssetBundles"
 	WebServerRoot="$JENKINS_HOME/AssetBundleServer/AssetBundles"

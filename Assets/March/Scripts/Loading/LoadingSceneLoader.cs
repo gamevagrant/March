@@ -14,8 +14,13 @@ namespace March.Scene
         {
             BundleList.Add(Configure.ConfigurePath);
             BundleList.Add(Configure.LevelBundlePath);
-            BundleList.Add(Configure.SceneBackgroundPath);
             BundleList.Add(Configure.FilmBackgroundPath);
+            BundleList.Add(Configure.SceneBackgroundPath);
+            BundleList.Add(Configure.SceneBuildingPath);
+            BundleList.Add(Configure.SceneNPCPath);
+            BundleList.Add(Configure.ScenePlayerPath);
+            BundleList.Add(Configure.StoryBackground);
+            BundleList.Add(Configure.StoryPerson);
         }
 
         public IEnumerator Load()

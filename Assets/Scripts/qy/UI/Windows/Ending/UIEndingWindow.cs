@@ -41,12 +41,16 @@ public class UIEndingWindow :  UIWindowBase
 
     private void UpdateUI(qy.config.QuestItem quest)
     {
+        //string headUrl = FilePathTools.GetStorySpritePath(quest.bg);
+        //AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
+        //{
+        //    bgImg.sprite = sp;
+        //});
 
-        string headUrl = FilePathTools.GetStorySpritePath(quest.bg);
-        AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
-        {
-            bgImg.sprite = sp;
-        });
+        var sp =
+        March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground,
+                quest.bg);
+        bgImg.sprite = sp;
 
         if(quest.endingType==1)
         {

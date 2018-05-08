@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using AssetBundles;
-using March.Scene;
+﻿using March.Scene;
+using qy;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
-using qy;
+
 public class LoadingScene : MonoBehaviour
 {
     private LoadingSceneLoader loader;

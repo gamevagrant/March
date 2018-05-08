@@ -99,16 +99,26 @@ public class DialogComponent : MonoBehaviour {
         }
         else
         {
-            AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetPersonHeadPath(talkerPic), (sp) => {
+            var sp =
+                March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryPerson,
+                    talkerPic);
+            if (sp != null)
+            {
+                img.sprite = sp;
+                img.SetNativeSize();
+                img.gameObject.SetActive(true);
+            }
 
-                if (sp != null)
-                {
-                    img.sprite = sp;
-                    img.SetNativeSize();
-                    img.gameObject.SetActive(true);
-                }
+            //AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetPersonHeadPath(talkerPic), (sp) => {
 
-            });
+            //    if (sp != null)
+            //    {
+            //        img.sprite = sp;
+            //        img.SetNativeSize();
+            //        img.gameObject.SetActive(true);
+            //    }
+
+            //});
 
             img.DOColor(Color.white, 0.5f);
             img.transform.DOScale(1.1f, 0.5f);

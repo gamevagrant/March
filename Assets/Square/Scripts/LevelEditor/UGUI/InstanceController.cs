@@ -17,13 +17,12 @@ namespace March.Scene
 
         private Text itemText;
         private Dropdown dropdown;
-        private Button instanceButton;
 
         void Awake()
         {
             itemText = transform.Find("ItemText").GetComponent<Text>();
             dropdown = transform.Find("Dropdown").GetComponent<Dropdown>();
-            instanceButton = transform.Find("Button").GetComponent<Button>();
+            transform.Find("Button").GetComponent<Button>();
         }
 
         void Start()

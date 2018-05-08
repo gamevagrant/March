@@ -1,25 +1,17 @@
-﻿using System;
-using DG.Tweening;
+﻿using March.Core.WindowManager;
+using qy;
+using qy.config;
 using System.Collections;
 using System.Collections.Generic;
-using March.Core.WindowManager;
 using UnityEngine;
-using UnityEngine.UI;
-using qy.config;
-using qy;
 using Random = UnityEngine.Random;
 
-#if UNITY_EDITOR
-// Unity Ads
-#endif
-
-public class Board : MonoBehaviour 
+public class Board : MonoBehaviour
 {
-    // public
     [Header("Nodes")]
     public List<Node> nodes = new List<Node>();
 
-    [Header("Board variables")]    
+    [Header("Board variables")]
     public GAME_STATE state;
     public bool lockSwap;
     public int moveLeft;
@@ -51,7 +43,7 @@ public class Board : MonoBehaviour
     public bool skipGenerateGingerbread;
     public bool showingInspiringPopup;
     public int skipGingerbreadCount;
-    
+
     [Header("Item Lists")]
     public List<Item> changingList;
     public List<Item> sameColorList;
@@ -61,12 +53,10 @@ public class Board : MonoBehaviour
     public Item swappedItem;
     public Item clickedItem;
 
-    // UI
     [Header("UI")]
     public UITarget UITarget;
     public UITop UITop;
 
-    // hint
     [Header("Hint")]
     public int checkHintCall;
     public int showHintCall;
@@ -77,8 +67,8 @@ public class Board : MonoBehaviour
 
     [Header("PlanePlus")]
     public int planePlusNum = 0;
-    // private
-    Vector3 firstNodePosition;
+
+    private Vector3 firstNodePosition;
 
     [Header("data")]
     public int allstep;
@@ -88,14 +78,13 @@ public class Board : MonoBehaviour
 
     void Awake()
     {
-        // debug
         if (LevelLoader.instance.level == 0)
         {
             LevelLoader.instance.LoadLevel();
-        }            
+        }
     }
 
-	void Start () 
+    void Start()
     {
         state = GAME_STATE.PREPARING_LEVEL;
         moveLeft = LevelLoader.instance.moves;
@@ -134,8 +123,8 @@ public class Board : MonoBehaviour
         // open target popup
         TargetPopup();
     }
-	
-	void Update () 
+
+    void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Escape))
         //{
@@ -152,8 +141,8 @@ public class Board : MonoBehaviour
             }
             else
             {
-                if (Configure.instance.touchIsSwallowed 
-                    && GameObject.Find("Help") != null 
+                if (Configure.instance.touchIsSwallowed
+                    && GameObject.Find("Help") != null
                     && GameObject.Find("Help").activeSelf
                     )
                 {
@@ -230,13 +219,13 @@ public class Board : MonoBehaviour
         } // if state is WAITING_USER_SWAP
 
         // fix freezing board
-//        if (state == GAME_STATE.DESTROYING_ITEMS)
-//        {
-//            if (lockSwap == false && destroyingItems == 0 && droppingItems == 0 && flyingItems == 0 && matching == 0 && playingAnimation == 0)
-//            {
-//                state = GAME_STATE.WAITING_USER_SWAP;
-//            }
-//        }
+        //        if (state == GAME_STATE.DESTROYING_ITEMS)
+        //        {
+        //            if (lockSwap == false && destroyingItems == 0 && droppingItems == 0 && flyingItems == 0 && matching == 0 && playingAnimation == 0)
+        //            {
+        //                state = GAME_STATE.WAITING_USER_SWAP;
+        //            }
+        //        }
     }
     #region Board
 
@@ -309,12 +298,12 @@ public class Board : MonoBehaviour
                     case TILE_TYPE.PASS_THROUGH:
                         tile = Instantiate(Resources.Load(Configure.NoneTilePrefab())) as GameObject;
                         break;
-                    //case TILE_TYPE.LIGHT_TILE:
-                    //    tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
-                    //    break;
-                    //case TILE_TYPE.DARD_TILE:
-                    //    tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
-                    //    break;
+                        //case TILE_TYPE.LIGHT_TILE:
+                        //    tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
+                        //    break;
+                        //case TILE_TYPE.DARD_TILE:
+                        //    tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
+                        //    break;
                 }
 
                 if ((i % 2 + j % 2) % 2 == 0)
@@ -412,8 +401,8 @@ public class Board : MonoBehaviour
 
 
 
-// waffle
-void GenerateWaffleLayer()
+    // waffle
+    void GenerateWaffleLayer()
     {
         var row = LevelLoader.instance.row;
         var column = LevelLoader.instance.column;
@@ -793,14 +782,14 @@ void GenerateWaffleLayer()
 
             if (node != null && node.CanStoreItem())
             {
-				var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
-				if (box)
-				{
-					box.transform.SetParent(node.gameObject.transform);
-					box.name = "Box";
-					box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.4f, 0);
-					box.transform.localScale = new Vector3 (0.7f, 0.7f, 1.0f);
-				}
+                var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
+                if (box)
+                {
+                    box.transform.SetParent(node.gameObject.transform);
+                    box.name = "Box";
+                    box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.4f, 0);
+                    box.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                }
             }
         }
     }
@@ -836,14 +825,14 @@ void GenerateWaffleLayer()
 
                     if (node != null)
                     {
-						var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
-						if (box)
-						{
-							box.transform.SetParent(node.gameObject.transform);
-							box.name = "Box";
-							box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.4f, 0);
-							box.transform.localScale = new Vector3 (0.7f, 0.7f, 1.0f);
-						}
+                        var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
+                        if (box)
+                        {
+                            box.transform.SetParent(node.gameObject.transform);
+                            box.name = "Box";
+                            box.transform.localPosition = NodeLocalPosition(node.i, node.j) + new Vector3(0, -1 * NodeSize() + 0.4f, 0);
+                            box.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                        }
                     }
                 }
             }
@@ -856,7 +845,7 @@ void GenerateWaffleLayer()
 
     void BeginBooster()
     {
-        for (int i = LevelLoader.instance.beginItemList.Count-1; i >= 0; i--)
+        for (int i = LevelLoader.instance.beginItemList.Count - 1; i >= 0; i--)
         {
             BoosterEffect(LevelLoader.instance.beginItemList[i]);
         }
@@ -962,7 +951,7 @@ void GenerateWaffleLayer()
             return null;
         }
         return nodes[row * LevelLoader.instance.column + column];
-    }  
+    }
 
     Vector3 ColumnFirstItemPosition(int i, int j)
     {
@@ -1197,7 +1186,7 @@ void GenerateWaffleLayer()
             var grasschangeList = new List<Node>();
 
             var combines = GetMatches();
-            
+
             //Debug.Log("Number of combines: " + combines.Count);
 
             foreach (var combine in combines)
@@ -1308,7 +1297,7 @@ void GenerateWaffleLayer()
             // So There is case destroyingItems = 0 BUT the item still exist that causes the GenerateNewItems function goes wrong
             yield return new WaitForEndOfFrame();
 
-            for (int i = appleBoxes.Count-1; i >=0; i--)
+            for (int i = appleBoxes.Count - 1; i >= 0; i--)
             {
                 appleBoxes[i].TryToDestroyBox();
             }
@@ -1372,7 +1361,7 @@ void GenerateWaffleLayer()
 
                         FindMatches();
                     }
-                    
+
                     if (GenerateGingerbread())
                     {
                         yield return new WaitForSeconds(0.2f);
@@ -1403,7 +1392,7 @@ void GenerateWaffleLayer()
 
                     AudioManager.instance.PopupWinAudio();
 
-//                    ShowAds();
+                    //                    ShowAds();
                 }
                 else
                 {
@@ -1414,7 +1403,7 @@ void GenerateWaffleLayer()
 
                     AudioManager.instance.PopupLoseAudio();
 
-//                    ShowAds();
+                    //                    ShowAds();
                 }
             }
         }
@@ -1508,8 +1497,8 @@ void GenerateWaffleLayer()
                                     }
                                 }
 
-                                    // after have the target we swap items on nodes
-                                if ((target.item != null && target.item.type == ITEM_TYPE.BLANK)&& target.ice == null && target.CanStoreItem())
+                                // after have the target we swap items on nodes
+                                if ((target.item != null && target.item.type == ITEM_TYPE.BLANK) && target.ice == null && target.CanStoreItem())
                                 {
                                     if (target.item != null && target.item.type == ITEM_TYPE.BLANK)
                                     {
@@ -1522,7 +1511,7 @@ void GenerateWaffleLayer()
                                     node.item = null;
                                     node.GenerateItem(ITEM_TYPE.BLANK);
 
-                                    if ( node.ice != null)
+                                    if (node.ice != null)
                                     {
                                         target.ice = node.ice;
                                         target.ice.gameObject.transform.SetParent(target.gameObject.transform);
@@ -1548,13 +1537,13 @@ void GenerateWaffleLayer()
 
         var marshmallowGenerated = false;
 
-        for (int j = 0; j < column; j++) 
+        for (int j = 0; j < column; j++)
         {
             var space = -1;
 
             var itemPos = Vector3.zero;
 
-            for (int i = row - 1; i >= 0; i--) 
+            for (int i = row - 1; i >= 0; i--)
             {
                 if (GetNode(i, j) != null)
                 {
@@ -1567,12 +1556,12 @@ void GenerateWaffleLayer()
                         if (i == 0)
                         {
                             // check if need to generate new collectible
-                            if (CheckGenerateCollectible() != null && 
-                                CheckGenerateCollectible().Count > 0 && 
+                            if (CheckGenerateCollectible() != null &&
+                                CheckGenerateCollectible().Count > 0 &&
                                 (LevelLoader.instance.collectibleGenerateMarkers.Contains(j) || LevelLoader.instance.collectibleGenerateMarkers.Count == 0))
                             {
                                 collectible = true;
-                            }                            
+                            }
                         }
 
                         // check if need to generate a new marshmallow
@@ -1686,7 +1675,7 @@ void GenerateWaffleLayer()
 
                             // new item position
                             var pos = ColumnFirstItemPosition(0, source.j);
-                            
+
                             //print(pos);
 
                             // calculate move path
@@ -1695,7 +1684,7 @@ void GenerateWaffleLayer()
                             if (source.transform.position != NodeLocalPosition(source.i, source.j))
                             {
                                 // if source item is just generated
-                                path.Add(NodeLocalPosition(source.i, source.j)+ transform.position);
+                                path.Add(NodeLocalPosition(source.i, source.j) + transform.position);
                             }
 
                             if (node.item != null && node.item.type == ITEM_TYPE.BLANK && node.CanDropIn())
@@ -1729,7 +1718,7 @@ void GenerateWaffleLayer()
                             SetDropTargets();
 
                             GenerateNewItems(true, pos);
-                            
+
                         } // end if source node != null
                     }
                 } // end if node != null
@@ -1755,7 +1744,7 @@ void GenerateWaffleLayer()
         {
             bool hasDrop = false;
             for (int j = 0; j < column; j++)
-                {
+            {
                 if (GetNode(i, j) != null)
                 {
                     if (GetNode(i, j).item != null)
@@ -1812,7 +1801,7 @@ void GenerateWaffleLayer()
         //todo : 优先级根据配置 改掉死代码
         foreach (Item item in combine)
         {
-            if (item.next != ITEM_TYPE.NONE )
+            if (item.next != ITEM_TYPE.NONE)
             {
                 isSwap = true;
 
@@ -1868,16 +1857,16 @@ void GenerateWaffleLayer()
 
         bool isSwap = false;
         //todo : 优先级根据配置 改掉死代码
-       // rainbow优先级最高
+        // rainbow优先级最高
         foreach (Item item in combine)
         {
             if (item.next == ITEM_TYPE.COOKIE_RAINBOW)
             {
                 isSwap = true;
                 break;
-                
+
             }
-            
+
         }
 
         if (!isSwap)
@@ -1958,31 +1947,31 @@ void GenerateWaffleLayer()
                 }
             }
             first.next = first.GetPlaneBreaker(first.type);
-//            foreach (Item item in combine)
-//            {
-//                if (first.node.RightNeighbor())
-//                {
-//                    if (item.node.OrderOnBoard() == first.node.RightNeighbor().OrderOnBoard())
-//                    {
-//                        first.next = first.GetColumnBreaker(first.type);
-//                        break;
-//                    }
-//                }
-//
-//                if (first.node.BottomNeighbor())
-//                {
-//                    if (item.node.OrderOnBoard() == first.node.BottomNeighbor().OrderOnBoard())
-//                    {
-//                        first.next = first.GetRowBreaker(first.type);
-//                        break;
-//                    }
-//                }
-//            }
+            //            foreach (Item item in combine)
+            //            {
+            //                if (first.node.RightNeighbor())
+            //                {
+            //                    if (item.node.OrderOnBoard() == first.node.RightNeighbor().OrderOnBoard())
+            //                    {
+            //                        first.next = first.GetColumnBreaker(first.type);
+            //                        break;
+            //                    }
+            //                }
+            //
+            //                if (first.node.BottomNeighbor())
+            //                {
+            //                    if (item.node.OrderOnBoard() == first.node.BottomNeighbor().OrderOnBoard())
+            //                    {
+            //                        first.next = first.GetRowBreaker(first.type);
+            //                        break;
+            //                    }
+            //                }
+            //            }
         }
     }
 
     // return items around
-    public List<Item> ItemAround(Node node,int range)
+    public List<Item> ItemAround(Node node, int range)
     {
         List<Item> items = new List<Item>();
 
@@ -2004,7 +1993,7 @@ void GenerateWaffleLayer()
                     items.Add(GetNode(i, j).item);
                 }
             }
-        }   
+        }
 
         return items;
     }
@@ -2187,7 +2176,7 @@ void GenerateWaffleLayer()
 
     public void DestroyPlaneTargetList(Item item, bool isgrass = false)
     {
-        StartCoroutine(StartDestroyPlaneTargetList(item,isgrass));
+        StartCoroutine(StartDestroyPlaneTargetList(item, isgrass));
     }
 
     IEnumerator StartDestroyPlaneTargetList(Item item, bool isgrass = false)
@@ -2237,18 +2226,18 @@ void GenerateWaffleLayer()
 
         yield return new WaitForEndOfFrame();
 
-//        state = originalState;
+        //        state = originalState;
 
         //        if (state == GAME_STATE.WAITING_USER_SWAP)
         {
-           // FindMatches();
+            // FindMatches();
         }
 
-//        specialDestroying--;
-//        if (specialDestroying == 0)
-//        {
-//            state = originalStateInSDestroying;
-//        }
+        //        specialDestroying--;
+        //        if (specialDestroying == 0)
+        //        {
+        //            state = originalStateInSDestroying;
+        //        }
 
     }
 
@@ -2322,11 +2311,11 @@ void GenerateWaffleLayer()
             FindMatches();
         }
 
-//        specialDestroying--;
-//        if (specialDestroying == 0)
-//        {
-//            state = originalStateInSDestroying;
-//        }
+        //        specialDestroying--;
+        //        if (specialDestroying == 0)
+        //        {
+        //            state = originalStateInSDestroying;
+        //        }
     }
 
     public void DestroySameColorList(bool isgrass = false)
@@ -2434,7 +2423,7 @@ void GenerateWaffleLayer()
     {
         var marshmallows = new List<Item>();
 
-        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null  && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsMarshmallow())
+        if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsMarshmallow())
         {
             marshmallows.Add(item.node.TopNeighbor().item);
         }
@@ -2494,7 +2483,7 @@ void GenerateWaffleLayer()
 
     public void DestroyChocolate(Item item)
     {
-        
+
         var chocolates = new List<Item>();
 
         if (item.node.TopNeighbor() != null && item.node.TopNeighbor().bafflebottom == null && item.node.TopNeighbor().item != null && item.node.TopNeighbor().item.IsChocolate())
@@ -2634,8 +2623,8 @@ void GenerateWaffleLayer()
         {
             for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
             {
-                if (LevelLoader.instance.targetList[i].Type == TARGET_TYPE.COOKIE 
-                    && LevelLoader.instance.targetList[i].color == item.color 
+                if (LevelLoader.instance.targetList[i].Type == TARGET_TYPE.COOKIE
+                    && LevelLoader.instance.targetList[i].color == item.color
                     && targetLeftList[i] > 0
                     )
                 {
@@ -2714,7 +2703,7 @@ void GenerateWaffleLayer()
                     spriteRenderer.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
                 }
             }
-        }    
+        }
         // marshmallow
         else if (item.IsMarshmallow())
         {
@@ -2811,38 +2800,38 @@ void GenerateWaffleLayer()
                 }
             }
         }
-		// generic bomb breaker
-		else if (item.IsBombBreaker(item.type))
-		{
-		    for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
-		    {
-		        if (LevelLoader.instance.targetList[i].Type == TARGET_TYPE.BOMB_BREAKER
+        // generic bomb breaker
+        else if (item.IsBombBreaker(item.type))
+        {
+            for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
+            {
+                if (LevelLoader.instance.targetList[i].Type == TARGET_TYPE.BOMB_BREAKER
                     && targetLeftList[i] > 0
-		        )
-		        {
-		            targetLeftList[i]--;
-		            flyingItem = new GameObject();
-		            order = i;
-		            break;
-		        }
-		    }
+                )
+                {
+                    targetLeftList[i]--;
+                    flyingItem = new GameObject();
+                    order = i;
+                    break;
+                }
+            }
 
-			if (flyingItem != null)
-			{
-				flyingItem.transform.position = item.transform.position;
-				flyingItem.name = "Flying Bomb Breaker";
-				flyingItem.layer = LayerMask.NameToLayer("On Top UI");
+            if (flyingItem != null)
+            {
+                flyingItem.transform.position = item.transform.position;
+                flyingItem.name = "Flying Bomb Breaker";
+                flyingItem.layer = LayerMask.NameToLayer("On Top UI");
 
-				SpriteRenderer spriteRenderer = flyingItem.AddComponent<SpriteRenderer>();
+                SpriteRenderer spriteRenderer = flyingItem.AddComponent<SpriteRenderer>();
 
-				GameObject prefab = Resources.Load(Configure.GenericBombBreaker()) as GameObject;
+                GameObject prefab = Resources.Load(Configure.GenericBombBreaker()) as GameObject;
 
-				if (prefab != null)
-				{
-					spriteRenderer.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
-				}
-			}
-		}
+                if (prefab != null)
+                {
+                    spriteRenderer.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+                }
+            }
+        }
         // rainbow
         else if (item.type == ITEM_TYPE.COOKIE_RAINBOW)
         {
@@ -2940,7 +2929,7 @@ void GenerateWaffleLayer()
         }
         else if (item.type == ITEM_TYPE.APPLEBOX)
         {
-            if (item.applebox != null && item.applebox.appleNum > 0) 
+            if (item.applebox != null && item.applebox.appleNum > 0)
             {
                 for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
                 {
@@ -3082,18 +3071,18 @@ void GenerateWaffleLayer()
             {
                 collectable = true;
             }
-            
+
             // collectible marker by node
-            if (item != null && 
+            if (item != null &&
                 LevelLoader.instance.collectibleCollectNodeMarkers.Contains(NodeOrder(item.node.i, item.node.j)) &&
                 item.IsCollectible())
             {
                 collectable = true;
             }
-            
+
             if (collectable)
             {
-                Debug.Log("收集到cake"+item.node.name+item.type.ToString());
+                Debug.Log("收集到cake" + item.node.name + item.type.ToString());
                 GameObject flyingItem = null;
                 var order = 0;
 
@@ -3234,7 +3223,7 @@ void GenerateWaffleLayer()
         UITarget.UpdateTargetAmount(order);
 
         Destroy(item);
-        
+
         flyingItems--;
     }
 
@@ -3280,10 +3269,10 @@ void GenerateWaffleLayer()
         }
 
         // Plus 5 moves popup
-//        if (Configure.instance.beginFiveMoves == true)
-//        {
-//            StartCoroutine(Plus5MovesPopup());
-//        }
+        //        if (Configure.instance.beginFiveMoves == true)
+        //        {
+        //            StartCoroutine(Plus5MovesPopup());
+        //        }
     }
 
     IEnumerator Plus5MovesPopup()
@@ -3321,7 +3310,7 @@ void GenerateWaffleLayer()
             case 2:
                 WindowManager.instance.Show<GreatPopupWindow>();
                 AudioManager.instance.greatAudio();
-                break;            
+                break;
         }
     }
 
@@ -3389,15 +3378,16 @@ void GenerateWaffleLayer()
             var timeToTravel = 0.2f;
             var timeStamp = Time.time;
 
-            while (Time.time < timeStamp + timeToTravel) {
-                var currentPos = Vector3.Lerp(startPosition, endPosition, (Time.time - timeStamp)/timeToTravel);
-         
-                currentPos.x += bending.x * Mathf.Sin(Mathf.Clamp01((Time.time - timeStamp)/timeToTravel) * Mathf.PI);
-                currentPos.y += bending.y * Mathf.Sin(Mathf.Clamp01((Time.time - timeStamp)/timeToTravel) * Mathf.PI);
-                currentPos.z += bending.z * Mathf.Sin(Mathf.Clamp01((Time.time - timeStamp)/timeToTravel) * Mathf.PI);
+            while (Time.time < timeStamp + timeToTravel)
+            {
+                var currentPos = Vector3.Lerp(startPosition, endPosition, (Time.time - timeStamp) / timeToTravel);
+
+                currentPos.x += bending.x * Mathf.Sin(Mathf.Clamp01((Time.time - timeStamp) / timeToTravel) * Mathf.PI);
+                currentPos.y += bending.y * Mathf.Sin(Mathf.Clamp01((Time.time - timeStamp) / timeToTravel) * Mathf.PI);
+                currentPos.z += bending.z * Mathf.Sin(Mathf.Clamp01((Time.time - timeStamp) / timeToTravel) * Mathf.PI);
 
                 prefab.transform.position = currentPos;
-         
+
                 yield return null;
             }
 
@@ -3505,7 +3495,7 @@ void GenerateWaffleLayer()
         }
         else if (item.IsBombBreaker(item.type))
         {
-           // winGold += Int32.Parse(config["bombbreaker"]);
+            // winGold += Int32.Parse(config["bombbreaker"]);
             winGold += config.bombbreaker;
             getWinGold(item, winGold);
         }
@@ -3523,24 +3513,24 @@ void GenerateWaffleLayer()
         //todo:金币弹出动画
     }
 
-    private void getWinGold(Item item, int gold) {
-		return;
-        var cloneGold = Instantiate(item.gameObject, GameObject.Find("Board").transform);
-        cloneGold.transform.position = item.transform.position;
-        cloneGold.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/Cookie/UI/Map/goldsp", typeof(Sprite)) as Sprite;
-        cloneGold.GetComponent<SpriteRenderer>().sortingOrder = 90;
-        cloneGold.transform.localScale = new Vector3(1.0f, 1.0f, 1);
-        cloneGold.gameObject.SetActive(true);
+    private void getWinGold(Item item, int gold)
+    {
+        //var cloneGold = Instantiate(item.gameObject, GameObject.Find("Board").transform);
+        //cloneGold.transform.position = item.transform.position;
+        //cloneGold.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/Cookie/UI/Map/goldsp", typeof(Sprite)) as Sprite;
+        //cloneGold.GetComponent<SpriteRenderer>().sortingOrder = 90;
+        //cloneGold.transform.localScale = new Vector3(1.0f, 1.0f, 1);
+        //cloneGold.gameObject.SetActive(true);
 
-		Vector3 v1 = new Vector3 (item.transform.position.x, item.transform.position.y, 0);
-		Vector3 v2 = GameObject.Find ("Canvas").transform.Find ("PiggyBank").transform.position;
-		Vector3[] path = {v1, new Vector3(v1.x + 1, v1.y + 1, 0), new Vector3(v1.x + 2, v1.y + 2, 0), new Vector3(v1.x + 3, v1.y + 3, 0), v2};
-		cloneGold.transform.DOPath(path, 1.0f).SetEase(Ease.InQuad).OnComplete(() => 
-			{
-				Destroy(cloneGold);
-				GameObject.FindObjectOfType<Canvas>().transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
-			}
-		);
+        //Vector3 v1 = new Vector3(item.transform.position.x, item.transform.position.y, 0);
+        //Vector3 v2 = GameObject.Find("Canvas").transform.Find("PiggyBank").transform.position;
+        //Vector3[] path = { v1, new Vector3(v1.x + 1, v1.y + 1, 0), new Vector3(v1.x + 2, v1.y + 2, 0), new Vector3(v1.x + 3, v1.y + 3, 0), v2 };
+        //cloneGold.transform.DOPath(path, 1.0f).SetEase(Ease.InQuad).OnComplete(() =>
+        //    {
+        //        Destroy(cloneGold);
+        //        GameObject.FindObjectOfType<Canvas>().transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
+        //    }
+        //);
     }
 
     private void DestroyAllObstacles()
@@ -3662,7 +3652,7 @@ void GenerateWaffleLayer()
             if (openedLevel < Configure.instance.maxLevel)
             {
                 GameData.instance.SaveOpendedLevel(openedLevel + 1);
-            }            
+            }
         }
 
         // add bonus coin
@@ -3851,7 +3841,7 @@ void GenerateWaffleLayer()
         {
             yield break;
         }
-        
+
         yield return new WaitForSeconds(Configure.instance.hintDelay);
 
         while (state != GAME_STATE.WAITING_USER_SWAP)
@@ -3905,7 +3895,7 @@ void GenerateWaffleLayer()
         {
             yield return new WaitForSeconds(1.5f);
         }
-        
+
         showHintCall--;
 
         StartCoroutine(CheckHint());
@@ -3971,8 +3961,8 @@ void GenerateWaffleLayer()
         {
             if (node.item != null && node.item.color == color)
             {
-                if (direction == SWAP_DIRECTION.TOP 
-                    ||direction == SWAP_DIRECTION.RIGHT
+                if (direction == SWAP_DIRECTION.TOP
+                    || direction == SWAP_DIRECTION.RIGHT
                     || direction == SWAP_DIRECTION.BOTTOM
                     || direction == SWAP_DIRECTION.LEFT
                     )
@@ -4026,7 +4016,7 @@ void GenerateWaffleLayer()
 
                     if (node != null)
                     {
-                        if (node.item == null  || !(node.item.Exchangeable(SWAP_DIRECTION.NONE)))
+                        if (node.item == null || !(node.item.Exchangeable(SWAP_DIRECTION.NONE)))
                         {
                             continue;
                         }
@@ -4037,7 +4027,7 @@ void GenerateWaffleLayer()
                         // o x o 
                         //   o o
                         CheckHintNode(GetNode(i - 1, j), color, SWAP_DIRECTION.BOTTOM);
-                        CheckHintNode(GetNode(i , j - 1), color, SWAP_DIRECTION.RIGHT);
+                        CheckHintNode(GetNode(i, j - 1), color, SWAP_DIRECTION.RIGHT);
                         CheckHintNode(GetNode(i, j + 1), color, SWAP_DIRECTION.NONE);
                         CheckHintNode(GetNode(i + 1, j), color, SWAP_DIRECTION.NONE);
                         CheckHintNode(GetNode(i + 1, j + 1), color, SWAP_DIRECTION.NONE);
@@ -4694,7 +4684,7 @@ void GenerateWaffleLayer()
         {
             return null;
         }
-        else 
+        else
         {
             if (top.tile.type == TILE_TYPE.NONE || top.tile.type == TILE_TYPE.PASS_THROUGH)
             {
@@ -4870,7 +4860,7 @@ void GenerateWaffleLayer()
             {
                 // remove active
                 ovenTouchItem.node.RemoveOvenBoosterActive();
-                
+
                 ovenTouchItem = null;
 
                 AudioManager.instance.ButtonClickAudio();
@@ -4894,7 +4884,7 @@ void GenerateWaffleLayer()
 
                 // animation
                 iTween.MoveTo(ovenTouchItem.gameObject, iTween.Hash(
-                    "position", boosterItem.gameObject.transform.position,                    
+                    "position", boosterItem.gameObject.transform.position,
                     "easetype", iTween.EaseType.linear,
                     "time", Configure.instance.swapTime
                 ));
@@ -5251,7 +5241,7 @@ void GenerateWaffleLayer()
         kuang.GetComponent<SpriteRenderer>().sortingLayerName = "Effect";
 
         var spr = new Sprite();
-        spr = Resources.Load(Configure.ChoseIcon(),spr.GetType()) as Sprite;
+        spr = Resources.Load(Configure.ChoseIcon(), spr.GetType()) as Sprite;
         kuang.GetComponent<SpriteRenderer>().sprite = spr;
         //float loopTime = 0.5f;
         //kuang.transform.DOScale(new Vector3(1.1f, 1.1f, 1.0f), loopTime).SetLoops(-1, LoopType.Yoyo);
@@ -5281,15 +5271,15 @@ void GenerateWaffleLayer()
                     {
                         prepareToChange.Add(top.item);
                     }
-                    if (bottom!= null && bottom.item != null && bottom.item.CanChangeToBubble())
+                    if (bottom != null && bottom.item != null && bottom.item.CanChangeToBubble())
                     {
                         prepareToChange.Add(bottom.item);
                     }
-                    if (left != null && left.item!=null && left.item.CanChangeToBubble())
+                    if (left != null && left.item != null && left.item.CanChangeToBubble())
                     {
                         prepareToChange.Add(left.item);
                     }
-                    if (right!=null && right.item !=null && right.item.CanChangeToBubble())
+                    if (right != null && right.item != null && right.item.CanChangeToBubble())
                     {
                         prepareToChange.Add(right.item);
                     }
@@ -5336,7 +5326,7 @@ void GenerateWaffleLayer()
     // change all items to column-breaker/row-breaker/bomb-breaker/x-breaker when swap a rainbow with a breaker
     public void ChangeItemsType(int color, ITEM_TYPE changeToType, bool isgrass)
     {
-        StartCoroutine(TryToChangeType(color, changeToType,isgrass));
+        StartCoroutine(TryToChangeType(color, changeToType, isgrass));
     }
 
     IEnumerator TryToChangeType(int color, ITEM_TYPE changeToType, bool isgrass)
@@ -5437,11 +5427,12 @@ void GenerateWaffleLayer()
             qy.GameMainManager.Instance.playerModel.StartLevel();
             //todo：扣除开始道具
             //LevelLoader.instance.beginItemList
-			int j = LevelLoader.instance.beginItemList.Count;
-			for (int i = 0; i < j; i++) {
-				string itemId = LevelLoader.instance.beginItemList [i];
-				//NetManager.instance.userToolsToServer (itemId, "1");
-                qy.GameMainManager.Instance.playerModel.UseProp(itemId,1);
+            int j = LevelLoader.instance.beginItemList.Count;
+            for (int i = 0; i < j; i++)
+            {
+                string itemId = LevelLoader.instance.beginItemList[i];
+                //NetManager.instance.userToolsToServer (itemId, "1");
+                qy.GameMainManager.Instance.playerModel.UseProp(itemId, 1);
             }
         }
     }

@@ -1,28 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LanguageKey : MonoBehaviour {
+public class LanguageKey : MonoBehaviour
+{
+    void Start()
+    {
+        var text = GetComponent<Text>();
 
+        if (text == null)
+            return;
 
-
-	// Use this for initialization
-	void Start () {
-	    string key = "";
-	    Text m_Text = GetComponent<Text>();
-	    if (m_Text != null)
-	    {
-	        key = m_Text.text;
-	    }
-	    if (key != "")
-	    {
-            m_Text.text = LanguageManager.instance.GetValueByKey(key);
+        if (!string.IsNullOrEmpty(text.text))
+        {
+            text.text = LanguageManager.instance.GetValueByKey(text.text);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
