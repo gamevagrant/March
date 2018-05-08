@@ -12,7 +12,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: elex
-  productName: March
+  productName: "\u8FFD\u51FB\u7C89\u788E\u4F20\u5947"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -24,7 +24,7 @@ PlayerSettings:
   m_SplashScreenDrawMode: 1
   m_SplashScreenBackgroundAnimationZoom: 0.5
   m_SplashScreenLogoAnimationZoom: 0.5
-  m_SplashScreenBackgroundLandscapeAspect: 1
+  m_SplashScreenBackgroundLandscapeAspect: 1.7777778
   m_SplashScreenBackgroundPortraitAspect: 1
   m_SplashScreenBackgroundLandscapeUvs:
     serializedVersion: 2
@@ -39,7 +39,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 1c26db03d08fedd43b592f5aafae6603, type: 3}
+  - logo: {fileID: 21300000, guid: 5a86f03613d6370499dfd9845dfaad80, type: 3}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -162,7 +162,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.elex.march
   buildNumber: {}
-  AndroidBundleVersionCode: 1525689277
+  AndroidBundleVersionCode: 1525799693
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -578,7 +578,7 @@ PlayerSettings:
   psp2InfoBarColor: 0
   psp2ScriptOptimizationLevel: 0
   psmSplashimage: {fileID: 0}
-  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: b67ccaa03c564a349a3c8d90fc0bcea9,
+  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: 41d14df3a8a665347bbc05008b676810,
     type: 3}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
   spritePackerPolicy: 
