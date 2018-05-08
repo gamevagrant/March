@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 namespace qy
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class GuideManager : MonoBehaviour
     {
         private static GuideManager _instance;
@@ -16,7 +12,7 @@ namespace qy
         {
             get
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     Init();
                 }
@@ -38,10 +34,8 @@ namespace qy
 
         private static void Init()
         {
-            AssetsManager.Instance.LoadAssetAsync<GameObject>(FilePathTools.getUIPath("GuideManager"),(go)=> {
-
-                GameObject guideGO = GameObject.Instantiate(go);
-
+            AssetsManager.Instance.LoadAssetAsync<GameObject>(FilePathTools.getUIPath("GuideManager"), (go) =>
+            {
             });
         }
 
@@ -67,10 +61,10 @@ namespace qy
 
         private void OnOpenUIHandle(ui.UISettings.UIWindowID uiID)
         {
-            Debug.Log("打开面板"+uiID.ToString());
+            Debug.Log("打开面板" + uiID.ToString());
             config.GuideItem item = GetUnDisplayedGuideWithUIid(uiID);
-            
-            if (item!=null)
+
+            if (item != null)
             {
                 guideStepID = item.id;
                 Show(item);
@@ -92,7 +86,7 @@ namespace qy
 
         private void Show(config.GuideItem item)
         {
-            Debug.Log("@@@:开始执行引导："+item.id);
+            Debug.Log("@@@:开始执行引导：" + item.id);
             guideItem = item;
             mask.gameObject.SetActive(true);
             if (!string.IsNullOrEmpty(guideItem.highlight))
@@ -114,12 +108,13 @@ namespace qy
             {
                 return;
             }
-            
+
             config.GuideItem nextItem = guideItem.next as config.GuideItem;
-            if (nextItem !=null)
+            if (nextItem != null)
             {
                 Show(nextItem);
-            }else
+            }
+            else
             {
                 AddDisplayedGuide(guideStepID);
                 OnGuideItemEnd(guideItem);
@@ -128,7 +123,8 @@ namespace qy
 
         private void ShowHightLight(string widgtName)
         {
-            StartCoroutine(FindTarget(widgtName,(go)=> {
+            StartCoroutine(FindTarget(widgtName, (go) =>
+            {
                 maskClickGO = go;
                 RectTransform target = go.transform as RectTransform;
                 Vector2 targetSize = GameUtils.GetSize(target);
@@ -140,7 +136,7 @@ namespace qy
                 if (guideItem.type == config.GuideConfig.GuideType.Click)
                 {
                     EventTriggerListener.GetListener(go).onPointerClick += OnClickTargetHandle;
-                    SetArrow(go.transform as RectTransform,arrow);
+                    SetArrow(go.transform as RectTransform, arrow);
                     arrow.gameObject.SetActive(true);
                     mask.GetComponent<HollowOutMask>().isRaycast = true;
                 }
@@ -148,7 +144,7 @@ namespace qy
 
         }
 
-        private IEnumerator FindTarget(string widgtName,System.Action<GameObject> onFinded)
+        private IEnumerator FindTarget(string widgtName, System.Action<GameObject> onFinded)
         {
             Transform tf = GameMainManager.Instance.uiManager.root.Find(widgtName);
             while (tf == null || !tf.gameObject.activeInHierarchy)
@@ -163,7 +159,7 @@ namespace qy
 
         private void CancelHightLight()
         {
-            if(maskClickGO==null)
+            if (maskClickGO == null)
             {
                 return;
             }
@@ -192,7 +188,7 @@ namespace qy
             //除了特殊情况 从配置表里遍历寻找没有展示过的 当前面板的引导
             List<config.GuideItem> allItems = GameMainManager.Instance.configManager.guideConfig.GetItemWithWindowName(id.ToString());
             List<config.GuideItem> list = new List<config.GuideItem>();//步骤id 每个步骤起始引导的id
-            if (allItems!=null)
+            if (allItems != null)
             {
                 //查找每个步骤的起始id
                 for (int i = 0; i < allItems.Count; i++)
@@ -225,7 +221,7 @@ namespace qy
                 return null;
             }
             //特殊处理
-            if(id == ui.UISettings.UIWindowID.UITaskWindow)
+            if (id == ui.UISettings.UIWindowID.UITaskWindow)
             {
                 config.QuestItem quest = GameMainManager.Instance.playerData.GetQuest();
                 if (quest.type == config.QuestItem.QuestType.Branch && guide.id != "10014")
@@ -238,7 +234,7 @@ namespace qy
             {
                 displayedGuidesStr += "[" + key + "]";
             }
-            Debug.Log("@@@准备进行引导:"+guide.id +" 进行过的引导："+ displayedGuidesStr);
+            Debug.Log("@@@准备进行引导:" + guide.id + " 进行过的引导：" + displayedGuidesStr);
             return guide;
 
         }
@@ -250,12 +246,12 @@ namespace qy
 
         public void OnClickPanel()
         {
-            if (guideItem!=null && guideItem.type== config.GuideConfig.GuideType.Dialog)
+            if (guideItem != null && guideItem.type == config.GuideConfig.GuideType.Dialog)
             {
                 HideDialog();
                 Next();
             }
-            
+
         }
         private void ShowDialog(config.GuideItem item)
         {
@@ -270,19 +266,17 @@ namespace qy
             mask.gameObject.SetActive(false);
         }
 
-        private void SetArrow(RectTransform target,RectTransform arrow)
+        private void SetArrow(RectTransform target, RectTransform arrow)
         {
             Canvas canvas = arrow.root.GetComponent<Canvas>();
             Vector2 pos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, target.position, canvas.worldCamera,out pos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, target.position, canvas.worldCamera, out pos);
 
-            Vector2 point = new Vector2(0.5f,0.5f);
-            
+            Vector2 point = new Vector2(0.5f, 0.5f);
+
             Vector2 targetSize = GameUtils.GetSize(target);
             Vector2 offset = (point - target.pivot);
-            arrow.anchoredPosition = pos +  new Vector2(targetSize.x * offset.x, targetSize.y * offset.y) + new Vector2(arrow.sizeDelta.x,arrow.sizeDelta.y/2);
-
-
+            arrow.anchoredPosition = pos + new Vector2(targetSize.x * offset.x, targetSize.y * offset.y) + new Vector2(arrow.sizeDelta.x, arrow.sizeDelta.y / 2);
         }
     }
 }

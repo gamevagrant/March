@@ -1,8 +1,7 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using DG.Tweening;
+using UnityEngine;
 
 public class Item : MonoBehaviour 
 {
@@ -2360,12 +2359,7 @@ public class Item : MonoBehaviour
     {
         List<Item> items = board.ItemAround(node,range);
 
-        var isgrass = false;
-        if (node.IsGrass())
-        {
-            isgrass = true;
-        }
-
+        var isgrass = node.IsGrass();
 
         foreach (var item in items)
         {
@@ -2407,11 +2401,7 @@ public class Item : MonoBehaviour
     {
         List<Item> items = board.GetListItems();
 
-        var isgrass = false;
-        if (node.IsGrass())
-        {
-            isgrass = true;
-        }
+        bool isgrass = node.IsGrass();
 
         foreach (Item item in items)
         {
@@ -2434,12 +2424,8 @@ public class Item : MonoBehaviour
         {
             return;
         }
-        var isgrass = false;
-        if (node.IsGrass())
-        {
-            isgrass = true;
-        }
 
+        bool isgrass = node.IsGrass();
 
         if (thisItem.type == ITEM_TYPE.COOKIE_RAINBOW)
         {
@@ -2739,12 +2725,6 @@ public class Item : MonoBehaviour
                 thisItem.effect = BREAKER_EFFECT.BIG_PLANE_BREAKER;
                 otherItem.type = ITEM_TYPE.NONE;
 
-                var isgrass = false;
-                if (otherItem.node.IsGrass())
-                {
-                    isgrass = true;
-                }
-
                 if (thisItem.node.TopLeftNeighbor() != null && thisItem.node.TopLeftNeighbor().item != null)
                 {
                     thisItem.node.TopLeftNeighbor().item.Destroy();
@@ -2801,13 +2781,6 @@ public class Item : MonoBehaviour
 
                 otherItem.type = ITEM_TYPE.NONE;
 
-
-                var isgrass = false;
-                if (otherItem.node.IsGrass())
-                {
-                    isgrass = true;
-                }
-
                 if (thisItem.node.TopLeftNeighbor() != null && thisItem.node.TopLeftNeighbor().item != null)
                 {
                     thisItem.node.TopLeftNeighbor().item.Destroy();
@@ -2851,11 +2824,7 @@ public class Item : MonoBehaviour
         //开始时使用了生成飞机增加
         planeNum += board.planePlusNum;
 
-        var isgrass = false;
-        if (node.IsGrass())
-        {
-            isgrass = true;
-        }
+        bool isgrass = node.IsGrass();
 
         var items = board.ItemAround(node, 1);
         foreach (var item in items)
@@ -2947,18 +2916,11 @@ public class Item : MonoBehaviour
                 "easetype", iTween.EaseType.linear,
                 "time", 0.5f
             ));
-
-
-
         }
-
-
-
     }
 
     private void onPlaneComplete(Hashtable param1)
     {
-
         var item = (Item)param1["targetItem"];
 
         var isgrass = (bool)param1["isGrass"];
@@ -2970,7 +2932,7 @@ public class Item : MonoBehaviour
 
         if (planeTargetType != ITEM_TYPE.NONE)
         {
-            ChangeToSpecialType(planeTargetType,isgrass);
+            ChangeToSpecialType(planeTargetType);
         }
         else
         {
@@ -3218,7 +3180,7 @@ public class Item : MonoBehaviour
 
     #region Change
 
-    void ChangeToSpecialType(ITEM_TYPE changeToType,bool isgrass = false)
+    void ChangeToSpecialType(ITEM_TYPE changeToType)
     {
         //                GameObject explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RainbowExplosion()) as GameObject);
         //

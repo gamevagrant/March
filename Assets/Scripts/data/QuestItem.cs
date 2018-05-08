@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
@@ -19,9 +18,7 @@ public class QuestItem
 
     public List<QuestItem> questItems = new List<QuestItem>();
 
-
     private string selectedID;//分支剧情的选择
-    private int survival;//生还率
 
     /// <summary>
     ///type==2 时设置选择的分支
@@ -35,12 +32,11 @@ public class QuestItem
     /// </summary>
     public void SetSurvival(int survival)
     {
-        this.survival = survival;
     }
 
     public Ability GetAbility(string id)
     {
-        if(type == "2")
+        if (type == "2")
         {
             string[] branchs = selectList.Split(',');
             foreach (string branch in branchs)
@@ -67,13 +63,13 @@ public class QuestItem
     {
         get
         {
-            if(type == "2")
+            if (type == "2")
             {
                 string[] branchs = selectList.Split(',');
-                foreach(string branch in branchs)
+                foreach (string branch in branchs)
                 {
                     string[] data = branch.Split(':');
-                    if(data[0] == selectedID && data.Length>2)
+                    if (data[0] == selectedID && data.Length > 2)
                     {
                         return data[2];
                     }
@@ -81,7 +77,7 @@ public class QuestItem
                 }
 
             }
-           
+
             return _gotoId;
         }
         set
@@ -98,15 +94,15 @@ public class Ability
     /// <summary>
     /// 纪律
     /// </summary>
-    public int discipline=0;
+    public int discipline = 0;
     /// <summary>
     /// 忠诚
     /// </summary>
-    public int loyalty=0;
+    public int loyalty = 0;
     /// <summary>
     /// 智慧
     /// </summary>
-    public int wisdom=0;
+    public int wisdom = 0;
 
 
     public static Ability operator +(Ability lhs, Ability rhs)
@@ -177,7 +173,7 @@ public class quest : DatabaseConfig
             if (tempBean.id == id)
             {
                 string list = tempBean.selectList;
-                Debug.Log("selectList before split:" +list);
+                Debug.Log("selectList before split:" + list);
                 string[] v = list.Split(',');
                 foreach (string va in v)
                 {

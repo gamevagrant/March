@@ -35,7 +35,6 @@ namespace PathFinding
 
         private const int NodeClearCount = 3;
         private const string WallTag = "Wall";
-        private static readonly float SquareTwo = Mathf.Sqrt(2);
 
         public Node(float x, float y, Vector2 position, Grid grid)
         {
