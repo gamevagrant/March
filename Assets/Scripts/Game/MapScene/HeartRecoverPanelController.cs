@@ -25,7 +25,7 @@ public class HeartRecoverPanelController : MonoBehaviour
         allLifeText = transform.Find("all_life_text").GetComponent<Text>();
 
         buyButton = transform.Find("buyPanel").gameObject;
-        buyText = buyButton.transform.Find("iconNum_Text").GetComponent<Text>();
+        buyText = buyButton.transform.Find("Button/iconNum_Text").GetComponent<Text>();
 
         popup = GetComponent<Popup>();
     }
