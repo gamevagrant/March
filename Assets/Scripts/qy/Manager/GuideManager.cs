@@ -87,14 +87,12 @@ namespace qy
         private void OnGuideItemEnd(config.GuideItem item)
         {
             //特殊处理 结束引导时的处理
-            if(item.id == "10001")
-            {
-                GameMainManager.Instance.uiManager.OpenWindow(ui.UISettings.UIWindowID.UINickNameWindow);
-            }
+
         }
 
         private void Show(config.GuideItem item)
         {
+            Debug.Log("@@@:开始执行引导："+item.id);
             guideItem = item;
             mask.gameObject.SetActive(true);
             if (!string.IsNullOrEmpty(guideItem.highlight))
@@ -102,18 +100,16 @@ namespace qy
                 ShowHightLight(guideItem.highlight);
             }
 
-            if (item.type != config.GuideConfig.GuideType.Click)
+            if (!string.IsNullOrEmpty(guideItem.dialogue))
             {
-                if (!string.IsNullOrEmpty(guideItem.dialogue))
-                {
-                    ShowDialog(guideItem);
-                }
+                ShowDialog(guideItem);
             }
         }
 
         private void Next()
         {
             CancelHightLight();
+            HideDialog();
             if (guideItem == null)
             {
                 return;
@@ -237,8 +233,12 @@ namespace qy
                     return null;
                 }
             }
-            
-
+            string displayedGuidesStr = "";
+            foreach (string key in displayedGuides.Keys)
+            {
+                displayedGuidesStr += "[" + key + "]";
+            }
+            Debug.Log("@@@准备进行引导:"+guide.id +" 进行过的引导："+ displayedGuidesStr);
             return guide;
 
         }

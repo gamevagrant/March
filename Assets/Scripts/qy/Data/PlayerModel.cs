@@ -258,7 +258,29 @@ namespace qy
             return PlayerModelErr.NULL;
         }
 
-       
+        public PlayerModelErr QuestComplateCondition()
+        {
+            config.QuestItem questItem = playerData.GetQuest();
+            if (!playerData.complatedQuests.ContainsKey(questItem.id))
+            {
+                if (playerData.starNum < questItem.requireStar)
+                {
+                    return PlayerModelErr.NOT_ENOUGH_STAR;
+                }
+                List<PropItem> needProps = questItem.requireItem;
+                foreach (PropItem item in needProps)
+                {
+                    PropItem haveItem = playerData.GetPropItem(item.id);
+                    int haveCount = haveItem == null ? 0 : haveItem.count;
+                    if (haveCount < item.count)
+                    {
+                        return PlayerModelErr.NOT_ENOUGH_PROP;
+                    }
+                }
+            }
+            return PlayerModelErr.NULL;
+        }
+
 
         public PlayerModelErr StartLevel()
         {

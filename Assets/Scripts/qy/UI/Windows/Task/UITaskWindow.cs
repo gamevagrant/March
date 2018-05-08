@@ -179,31 +179,47 @@ public class UITaskWindow :  UIWindowBase{
                 //UpdatePanel();
             }
             
-        }else if(err == PlayerModelErr.NOT_ENOUGH_PROP)
+        }else
+        {
+            OnErrHandle(err);
+        }
+        
+    }
+
+    private void OnErrHandle(PlayerModelErr err)
+    {
+        if (err == PlayerModelErr.NOT_ENOUGH_PROP)
         {
             //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
-            Alert.Show(LanguageManager.instance.GetValueByKey("200010"),Alert.OK,(btn)=>{
+            Alert.Show(LanguageManager.instance.GetValueByKey("200010"), Alert.OK, (btn) => {
                 Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
                 OnClickClose();
             });
-            
+
         }
-        else if(err == PlayerModelErr.NOT_ENOUGH_STAR)
+        else if (err == PlayerModelErr.NOT_ENOUGH_STAR)
         {
             Alert.Show(LanguageManager.instance.GetValueByKey("200011"), Alert.OK, (btn) => {
                 Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
                 OnClickClose();
             });
-           
+
         }
-        
     }
 
     public void OnClickDoBtnHandle()
     {
         if (questItem.type == qy.config.QuestItem.QuestType.Branch)
         {
-            SetSelectTask();
+            PlayerModelErr err = GameMainManager.Instance.playerModel.QuestComplateCondition();
+            if(err == PlayerModelErr.NULL)
+            {
+                SetSelectTask();
+            }else
+            {
+                OnErrHandle(err);
+            }
+            
         }else
         {
             DoTask();
