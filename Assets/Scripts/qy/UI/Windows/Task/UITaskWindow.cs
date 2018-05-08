@@ -188,23 +188,29 @@ public class UITaskWindow :  UIWindowBase{
 
     private void OnErrHandle(PlayerModelErr err)
     {
+        OnClickClose();
         if (err == PlayerModelErr.NOT_ENOUGH_PROP)
         {
             //MessageBox.Instance.Show(LanguageManager.instance.GetValueByKey("200010"));
+            Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
+            /*
             Alert.Show(LanguageManager.instance.GetValueByKey("200010"), Alert.OK, (btn) => {
                 Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
                 OnClickClose();
             });
-
+            */
         }
         else if (err == PlayerModelErr.NOT_ENOUGH_STAR)
         {
+            Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
+            /*
             Alert.Show(LanguageManager.instance.GetValueByKey("200011"), Alert.OK, (btn) => {
                 Messenger.Broadcast(ELocalMsgID.OpenLevelBeginPanel);
                 OnClickClose();
             });
-
+            */
         }
+       
     }
 
     public void OnClickDoBtnHandle()
