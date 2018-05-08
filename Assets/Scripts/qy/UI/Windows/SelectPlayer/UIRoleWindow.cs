@@ -8,7 +8,8 @@ using qy;
 
 public class UIRoleWindow : UIWindowBase {
 
-    public AutoScrollView scrollView;
+    //public AutoScrollView scrollView;
+    public GameObjectPool pool;
     public Image head;
     public Slider discipline;
     public Slider wisdomSlider;
@@ -36,22 +37,26 @@ public class UIRoleWindow : UIWindowBase {
 
     private void Awake()
     {
-        scrollView.onSelected += OnSelected;
+        //scrollView.onSelected += OnSelected;
 
         Messenger.AddListener(ELocalMsgID.RefreshBaseData, UpdateUI);
     }
 
     private void OnDestroy()
     {
-        scrollView.onSelected -= OnSelected;
+        //scrollView.onSelected -= OnSelected;
         Messenger.RemoveListener(ELocalMsgID.RefreshBaseData, UpdateUI);
     }
 
-    private void OnSelected(BaseItemView item)
+    public void OnSelected(BaseItemView item,bool isOn)
     {
-        UIRoleWindowHead roleItem = item as UIRoleWindowHead;
-        SetPanel(roleItem.data);
-        selectedRoleID = roleItem.data.id;
+        if(isOn)
+        {
+            UIRoleWindowHead roleItem = item as UIRoleWindowHead;
+            SetPanel(roleItem.data);
+            selectedRoleID = roleItem.data.id;
+        }
+       
     }
     
 
@@ -62,7 +67,25 @@ public class UIRoleWindow : UIWindowBase {
     private void UpdateUI()
     {
         List<RoleItem> roles = GameMainManager.Instance.configManager.roleConfig.GetRoleList();
-        scrollView.SetData(roles);
+        pool.resetAllTarget();
+        for(int i=0;i<roles.Count;i++ )
+        {
+            RoleItem item = roles[i];
+            UIRoleWindowHead headItem = pool.getIdleTarget<UIRoleWindowHead>();
+            headItem.SetData(item);
+            Toggle toggle = headItem.toggle;
+            toggle.onValueChanged.RemoveAllListeners();
+            toggle.onValueChanged.AddListener((isOn) =>
+            {
+                OnSelected(headItem,isOn);
+            });
+            if (i == 0)
+            {
+                toggle.isOn = true;
+            }
+            
+        }
+        //scrollView.SetData(roles);
     }
     private void SetPanel(RoleItem item)
     {
@@ -122,7 +145,7 @@ public class UIRoleWindow : UIWindowBase {
             RoleItem role = roles[i];
             if (role.id == selectRole.id)
             {
-                scrollView.SetSelected(i);
+                //scrollView.SetSelected(i);
                 break;
             }
         }
