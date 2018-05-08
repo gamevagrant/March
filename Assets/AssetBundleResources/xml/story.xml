@@ -21,8 +21,8 @@
     <ItemSpec id="1000111" questId="10002" bgFile="1bg" personFile="person2" dialogue="100120" next="1000112"/>
     <ItemSpec id="1000112" questId="10002" bgFile="1bg" personFile="person3" dialogue="100121" next="1000113"/>
     <ItemSpec id="1000113" questId="10002" bgFile="1bg" personFile="person1" dialogue="100122" next="0"/>
-    <ItemSpec id="1000114" questId="10003" bgFile="1000113bg" personFile="person1" dialogue="100123" next="100015"/>
-    <ItemSpec id="1000115" questId="10003" bgFile="1000113bg" personFile="person2" dialogue="100124" next="100016"/>
+    <ItemSpec id="1000114" questId="10003" bgFile="1000105bg" personFile="person1" dialogue="100123" next="100015"/>
+    <ItemSpec id="1000115" questId="10003" bgFile="1000105bg" personFile="person2" dialogue="100124" next="100016"/>
     <ItemSpec id="1000116" questId="10004" bgFile="1000113bg" personFile="person3" dialogue="100125" next="1000117"/>
     <ItemSpec id="1000117" questId="10004" bgFile="1000113bg" personFile="person1" dialogue="100126" next="0"/>
     <ItemSpec id="1000118" questId="10005" bgFile="3bg" personFile="person2" dialogue="100127" next="1000119"/>
