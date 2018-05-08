@@ -1399,11 +1399,15 @@ public class Configure : MonoSingleton<Configure>
 
     public static string LevelBundlePath = "play/level";
     public static string ConfigurePath = "core/config";
+    public static string FilmBackgroundPath = "film/bg";
+
     public static string SceneBackgroundPath = "scene/background";
     public static string SceneBuildingPath = "scene/building";
     public static string SceneNPCPath = "scene/npc";
     public static string ScenePlayerPath = "scene/player";
-    public static string FilmBackgroundPath = "film/bg";
+
+    public static string StoryBackground = "story/bg";
+    public static string StoryPerson = "story/person";
 
     protected override void Init()
     {

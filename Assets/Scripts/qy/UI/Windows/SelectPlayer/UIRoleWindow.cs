@@ -89,13 +89,20 @@ public class UIRoleWindow : UIWindowBase {
     }
     private void SetPanel(RoleItem item)
     {
-        string headUrl = FilePathTools.GetPersonHeadPath(item.headIcon);
-        AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
-        {
-            head.sprite = sp;
-            head.type = Image.Type.Simple;
-            GameUtils.Scaling(head.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
-        });
+        var sp =
+            March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryPerson,
+                item.headIcon);
+        head.sprite = sp;
+        head.type = Image.Type.Simple;
+        GameUtils.Scaling(head.transform as RectTransform, new Vector2(sp.texture.width, sp.texture.height));
+
+        //string headUrl = FilePathTools.GetPersonHeadPath(item.headIcon);
+        //AssetsManager.Instance.LoadAssetAsync<Sprite>(headUrl, (sp) =>
+        //{
+        //    head.sprite = sp;
+        //    head.type = Image.Type.Simple;
+        //    GameUtils.Scaling(head.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
+        //});
 
         loyaltySlider.value = item.ability.loyalty/100f;
         wisdomSlider.value = item.ability.wisdom / 100f;
