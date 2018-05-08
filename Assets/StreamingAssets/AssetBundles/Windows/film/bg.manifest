@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 3705699857
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 907e53a3fcd66ba28a625b4277f6f80a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 460b4f5d62b6facbccf7c01637df8f00
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleResources/Background/1000125bg.png
+- Assets/AssetBundleResources/Background/1000126bg.png
+- Assets/AssetBundleResources/Background/1000202bg.jpg
+- Assets/AssetBundleResources/Background/1000101bg.png
+- Assets/AssetBundleResources/Background/1000127bg.png
+Dependencies: []
