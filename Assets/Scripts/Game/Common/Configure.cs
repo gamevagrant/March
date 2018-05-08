@@ -1392,6 +1392,7 @@ public class Configure : MonoSingleton<Configure>
     #endregion
 
     public static string ServerPath = "Config/ServerConfig";
+    public static string AssetBundleServerPath = "Config/AssetBundleServerConfig";
 
     public static string DebugCanvasPath = "Debug/Debug";
     public static string DebugLevelChoosePanelPath = "Debug/LevelChoosePanel";
@@ -1418,7 +1419,9 @@ public class Configure : MonoSingleton<Configure>
 
         var config = JsonUtility.FromJson<ServerConfig>(Resources.Load<TextAsset>(ServerPath).text);
         ServerUrl = config.Current.Url;
-        AssetBundleServerUrl = config.AssetBundleServer.Url;
+
+        var abConfig = JsonUtility.FromJson<ServerConfig>(Resources.Load<TextAsset>(AssetBundleServerPath).text);
+        AssetBundleServerUrl = abConfig.Current.Url;
     }
 
     void OnApplicationQuit()

@@ -1,0 +1,13 @@
+{
+  "CurrentIndex": 1,
+  "AvailableList": [
+    {
+      "Name": "Test",
+      "Url": "http://10.1.38.195:8000"
+    },
+    {
+      "Name": "Native",
+      "Url": "http://123.206.90.153/march/asset"
+    }
+  ]
+}

@@ -13,10 +13,5 @@
       "Name": "Test",
       "Url": "http://10.1.9.247:9933"
     }
-  ],
-  "AssetBundleServer":
-  {
-    "Name": "ABServer",
-    "Url": "http://10.1.38.195:8000"
-  }
+  ]
 }
