@@ -53,6 +53,11 @@ namespace qy
         /// <returns></returns>
         PlayerModelErr QuestComplate(out string storyID,string selectedID="");
         /// <summary>
+        /// 判断是否满足完成任务的条件
+        /// </summary>
+        /// <returns></returns>
+        PlayerModelErr QuestComplateCondition();
+        /// <summary>
         /// 使用道具
         /// </summary>
         /// <param name="itemID"></param>

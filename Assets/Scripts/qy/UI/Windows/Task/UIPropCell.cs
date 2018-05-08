@@ -27,7 +27,15 @@ public class UIPropCell : MonoBehaviour {
         }else
         {
             complateImg.SetActive(false);
-            text.text = haveCount.ToString() + "/" + prop.count.ToString();
+            string str = "";
+            if(haveCount<prop.count)
+            {
+                str = string.Format("<color=red>{0}</color>/{1}", haveCount, prop.count);
+            }else
+            {
+                str = haveCount.ToString() + "/" + prop.count.ToString();
+            }
+            text.text = str;
         }
        
     }
