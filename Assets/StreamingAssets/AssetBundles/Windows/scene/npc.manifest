@@ -1,0 +1,46 @@
+ManifestFileVersion: 0
+CRC: 2194562962
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 27618b9ca4c363793ccc6029cd2101d2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8717f6a4489a1c5433da488c7c91a852
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: e7d301b7312020d44b6939c62c30f038, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 978850ddbd92fb74585ac73d6abd0c16, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleResources/Scene/NPC/1.prefab
+- Assets/AssetBundleResources/Scene/NPC/2.prefab
+- Assets/AssetBundleResources/Scene/NPC/3.prefab
+Dependencies: []

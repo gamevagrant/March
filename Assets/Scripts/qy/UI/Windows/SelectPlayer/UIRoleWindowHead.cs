@@ -8,11 +8,16 @@ using DG.Tweening;
 public class UIRoleWindowHead : BaseItemView {
 
     public Image head;
-    public Image mask;
+    public Toggle toggle
+    {
+        get
+        {
+            return GetComponent<Toggle>();
+        }
+    }
     public GameObject stateGO;
     public Text stateText;
     public RoleItem data;
-    public Sprite[] BGsprites;
     public override void SetData(object data)
     {
         this.data = data as RoleItem;
@@ -41,12 +46,6 @@ public class UIRoleWindowHead : BaseItemView {
         }
     }
 
-    public override void OnSelected(bool isSelected)
-    {
-        mask.gameObject.SetActive(!isSelected);
-        gameObject.GetComponent<Image>().sprite = isSelected?BGsprites[1]: BGsprites[0];
-        transform.localScale = isSelected?new Vector3(1.3f,1.3f,1.3f):Vector3.one;
-    }
 
     
 }

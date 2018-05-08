@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 3858059555
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: db1661c835ed949406e31da6f5c1336f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleResources/xml/quest.xml
+- Assets/AssetBundleResources/xml/guide.xml
+- Assets/AssetBundleResources/xml/setting.xml
+- Assets/AssetBundleResources/xml/level.xml
+- Assets/AssetBundleResources/xml/matchlevel.xml
+- Assets/AssetBundleResources/xml/role.xml
+- Assets/AssetBundleResources/xml/guidesetup.xml
+- Assets/AssetBundleResources/xml/language_en.xml
+- Assets/AssetBundleResources/xml/storyhead.xml
+- Assets/AssetBundleResources/xml/item.xml
+- Assets/AssetBundleResources/xml/story.xml
+- Assets/AssetBundleResources/xml/exchange.xml
+- Assets/AssetBundleResources/xml/language_cn.xml
+Dependencies: []
