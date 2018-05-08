@@ -4,7 +4,7 @@ now=$(date +"%T")
 echo "Build Start: $now"
 
 # Build parameters.
-export ProductName=March
+export ProductName=追击粉碎
 export CompanyName=elex
 export ApplicationId=com.elex.march
 
