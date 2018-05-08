@@ -5,78 +5,76 @@ using UnityEngine.UI;
 
 public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
 {
+    public RectTransform target;
     public bool isRaycast = true;
-    [SerializeField]
-    private RectTransform _target;
-    private Vector3 _targetMin = Vector3.zero;
-    private Vector3 _targetMax = Vector3.zero;
-    private bool _canRefresh = true;
-    private Transform _cacheTrans = null; 
-    /// 
-                                                                                                                                                                                                                 /// 设置镂空的目标 /// 
-    public void SetTarget(RectTransform target)
+
+    private Vector2 targetMin;
+    private Vector2 targetMax;
+    public void Update()
     {
-        _canRefresh = true;
-        _target = target;
-        _RefreshView();
+        RefreshView();
     }
-    private void _SetTarget(Vector3 tarMin, Vector3 tarMax)
+    private void RefreshView()
     {
-        if (tarMin == _targetMin && tarMax == _targetMax)
-            return;
-        _targetMin = tarMin;
-        _targetMax = tarMax;
-        SetAllDirty();
-    }
-    private void _RefreshView()
-    {
-        if (!_canRefresh)
-            return;
-        _canRefresh = false;
-        if (null == _target || !_target.gameObject.activeSelf)
+        Vector2 newMin;
+        Vector2 newMax;
+        if (target != null && target.gameObject.activeSelf)
         {
-            _SetTarget(Vector3.zero, Vector3.zero);
-            SetAllDirty();
+            GetTargetMinMax(out newMin, out newMax, target);
         }
         else
         {
-            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(_cacheTrans, _target);
-            _SetTarget(bounds.min, bounds.max);
+            newMin = Vector2.zero;
+            newMax = Vector2.zero;
+        }
+        if (targetMin != newMin || targetMax != newMax)
+        {
+            targetMin = newMin;
+            targetMax = newMax;
+            SetAllDirty();
         }
     }
+
+    private void GetTargetMinMax(out Vector2 min, out Vector2 max, RectTransform targetTF)
+    {
+        //min = targetTF.offsetMin;
+        //max = targetTF.offsetMax;
+        Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(transform, targetTF);
+        min = bounds.min;
+        max = bounds.max;
+    }
+
+    bool ICanvasRaycastFilter.IsRaycastLocationValid(Vector2 screenPos, Camera eventCamera)
+    {
+
+        if (null == target) return true; // 将目标对象范围内的事件镂空（使其穿过） 
+        if (!isRaycast) return true;
+        return !RectTransformUtility.RectangleContainsScreenPoint(target, screenPos, eventCamera);
+    }
+
     protected override void OnPopulateMesh(VertexHelper vh)
     {
-        if (_targetMin == Vector3.zero && _targetMax == Vector3.zero)
-        {
-            base.OnPopulateMesh(vh);
-            return;
-        }
-        vh.Clear(); // 填充顶点 
-        UIVertex vert = UIVertex.simpleVert;
-        
-        vert.color = color;
+        Debug.Log("--");
+
         Vector2 selfPiovt = rectTransform.pivot;
         Rect selfRect = rectTransform.rect;
-        float outerLx = -selfPiovt.x * selfRect.width;
-        float outerBy = -selfPiovt.y * selfRect.height;
-        float outerRx = (1 - selfPiovt.x) * selfRect.width;
-        float outerTy = (1 - selfPiovt.y) * selfRect.height; // 0 - Outer:LT 
-        vert.position = new Vector3(outerLx, outerTy);
-        vh.AddVert(vert); // 1 - Outer:RT 
-        vert.position = new Vector3(outerRx, outerTy);
-        vh.AddVert(vert); // 2 - Outer:RB 
-        vert.position = new Vector3(outerRx, outerBy);
-        vh.AddVert(vert); // 3 - Outer:LB 
-        vert.position = new Vector3(outerLx, outerBy);
-        vh.AddVert(vert); // 4 - Inner:LT 
-        vert.position = new Vector3(_targetMin.x, _targetMax.y);
-        vh.AddVert(vert); // 5 - Inner:RT 
-        vert.position = new Vector3(_targetMax.x, _targetMax.y);
-        vh.AddVert(vert); // 6 - Inner:RB 
-        vert.position = new Vector3(_targetMax.x, _targetMin.y);
-        vh.AddVert(vert); // 7 - Inner:LB 
-        vert.position = new Vector3(_targetMin.x, _targetMin.y);
-        vh.AddVert(vert); // 设定三角形 
+
+        Vector2 outMin = new Vector2(-selfPiovt.x * selfRect.width, -selfPiovt.y * selfRect.height);
+        Vector2 outMax = new Vector2((1 - selfPiovt.x) * selfRect.width, (1 - selfPiovt.y) * selfRect.height);
+        Vector2 inMin = targetMin;
+        Vector2 inMax = targetMax;
+        vh.Clear();
+        //添加四个顶点  
+        vh.AddVert(new Vector3(outMax.x, outMax.y), color, Vector2.zero);
+        vh.AddVert(new Vector3(outMax.x, outMin.y), color, Vector2.zero);
+        vh.AddVert(new Vector3(outMin.x, outMin.y), color, Vector2.zero);
+        vh.AddVert(new Vector3(outMin.x, outMax.y), color, Vector2.zero);
+
+        vh.AddVert(new Vector3(inMax.x, inMax.y), color, Vector2.zero);
+        vh.AddVert(new Vector3(inMax.x, inMin.y), color, Vector2.zero);
+        vh.AddVert(new Vector3(inMin.x, inMin.y), color, Vector2.zero);
+        vh.AddVert(new Vector3(inMin.x, inMax.y), color, Vector2.zero);
+        //添加两个三角形  
         vh.AddTriangle(4, 0, 1);
         vh.AddTriangle(4, 1, 5);
         vh.AddTriangle(5, 1, 2);
@@ -85,24 +83,6 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         vh.AddTriangle(6, 3, 7);
         vh.AddTriangle(7, 3, 0);
         vh.AddTriangle(7, 0, 4);
-    }
-    bool ICanvasRaycastFilter.IsRaycastLocationValid(Vector2 screenPos, Camera eventCamera)
-    {
 
-        if (null == _target) return true; // 将目标对象范围内的事件镂空（使其穿过） 
-        if (!isRaycast) return true;
-        return !RectTransformUtility.RectangleContainsScreenPoint(_target, screenPos, eventCamera);
     }
-    protected override void Awake()
-    {
-        base.Awake();
-        _cacheTrans = transform;
-    }
-#if UNITY_EDITOR
-    void Update()
-    {
-        _canRefresh = true;
-        _RefreshView();
-    }
-#endif 
 }

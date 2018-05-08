@@ -359,8 +359,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  target: {fileID: 224967931138481960}
   isRaycast: 1
-  _target: {fileID: 224967931138481960}
 --- !u!114 &114847464438156950
 MonoBehaviour:
   m_ObjectHideFlags: 1
