@@ -5,6 +5,8 @@ public class UISettings : MonoBehaviour
 {
     private Board board;
 
+    private GameObject settingPopup;
+
     private void Start()
     {
         board = GameObject.Find("Board").GetComponent<Board>();
@@ -16,7 +18,14 @@ public class UISettings : MonoBehaviour
         {
             AudioManager.instance.ButtonClickAudio();
 
-            WindowManager.instance.Show<SettingPopupWindow>();
+            if (settingPopup == null)
+            {
+                settingPopup = WindowManager.instance.Show<SettingPopupWindow>().gameObject;
+            }
+            else
+            {
+                settingPopup.SetActive(true);
+            }
 
             board.state = GAME_STATE.OPENING_POPUP;
         }
