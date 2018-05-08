@@ -307,6 +307,7 @@ namespace qy.config
     /// </summary>
     public class Ability:Cloneable<Ability>
     {
+        private const int MAX = 100;
         /// <summary>
         /// 纪律
         /// </summary>
@@ -342,11 +343,25 @@ namespace qy.config
         {
             Ability abilityNew = new Ability()
             {
-                discipline = lhs.discipline + rhs.discipline,
-                loyalty = lhs.loyalty + rhs.loyalty,
-                wisdom = lhs.wisdom + rhs.wisdom,
+                discipline = Add(lhs.discipline , rhs.discipline),
+                loyalty = Add(lhs.loyalty , rhs.loyalty),
+                wisdom = Add(lhs.wisdom , rhs.wisdom),
             };
             return abilityNew;
+        }
+
+        private static int Add(int lhs,int rhs)
+        {
+            int baseValue = 0;
+            if(rhs>0)
+            {
+                baseValue = (MAX - lhs);
+            }else if(rhs<0)
+            {
+                baseValue = lhs;
+            }
+             
+            return Mathf.Max(0, Mathf.Min(MAX,(int)(lhs + baseValue * (rhs/(float)MAX))));
         }
 
         public override string ToString()
