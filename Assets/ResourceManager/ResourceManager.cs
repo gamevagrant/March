@@ -18,7 +18,7 @@ namespace March.Core.ResourceManager
                 var loaded = AssetBundleManager.GetLoadedAssetBundle(bundle, out error);
                 if (!string.IsNullOrEmpty(error))
                 {
-                    Debug.LogError(error);
+                    Debug.LogError(error + " in bundle: " + bundle);
                     return null;
                 }
                 return loaded.m_AssetBundle.LoadAsset<T>(asset);
@@ -33,6 +33,11 @@ namespace March.Core.ResourceManager
             {
                 string error;
                 var loaded = AssetBundleManager.GetLoadedAssetBundle(bundle, out error);
+                if (!string.IsNullOrEmpty(error))
+                {
+                    Debug.LogError(error + " in bundle: " + bundle);
+                    return null;
+                }
                 return loaded.m_AssetBundle.LoadAllAssets<T>().ToList();
             }
 
