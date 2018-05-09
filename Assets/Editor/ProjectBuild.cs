@@ -140,7 +140,7 @@ public class ProjectBuild
             return;
         }
 
-        Debug.LogWarning("Server Index: " + serverIndex + ", config path: " + configPath);
+        Debug.LogWarning("Server Index: " + serverIndex + ", config path: " + new FileInfo(configPath).FullName));
 
         var str = File.ReadAllText(configPath);
         var serverConfig = JsonUtility.FromJson<ServerConfig>(str);
