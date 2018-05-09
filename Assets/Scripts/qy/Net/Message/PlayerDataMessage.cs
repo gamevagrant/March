@@ -21,7 +21,7 @@ public class PlayerDataMessage : NetMessage
 
     public RoleData[] roles;
     public StoryData[] stories;
-    public string roleUuId="";//当前角色uuid
+    public string roleId;
     public int discipline;
     public int loyalty;
     public int wisdom;
@@ -66,7 +66,6 @@ public class PlayerDataMessage : NetMessage
     public class RoleData
     {
         public string roleId;
-        public string uuid;
         /// <summary>
         ///  1死亡 ，2通关    
         /// </summary>
@@ -92,7 +91,7 @@ public class PlayerDataServerMessage : NetMessage
 
     public List<PlayerDataMessage.RoleData> roles;
     public List<PlayerDataMessage.StoryData> stories;
-    public string roleUuId = "";//当前角色uuid
+    public string roleId = "";//当前角色id
     public int discipline;
     public int loyaty;
     public int wisdom;
@@ -110,6 +109,7 @@ public class PlayerDataServerMessage : NetMessage
         name = playerData.nickName;
         uid = playerData.userId;
         level = playerData.eliminateLevel;
+        roleId = playerData.role!=null? playerData.role.id:"";
         items = new List<PlayerDataMessage.PropItem>();
         foreach (qy.config.PropItem item in playerData.propsDic.Values)
         {

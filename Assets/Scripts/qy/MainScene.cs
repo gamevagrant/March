@@ -50,7 +50,7 @@ namespace qy
         {
             config.QuestItem quest = GameMainManager.Instance.playerData.GetQuest();
             PlayerData.RoleState state = GameMainManager.Instance.playerData.roleState;
-            if (quest == null || (quest!=null &&  state == PlayerData.RoleState.Pass))
+            if (GameMainManager.Instance.playerData.role==null || quest == null || (quest!=null &&  state == PlayerData.RoleState.Pass))
             {
                 GameMainManager.Instance.uiManager.OpenWindow(ui.UISettings.UIWindowID.UIRoleWindow);
             }else
