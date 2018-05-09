@@ -63,7 +63,7 @@ namespace qy
 
         private void OnOpenUIHandle(ui.UISettings.UIWindowID uiID)
         {
-            if(GameMainManager.Instance.playerData.GetRoleState(GameMainManager.Instance.playerData.role.id)!= PlayerData.RoleState.Normal)
+            if(GameMainManager.Instance.playerData.role!=null && GameMainManager.Instance.playerData.GetRoleState(GameMainManager.Instance.playerData.role.id)!= PlayerData.RoleState.Normal)
             {
                 return;
             }
