@@ -137,7 +137,7 @@ public class UILosePopup : MonoBehaviour
         }
         else
         {
-            WindowManager.instance.Show<ShopPopupPlayWindow>();
+            //WindowManager.instance.Show<ShopPopupPlayWindow>();
         }
     }
 

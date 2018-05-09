@@ -360,20 +360,11 @@ namespace qy
                 }
             }
 
-            if(!string.IsNullOrEmpty(message.roleUuId))
+            if(!string.IsNullOrEmpty(message.roleId))
             {
-                string roleID = "101";
-                foreach(PlayerDataMessage.RoleData role in message.roles)
-                {
-                    if(role.uuid == message.roleUuId)
-                    {
-                        roleID = role.roleId;
-                    }
-                }
-                Debug.Log("============"+roleID.ToString());
-                Debug.Log("----------"+GameMainManager.Instance.configManager.roleConfig.ToString());
-                role = GameMainManager.Instance.configManager.roleConfig.GetItem(roleID).Clone();
+                role = GameMainManager.Instance.configManager.roleConfig.GetItem(message.roleId).Clone();
             }
+            
             questId = message.storyid;//任务id存到角色数据中有了角色再保存数据
             if (!string.IsNullOrEmpty(nextQuestId))
             {
