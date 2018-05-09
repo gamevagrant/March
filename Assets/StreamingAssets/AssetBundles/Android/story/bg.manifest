@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 510986367
+CRC: 1912149813
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d4253d737668e60f71f0fbf30dababb1
+    Hash: 54e0f01e5a66dc1e12d0ac4d9e69f598
   TypeTreeHash:
     serializedVersion: 2
     Hash: 460b4f5d62b6facbccf7c01637df8f00
@@ -17,14 +17,12 @@ Assets:
 - Assets/AssetBundleResources/Story/1000239bg.jpg
 - Assets/AssetBundleResources/Story/1000112bg.png
 - Assets/AssetBundleResources/Story/1000235bg.jpg
-- Assets/AssetBundleResources/Story/1000103bg.png
 - Assets/AssetBundleResources/Story/1000110bg.png
 - Assets/AssetBundleResources/Story/1000121bg.png
 - Assets/AssetBundleResources/Story/1000241bg.jpg
 - Assets/AssetBundleResources/Story/1000203bg.png
 - Assets/AssetBundleResources/Story/1000126bg.png
 - Assets/AssetBundleResources/Story/1000212bg.png
-- Assets/AssetBundleResources/Story/1000109bg.png
 - Assets/AssetBundleResources/Story/1000232bg.jpg
 - Assets/AssetBundleResources/Story/1000113bg.png
 - Assets/AssetBundleResources/Story/1000211bg.png
@@ -35,7 +33,6 @@ Assets:
 - Assets/AssetBundleResources/Story/1000129bg.png
 - Assets/AssetBundleResources/Story/1000120bg.png
 - Assets/AssetBundleResources/Story/1000230bg.jpg
-- Assets/AssetBundleResources/Story/1000115bg.png
 - Assets/AssetBundleResources/Story/1000227bg.jpg
 - Assets/AssetBundleResources/Story/1000229bg.jpg
 - Assets/AssetBundleResources/Story/1000201bg.png
@@ -53,12 +50,10 @@ Assets:
 - Assets/AssetBundleResources/Story/1000202bg.jpg
 - Assets/AssetBundleResources/Story/1000218bg.jpg
 - Assets/AssetBundleResources/Story/1000124bg.png
-- Assets/AssetBundleResources/Story/1000102bg.png
 - Assets/AssetBundleResources/Story/1000228bg.jpg
 - Assets/AssetBundleResources/Story/1000118bg.png
 - Assets/AssetBundleResources/Story/1000205bg.png
 - Assets/AssetBundleResources/Story/1000111bg.png
-- Assets/AssetBundleResources/Story/1000202bg.png
 - Assets/AssetBundleResources/Story/1000127bg.jpg
 - Assets/AssetBundleResources/Story/1000234bg.jpg
 - Assets/AssetBundleResources/Story/1000210bg.png
@@ -70,7 +65,6 @@ Assets:
 - Assets/AssetBundleResources/Story/1000231bg.jpg
 - Assets/AssetBundleResources/Story/1000123bg.png
 - Assets/AssetBundleResources/Story/1000237bg.jpg
-- Assets/AssetBundleResources/Story/1000101bg.png
 - Assets/AssetBundleResources/Story/1000213bg.png
 - Assets/AssetBundleResources/Story/1000215bg.png
 - Assets/AssetBundleResources/Story/1000117bg.png
