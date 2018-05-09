@@ -232,6 +232,7 @@ namespace qy
             config.QuestItem nextQuest = playerData.GetQuest();
             if (nextQuest.type == config.QuestItem.QuestType.Ending)
             {
+                GameMainManager.Instance.netManager.ComplateQuestId(nextQuest.id, new config.Ability(), (ret, res) =>{});
                 GameMainManager.Instance.netManager.EndingRole(nextQuest.endingType, (ret, res) => { });
                 switch (nextQuest.endingType)
                 {

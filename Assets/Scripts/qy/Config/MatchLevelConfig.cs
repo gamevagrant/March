@@ -27,24 +27,23 @@ namespace qy.config
 
         private List<PropItem> ReadrequireItem(string value)
         {
-            if (string.IsNullOrEmpty(value) || value == "0")
-            {
-                return null;
-            }
             List<PropItem> list = new List<PropItem>();
-            string[] items = value.Split(',');
-            foreach (string str in items)
+            if(!string.IsNullOrEmpty(value) && value != "0")
             {
-                string[] data = str.Split(':');
-                string id = data[0];
-                int count = int.Parse(data[1]);
-                int rate = data.Length > 2 ? int.Parse(data[2])  : 0;
-                PropItem prop = ConfigManager.Instance.propsConfig.GetItem(id);
-                if (prop!=null)
+                string[] items = value.Split(',');
+                foreach (string str in items)
                 {
-                    prop.count = count;
-                    prop.rate = rate;
-                    list.Add(prop);
+                    string[] data = str.Split(':');
+                    string id = data[0];
+                    int count = int.Parse(data[1]);
+                    int rate = data.Length > 2 ? int.Parse(data[2]) : 0;
+                    PropItem prop = ConfigManager.Instance.propsConfig.GetItem(id);
+                    if (prop != null)
+                    {
+                        prop.count = count;
+                        prop.rate = rate;
+                        list.Add(prop);
+                    }
                 }
             }
 

@@ -140,6 +140,8 @@ namespace qy
         /// </summary>
         public int awardState = 1;
         public bool isPlayScene = false;
+
+        public bool isNeedUpLoadOffLine;
         /// <summary>
         /// 数据是否发生改变
         /// </summary>

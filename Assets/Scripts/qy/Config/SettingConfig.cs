@@ -164,7 +164,7 @@ namespace qy.config
         /// <returns></returns>
         public int GetPriceWithStep(int step)
         {
-            step = Mathf.Min(step, price.Count);
+            step = Mathf.Min(step, price.Count-1);
             return price[step];
         }
         /// <summary>
