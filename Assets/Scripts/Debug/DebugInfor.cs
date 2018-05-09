@@ -11,6 +11,7 @@ public class DebugInfor : MonoBehaviour
     private InputField uidInput;
     private InputField deviceIdInput;
     private InputField urlInput;
+    private InputField bundleUrlInput;
     private InputField infoInput;
     private Dropdown chapterDropdown;
     private Button chapterButton;
@@ -25,6 +26,7 @@ public class DebugInfor : MonoBehaviour
         uidInput = contentPanel.transform.Find("Container1/InputField").GetComponent<InputField>();
         deviceIdInput = contentPanel.transform.Find("Container2/InputField").GetComponent<InputField>();
         urlInput = contentPanel.transform.Find("Container3/InputField").GetComponent<InputField>();
+        bundleUrlInput = contentPanel.transform.Find("Container6/InputField").GetComponent<InputField>();
         infoInput = contentPanel.transform.Find("Container4/InputField").GetComponent<InputField>();
         chapterDropdown = contentPanel.transform.Find("Container5/Dropdown").GetComponent<Dropdown>();
         chapterButton = contentPanel.transform.Find("Container5/Button").GetComponent<Button>();
@@ -47,6 +49,7 @@ public class DebugInfor : MonoBehaviour
         infoInput.text = playerdata;
 
         urlInput.text = Configure.instance.ServerUrl;
+        bundleUrlInput.text = Configure.instance.AssetBundleServerUrl;
 
         deviceIdInput.text = Utils.instance.getDeviceID();
 

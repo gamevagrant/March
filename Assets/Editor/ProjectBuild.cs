@@ -3,6 +3,7 @@ using LitJson;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Core.March.Config;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class ProjectBuild
         {
             Apk = 1,
             AsestBundle = 2,
-            All = 4,
+            All = 4
         }
 
         public string ProductName;
@@ -28,10 +29,14 @@ public class ProjectBuild
         public bool IsForDev;
         public string PredefineSymbols;
         public BuildType Build;
+        public int ServerIndex;
+        public int AssetBundleServerIndex;
     }
 
     private static BuildTarget target = BuildTarget.Android;
     private const string ConfigName = "BuildConfig.txt";
+    private const string ServerName = "ServerConfig.json";
+    private const string AssetBundleServerName = "AssetBundleServerConfig.json";
 
     private static readonly BuildConfig DefaultBuildConfig = new BuildConfig
     {
@@ -46,6 +51,8 @@ public class ProjectBuild
         IsForDev = false,
         PredefineSymbols = string.Empty,
         Build = BuildConfig.BuildType.Apk,
+        ServerIndex = 0,
+        AssetBundleServerIndex = 0,
     };
 
     public static string[] GetBuildScenes()
@@ -116,11 +123,35 @@ public class ProjectBuild
         // override config build type if build is triggered by an ab request push.
         config.Build = pushByGit && assetbunldeCommit ? BuildConfig.BuildType.AsestBundle : config.Build;
 
+        config.ServerIndex = int.Parse(Environment.GetEnvironmentVariable("GameServerList")
+            .Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0]);
+        config.AssetBundleServerIndex = int.Parse(Environment.GetEnvironmentVariable("AssetBundleServerList")
+            .Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0]);
+
         DoAndroidBuild(config);
+    }
+
+    private static void PrepareAndroidBuild(int serverIndex, string configName)
+    {
+        var configPath = string.Format("./Assets/Resources/Config/{0}", configName);
+        if (!File.Exists(configPath))
+        {
+            Debug.LogError("Config file does not found: " + configPath);
+            return;
+        }
+
+        var str = File.ReadAllText(configPath);
+        var serverConfig = JsonUtility.FromJson<ServerConfig>(str);
+        serverConfig.CurrentIndex = serverIndex;
+
+        File.WriteAllText(configPath, JsonUtility.ToJson(serverConfig));
     }
 
     private static void DoAndroidBuild(BuildConfig config)
     {
+        PrepareAndroidBuild(config.AssetBundleServerIndex, AssetBundleServerName);
+        PrepareAndroidBuild(config.ServerIndex, ServerName);
+
         var root = Application.platform == RuntimePlatform.OSXEditor ||
                    Application.platform == RuntimePlatform.OSXPlayer
             ? Path.Combine(Environment.GetEnvironmentVariable("HOME"), ".android")

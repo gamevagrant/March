@@ -8,7 +8,6 @@ namespace Core.March.Config
     {
         public int CurrentIndex;
         public List<Server> AvailableList;
-        public Server AssetBundleServer;
 
         public Server Current
         {
