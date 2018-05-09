@@ -54,18 +54,9 @@ public class Help : MonoBehaviour
                 )
             {
                 help = true;
-				if (LevelLoader.instance.level == 9) {
-					if (qy.GameMainManager.Instance.playerData.needShow9Help) {
-                        qy.GameMainManager.Instance.playerData.needShow9Help = false;
-					} else {
-						help = false;
-					}
-				}
             }
             else
             {
-                //SelfDisactive();
-
                 help = false;
 
                 gameObject.SetActive(false);

@@ -154,10 +154,6 @@ namespace qy
         ///  //道具解锁状态, "0"缺省, "1"表示解锁导弹, 所有下关开始的时候, 道具列表要自动勾选导弹; "2"魔方; "3"飞机
         /// </summary>
         public string showUnlockItemStatus = "0";
-        /// <summary>
-        /// //需要展示了第9关引导
-        /// </summary>
-        public bool needShow9Help = false;
 
         public bool isShowedLoginAward = false;
         /// <summary>
