@@ -31,6 +31,8 @@ public class UICallBackWindow : UIWindowBase
         roleID = data[0].ToString();
         callBackCost.text = GameMainManager.Instance.configManager.settingConfig.callBackPrice.ToString();
         callBackCardCount.text = "0";
+        callBackDes.text = LangrageManager.Instance.GetItemWithID("220021");
+       
     }
 
     public void OnClickCallBackCoinHandle()
