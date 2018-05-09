@@ -60,7 +60,7 @@
     <ItemSpec id="10058" chapter="2" type="1" sectionName="110058" sectionDes="100656" gotoId="10062" requireStar="1" requireItem="0" prize="0" exp="100" storyId="1000615"/>
     <ItemSpec id="10059" chapter="2" type="3" sectionName="110059" sectionDes="100679" endingPoint="30:1000646:10011" gotoId="10020" requireStar="1" requireItem="0" prize="0" exp="100" storyId="0"/>
     <ItemSpec id="10060" chapter="2" type="3" sectionName="110060" sectionDes="100680" endingPoint="30:1000647:10019" gotoId="10043" requireStar="1" requireItem="0" prize="0" exp="100" storyId="0"/>
-    <ItemSpec id="10061" chapter="2" type="4" sectionName="110061" sectionDes="100681" endingType="1" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000673"/>
-    <ItemSpec id="10062" chapter="2" type="4" sectionName="110062" sectionDes="100682" endingType="2" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000674"/>
-    <ItemSpec id="10063" chapter="2" type="4" sectionName="110063" sectionDes="100683" endingType="1" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000675"/>
+    <ItemSpec id="10061" chapter="2" bg="1000221bg" type="4" sectionName="110061" sectionDes="100681" endingType="1" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000673"/>
+    <ItemSpec id="10062" chapter="2" bg="1000222bg" type="4" sectionName="110062" sectionDes="100682" endingType="2" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000674"/>
+    <ItemSpec id="10063" chapter="2" bg="1000221bg" type="4" sectionName="110063" sectionDes="100683" endingType="1" gotoId="0" requireStar="0" requireItem="0" prize="0" exp="100" storyId="1000675"/>
 </Group>

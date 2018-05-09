@@ -777,7 +777,7 @@
  <ItemSpec id="210124" value="匹配锁链中的图块，即可解除锁链"/>
  <ItemSpec id="210125" value="铲子可以铲掉任何图块，不消耗步数"/>
  <ItemSpec id="210126" value="现在用铲子铲一个被纸条包裹的图块。"/>
- <ItemSpec id="210127" value="消除草莓旁的图块，即可收集草莓。"/>
+ <ItemSpec id="210127" value="消除子弹旁的图块，即可收集子弹。"/>
  <ItemSpec id="210128" value="恭喜解锁新的道具！"/>
  <ItemSpec id="210129" value="使用这个免费的道具吧，一个炸弹和一个导弹开始闯关！"/>
  <ItemSpec id="210130" value="使用这个免费的道具吧，一个魔方开始闯关！"/>
