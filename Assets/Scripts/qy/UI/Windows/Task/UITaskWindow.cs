@@ -73,10 +73,8 @@ public class UITaskWindow :  UIWindowBase{
         //    GameUtils.Scaling(roleHeadImage.transform as RectTransform,new Vector2(sp.texture.width,sp.texture.height));
         //});
         roleNameText.text = playerdata.role.name;
-        loyaltySlider.value = playerdata.ability.loyalty / 100f;
-        wisdomSlider.value = playerdata.ability.wisdom / 100f;
-        discipline.value = playerdata.ability.discipline / 100f;
         levelText.text = playerdata.level.ToString();
+        UpdateAbility(playerdata.ability);
 
         qy.config.LevelItem levelItem = GameMainManager.Instance.configManager.levelConfig.GetItem(playerdata.level);
         if(levelItem!=null)
@@ -118,6 +116,13 @@ public class UITaskWindow :  UIWindowBase{
 
 
         SetMainTask();
+    }
+
+    private void UpdateAbility(qy.config.Ability ability)
+    {
+        loyaltySlider.value = ability.loyalty / 100f;
+        wisdomSlider.value = ability.wisdom / 100f;
+        discipline.value = ability.discipline / 100f;
     }
 
     private void SetSelectTask()
@@ -192,8 +197,10 @@ public class UITaskWindow :  UIWindowBase{
                 GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow,playerdata);
                 //UpdatePanel();
             }
-            
-        }else
+
+            UpdateAbility(playerdata.ability);
+        }
+        else
         {
             OnErrHandle(err);
         }
