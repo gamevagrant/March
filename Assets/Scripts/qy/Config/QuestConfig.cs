@@ -343,15 +343,36 @@ namespace qy.config
         {
             Ability abilityNew = new Ability()
             {
-                discipline = Add(lhs.discipline , rhs.discipline),
-                loyalty = Add(lhs.loyalty , rhs.loyalty),
-                wisdom = Add(lhs.wisdom , rhs.wisdom),
+                discipline = lhs.discipline + rhs.discipline,
+                loyalty =lhs.loyalty + rhs.loyalty,
+                wisdom = lhs.wisdom + rhs.wisdom,
             };
+            
             return abilityNew;
         }
 
-        private static int Add(int lhs,int rhs)
+        /// <summary>
+        /// 获取属性增加值 按照当前值和增加值的百分比计算应该增加多少具体的值
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
+        public static Ability GetAddAbilty(Ability lhs, Ability rhs)
         {
+            Ability abilityNew = new Ability()
+            {
+                discipline = GetAddValue(lhs.discipline, rhs.discipline),
+                loyalty = GetAddValue(lhs.loyalty, rhs.loyalty),
+                wisdom = GetAddValue(lhs.wisdom, rhs.wisdom),
+            };
+            Debug.LogFormat("属性增加值：{0}+{1}={2}", lhs, rhs, abilityNew);
+            return abilityNew;
+        }
+
+        private static int GetAddValue(int lhs,int rhs)
+        {
+            lhs = Mathf.Min(MAX,lhs);
+            rhs = Mathf.Max(-MAX, Mathf.Min(MAX,rhs));
             int baseValue = 0;
             if(rhs>0)
             {
@@ -360,8 +381,9 @@ namespace qy.config
             {
                 baseValue = lhs;
             }
-             
-            return Mathf.Max(0, Mathf.Min(MAX,(int)(lhs + baseValue * (rhs/(float)MAX))));
+            int add = (int)(baseValue * (rhs / (float)MAX));
+
+            return add;
         }
 
         public override string ToString()

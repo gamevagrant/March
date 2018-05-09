@@ -195,7 +195,7 @@ namespace qy
                         playerData.nextQuestId = item.toQuestId;
                         storyID = item.storyID;
                         ability = item.ability;
-                        playerData.ability += item.ability;
+                       
                         string selectID = questItem.id + "_" + item.id;
                         if(!playerData.selectedItems.ContainsKey(selectID))
                         {
@@ -224,10 +224,16 @@ namespace qy
             {
                 return PlayerModelErr.QUEST_ID_ERROR;
             }
-            GameMainManager.Instance.netManager.ComplateQuestId(playerData.questId, ability, (ret, res) => {
+
+            //增加属性值
+            config.Ability addAbilty = config.Ability.GetAddAbilty(playerData.ability, ability);
+            playerData.ability += addAbilty;
+
+            GameMainManager.Instance.netManager.ComplateQuestId(playerData.questId, addAbilty, (ret, res) => {
 
             });
             playerData.questId = playerData.nextQuestId;
+            
             //标记角色状态
             config.QuestItem nextQuest = playerData.GetQuest();
             if (nextQuest.type == config.QuestItem.QuestType.Ending)
