@@ -199,7 +199,7 @@ MonoBehaviour:
   Min: 0.01
   PreMax: 0.85
   PreMaxDuration: 10
-  MaxDuration: 100
+  MaxDuration: 1000
 --- !u!114 &114243336132455316
 MonoBehaviour:
   m_ObjectHideFlags: 1
