@@ -267,7 +267,7 @@ MonoBehaviour:
   Begin: {fileID: 224922900483246176}
   End: {fileID: 224319453789218142}
   PreMaxDuration: 10
-  MaxDuration: 1000
+  MaxDuration: 240
 --- !u!114 &114243336132455316
 MonoBehaviour:
   m_ObjectHideFlags: 1
