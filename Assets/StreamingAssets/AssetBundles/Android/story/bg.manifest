@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1547132686
+CRC: 510986367
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cc73343bc51cd0153dd383501291b312
+    Hash: d4253d737668e60f71f0fbf30dababb1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 460b4f5d62b6facbccf7c01637df8f00
@@ -14,50 +14,82 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
+- Assets/AssetBundleResources/Story/1000239bg.jpg
 - Assets/AssetBundleResources/Story/1000112bg.png
+- Assets/AssetBundleResources/Story/1000235bg.jpg
 - Assets/AssetBundleResources/Story/1000103bg.png
 - Assets/AssetBundleResources/Story/1000110bg.png
 - Assets/AssetBundleResources/Story/1000121bg.png
+- Assets/AssetBundleResources/Story/1000241bg.jpg
 - Assets/AssetBundleResources/Story/1000203bg.png
 - Assets/AssetBundleResources/Story/1000126bg.png
 - Assets/AssetBundleResources/Story/1000212bg.png
 - Assets/AssetBundleResources/Story/1000109bg.png
+- Assets/AssetBundleResources/Story/1000232bg.jpg
 - Assets/AssetBundleResources/Story/1000113bg.png
 - Assets/AssetBundleResources/Story/1000211bg.png
 - Assets/AssetBundleResources/Story/1000106bg.png
 - Assets/AssetBundleResources/Story/1000125bg.png
+- Assets/AssetBundleResources/Story/1000219bg.jpg
 - Assets/AssetBundleResources/Story/1000207bg.png
 - Assets/AssetBundleResources/Story/1000129bg.png
 - Assets/AssetBundleResources/Story/1000120bg.png
+- Assets/AssetBundleResources/Story/1000230bg.jpg
 - Assets/AssetBundleResources/Story/1000115bg.png
+- Assets/AssetBundleResources/Story/1000227bg.jpg
+- Assets/AssetBundleResources/Story/1000229bg.jpg
 - Assets/AssetBundleResources/Story/1000201bg.png
 - Assets/AssetBundleResources/Story/1000214bg.png
 - Assets/AssetBundleResources/Story/1000108bg.png
+- Assets/AssetBundleResources/Story/1000115bg.jpg
+- Assets/AssetBundleResources/Story/1000102bg.jpg
+- Assets/AssetBundleResources/Story/1000225bg.jpg
+- Assets/AssetBundleResources/Story/1000230bg.png
 - Assets/AssetBundleResources/Story/1000208bg.png
 - Assets/AssetBundleResources/Story/1000114bg.png
 - Assets/AssetBundleResources/Story/1000216bg.png
 - Assets/AssetBundleResources/Story/1000104bg.png
+- Assets/AssetBundleResources/Story/1000222bg.png
+- Assets/AssetBundleResources/Story/1000202bg.jpg
+- Assets/AssetBundleResources/Story/1000218bg.jpg
 - Assets/AssetBundleResources/Story/1000124bg.png
 - Assets/AssetBundleResources/Story/1000102bg.png
+- Assets/AssetBundleResources/Story/1000228bg.jpg
 - Assets/AssetBundleResources/Story/1000118bg.png
 - Assets/AssetBundleResources/Story/1000205bg.png
 - Assets/AssetBundleResources/Story/1000111bg.png
 - Assets/AssetBundleResources/Story/1000202bg.png
+- Assets/AssetBundleResources/Story/1000127bg.jpg
+- Assets/AssetBundleResources/Story/1000234bg.jpg
 - Assets/AssetBundleResources/Story/1000210bg.png
+- Assets/AssetBundleResources/Story/1000223bg.jpg
+- Assets/AssetBundleResources/Story/1000238bg.jpg
 - Assets/AssetBundleResources/Story/1000217bg.png
 - Assets/AssetBundleResources/Story/1000206bg.png
 - Assets/AssetBundleResources/Story/1000105bg.png
+- Assets/AssetBundleResources/Story/1000231bg.jpg
 - Assets/AssetBundleResources/Story/1000123bg.png
+- Assets/AssetBundleResources/Story/1000237bg.jpg
 - Assets/AssetBundleResources/Story/1000101bg.png
 - Assets/AssetBundleResources/Story/1000213bg.png
 - Assets/AssetBundleResources/Story/1000215bg.png
 - Assets/AssetBundleResources/Story/1000117bg.png
+- Assets/AssetBundleResources/Story/1000109bg.jpg
+- Assets/AssetBundleResources/Story/nplbg.jpg
 - Assets/AssetBundleResources/Story/1000119bg.png
 - Assets/AssetBundleResources/Story/1000130bg.png
+- Assets/AssetBundleResources/Story/1000240bg.jpg
 - Assets/AssetBundleResources/Story/1000204bg.png
 - Assets/AssetBundleResources/Story/1000209bg.png
+- Assets/AssetBundleResources/Story/1000103bg.jpg
 - Assets/AssetBundleResources/Story/1000128bg.png
+- Assets/AssetBundleResources/Story/1000226bg.jpg
+- Assets/AssetBundleResources/Story/1000101bg.jpg
 - Assets/AssetBundleResources/Story/1000122bg.png
+- Assets/AssetBundleResources/Story/1000224bg.jpg
 - Assets/AssetBundleResources/Story/1000116bg.png
+- Assets/AssetBundleResources/Story/1000221bg.png
+- Assets/AssetBundleResources/Story/1000220bg.jpg
+- Assets/AssetBundleResources/Story/1000236bg.jpg
 - Assets/AssetBundleResources/Story/1000107bg.png
 Dependencies: []
