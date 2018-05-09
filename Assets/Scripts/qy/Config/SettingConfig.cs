@@ -174,7 +174,7 @@ namespace qy.config
         /// <returns></returns>
         public List<PropItem> GetBonusItemWithStep(int step)
         {
-            step = Mathf.Min(step, bonusItems.Count);
+            step = Mathf.Min(step, bonusItems.Count-1);
             return bonusItems[step];
         }
          /// <summary>
@@ -184,7 +184,7 @@ namespace qy.config
          /// <returns></returns>
         public List<PropItem> GetBonusItemBagWithStep(int step)
         {
-            step = Mathf.Min(step, bonusItemsBag.Count);
+            step = Mathf.Min(step, bonusItemsBag.Count-1);
             return bonusItemsBag[step];
         }
 
