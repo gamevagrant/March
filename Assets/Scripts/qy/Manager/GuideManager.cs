@@ -34,8 +34,10 @@ namespace qy
 
         private static void Init()
         {
+               
             AssetsManager.Instance.LoadAssetAsync<GameObject>(FilePathTools.getUIPath("GuideManager"), (go) =>
             {
+                GameObject guideGO = GameObject.Instantiate(go);
             });
         }
 
