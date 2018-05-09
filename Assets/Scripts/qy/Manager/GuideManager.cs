@@ -63,6 +63,10 @@ namespace qy
 
         private void OnOpenUIHandle(ui.UISettings.UIWindowID uiID)
         {
+            if(GameMainManager.Instance.playerData.GetRoleState(GameMainManager.Instance.playerData.role.id)!= PlayerData.RoleState.Normal)
+            {
+                return;
+            }
             Debug.Log("打开面板" + uiID.ToString());
             config.GuideItem item = GetUnDisplayedGuideWithUIid(uiID);
 

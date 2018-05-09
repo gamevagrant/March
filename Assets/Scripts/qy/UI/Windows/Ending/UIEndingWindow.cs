@@ -47,10 +47,12 @@ public class UIEndingWindow :  UIWindowBase
         //    bgImg.sprite = sp;
         //});
 
-        var sp =
-        March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground,
-                quest.bg);
-        bgImg.sprite = sp;
+        if(!string.IsNullOrEmpty(quest.bg))
+        {
+            var sp = March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground, quest.bg);
+            bgImg.sprite = sp;
+        }
+        
 
         if(quest.endingType==1)
         {

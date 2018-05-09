@@ -1033,9 +1033,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleHeadImage: {fileID: 114125449215892734}
   roleNameText: {fileID: 114015853516600864}
+  discipline: {fileID: 114903557273965486}
   loyaltySlider: {fileID: 114664259462884422}
   wisdomSlider: {fileID: 114855500765560338}
-  discipline: {fileID: 114903557273965486}
   levelText: {fileID: 114646586106002382}
   levelSlider: {fileID: 114872476289354740}
   levelProgressText: {fileID: 114997220515442304}
@@ -2780,10 +2780,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 10
+    m_FontSize: 40
     m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 10
+    m_BestFit: 0
+    m_MinSize: 4
     m_MaxSize: 45
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2791,7 +2791,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6211\u4E00\u5B9A\u80FD\u505A\u5230"
+  m_Text: 
 --- !u!114 &114997220515442304
 MonoBehaviour:
   m_ObjectHideFlags: 1

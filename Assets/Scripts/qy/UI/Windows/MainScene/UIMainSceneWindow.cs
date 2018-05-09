@@ -54,8 +54,8 @@ public class UIMainSceneWindow : UIWindowBase
     {
         if (GameMainManager.Instance.playerData.GetRoleState(GameMainManager.Instance.playerData.role.id) != qy.PlayerData.RoleState.Normal)
         {
-            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UICallBackWindow, GameMainManager.Instance.playerData.role.id);
-
+            //GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UICallBackWindow, GameMainManager.Instance.playerData.role.id);
+            GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UIEndingWindow, GameMainManager.Instance.playerData.GetQuest());
         }
         else
         {
