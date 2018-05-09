@@ -155,6 +155,10 @@ namespace qy
         /// </summary>
         public string showUnlockItemStatus = "0";
 
+        /// <summary>
+        /// //需要展示了第9关引导
+        /// </summary>
+        public bool needShow9Help = false;
         public bool isShowedLoginAward = false;
         /// <summary>
         /// 玩家持有的物品列表
