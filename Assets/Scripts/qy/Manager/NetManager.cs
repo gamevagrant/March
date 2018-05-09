@@ -108,18 +108,41 @@ namespace qy.net
             }
         }
 
+        private bool isNeedUpLoadOffLine
+        {
+            get
+            {
+
+                return GameMainManager.Instance.playerData.isNeedUpLoadOffLine;
+            }
+            set
+            {
+                GameMainManager.Instance.playerData.isNeedUpLoadOffLine = value;
+            }
+        }
+
         private bool SendData(string cmd,object jd, Action<bool, PlayerDataMessage> callBack)
         {
             if(!isNetWorkStatusGood)
             {
                 Debug.Log("网络不好 不发送消息");
+                isNeedUpLoadOffLine = true;
                 return false;
             }
             if(cmd!= SAVE_OFF_LINE)
             {
-                TrySynchronizationData();
+                TrySynchronizationData(()=> {
+                    Send(cmd, jd, callBack);
+                });
+            }else
+            {
+                Send(cmd, jd, callBack);
             }
-            
+
+            return true;
+        }
+        private bool Send(string cmd, object jd, Action<bool, PlayerDataMessage> callBack)
+        {
             string url = APIDomain;
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("cmd", cmd);
@@ -130,28 +153,29 @@ namespace qy.net
             {
                 if (res.isOK)
                 {
-                  
+
                     GameMainManager.Instance.playerData.RefreshData(res as PlayerDataMessage);
 
                 }
                 else
                 {
-                    Debug.Log("-----服务器返回错误："+res.errMsg+"-----");
+                    Debug.Log("-----服务器返回错误：" + res.errMsg + "-----");
                     Debug.LogWarning("-----服务器返回错误：" + res.errMsg + "-----");
                     ui.Alert.Show(GetMsgByErrorCode(res.err));
                 }
                 callBack(ret, res);
             });
         }
-
         public void SendRequest<T>(T handler) where T : INetHandler
         {
-            TrySynchronizationData();
-            HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, handler.OnRecieve);
-            request.AddField("uid", uid);
-            request.AddField("cmd", handler.GetCommand());
-            request.AddField("data", handler.GetData());
-            request.Send();
+            TrySynchronizationData(()=> {
+                HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, handler.OnRecieve);
+                request.AddField("uid", uid);
+                request.AddField("cmd", handler.GetCommand());
+                request.AddField("data", handler.GetData());
+                request.Send();
+            });
+            
         }
  
 
@@ -447,15 +471,20 @@ namespace qy.net
         /// <summary>
         /// 尝试进行同步
         /// </summary>
-        private void TrySynchronizationData()
+        private void TrySynchronizationData(Action onComplate)
         {
-            if (GameMainManager.Instance.playerData.dirty && isNetWorkStatusGood)
+            if (isNeedUpLoadOffLine && isNetWorkStatusGood)
             {
                 Debug.Log("开始同步数据");
                 UpLoadOffLineData(new PlayerDataServerMessage(GameMainManager.Instance.playerData), (ret, res) =>
                 {
+                    isNeedUpLoadOffLine = false;
                     GameMainManager.Instance.playerData.dirty = false;
+                    onComplate();
                 });
+            }else
+            {
+                onComplate();
             }
 
         }
