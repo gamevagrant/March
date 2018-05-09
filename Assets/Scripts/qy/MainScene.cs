@@ -24,10 +24,6 @@ namespace qy
                 int level = GameMainManager.Instance.playerData.eliminateLevel;
                 if (level == 9 || level == 15 || level == 17 || level == 21)
                 {
-                    if (level == 9)
-                    {
-                        GameMainManager.Instance.playerData.needShow9Help = false;
-                    }
                     WindowManager.instance.Show<UnlocktemPopupWindow>();
                 }
                 if (level == 10)
