@@ -284,7 +284,7 @@ public class UIBoosterPopup : MonoBehaviour
         else
         {
             // show shop popup
-            WindowManager.instance.Show<ShopPopupPlayWindow>();
+            //WindowManager.instance.Show<ShopPopupPlayWindow>();
         }
     }
 
