@@ -45,11 +45,6 @@ public class LoadingScene : MonoBehaviour
         });
     }
 
-    private void AddConfig<T>() where T : DatabaseConfig, new()
-    {
-        T config = new T();
-        StartCoroutine(XMLDataManager.instance.loadXML(config));
-    }
 
     private IEnumerator LoadScene(string scene)
     {
