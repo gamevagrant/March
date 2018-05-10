@@ -19,8 +19,8 @@ public class ToolsEditor : MonoBehaviour
         return PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab;
     }
 
-    [MenuItem("Tools/EditorPrefs/Clear all Player Preferences")]
-    static void DeleteAllExample()
+    [MenuItem("Tools/Utils/Clear all Player Preferences")]
+    static void ClearPlayerPrefs()
     {
         if (EditorUtility.DisplayDialog("Delete all editor preferences.",
             "Are you sure you want to delete all the editor preferences? " +
@@ -28,5 +28,11 @@ public class ToolsEditor : MonoBehaviour
         {
             PlayerPrefs.DeleteAll();
         }
+    }
+
+    [MenuItem("Tools/Utils/Clear AssetBundle Caches")]
+    static void ClearAssetBundleCaches()
+    {
+        Caching.ClearCache();
     }
 }
