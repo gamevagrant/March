@@ -82,7 +82,7 @@ namespace qy
             }
         }
         /// <summary>
-        /// //剧情ID
+        /// 任务ID
         /// </summary>
         public string questId
         {

@@ -383,13 +383,14 @@ namespace qy.ui
                     showingWindows.Add(id, window);
                 }
                 isOpening = false;
+                Messenger.Broadcast<UISettings.UIWindowID>(ELocalMsgID.OpenUI, id);
                 StartCoroutine(window.ShowWindow(() =>
                 {
                     if (onComplate != null)
                     {
                         onComplate();
                     }
-                    Messenger.Broadcast<UISettings.UIWindowID>(ELocalMsgID.OpenUI, id);
+                    
                 }, needTransform, data));
             }
             else
