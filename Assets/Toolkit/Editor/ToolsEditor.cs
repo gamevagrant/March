@@ -33,6 +33,7 @@ public class ToolsEditor : MonoBehaviour
     [MenuItem("Tools/Utils/Clear AssetBundle Caches")]
     static void ClearAssetBundleCaches()
     {
-        Caching.ClearCache();
+        var result = Caching.ClearCache();
+        Debug.LogWarning("Clear AssetBundle Caches " + (result ? "Success" : "Fail"));
     }
 }
