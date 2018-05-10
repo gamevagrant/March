@@ -4,25 +4,23 @@ using DG.Tweening;
 
 public class LoadingProgressController : MonoBehaviour
 {
-    [Range(0f, 1f)]
-    public float Min;
-
-    [Range(0f, 1f)]
-    public float PreMax;
-
     public Transform Begin;
     public Transform End;
 
-    public float PreMaxDuration;
-    public float MaxDuration;
+    public int Partition;
+    public float TweenDuration;
+
+    [Range(0f, 1f)]
+    public float MaxFillAmount;
+
+    public Ease EaseType;
 
     private Image bar;
     private Image barRight;
     private Transform person;
     private Text percentageText;
 
-    private Tweener tweener;
-    private Tweener tweener2;
+    private Tweener currentTweener;
 
     private void Awake()
     {
@@ -31,38 +29,37 @@ public class LoadingProgressController : MonoBehaviour
         person = transform.Find("bg/person");
         percentageText = transform.Find("bg/right").GetComponent<Text>();
 
-        bar.fillAmount = Min;
+        bar.fillAmount = 0f;
         NotifyUI();
     }
 
     private void Start()
     {
-        tweener = bar.DOFillAmount(PreMax, PreMaxDuration).OnUpdate(NotifyUI).OnComplete(CompleteTween);
-        Debug.LogWarning("Tween 1 start");
+        Debug.LogWarning("Tween start");
+
+        GenerateTween(0f);
     }
 
-    void CompleteTween()
+    private void GenerateTween(float start)
     {
-        Debug.LogWarning("Tween 1 complete " + bar.fillAmount);
+        var end = start + 1f / Partition * (1 - start);
 
-        Debug.LogWarning("Tween 2 start " + bar.fillAmount);
+        if (end > MaxFillAmount)
+            return;
 
-        tweener2 = bar.DOFillAmount(1f, MaxDuration).OnUpdate(NotifyUI).OnComplete(TrimTween2);
+        currentTweener = bar.DOFillAmount(start + 1f / Partition * (1 - start), TweenDuration).SetEase(EaseType)
+            .OnUpdate(NotifyUI).OnComplete(() =>
+            {
+                start = end;
+                GenerateTween(start);
+            });
     }
 
-    void CompleteTween2()
+    public void StopTween()
     {
-        Debug.LogWarning("Tween 2 complete " + bar.fillAmount);
-    }
-
-    public void TrimTween()
-    {
-        tweener.Complete();
-    }
-
-    public void TrimTween2()
-    {
-        tweener2.Complete();
+        currentTweener.Kill();
+        bar.fillAmount = 1f;
+        NotifyUI();
     }
 
     private void NotifyUI()
