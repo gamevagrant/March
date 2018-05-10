@@ -29,6 +29,7 @@ namespace qy.config
             guide.highlight = item.GetAttribute("highlight");
             guide.nextId = item.GetAttribute("next");
             guide.action = item.GetAttribute("action");
+            guide.questId = item.GetAttribute("questId");
 
             string positionStr = item.GetAttribute("position");
             if(!string.IsNullOrEmpty(positionStr))
@@ -81,6 +82,10 @@ namespace qy.config
         /// 这条引导完成后的行为
         /// </summary>
         public string action;
+        /// <summary>
+        /// 任务id
+        /// </summary>
+        public string questId;
         /// <summary>
         /// 引导员位置
         /// </summary>

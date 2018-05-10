@@ -63,12 +63,13 @@ namespace qy
 
         private void OnOpenUIHandle(ui.UISettings.UIWindowID uiID)
         {
-            if(GameMainManager.Instance.playerData.role!=null && GameMainManager.Instance.playerData.GetRoleState(GameMainManager.Instance.playerData.role.id)!= PlayerData.RoleState.Normal)
+            PlayerData playerdata = GameMainManager.Instance.playerData;
+            if (playerdata.role!=null && playerdata.GetRoleState(playerdata.role.id)!= PlayerData.RoleState.Normal)
             {
                 return;
             }
             Debug.Log("打开面板" + uiID.ToString());
-            config.GuideItem item = GetUnDisplayedGuideWithUIid(uiID);
+            config.GuideItem item = GetUnDisplayedGuideWithUIid(uiID,playerdata.questId);
 
             if (item != null)
             {
@@ -155,7 +156,7 @@ namespace qy
             Transform tf = GameMainManager.Instance.uiManager.root.Find(widgtName);
             while (tf == null || !tf.gameObject.activeInHierarchy)
             {
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.3f);
                 if (tf == null)
                     tf = GameMainManager.Instance.uiManager.root.Find(widgtName);
             }
@@ -188,7 +189,7 @@ namespace qy
             }
         }
 
-        private config.GuideItem GetUnDisplayedGuideWithUIid(ui.UISettings.UIWindowID id)
+        private config.GuideItem GetUnDisplayedGuideWithUIid(ui.UISettings.UIWindowID id,string questId)
         {
             config.GuideItem guide = null;
             //除了特殊情况 从配置表里遍历寻找没有展示过的 当前面板的引导
@@ -200,6 +201,10 @@ namespace qy
                 for (int i = 0; i < allItems.Count; i++)
                 {
                     config.GuideItem item = allItems[i];
+                    if(item.questId!=questId)
+                    {
+                        continue;
+                    }
                     if (i > 0)
                     {
                         config.GuideItem lastItem = allItems[i - 1];
@@ -212,7 +217,7 @@ namespace qy
                 }
             }
 
-
+            //找出没有展示过的引导
             for (int i = 0; i < list.Count; i++)
             {
                 if (!displayedGuides.ContainsKey(list[i].id))
@@ -226,6 +231,7 @@ namespace qy
             {
                 return null;
             }
+            /*
             //特殊处理
             if (id == ui.UISettings.UIWindowID.UITaskWindow)
             {
@@ -234,7 +240,7 @@ namespace qy
                 {
                     return null;
                 }
-            }
+            }*/
             string displayedGuidesStr = "";
             foreach (string key in displayedGuides.Keys)
             {
