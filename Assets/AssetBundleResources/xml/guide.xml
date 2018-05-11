@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Group>
-	<ItemSpec id="10002" type="1" person="person1" dialog="220002" ui="UIRoleWindow" next="0"/>
+	<ItemSpec id="10002" type="1" person="person1" dialog="220002" ui="UIRoleWindow" questId="0" next="0"/>
 	<ItemSpec id="10004" type="2" person="person1" dialog="220003" ui="UIMainSceneWindow" questId="10001" highlight="FixedRoot/UIMainSceneWindow/Bottom/TaskBtn" next="10006"/>
 	<ItemSpec id="10006" type="1" person="person1" dialog="220004" ui="UITaskWindow" questId="10001" highlight="PopUpRoot/UITaskWindow/CenterMission/Mission/TopMission" next="10007" position="-361:-389"/>
 	<ItemSpec id="10007" type="1" person="person1" dialog="220005" ui="UITaskWindow" questId="10001" highlight="PopUpRoot/UITaskWindow/CenterMission/Button/PropItems" next="10008"/>
@@ -13,4 +13,8 @@
 	<ItemSpec id="10018" type="2" person="person1" ui="UITaskWindow" questId="10002" highlight="PopUpRoot/UITaskWindow/CenterMission/Button" next="0"/>
 	<ItemSpec id="10020" type="1" person="person1" dialog="220013" ui="UITaskWindow" questId="10003" next="10021"/>
 	<ItemSpec id="10021" type="1" person="person1" dialog="220014" ui="UITaskWindow" questId="10003" highlight="PopUpRoot/UITaskWindow/Left/GameObject" next="0"/>
+	<ItemSpec id="10022" type="1" person="person1" dialog="220015" ui="UIEndingWindow" next="10023"/>
+	<ItemSpec id="10023" type="1" person="person1" dialog="220016" ui="UIEndingWindow" highlight="PopUpRoot/UIEndingWindow/GameOverBtns" next="0"/>
+	<ItemSpec id="10024" type="1" person="person1" dialog="220018" ui="UICallBackWindow" highlight="PopUpRoot/UICallBackWindow/CoinButton" next="0"/>
+	<ItemSpec id="10025" type="1" person="person1" dialog="220017" ui="UIRoleWindow" highlight="UIRoleWindow/Panel/Head" next="0"/>
 </Group>

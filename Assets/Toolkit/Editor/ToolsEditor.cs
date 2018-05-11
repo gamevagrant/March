@@ -36,4 +36,22 @@ public class ToolsEditor : MonoBehaviour
         var result = Caching.ClearCache();
         Debug.LogWarning("Clear AssetBundle Caches " + (result ? "Success" : "Fail"));
     }
+
+    [MenuItem("Tools/Guide/Show Selection Path")]
+    public static void ShowSelectedPath()
+    {
+        Debug.Log(GetPath(Selection.activeTransform));
+    }
+
+    private static string GetPath(Transform tf)
+    {
+        if (tf == null)
+            return " null ";
+        string path = tf.name;
+        if (tf.parent != null && tf.parent.gameObject.GetComponent<Canvas>() == null)
+        {
+            path = GetPath(tf.parent) + "/" + path;
+        }
+        return path;
+    }
 }
