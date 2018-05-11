@@ -11,14 +11,11 @@ done
 echo "Latest apk is : $latest"
 
 # Copy latest release apk plus march.apk for publishing.
-echo cp -vf "$latest" "package/march.apk"
 cp -vf "$latest" "package/march.apk"
 cp -vf "$latest" "package/"
 
 # Copy asset bundles to workspace.
-echo rm -rvf AssetBundles
 rm -rvf AssetBundles
-echo cp -rvf $JENKINS_HOME/AssetBundleServer/AssetBundles/ AssetBundles
 cp -rvf $JENKINS_HOME/AssetBundleServer/AssetBundles/ AssetBundles
 
 now=$(date +"%T")
