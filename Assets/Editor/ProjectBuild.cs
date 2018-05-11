@@ -148,7 +148,9 @@ public class ProjectBuild
         var serverConfig = JsonUtility.FromJson<ServerConfig>(str);
         serverConfig.CurrentIndex = serverIndex;
 
-        File.WriteAllText(configPath, JsonUtility.ToJson(serverConfig));
+        str = JsonUtility.ToJson(serverConfig);
+        File.WriteAllText(configPath, str);
+        Debug.LogWarning(str);
     }
 
     private static void DoAndroidBuild(BuildConfig config)
