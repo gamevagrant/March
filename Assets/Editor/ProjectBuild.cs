@@ -151,6 +151,8 @@ public class ProjectBuild
         str = JsonUtility.ToJson(serverConfig);
         File.WriteAllText(configPath, str);
         Debug.LogWarning(str);
+
+        AssetDatabase.Refresh();
     }
 
     private static void DoAndroidBuild(BuildConfig config)
