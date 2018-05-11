@@ -13,6 +13,7 @@ public class ProjectBuild
     {
         public enum BuildType
         {
+            None = 0,
             Apk = 1,
             AsestBundle = 2,
             All = 4
@@ -116,7 +117,8 @@ public class ProjectBuild
         var assetbundleBuild = bool.Parse(Environment.GetEnvironmentVariable("BuildAssetBundle"));
         var apkBuild = bool.Parse(Environment.GetEnvironmentVariable("BuildApk"));
         config.Build = assetbundleBuild && apkBuild ? BuildConfig.BuildType.All :
-            assetbundleBuild ? BuildConfig.BuildType.AsestBundle : BuildConfig.BuildType.Apk;
+            assetbundleBuild ? BuildConfig.BuildType.AsestBundle : 
+            apkBuild ? BuildConfig.BuildType.Apk : BuildConfig.BuildType.None;
         var assetbunldeCommit = Environment.GetEnvironmentVariable("COMMIT_MESSAGE")
             .Contains(Environment.GetEnvironmentVariable("BUILD_AB_COMMIT"));
         var pushByGit = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("gitlabUserName"));
@@ -221,7 +223,7 @@ public class ProjectBuild
 
             if (config.Build == BuildConfig.BuildType.Apk || config.Build == BuildConfig.BuildType.All)
             {
-                var buildName = string.Format("./package/{2}/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
+                var buildName = string.Format("./package/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
                     DateTime.Now.ToString(@"yyyyMMdd"), DateTime.Now.ToString(@"HHmmss"), config.IsForDev ? "_dev" : "");
 
                 Debug.LogWarning("Build package to : " + new FileInfo(buildName).FullName);

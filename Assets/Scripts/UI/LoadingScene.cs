@@ -35,11 +35,9 @@ public class LoadingScene : MonoBehaviour
 
         yield return loader.Load();
 
-        progressController.TrimTween();
-
         GameMainManager.Instance.configManager.LoadConfig(() =>
         {
-            progressController.TrimTween2();
+            progressController.StopTween();
 
             StartCoroutine(LoadScene("Film"));
         });
