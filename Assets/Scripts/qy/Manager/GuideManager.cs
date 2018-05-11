@@ -66,7 +66,7 @@ namespace qy
             PlayerData playerdata = GameMainManager.Instance.playerData;
             if (playerdata.role!=null && playerdata.GetRoleState(playerdata.role.id)!= PlayerData.RoleState.Normal)
             {
-                return;
+                //return;
             }
             Debug.Log("打开面板" + uiID.ToString());
             config.GuideItem item = GetUnDisplayedGuideWithUIid(uiID,playerdata.questId);
@@ -156,7 +156,7 @@ namespace qy
             Transform tf = GameMainManager.Instance.uiManager.root.Find(widgtName);
             while (tf == null || !tf.gameObject.activeInHierarchy)
             {
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(0.5f);
                 if (tf == null)
                     tf = GameMainManager.Instance.uiManager.root.Find(widgtName);
             }
@@ -192,6 +192,7 @@ namespace qy
         private config.GuideItem GetUnDisplayedGuideWithUIid(ui.UISettings.UIWindowID id,string questId)
         {
             config.GuideItem guide = null;
+            questId = string.IsNullOrEmpty(questId)?"0":questId;
             //除了特殊情况 从配置表里遍历寻找没有展示过的 当前面板的引导
             List<config.GuideItem> allItems = GameMainManager.Instance.configManager.guideConfig.GetItemWithWindowName(id.ToString());
             List<config.GuideItem> list = new List<config.GuideItem>();//步骤id 每个步骤起始引导的id
@@ -201,7 +202,7 @@ namespace qy
                 for (int i = 0; i < allItems.Count; i++)
                 {
                     config.GuideItem item = allItems[i];
-                    if(item.questId!=questId)
+                    if(!string.IsNullOrEmpty(item.questId) && item.questId!=questId)
                     {
                         continue;
                     }
