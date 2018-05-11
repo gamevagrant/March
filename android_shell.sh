@@ -36,6 +36,15 @@ echo "Compiling.. this will take a while, redirect log file to console..."
 echo $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 $untiy -quit -batchmode -projectPath $projectPath -logFile -executeMethod ProjectBuild.JenkinsBuildAndroid
 
+# Get latest apk in package folder.
+unset -v latest
+for file in "$APK_OUTPUT_DIR"/*; do
+  [[ $file -nt $latest ]] && latest=$file
+done
+echo "Latest apk is : $latest"
+
+copy -vf "$APK_OUTPUT_DIR/$latest" "$APK_OUTPUT_DIR/march.apk"
+
 # Post handle asset bundles.
 if [[ $PredefineSymbols == *ENABLE_BUNDLE_SERVER* ]]; then
 	# copy asset bundles to web server.
