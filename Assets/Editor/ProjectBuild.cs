@@ -221,7 +221,7 @@ public class ProjectBuild
 
             if (config.Build == BuildConfig.BuildType.Apk || config.Build == BuildConfig.BuildType.All)
             {
-                var buildName = string.Format("./package/{0}_{1}_{2}_{3}{4}.apk", config.ProductName, config.Version,
+                var buildName = string.Format("./package/{0}_{1}_{2}{3}.apk", config.ProductName, config.Version,
                     DateTime.Now.ToString(@"yyyyMMdd"), config.IsForDev ? "_dev" : "");
 
                 Debug.LogWarning("Build package to : " + new FileInfo(buildName).FullName);
