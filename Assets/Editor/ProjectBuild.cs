@@ -220,10 +220,11 @@ public class ProjectBuild
 
                 BuildScript.CopyToStreamingAsset = true;
                 BuildScript.BuildAssetBundles();
-#if ENABLE_BUNDLE_SERVER
-                FileUtil.DeleteFileOrDirectory(Application.streamingAssetsPath);
-#endif
             }
+
+#if ENABLE_BUNDLE_SERVER
+            FileUtil.DeleteFileOrDirectory(Application.streamingAssetsPath);
+#endif
 
             if (config.Build == BuildConfig.BuildType.Apk || config.Build == BuildConfig.BuildType.All)
             {
