@@ -43,7 +43,9 @@ for file in "$APK_OUTPUT_DIR"/*; do
 done
 echo "Latest apk is : $latest"
 
-copy -vf "$APK_OUTPUT_DIR/$latest" "$APK_OUTPUT_DIR/march.apk"
+# Copy latest release apk to march.apk for publishing.
+echo cp -vf "$APK_OUTPUT_DIR/$latest" "$APK_OUTPUT_DIR/march.apk"
+cp -vf "$APK_OUTPUT_DIR/$latest" "$APK_OUTPUT_DIR/march.apk"
 
 # Post handle asset bundles.
 if [[ $PredefineSymbols == *ENABLE_BUNDLE_SERVER* ]]; then
