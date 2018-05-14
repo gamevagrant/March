@@ -125,10 +125,13 @@ namespace qy
         {
             
             storyID = "";
-            qy.config.Ability ability = new config.Ability();
+            
             //检测完成任务条件
             config.QuestItem questItem = playerData.GetQuest();
-
+            if(questItem.type == QuestItem.QuestType.Ending)
+            {
+                return PlayerModelErr.NULL;
+            }
             //完成过的任务无消耗 无经验
             if (!playerData.complatedQuests.ContainsKey(questItem.id))
             {
@@ -181,6 +184,7 @@ namespace qy
             }
 
             //更新下个任务
+            qy.config.Ability ability = new config.Ability();
             if (questItem.type == config.QuestItem.QuestType.Main)
             {
                 playerData.nextQuestId = questItem.gotoId;
