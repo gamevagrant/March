@@ -148,7 +148,11 @@ public class ProjectBuild
         var serverConfig = JsonUtility.FromJson<ServerConfig>(str);
         serverConfig.CurrentIndex = serverIndex;
 
-        File.WriteAllText(configPath, JsonUtility.ToJson(serverConfig));
+        str = JsonUtility.ToJson(serverConfig);
+        File.WriteAllText(configPath, str);
+        Debug.LogWarning(str);
+
+        AssetDatabase.Refresh();
     }
 
     private static void DoAndroidBuild(BuildConfig config)
@@ -216,10 +220,11 @@ public class ProjectBuild
 
                 BuildScript.CopyToStreamingAsset = true;
                 BuildScript.BuildAssetBundles();
-#if ENABLE_BUNDLE_SERVER
-                FileUtil.DeleteFileOrDirectory(Application.streamingAssetsPath);
-#endif
             }
+
+#if ENABLE_BUNDLE_SERVER
+            FileUtil.DeleteFileOrDirectory(Application.streamingAssetsPath);
+#endif
 
             if (config.Build == BuildConfig.BuildType.Apk || config.Build == BuildConfig.BuildType.All)
             {
