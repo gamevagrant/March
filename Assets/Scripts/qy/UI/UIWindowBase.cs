@@ -35,16 +35,24 @@ namespace qy.ui
             }
         }
 
+        private CanvasGroup canvasGroup;
+        
         /// <summary>
         /// 第一次创建的时候会被调用
         /// </summary>
         public virtual void Init()
         {
             transform.localScale = Vector3.zero;
+            canvasGroup = GetComponent<CanvasGroup>();
+            if(canvasGroup == null)
+            {
+                canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            }
         }
 
         public IEnumerator ShowWindow(Action onComplate = null, bool needTransform = true, params object[] data)
         {
+            
             //transform.SetSiblingIndex(100);
             gameObject.SetActive(true);
             //避免和awake start冲突，延后到帧末执行
@@ -53,14 +61,14 @@ namespace qy.ui
             StartShowWindow(data);
             if (needTransform)
             {
-                UIManager.Instance.DisableOperation();
+                canvasGroup.blocksRaycasts = false;
                 EnterAnimation(() => {
                     if (onComplate != null)
                     {
                         onComplate();
                     }
                     EndShowWindow();
-                    UIManager.Instance.EnableOperation();
+                    canvasGroup.blocksRaycasts = true;
                 });
             }
             else
@@ -78,10 +86,10 @@ namespace qy.ui
             StartHideWindow();
             if (needTransform)
             {
-                UIManager.Instance.DisableOperation();
+                canvasGroup.blocksRaycasts = false;
                 ExitAnimation(() => {
 
-                    UIManager.Instance.EnableOperation();
+                    canvasGroup.blocksRaycasts = true;
                     gameObject.SetActive(false);
                     if (onComplate != null)
                     {
