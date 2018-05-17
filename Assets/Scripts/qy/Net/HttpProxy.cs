@@ -43,9 +43,9 @@ public class HttpProxy {
             if (!ret)
             {
                 Debug.LogAssertionFormat("请求失败失败 request.State = {0},[{1}]\n", request.State.ToString(),request.Uri);
-                
-                
-                
+
+
+                callback(ret,null);
             }
             else
             {
@@ -88,7 +88,7 @@ public class HttpProxy {
             if (!ret)
             {
                 Debug.LogErrorFormat("request.State = {0} [{1}]", request.State.ToString(), url);
-                
+                callback(ret, null);
             }
             else
             {

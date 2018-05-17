@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Security.Cryptography;
 using System.Text;
+using System.Linq;
 
 public class GameUtils 
 {
@@ -77,6 +78,17 @@ public class GameUtils
     {
         System.DateTime startTime = System.TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
         long t = (long)(time - startTime).TotalSeconds;   //除10000调整为13位      
+        return t;
+    }
+    /// <summary>
+    /// 毫秒时间戳
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public static long DateTimeToMilliTimeStamp(System.DateTime time)
+    {
+        System.DateTime startTime = System.TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
+        long t = (long)(time - startTime).TotalMilliseconds;   //除10000调整为13位      
         return t;
     }
 
@@ -208,5 +220,17 @@ public class GameUtils
     public static void ScalingFixedWithHeight(RectTransform rtf, Vector2 size)
     {
         rtf.sizeDelta = new Vector2(rtf.rect.height * (size.x / size.y), 0);
+    }
+    /// <summary>
+    /// 去除转义符
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static string RemoveEscapeCharacter(string str)
+    {
+        string res = str.Replace("\\", "");
+        return str;
+        //return new string((from c in str.ToCharArray() where char.IsControl(c) select c).ToArray());
+        
     }
 }

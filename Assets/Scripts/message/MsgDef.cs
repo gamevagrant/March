@@ -18,6 +18,7 @@ public enum ELocalMsgID
     OpenUI,
     CloseUI,
     LoadScene,
+    CallPlayerModel,
 }
 
 /// <summary>

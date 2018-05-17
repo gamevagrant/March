@@ -17,6 +17,10 @@ namespace qy
 
         public PlayerModelErr BuyFiveMore(int step)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo() {
+                name = "BuyFiveMore",
+                parameters = new object[] {step },
+            });
             GameMainManager.Instance.netManager.EliminateLevelFiveMore(step, (ret, res) => {
                 
             });
@@ -41,6 +45,11 @@ namespace qy
 
         public PlayerModelErr BuyHeart()
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "BuyHeart",
+                parameters = new object[] {},
+            });
             GameMainManager.Instance.netManager.BuyHeart((ret, res) => {
                 
             });
@@ -53,8 +62,7 @@ namespace qy
             }
 
             playerData.coinNum -= cost;
-            playerData.heartNum = GameMainManager.Instance.configManager.settingConfig.maxLives;
-            playerData.hertTimestamp = 0;
+            AddHeart(GameMainManager.Instance.configManager.settingConfig.maxLives);
             SaveData();
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             return PlayerModelErr.NULL;
@@ -62,6 +70,11 @@ namespace qy
 
         public PlayerModelErr BuyProp(string itemId, int num)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "BuyProp",
+                parameters = new object[] { itemId ,num},
+            });
             GameMainManager.Instance.netManager.BuyItem(itemId,num,(ret, res) => {
 
             });
@@ -88,6 +101,11 @@ namespace qy
 
         public PlayerModelErr EndLevel(int level, bool result, int step, int wingold)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "EndLevel",
+                parameters = new object[] { level, result, step, wingold },
+            });
             GameMainManager.Instance.netManager.LevelEnd(level,result?1:0,step, wingold, (ret, res) => {
                 
             });
@@ -97,7 +115,7 @@ namespace qy
                 MatchLevelItem matchItem = GameMainManager.Instance.configManager.matchLevelConfig.GetItem((1000000+level).ToString());
                 playerData.coinNum += wingold + matchItem.coin;
                 playerData.starNum += matchItem.star;
-                playerData.heartNum += 1;
+                AddHeart();
                 playerData.eliminateLevel += 1;
 
                 foreach(PropItem prop in matchItem.itemReward)
@@ -112,6 +130,11 @@ namespace qy
 
         public PlayerModelErr ModifyNickName(string nickName)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "ModifyNickName",
+                parameters = new object[] { nickName },
+            });
             GameMainManager.Instance.netManager.ModifyNickName(nickName, (ret, res) => {
                 Debug.Log("===============修改姓名成功");
             });
@@ -123,7 +146,11 @@ namespace qy
 
         public PlayerModelErr QuestComplate(out string storyID, string selectedID = "")
         {
-            
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "QuestComplate",
+                parameters = new object[] { "", selectedID },
+            });
             storyID = "";
             
             //检测完成任务条件
@@ -295,6 +322,11 @@ namespace qy
 
         public PlayerModelErr StartLevel()
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "StartLevel",
+                parameters = new object[] { },
+            });
             GameMainManager.Instance.netManager.LevelStart((ret, res) => {
                 
             });
@@ -303,7 +335,7 @@ namespace qy
             {
                 return PlayerModelErr.NOT_ENOUGH_HEART;
             }
-            playerData.heartNum -= 1;
+            RemoveHeart();
             SaveData();
 
             return PlayerModelErr.NULL;
@@ -311,6 +343,11 @@ namespace qy
 
         public PlayerModelErr UseProp(string itemID, int count)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "UseProp",
+                parameters = new object[] { itemID, count },
+            });
             GameMainManager.Instance.netManager.UseTools(itemID, count, (ret, res) =>
             {
                 
@@ -330,6 +367,11 @@ namespace qy
 
         public PlayerModelErr StartGameWithRole(string id)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "StartGameWithRole",
+                parameters = new object[] { id },
+            });
             GameMainManager.Instance.netManager.SwitchRole(id,(ret,res)=> { });
             if(playerData.GetRoleState(id) == PlayerData.RoleState.Dide)
             {
@@ -342,6 +384,12 @@ namespace qy
 
         public PlayerModelErr CallBackRoleWithCoin(string id)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "CallBackRoleWithCoin",
+                parameters = new object[] { id },
+            });
+
             GameMainManager.Instance.netManager.RecoverRole(id,0, (ret, res) => { });
             int cost = GameMainManager.Instance.configManager.settingConfig.callBackPrice;
             if(playerData.coinNum<cost)
@@ -367,6 +415,11 @@ namespace qy
 
         public PlayerModelErr CallBackRoleWithCard(string id)
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "CallBackRoleWithCard",
+                parameters = new object[] { id },
+            });
             GameMainManager.Instance.netManager.RecoverRole(id, 1, (ret, res) => { });
             Messenger.Broadcast(ELocalMsgID.RefreshBaseData);
             playerData.dirty = true;
@@ -375,6 +428,11 @@ namespace qy
 
         public PlayerModelErr UpdateHeart()
         {
+            Messenger.Broadcast<CallMethodInfo>(ELocalMsgID.CallPlayerModel, new CallMethodInfo()
+            {
+                name = "UpdateHeart",
+                parameters = new object[] { },
+            });
             int maxHeart = GameMainManager.Instance.configManager.settingConfig.maxLives;
             if (playerData.heartNum>= maxHeart)
             {
@@ -394,6 +452,35 @@ namespace qy
             
 
             return PlayerModelErr.NULL;
+        }
+
+        private void AddHeart(int num = 1)
+        {
+            playerData.heartNum += num;
+            int maxHeart = GameMainManager.Instance.configManager.settingConfig.maxLives;
+            if (playerData.heartNum>= maxHeart)
+            {
+                playerData.heartNum = maxHeart;
+                playerData.hertTimestamp = 0;
+            }
+        }
+
+        private void RemoveHeart(int num = 1)
+        {
+            playerData.heartNum -= num;
+            int maxHeart = GameMainManager.Instance.configManager.settingConfig.maxLives;
+            if (playerData.heartNum == maxHeart-1)
+            {
+                long space = GameMainManager.Instance.configManager.settingConfig.livesRecoverTime * 60;
+                playerData.hertTimestamp = GameUtils.DateTimeToTimestamp(System.DateTime.Now) + space;
+            }else if(playerData.heartNum >= maxHeart)
+            {
+                playerData.hertTimestamp = 0;
+            }else if(playerData.heartNum <0)
+            {
+                playerData.heartNum = 0;
+            }
+
         }
 
         public string GetErrorDes(PlayerModelErr err)
