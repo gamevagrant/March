@@ -116,7 +116,10 @@ namespace qy
                 MatchLevelItem matchItem = GameMainManager.Instance.configManager.matchLevelConfig.GetItem((1000000+level).ToString());
                 playerData.coinNum += wingold + matchItem.coin;
                 playerData.starNum += matchItem.star;
-                playerData.eliminateLevel += 1;
+                if (playerData.roleState == PlayerData.RoleState.Normal)
+                {
+                    playerData.eliminateLevel += 1;
+                }
 
                 foreach(PropItem prop in matchItem.itemReward)
                 {
