@@ -254,7 +254,7 @@ namespace qy.net
                 OfflineData offlineData = new OfflineData(GameMainManager.Instance.playerData);
                 offlineData.offline = LocalDatasManager.netBufferQueue;
                 UpLoadOffLineData(offlineData, (ret, res) => {
-                    //LocalDatasManager.netBufferQueue = null;
+                    LocalDatasManager.netBufferQueue = null;
                 });
             }
 
