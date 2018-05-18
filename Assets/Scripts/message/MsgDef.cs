@@ -19,6 +19,7 @@ public enum ELocalMsgID
     CloseUI,
     LoadScene,
     CallPlayerModel,
+    OnApplicationQuit,
 }
 
 /// <summary>

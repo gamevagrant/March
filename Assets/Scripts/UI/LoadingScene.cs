@@ -87,4 +87,9 @@ public class LoadingScene : MonoBehaviour
     {
         StartCoroutine(LoadScene(scene));
     }
+
+    private void OnApplicationQuit()
+    {
+        Messenger.Broadcast(ELocalMsgID.OnApplicationQuit);
+    }
 }

@@ -8,10 +8,11 @@ namespace qy
     public class PlayerModel : IPlayerModel
     {
         private PlayerData playerData;
+        private bool isInLevel = false;//是否在关卡内
         public PlayerModel(PlayerData playerData)
         {
             this.playerData = playerData;
-            
+            Messenger.AddListener(ELocalMsgID.OnApplicationQuit, OnAppQuit);
         }
         
 
@@ -115,7 +116,6 @@ namespace qy
                 MatchLevelItem matchItem = GameMainManager.Instance.configManager.matchLevelConfig.GetItem((1000000+level).ToString());
                 playerData.coinNum += wingold + matchItem.coin;
                 playerData.starNum += matchItem.star;
-                AddHeart();
                 playerData.eliminateLevel += 1;
 
                 foreach(PropItem prop in matchItem.itemReward)
@@ -123,8 +123,11 @@ namespace qy
                     playerData.AddPropItem(prop.id,prop.count);
                 }
                 SaveData();
+            }else
+            {
+                RemoveHeart(1);
             }
-
+            isInLevel = false;
             return PlayerModelErr.NULL;
         }
 
@@ -335,9 +338,9 @@ namespace qy
             {
                 return PlayerModelErr.NOT_ENOUGH_HEART;
             }
-            RemoveHeart();
-            SaveData();
 
+            SaveData();
+            isInLevel = true;
             return PlayerModelErr.NULL;
         }
 
@@ -469,18 +472,21 @@ namespace qy
         {
             playerData.heartNum -= num;
             int maxHeart = GameMainManager.Instance.configManager.settingConfig.maxLives;
-            if (playerData.heartNum == maxHeart-1)
+            if(playerData.heartNum<maxHeart && playerData.hertTimestamp==0)
             {
                 long space = GameMainManager.Instance.configManager.settingConfig.livesRecoverTime * 60;
                 playerData.hertTimestamp = GameUtils.DateTimeToTimestamp(System.DateTime.Now) + space;
-            }else if(playerData.heartNum >= maxHeart)
-            {
-                playerData.hertTimestamp = 0;
-            }else if(playerData.heartNum <0)
-            {
-                playerData.heartNum = 0;
             }
+            playerData.heartNum = Mathf.Max(0,playerData.heartNum);
 
+        }
+
+        private void OnAppQuit()
+        {
+            if(isInLevel)
+            {
+                EndLevel(LevelLoader.instance.level, false, 0, 0);
+            }
         }
 
         public string GetErrorDes(PlayerModelErr err)
