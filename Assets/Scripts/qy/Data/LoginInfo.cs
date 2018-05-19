@@ -24,6 +24,12 @@ namespace qy
         public string isHDLogin = "1";
         public string pfSeeeion = "";
         public string recallId = "";
+        public string timestamp;
+
+        public LoginInfo()
+        {
+            timestamp = GameUtils.DateTimeToTimestamp(System.DateTime.Now).ToString();
+        }
     }
 }
 

@@ -9,7 +9,7 @@ using BestHTTP;
 namespace qy.net
 {
     
-    public class NetManager
+    public class NetManager:MonoBehaviour
     {
         public static string LOGIN_CMD = "user.login";
         public static string BIND_CMD = "user.bind";
@@ -34,6 +34,10 @@ namespace qy.net
         public static string ROLE_RECOVER = "role.recover";
         public static string ROLE_END = "role.end";
 
+        private Queue<Dictionary<string, object>> bufferQueue = new Queue<Dictionary<string, object>>();
+        private Queue<Action> queue = new Queue<Action>();
+        private bool isSending = false;
+
         private static NetManager _instance;
         public static NetManager Instance
         {
@@ -41,7 +45,14 @@ namespace qy.net
             {
                 if (_instance == null)
                 {
-                    _instance = new NetManager();
+                    GameObject go = GameObject.Find("MainManager");
+
+                    if (go == null)
+                    {
+                        go = new GameObject("MainManager");
+                    }
+                    GameObject.DontDestroyOnLoad(go);
+                    go.AddComponent<NetManager>();
                 }
                 return _instance;
             }
@@ -70,12 +81,14 @@ namespace qy.net
                 return GameMainManager.Instance.playerData.userId;
             }
         }
-
+        /// <summary>
+        /// 毫秒时间戳
+        /// </summary>
         private long time
         {
             get
             {
-                return GameUtils.DateTimeToTimestamp(DateTime.Now);
+                return GameUtils.DateTimeToMilliTimeStamp(DateTime.Now);
             }
         }
 
@@ -120,65 +133,132 @@ namespace qy.net
                 GameMainManager.Instance.playerData.isNeedUpLoadOffLine = value;
             }
         }
+        private void Awake()
+        {
+            _instance = this;
+            SendOfflineData();
+        }
+        private void Start()
+        {
+            
+        }
+
+        private float timer;
+        private const float space = 1; 
+        private void Update()
+        {
+            if(timer>0)
+            {
+                timer -= Time.unscaledDeltaTime;
+            }else
+            {
+                timer += space;
+                UpdateSecond();
+            }
+            
+        }
+
+        private void UpdateSecond()
+        {
+            if (queue.Count > 0 && !isSending)
+            {
+                isSending = true;
+                Action act = queue.Peek();
+                act();
+            }
+        }
+
+        private void OnApplicationQuit()
+        {
+            if(bufferQueue.Count>0)
+            {
+                Queue<Dictionary<string, object>> localQueue = new Queue<Dictionary<string, object>>(LocalDatasManager.netBufferQueue);
+                while (bufferQueue.Count > 0)
+                {
+                    Dictionary<string, object> data = bufferQueue.Dequeue();
+                    if(data["cmd"].ToString()!=SAVE_OFF_LINE)
+                    {
+                        localQueue.Enqueue(data);
+                    }
+                }
+                LocalDatasManager.netBufferQueue = new List<Dictionary<string, object>>(localQueue);
+                Debug.Log("保存离线数据："+localQueue.Count);
+            }
+        }
 
         private bool SendData(string cmd,object jd, Action<bool, PlayerDataMessage> callBack)
         {
-            if(!isNetWorkStatusGood)
-            {
-                Debug.Log("网络不好 不发送消息");
-                isNeedUpLoadOffLine = true;
-                return false;
-            }
-            if(cmd!= SAVE_OFF_LINE)
-            {
-                TrySynchronizationData(()=> {
-                    Send(cmd, jd, callBack);
-                });
-            }else
-            {
-                Send(cmd, jd, callBack);
-            }
+            Debug.Log("加入" + cmd);
 
-            return true;
-        }
-        private bool Send(string cmd, object jd, Action<bool, PlayerDataMessage> callBack)
-        {
-            string url = APIDomain;
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("cmd", cmd);
             data.Add("uid", uid);
-            data.Add("data", jd == null ? "" : JsonMapper.ToJson(jd));
+            data.Add("device", Utils.instance.getDeviceID());
+            data.Add("timestamp", time.ToString());
+            data.Add("data", jd == null ? "" :JsonMapper.ToJson(jd));
 
+            bufferQueue.Enqueue(data);
+            queue.Enqueue(() => {
+                
+                Dictionary<string, object> bufferData = bufferQueue.Peek();
+                Send(bufferData, callBack);
+                Debug.Log("--执行" + bufferData["cmd"]);
+            });
+
+            return true;
+        }
+        private bool Send(Dictionary<string, object> data, Action<bool, PlayerDataMessage> callBack)
+        {
+            string url = APIDomain;
             return HttpProxy.SendPostRequest<PlayerDataMessage>(url, data, (ret, res) =>
             {
-                if (res.isOK)
+                if(ret)
                 {
-
-                    GameMainManager.Instance.playerData.RefreshData(res as PlayerDataMessage);
-
+                    if (res.isOK)
+                    {
+                        GameMainManager.Instance.playerData.RefreshData(res as PlayerDataMessage);
+                    }
+                    else
+                    {
+                        Debug.Log("-----服务器返回错误：" + res.errMsg + "-----");
+                        Debug.LogWarning("-----服务器返回错误：" + res.errMsg + "-----");
+                        ui.Alert.Show(GetMsgByErrorCode(res.err));
+                    }
+                    callBack(ret, res);
+                    queue.Dequeue();
+                    bufferQueue.Dequeue();
                 }
-                else
-                {
-                    Debug.Log("-----服务器返回错误：" + res.errMsg + "-----");
-                    Debug.LogWarning("-----服务器返回错误：" + res.errMsg + "-----");
-                    ui.Alert.Show(GetMsgByErrorCode(res.err));
-                }
-                callBack(ret, res);
+                isSending = false;
             });
         }
         public void SendRequest<T>(T handler) where T : INetHandler
         {
-            TrySynchronizationData(()=> {
-                HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, handler.OnRecieve);
-                request.AddField("uid", uid);
-                request.AddField("cmd", handler.GetCommand());
-                request.AddField("data", handler.GetData());
-                request.Send();
-            });
-            
-        }
- 
+            HTTPRequest request = new HTTPRequest(new Uri(Configure.instance.ServerUrl), HTTPMethods.Post, handler.OnRecieve);
+            request.AddField("uid", uid);
+            request.AddField("device", Utils.instance.getDeviceID());
+            request.AddField("cmd", handler.GetCommand());
+            request.AddField("data", handler.GetData());
+            request.Send();
 
+        }
+
+        /// <summary>
+        /// 尝试进行同步
+        /// </summary>
+        private void SendOfflineData()
+        {
+            Queue<Dictionary<string, object>> localQueue = new Queue<Dictionary<string, object>>(LocalDatasManager.netBufferQueue);
+            Debug.Log("提取离线数据：" + localQueue.Count);
+            if (localQueue.Count > 0)
+            {
+                OfflineData offlineData = new OfflineData(GameMainManager.Instance.playerData);
+                offlineData.offline = LocalDatasManager.netBufferQueue;
+                UpLoadOffLineData(offlineData, (ret, res) => {
+                    LocalDatasManager.netBufferQueue = null;
+                });
+            }
+
+        }
         /// <summary>
         /// 登录
         /// </summary>
@@ -187,63 +267,10 @@ namespace qy.net
         /// <returns></returns>
         public bool Login(LoginInfo loginInfo, Action<bool, PlayerDataMessage> callBack)
         {
-            //TrySynchronizationData();
-            if (!isNetWorkStatusGood)
-            {
-                PlayerData pd = LocalDatasManager.playerData;
-                if(pd!=null)
-                {
-                    GameMainManager.Instance.playerData = pd;
-                }else
-                {
-                    Debug.Log("数据错误，请联网同步数据");
-                }
-               
-                return true;
-            }
-            string url = APIDomain;
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            data.Add("cmd", LOGIN_CMD);
-            data.Add("device", Utils.instance.getDeviceID());
-            data.Add("data", JsonMapper.ToJson(loginInfo));
-
-            return HttpProxy.SendPostRequest<PlayerDataMessage>(url, data, (ret, res) =>
-            {
-                if (res.isOK)
-                {
-                    GameMainManager.Instance.playerData.RefreshData(res);
-
-                }
-                else
-                {
-                    Debug.Log(GetMsgByErrorCode(res.err));
-                }
-                callBack(ret, res);
-            });
-
+            return SendData(LOGIN_CMD, loginInfo, callBack);
         }
 
-        /// <summary>
-        /// 上传离线数据
-        /// </summary>
-        /// <param name="playerData"></param>
-        /// <param name="callBack"></param>
-        /// <returns></returns>
-        public bool UpLoadOffLineData(PlayerDataServerMessage playerData, Action<bool, PlayerDataMessage> callBack)
-        {
-
-            return SendData(SAVE_OFF_LINE, playerData, (ret,res)=> {
-                if(res.isOK)
-                {
-                    Debug.Log("===============【上传离线数据成功】==============");
-                }
-                else
-                {
-                    Debug.Log("============【上传离线数据失败】==============" + GetMsgByErrorCode(res.err));
-                }
-                callBack(ret,res);
-            });
-        }
+        
 
         /// <summary>
         /// 使用道具
@@ -257,7 +284,7 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["item"] = itemID;
             jd["num"] = count;
-
+            jd["timestamp"] = time.ToString();
             return SendData(ITEM_DEL_CMD, jd, callBack);
         }
         /// <summary>
@@ -272,7 +299,7 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["storyid"] = questId;
             jd["choice"] = string.Format("{0}|{1}|{2}",ability.discipline,ability.loyalty,ability.wisdom);
-
+            jd["timestamp"] = time.ToString();
             return SendData(SAVE_STORY_CMD, jd, callBack);
         }
 
@@ -288,7 +315,7 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["itemId"] = itemId;
             jd["num"] = num;
-
+            jd["timestamp"] = time.ToString();
             return SendData(ITEM_BUY_CMD, jd, callBack);
         }
 
@@ -301,8 +328,9 @@ namespace qy.net
         /// <returns></returns>
         public bool LevelStart(Action<bool, PlayerDataMessage> callBack)
         {
-            
-            return SendData(LEVEL_START_CMD, null, callBack);
+            JsonData jd = new JsonData();
+            jd["timestamp"] = time.ToString();
+            return SendData(LEVEL_START_CMD, jd, callBack);
         }
         /// <summary>
         /// 关卡结束
@@ -320,7 +348,7 @@ namespace qy.net
             jd["succ"] = result;
             jd["step"] = step;
             jd["gold"] = wingold;
-
+            jd["timestamp"] = time.ToString();
             return SendData(LEVEL_END, jd, callBack);
         }
         /// <summary>
@@ -335,6 +363,7 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["level"] = level;
             jd["step"] = step;
+            jd["timestamp"] = time.ToString();
             return SendData(MAKE_POINT_ELIMINATEGUIDE, jd, callBack);
         }
 
@@ -351,6 +380,7 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["name"] = name;
             jd["num"] = num;
+            jd["timestamp"] = time.ToString();
             Debug.Log("MakePointInClickButton Result:" + jd.ToJson());
             return SendData(ServerGlobal.MAKE_POINT_CLICK, jd, callBack);
         }
@@ -361,7 +391,9 @@ namespace qy.net
         /// <returns></returns>
         public bool BuyHeart(Action<bool, PlayerDataMessage> callBack)
         {
-            return SendData(HEART_BUY, null, callBack);
+            JsonData jd = new JsonData();
+            jd["timestamp"] = time.ToString();
+            return SendData(HEART_BUY, jd, callBack);
         }
 
         /// <summary>
@@ -372,7 +404,9 @@ namespace qy.net
         /// <returns></returns>
         public bool EliminateLevelFiveMore(int step,Action<bool, PlayerDataMessage> callBack)
         {
-            return SendData(LEVEL_FIVEMORE, null, callBack);
+            JsonData jd = new JsonData();
+            jd["timestamp"] = time.ToString();
+            return SendData(LEVEL_FIVEMORE, jd, callBack);
         }
         /// <summary>
         /// 更改姓名
@@ -385,7 +419,7 @@ namespace qy.net
 
             JsonData jd = new JsonData();
             jd["nickName"] = nickName;
-
+            jd["timestamp"] = time.ToString();
             return SendData(CHANGE_NAME, jd, (ret,res)=> {
                 callBack(ret, res);
                 Messenger.Broadcast(ELocalMsgID.CloseModifyPanel);
@@ -400,7 +434,9 @@ namespace qy.net
         /// <returns></returns>
         public bool SevenDayAward( Action<bool, PlayerDataMessage> callBack)
         {
-            return SendData(SEVEN_DAY_AWARD, new object(), (ret,res)=> {
+            JsonData jd = new JsonData();
+            jd["timestamp"] = time.ToString();
+            return SendData(SEVEN_DAY_AWARD, jd, (ret,res)=> {
                 callBack(ret, res);
                 Messenger.Broadcast(ELocalMsgID.ShowDailyLandingActivites);
             });
@@ -408,7 +444,9 @@ namespace qy.net
 
         public bool SevenDayInfo(Action<bool, PlayerDataMessage> callBack)
         {
-            return SendData(SEVEN_DAY_INFO, new object(), callBack);
+            JsonData jd = new JsonData();
+            jd["timestamp"] = time.ToString();
+            return SendData(SEVEN_DAY_INFO, jd, callBack);
         }
 
         public bool UserBind(string id, string name, Action<bool, PlayerDataMessage> callBack)
@@ -417,7 +455,7 @@ namespace qy.net
             jd["optType"] = 1;
             jd["facebook"] = id;
             jd["facebookAccountName"] = name;
-
+            jd["timestamp"] = time.ToString();
             return SendData(BIND_CMD, jd, callBack);
         }
 
@@ -425,7 +463,7 @@ namespace qy.net
         {
             JsonData jd = new JsonData();
             jd["type"] = 1;
-
+            jd["timestamp"] = time.ToString();
             return SendData(BIND_CMD, jd, callBack);
         }
         /// <summary>
@@ -438,7 +476,7 @@ namespace qy.net
         {
             JsonData jd = new JsonData();
             jd["roleId"] = id;
-
+            jd["timestamp"] = time.ToString();
             return SendData(ROLE_SWITCH, jd, callBack);
         }
         /// <summary>
@@ -453,6 +491,7 @@ namespace qy.net
             JsonData jd = new JsonData();
             jd["roleId"] = id;
             jd["type"] = type;
+            jd["timestamp"] = time.ToString();
             return SendData(ROLE_RECOVER, jd, callBack);
         }
         /// <summary>
@@ -465,29 +504,32 @@ namespace qy.net
         {
             JsonData jd = new JsonData();
             jd["type"] = type;
+            jd["timestamp"] = time.ToString();
             return SendData(ROLE_END, jd, callBack);
         }
 
         /// <summary>
-        /// 尝试进行同步
+        /// 上传离线数据
         /// </summary>
-        private void TrySynchronizationData(Action onComplate)
+        /// <param name="playerData"></param>
+        /// <param name="callBack"></param>
+        /// <returns></returns>
+        private bool UpLoadOffLineData(OfflineData playerData, Action<bool, PlayerDataMessage> callBack)
         {
-            if (isNeedUpLoadOffLine && isNetWorkStatusGood)
-            {
-                Debug.Log("开始同步数据");
-                UpLoadOffLineData(new PlayerDataServerMessage(GameMainManager.Instance.playerData), (ret, res) =>
-                {
-                    isNeedUpLoadOffLine = false;
-                    GameMainManager.Instance.playerData.dirty = false;
-                    onComplate();
-                });
-            }else
-            {
-                onComplate();
-            }
 
+            return SendData(SAVE_OFF_LINE, playerData, (ret, res) => {
+                if (res.isOK)
+                {
+                    Debug.Log("===============【上传离线数据成功】==============");
+                }
+                else
+                {
+                    Debug.Log("============【上传离线数据失败】==============" + GetMsgByErrorCode(res.err));
+                }
+                callBack(ret, res);
+            });
         }
+        
 
         private string GetMsgByErrorCode(string errorcode)
         {

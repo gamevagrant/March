@@ -73,7 +73,7 @@ public class PlayerDataMessage : NetMessage
     }
 }
 
-public class PlayerDataServerMessage : NetMessage
+public class OfflineData : NetMessage
 {
     public string storyid;
     public string heartTime;
@@ -93,13 +93,15 @@ public class PlayerDataServerMessage : NetMessage
     public List<PlayerDataMessage.StoryData> stories;
     public string roleId = "";//当前角色id
     public int discipline;
-    public int loyaty;
+    public int loyalty;
     public int wisdom;
     public string storyExp = "0";//总经验
     public string lvExp = "0";//当前等级
     public int storyLv = 1;//等级
+    public List<Dictionary<string,object>> offline;//离线行为数据
+    public string timestamp;
 
-    public PlayerDataServerMessage(qy.PlayerData playerData)
+    public OfflineData(qy.PlayerData playerData)
     {
         storyid = playerData.questId;
         heartTime = (playerData.hertTimestamp * 1000).ToString();
@@ -122,7 +124,7 @@ public class PlayerDataServerMessage : NetMessage
         }
 
         discipline = playerData.ability.discipline;
-        loyaty = playerData.ability.loyalty;
+        loyalty = playerData.ability.loyalty;
         wisdom = playerData.ability.wisdom;
         storyExp = playerData.totalExp.ToString();
         lvExp = playerData.currExp.ToString();
@@ -143,5 +145,6 @@ public class PlayerDataServerMessage : NetMessage
             storyData.storyId = id;
             stories.Add(storyData);
         }
+        timestamp = GameUtils.DateTimeToTimestamp(System.DateTime.Now).ToString();
     }
 }

@@ -220,8 +220,8 @@
     <ItemSpec id="1000310" questId="10018" bgFile="1000226bg" personFile="person3" dialogue="100319" next="1000311"/>
     <ItemSpec id="1000311" questId="10018" bgFile="1000226bg" personFile="person4" dialogue="100320" next="0"/>
     <ItemSpec id="1000312" questId="10018" bgFile="1000226bg" personFile="person1" dialogue="100321" next="1000313"/>
-    <ItemSpec id="1000313" questId="10018" bgFile="1000106bg" personFile="person2" dialogue="100322" next="1000314"/>
-    <ItemSpec id="1000314" questId="10018" bgFile="1000106bg" personFile="person3" dialogue="100323" next="1000315"/>
+    <ItemSpec id="1000313" questId="10018" bgFile="1000226bg" personFile="person2" dialogue="100322" next="1000314"/>
+    <ItemSpec id="1000314" questId="10018" bgFile="1000226bg" personFile="person3" dialogue="100323" next="1000315"/>
     <ItemSpec id="1000315" questId="10018" bgFile="3bg" personFile="person4" dialogue="100324" next="1000316"/>
     <ItemSpec id="1000316" questId="10018" bgFile="3bg" personFile="person1" dialogue="100325" next="1000317"/>
     <ItemSpec id="1000317" questId="10018" bgFile="3bg" personFile="person2" dialogue="100326" next="1000318"/>

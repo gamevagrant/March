@@ -63,8 +63,32 @@ namespace qy
                 SaveData("CALLBACKED_FRIENDS", value);
             }
         }
-
-
+        /// <summary>
+        /// 网络请求缓冲队列
+        /// </summary>
+        public static List<Dictionary<string, object>> netBufferQueue
+        {
+            get
+            {
+                return GetData<List<Dictionary<string, object>>>("NET_BUFFER_QUEUE")??new List<Dictionary<string, object>>();
+            }set
+            {
+                SaveData("NET_BUFFER_QUEUE", value);
+            }
+        }
+#if UNITY_EDITOR
+        public static List<CallMethodInfo> callMethodList
+        {
+            get
+            {
+                return GetData<List<CallMethodInfo>>("CALL_METHOD_LIST") ?? new List<CallMethodInfo>();
+            }
+            set
+            {
+                SaveData("CALL_METHOD_LIST", value);
+            }
+        }
+#endif
 
         private static T GetData<T>(string name)
         {
