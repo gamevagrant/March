@@ -7,16 +7,16 @@ namespace March.Scene
     [Serializable]
     public class Position
     {
-        public double X;
-        public double Y;
-        public double Z;
+        public float X;
+        public float Y;
+        public float Z;
 
         public Position()
         {
             X = Y = Z = 0;
         }
 
-        public Position(double x, double y, double z)
+        public Position(float x, float y, float z)
         {
             X = x;
             Y = y;

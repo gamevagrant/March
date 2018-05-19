@@ -1,5 +1,4 @@
-﻿using LitJson;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -54,7 +53,7 @@ namespace March.Scene
 
             if (AutoLoad)
             {
-                SceneLevel = JsonMapper.ToObject<SceneLevel>(Data.text);
+                SceneLevel = JsonUtility.FromJson<SceneLevel>(Data.text);
                 GenerateGoMap();
             }
 
@@ -80,7 +79,7 @@ namespace March.Scene
                     }));
                 }
             }
-            var json = JsonMapper.ToJson(SceneLevel);
+            var json = JsonUtility.ToJson(SceneLevel);
             File.WriteAllText(path, json);
 
             Message = string.Format("Save level to file: {0}", new FileInfo(path).FullName);
@@ -92,7 +91,7 @@ namespace March.Scene
             try
             {
                 var json = File.ReadAllText(path);
-                SceneLevel = JsonMapper.ToObject<SceneLevel>(json);
+                SceneLevel = JsonUtility.FromJson<SceneLevel>(json);
             }
             catch (Exception e)
             {
@@ -112,7 +111,7 @@ namespace March.Scene
                 GoMap.Add(key, new List<GameObject>());
                 foreach (var gameInfo in list)
                 {
-                    var position = new Vector3((float)gameInfo.Position.X, (float)gameInfo.Position.Y, (float)gameInfo.Position.Z);
+                    var position = new Vector3(gameInfo.Position.X, gameInfo.Position.Y, gameInfo.Position.Z);
                     var go = Loader.CreateIdentifyGameObject(SceneLayerMap[key], gameInfo.ID, position);
                     if (SceneLoader != null)
                     {
