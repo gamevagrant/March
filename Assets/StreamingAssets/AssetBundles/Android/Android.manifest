@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3880614072
+CRC: 2759989766
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -15,13 +15,13 @@ AssetBundleManifest:
       Name: scene/npc
       Dependencies: {}
     Info_4:
-      Name: film/bg
-      Dependencies: {}
-    Info_5:
       Name: play/level
       Dependencies: {}
-    Info_6:
+    Info_5:
       Name: core/config
+      Dependencies: {}
+    Info_6:
+      Name: film/bg
       Dependencies: {}
     Info_7:
       Name: story/bg
