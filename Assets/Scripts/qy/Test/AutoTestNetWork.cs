@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
@@ -141,3 +143,5 @@ public class CallMethodInfo
     public string name;
     public object[] parameters;
 }
+
+#endif
