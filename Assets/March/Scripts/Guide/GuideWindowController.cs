@@ -10,9 +10,10 @@ public class GuideWindowController : MonoBehaviour
 
     public UnityAction NextButtonAction;
 
+    public Button NextButton;
+
     private Text contentText;
     private Text nextButtonText;
-    private Button nextButton;
     private Transform head;
 
     private RectTransform rectTransform;
@@ -30,10 +31,10 @@ public class GuideWindowController : MonoBehaviour
 
         contentText = transform.Find("Text").GetComponent<Text>();
         nextButtonText = transform.Find("NextButton/Text").GetComponent<Text>();
-        nextButton = transform.Find("NextButton").GetComponent<Button>();
+        NextButton = transform.Find("NextButton").GetComponent<Button>();
         head = transform.Find("Head");
 
-        nextButton.onClick.AddListener(NextButtonAction);
+        NextButton.onClick.AddListener(NextButtonAction);
     }
 
     [ContextMenu("UI to Data")]
@@ -42,7 +43,7 @@ public class GuideWindowController : MonoBehaviour
         Initialize();
 
         Data.Position = new Position(rectTransform.anchoredPosition);
-        Data.HasNextButton = nextButton.gameObject.activeSelf;
+        Data.HasNextButton = NextButton.gameObject.activeSelf;
         Data.HasHead = head.gameObject.activeSelf;
         Data.Content = contentText.text;
         Data.NextButtonContent = nextButtonText.text;
@@ -54,7 +55,7 @@ public class GuideWindowController : MonoBehaviour
         Initialize();
 
         rectTransform.anchoredPosition = new Vector3(Data.Position.X, Data.Position.Y, Data.Position.Z);
-        nextButton.gameObject.SetActive(Data.HasNextButton);
+        NextButton.gameObject.SetActive(Data.HasNextButton);
         head.gameObject.SetActive(Data.HasHead);
         contentText.text = Data.Content;
         nextButtonText.text = Data.NextButtonContent;

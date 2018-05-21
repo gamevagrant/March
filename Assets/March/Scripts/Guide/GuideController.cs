@@ -1,7 +1,8 @@
 ﻿using March.Core.Guide;
-using System.Collections.Generic;
 using March.Scene;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GuideController : MonoBehaviour
@@ -10,6 +11,8 @@ public class GuideController : MonoBehaviour
     public GuideData GuideData;
 
     public int StepMax;
+
+    public bool AutoMode;
 
     private const string GuideTemplate = "GuideTemplate";
     private const string GuideHand = "GuideHand";
@@ -22,13 +25,45 @@ public class GuideController : MonoBehaviour
     private GuideWindowController guideWindow;
     private Transform maskContainer;
 
-    private Queue<GuideItem> guideItemQueue = new Queue<GuideItem>();
+    private readonly Queue<GuideItem> guideItemQueue = new Queue<GuideItem>();
 
     private int step;
 
+    private HelpPopup helpController;
+
     private void Start()
     {
+        if (!AutoMode)
+            return;
+
         Generate();
+        GenerateLegacy();
+    }
+
+    public void GenerateLegacy()
+    {
+        // handle legacy code with HelpPopup
+        helpController = gameObject.GetComponent<HelpPopup>();
+        if (guideHand != null)
+            helpController.AnimateHand(guideHand.GetComponent<Image>());
+
+        var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
+        entry.callback.AddListener(eventData => helpController.SkipButtonDown());
+        guideWindow.NextButton.GetComponent<EventTrigger>().triggers.Add(entry);
+        entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
+        entry.callback.AddListener(eventData => helpController.SkipButtonUp());
+        guideWindow.NextButton.GetComponent<EventTrigger>().triggers.Add(entry);
+
+        for (var i = 0; i < maskContainer.transform.childCount; ++i)
+        {
+            var mask = maskContainer.GetChild(0);
+            var maskEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
+            maskEntry.callback.AddListener(eventData => helpController.MaskDown());
+            mask.GetComponent<EventTrigger>().triggers.Add(entry);
+            maskEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
+            maskEntry.callback.AddListener(eventData => helpController.MaskUp());
+            mask.GetComponent<EventTrigger>().triggers.Add(entry);
+        }
     }
 
     private void Initialize()
@@ -89,6 +124,9 @@ public class GuideController : MonoBehaviour
             item.AnchorMin = item.AnchorMax = item.Pivot = new Position(0.5f, 0.5f, 0);
             item.AnchorPosition = new Position(rectNormal.anchoredPosition.x, rectNormal.anchoredPosition.y, 0);
             item.Size = new Position(rectNormal.sizeDelta.x, rectNormal.sizeDelta.y, 0);
+
+            rect.gameObject.SetActive(false);
+            rectNormal.gameObject.SetActive(false);
         });
 
         CleanupMask();

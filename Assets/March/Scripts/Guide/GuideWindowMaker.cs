@@ -55,7 +55,7 @@ public class GuideWindowMaker : MonoBehaviour
 
     private Dictionary<PathType, string> pathDict = new Dictionary<PathType, string>
     {
-        {PathType.FromResource, "March/Data/PlayGuide"},
+        {PathType.FromResource, "March/Data/Resources/PlayGuide"},
         {PathType.FromAssetBundle, "AssetBundleResources/PlayGuide"}
     };
 

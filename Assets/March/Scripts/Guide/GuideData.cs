@@ -40,6 +40,7 @@ namespace March.Core.Guide
     public class GuideHandData
     {
         public Position Position;
+        public Position Direction;
         public bool Show;
     }
 }
