@@ -16,7 +16,6 @@ public class GuideWindowController : MonoBehaviour
     private Transform head;
 
     private RectTransform rectTransform;
-    private bool initialized;
 
     void Awake()
     {
@@ -27,9 +26,6 @@ public class GuideWindowController : MonoBehaviour
 
     void Initialize()
     {
-        if (initialized)
-            return;
-
         rectTransform = GetComponent<RectTransform>();
 
         contentText = transform.Find("Text").GetComponent<Text>();

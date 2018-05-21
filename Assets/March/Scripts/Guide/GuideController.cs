@@ -71,6 +71,9 @@ public class GuideController : MonoBehaviour
         GuideData.ItemList.ForEach(item =>
         {
             var rect = Instantiate(Resources.Load<GameObject>(GuideImage), guideInstance.transform, false).GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(item.AnchorMin.X, item.AnchorMin.Y);
+            rect.anchorMax = new Vector2(item.AnchorMax.X, item.AnchorMax.Y);
+            rect.pivot = new Vector2(item.Pivot.X, item.Pivot.Y);
             rect.anchoredPosition = new Vector3(item.AnchorPosition.X, item.AnchorPosition.Y, item.AnchorPosition.Z);
             rect.sizeDelta = new Vector3(item.Size.X, item.Size.Y, item.Size.Z);
             rect.name = item.ObjectName;

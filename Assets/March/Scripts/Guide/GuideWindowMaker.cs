@@ -14,8 +14,42 @@ public class GuideWindowMaker : MonoBehaviour
         FromAssetBundle,
     }
 
+    public enum GuideType
+    {
+        Guide_1_1,
+        Guide_1_2,
+        Guide_2_1,
+        Guide_2_2,
+        Guide_2_3,
+        Guide_2_4,
+        Guide_2_5,
+        Guide_3_1,
+        Guide_3_2,
+        Guide_3_3,
+        Guide_3_4,
+        Guide_3_5,
+        Guide_4_1,
+        Guide_4_2,
+        Guide_4_3,
+        Guide_4_4,
+        Guide_4_5,
+        Guide_5_1,
+        Guide_5_2,
+        Guide_6_1,
+        Guide_6_2,
+        Guide_7_1,
+        Guide_7_2,
+        Guide_7_3,
+        Guide_7_4,
+        Guide_8_1,
+        Guide_9_1,
+        Guide_9_2,
+        Guide_12_1,
+        Guide_18_1,
+    }
+
     public PathType SavePath;
-    public string FileName;
+    public GuideType GuideName;
 
     public List<RectTransform> ImageList;
 
@@ -32,9 +66,13 @@ public class GuideWindowMaker : MonoBehaviour
     private GuideWindowController guideWindow;
 
     private GuideData data;
-    private bool initialized;
 
     public RectTransform TestImage;
+
+    private string GuideFileName
+    {
+        get { return string.Format("{0}.json", GuideName); }
+    }
 
     void Awake()
     {
@@ -43,11 +81,12 @@ public class GuideWindowMaker : MonoBehaviour
 
     void Initialize()
     {
-        if (initialized)
-            return;
-
-        initialized = true;
         imageContainer = transform.Find("ImageContainer");
+        ImageList.Clear();
+        for (var i = 0; i < imageContainer.childCount; ++i)
+        {
+            ImageList.Add(imageContainer.GetChild(i).GetComponent<RectTransform>());
+        }
 
         guideMaskContainer = transform.Find("GuideMask");
         guideHand = transform.Find("GuideHand");
@@ -58,18 +97,12 @@ public class GuideWindowMaker : MonoBehaviour
     [ContextMenu("Save")]
     void OnSaveClicked()
     {
-        if (string.IsNullOrEmpty(FileName))
-        {
-            Debug.Log("File could not be empty.");
-            return;
-        }
-
         Initialize();
 
         SaveGuideData();
 
         var json = JsonUtility.ToJson(data);
-        var path = string.Format("{0}/{1}/{2}", Application.dataPath, pathDict[SavePath], FileName);
+        var path = string.Format("{0}/{1}/{2}", Application.dataPath, pathDict[SavePath], GuideFileName);
         File.WriteAllText(path, json);
 
         Debug.Log("Save file to path: " + path);
@@ -80,9 +113,9 @@ public class GuideWindowMaker : MonoBehaviour
         data.Hand.Show = guideHand.gameObject.activeSelf;
         data.Hand.Position = new Position(guideHand.GetComponent<RectTransform>().anchoredPosition);
 
-        var path = string.Format("{0}/{1}/{2}", Application.dataPath, pathDict[SavePath], FileName);
+        var path = string.Format("{0}/{1}/{2}", Application.dataPath, pathDict[SavePath], GuideFileName);
         data.Name = new FileInfo(path).Name.Replace(new FileInfo(path).Extension, string.Empty);
-        guideWindow.FlushUIToData();
+        guideWindow.Data.Position = new Position(guideWindow.GetComponent<RectTransform>().anchoredPosition);
         data.Window = guideWindow.Data;
         data.ItemList.Clear();
         data.ItemList.AddRange(ImageList.Select(rectTransform => new GuideItem
@@ -99,17 +132,9 @@ public class GuideWindowMaker : MonoBehaviour
     [ContextMenu("Load")]
     void OnLoadClicked()
     {
-        if (string.IsNullOrEmpty(FileName))
-        {
-            Debug.Log("File could not be empty.");
-            return;
-        }
-
-        initialized = false;
-
         Initialize();
 
-        var path = string.Format("{0}/{1}/{2}", Application.dataPath, pathDict[SavePath], FileName);
+        var path = string.Format("{0}/{1}/{2}", Application.dataPath, pathDict[SavePath], GuideFileName);
         var json = File.ReadAllText(path);
         data = JsonUtility.FromJson<GuideData>(json);
 
@@ -131,6 +156,9 @@ public class GuideWindowMaker : MonoBehaviour
         ImageList.AddRange(data.ItemList.Select(item =>
         {
             var rect = Instantiate(guideImage.gameObject, imageContainer).GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(item.AnchorMin.X, item.AnchorMin.Y);
+            rect.anchorMax = new Vector2(item.AnchorMax.X, item.AnchorMax.Y);
+            rect.pivot = new Vector2(item.Pivot.X, item.Pivot.Y);
             rect.anchoredPosition = new Vector3(item.AnchorPosition.X, item.AnchorPosition.Y, item.AnchorPosition.Z);
             rect.sizeDelta = new Vector3(item.Size.X, item.Size.Y, item.Size.Z);
             rect.name = item.ObjectName;
