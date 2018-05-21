@@ -1,5 +1,6 @@
 ﻿using March.Core.Guide;
 using System.Collections.Generic;
+using March.Scene;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,8 @@ public class GuideController : MonoBehaviour
     [ContextMenu("Generate")]
     public void Generate()
     {
+        Cleanup();
+
         Initialize();
 
         name = GuideData.Name;
@@ -77,6 +80,15 @@ public class GuideController : MonoBehaviour
             rect.anchoredPosition = new Vector3(item.AnchorPosition.X, item.AnchorPosition.Y, item.AnchorPosition.Z);
             rect.sizeDelta = new Vector3(item.Size.X, item.Size.Y, item.Size.Z);
             rect.name = item.ObjectName;
+
+            // normalize rect into normal space.
+            var rectNormal = Instantiate(Resources.Load<GameObject>(GuideImage), guideInstance.transform, false).GetComponent<RectTransform>();
+            rectNormal.sizeDelta = rect.sizeDelta;
+            rectNormal.localPosition = rect.localPosition;
+
+            item.AnchorMin = item.AnchorMax = item.Pivot = new Position(0.5f, 0.5f, 0);
+            item.AnchorPosition = new Position(rectNormal.anchoredPosition.x, rectNormal.anchoredPosition.y, 0);
+            item.Size = new Position(rectNormal.sizeDelta.x, rectNormal.sizeDelta.y, 0);
         });
 
         CleanupMask();
