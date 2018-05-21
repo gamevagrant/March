@@ -139,6 +139,7 @@ public class Board : MonoBehaviour
     [ContextMenu("CleanupLevel")]
     public void CleanupLevel()
     {
+        firstNodePosition = Vector3.zero;
         nodes.Clear();
         for (var i = transform.childCount - 1; i >= 0; --i)
             DestroyImmediate(transform.GetChild(i).gameObject);
@@ -146,11 +147,6 @@ public class Board : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    Application.Quit();
-        //}
-
         if (state == GAME_STATE.WAITING_USER_SWAP && lockSwap == false && moveLeft > 0)
         {
             if (needIncreaseBubble)

@@ -184,6 +184,52 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1028083471}
   m_Script: {fileID: 11500000, guid: d3c6ff8c2f7b23e4a929d935b293a73a, type: 3}
+--- !u!1001 &506148585
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 472530, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 137366, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+      propertyPath: m_Name
+      value: LevelLoader
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ebe07ce94c3f4f541a246ce6185ed17a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &524518175
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +784,7 @@ MonoBehaviour:
   FiveMoreTimes: 0
   minWinGold: 0
   winGold: 0
+  LevelText: {fileID: 4900000, guid: c89caca2af0ecf14ead56f6b886150dd, type: 3}
 --- !u!1 &1298485444
 GameObject:
   m_ObjectHideFlags: 0
