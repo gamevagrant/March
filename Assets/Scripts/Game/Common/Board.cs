@@ -76,6 +76,9 @@ public class Board : MonoBehaviour
     public int minWinGold;
     public int winGold;
 
+    [Header("EditorMode")]
+    public TextAsset LevelText;
+
     void Awake()
     {
         if (LevelLoader.instance.level == 0)
@@ -122,6 +125,23 @@ public class Board : MonoBehaviour
 
         // open target popup
         TargetPopup();
+    }
+
+    [ContextMenu("LoadLevel")]
+    public void LoadLevel()
+    {
+        LevelLoader.instance.LoadLevel(LevelText.text);
+
+        CleanupLevel();
+        GenerateBoard();
+    }
+
+    [ContextMenu("CleanupLevel")]
+    public void CleanupLevel()
+    {
+        nodes.Clear();
+        for (var i = transform.childCount - 1; i >= 0; --i)
+            DestroyImmediate(transform.GetChild(i).gameObject);
     }
 
     void Update()
@@ -234,6 +254,7 @@ public class Board : MonoBehaviour
         var row = LevelLoader.instance.row;
         var column = LevelLoader.instance.column;
 
+        nodes.Clear();
         for (int i = 0; i < row; i++)
         {
             for (int j = 0; j < column; j++)
