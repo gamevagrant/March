@@ -137,6 +137,7 @@ public class AutoTestNetWork:MonoBehaviour {
 
 
 }
+#endif
 
 public class CallMethodInfo
 {
@@ -144,4 +145,3 @@ public class CallMethodInfo
     public object[] parameters;
 }
 
-#endif
