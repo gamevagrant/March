@@ -1,6 +1,7 @@
 ﻿using March.Scene;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace March.Core.Guide
 {
@@ -18,7 +19,10 @@ namespace March.Core.Guide
     public class GuideItem
     {
         public string ObjectName;
-        public Position Position;
+        public Position AnchorMin;
+        public Position AnchorMax;
+        public Position Pivot;
+        public Position AnchorPosition;
         public Position Size;
     }
 

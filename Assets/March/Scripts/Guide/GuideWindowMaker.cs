@@ -88,7 +88,10 @@ public class GuideWindowMaker : MonoBehaviour
         data.ItemList.AddRange(ImageList.Select(rectTransform => new GuideItem
         {
             ObjectName = rectTransform.name,
-            Position = new Position(rectTransform.anchoredPosition),
+            AnchorMin = new Position(rectTransform.anchorMin),
+            AnchorMax = new Position(rectTransform.anchorMax),
+            Pivot = new Position(rectTransform.pivot),
+            AnchorPosition = new Position(rectTransform.anchoredPosition),
             Size = new Position(rectTransform.rect.size)
         }));
     }
@@ -128,7 +131,7 @@ public class GuideWindowMaker : MonoBehaviour
         ImageList.AddRange(data.ItemList.Select(item =>
         {
             var rect = Instantiate(guideImage.gameObject, imageContainer).GetComponent<RectTransform>();
-            rect.anchoredPosition = new Vector3(item.Position.X, item.Position.Y, item.Position.Z);
+            rect.anchoredPosition = new Vector3(item.AnchorPosition.X, item.AnchorPosition.Y, item.AnchorPosition.Z);
             rect.sizeDelta = new Vector3(item.Size.X, item.Size.Y, item.Size.Z);
             rect.name = item.ObjectName;
             return rect;
