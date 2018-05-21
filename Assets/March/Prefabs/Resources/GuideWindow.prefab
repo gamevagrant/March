@@ -319,13 +319,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     Position:
-      X: -398
-      Y: -287
+      X: 166.35446
+      Y: -150.79997
       Z: 0
-    Content: 210131
+    Content: 210125
     NextButtonContent: 210155
-    HasNextButton: 1
+    HasNextButton: 0
     HasHead: 1
+  NextButton: {fileID: 114508327864076766}
 --- !u!114 &114761569465150050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,7 +359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 210131
+  m_Text: 210125
 --- !u!114 &114854347338962808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -556,7 +557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -398, y: -287}
+  m_AnchoredPosition: {x: 166.35446, y: -150.79997}
   m_SizeDelta: {x: 955.4, y: 240.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224744587872593152
