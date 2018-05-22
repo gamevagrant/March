@@ -82,7 +82,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -97,7 +96,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -112,7 +110,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -127,7 +124,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -147,7 +143,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -163,7 +158,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -178,7 +172,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -198,7 +191,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -218,7 +210,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -233,7 +224,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
                 prefab = guideController.gameObject;
             }
@@ -253,7 +243,6 @@ public class Help : MonoBehaviour
                 guideController.GuideText =
                     Instantiate(Resources.Load(GetGuidePath(LevelLoader.instance.level, step))) as TextAsset;
                 guideController.Generate();
-                guideController.GenerateLegacy();
                 guideController.name = string.Format("Level {0} Step {1}", LevelLoader.instance.level, step);
 
                 prefab = guideController.gameObject;

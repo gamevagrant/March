@@ -21,15 +21,16 @@ public class GuideController : MonoBehaviour
     private const string GuideImage = "GuideImage";
 
     private GameObject guideInstance;
-    private RectTransform guideHand;
+    //private RectTransform guideHand;
     private GuideWindowController guideWindow;
+    private GuideHandController guideHandeController;
     private Transform maskContainer;
 
     private readonly Queue<GuideItem> guideItemQueue = new Queue<GuideItem>();
 
     private int step;
 
-    private HelpPopup helpController;
+    private GuideActionHandler actionHandler;
 
     private void Start()
     {
@@ -37,31 +38,25 @@ public class GuideController : MonoBehaviour
             return;
 
         Generate();
-        GenerateLegacy();
     }
 
-    public void GenerateLegacy()
+    public void GenerateAction()
     {
-        // handle legacy code with HelpPopup
-        helpController = gameObject.GetComponent<HelpPopup>();
-        if (guideHand != null)
-            helpController.AnimateHand(guideHand.GetComponent<Image>());
-
         var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
-        entry.callback.AddListener(eventData => helpController.SkipButtonDown());
+        entry.callback.AddListener(eventData => actionHandler.SkipButtonDown());
         guideWindow.NextButton.GetComponent<EventTrigger>().triggers.Add(entry);
         entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
-        entry.callback.AddListener(eventData => helpController.SkipButtonUp());
+        entry.callback.AddListener(eventData => actionHandler.SkipButtonUp());
         guideWindow.NextButton.GetComponent<EventTrigger>().triggers.Add(entry);
 
         for (var i = 0; i < maskContainer.transform.childCount; ++i)
         {
             var mask = maskContainer.GetChild(0);
             var maskEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
-            maskEntry.callback.AddListener(eventData => helpController.MaskDown());
+            maskEntry.callback.AddListener(eventData => actionHandler.MaskDown());
             mask.GetComponent<EventTrigger>().triggers.Add(entry);
             maskEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
-            maskEntry.callback.AddListener(eventData => helpController.MaskUp());
+            maskEntry.callback.AddListener(eventData => actionHandler.MaskUp());
             mask.GetComponent<EventTrigger>().triggers.Add(entry);
         }
     }
@@ -84,6 +79,8 @@ public class GuideController : MonoBehaviour
         guideItemQueue.Clear();
         GuideData.ItemList.ForEach(guideItemQueue.Enqueue);
 
+        actionHandler = gameObject.GetComponent<GuideActionHandler>();
+
         step = 0;
     }
 
@@ -96,16 +93,18 @@ public class GuideController : MonoBehaviour
 
         name = GuideData.Name;
 
-        if (GuideData.Hand.Show)
-        {
-            guideHand = Instantiate(Resources.Load<GameObject>(GuideHand), guideInstance.transform, false).GetComponent<RectTransform>();
-            guideHand.anchoredPosition = new Vector3(GuideData.Hand.Position.X, GuideData.Hand.Position.Y, GuideData.Hand.Position.Z);
-        }
+        // guide hand.
+        guideHandeController = Instantiate(Resources.Load<GameObject>(GuideHand), guideInstance.transform, false).GetComponent<GuideHandController>();
+        guideHandeController.Data = GuideData.Hand;
+        guideHandeController.FlushDataToUI();
+        guideHandeController.Animate();
 
+        // guide window.
         guideWindow = Instantiate(Resources.Load<GameObject>(GuideWindow), guideInstance.transform, false).GetComponent<GuideWindowController>();
         guideWindow.Data = GuideData.Window;
         guideWindow.FlushDataToUI();
 
+        // guide items.
         GuideData.ItemList.ForEach(item =>
         {
             var rect = Instantiate(Resources.Load<GameObject>(GuideImage), guideInstance.transform, false).GetComponent<RectTransform>();
@@ -136,6 +135,8 @@ public class GuideController : MonoBehaviour
         mask0.name = mask0.name + "_0";
         mask0.sizeDelta = maskContainer.GetComponent<RectTransform>().rect.size;
         GenerateMask(mask0);
+
+        GenerateAction();
     }
 
     [ContextMenu("Cleanup")]
@@ -177,8 +178,10 @@ public class GuideController : MonoBehaviour
 
     private bool InRange(GuideItem item, RectTransform parent)
     {
-        return item.AnchorPosition.X > parent.anchoredPosition.x - parent.rect.size.x / 2 && (item.AnchorPosition.X < parent.anchoredPosition.x + parent.rect.size.x / 2)
-               && (item.AnchorPosition.Y > parent.anchoredPosition.y - parent.rect.size.y / 2) && item.AnchorPosition.Y < parent.anchoredPosition.y + parent.rect.size.y / 2;
+        return item.AnchorPosition.X > parent.anchoredPosition.x - parent.rect.size.x / 2 
+               && item.AnchorPosition.X < parent.anchoredPosition.x + parent.rect.size.x / 2
+               && item.AnchorPosition.Y > parent.anchoredPosition.y - parent.rect.size.y / 2 
+               && item.AnchorPosition.Y < parent.anchoredPosition.y + parent.rect.size.y / 2;
     }
 
     private List<RectTransform> GenerateMask(GuideItem item, RectTransform parent)

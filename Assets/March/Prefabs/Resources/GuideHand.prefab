@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222225607361261714}
   - component: {fileID: 114861586968680042}
   - component: {fileID: 114810079897079078}
+  - component: {fileID: 114420306330390510}
   m_Layer: 5
   m_Name: GuideHand
   m_TagString: Untagged
@@ -29,6 +30,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114420306330390510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1598895380121336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb427ac8a07eb48b2ce8c15ca2c8ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data:
+    Position:
+      X: 292
+      Y: 376
+      Z: 0
+    Direction:
+      X: 0
+      Y: -1
+      Z: 0
+    Duration: 0.5
+    Show: 1
 --- !u!114 &114810079897079078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +147,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 273, y: 222}
+  m_AnchoredPosition: {x: 292, y: 376}
   m_SizeDelta: {x: 196, y: 196}
   m_Pivot: {x: 0.5, y: 0.5}

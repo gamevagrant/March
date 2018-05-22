@@ -61,9 +61,10 @@ public class GuideWindowMaker : MonoBehaviour
 
     private Transform imageContainer;
     private Transform guideMaskContainer;
-    private Transform guideHand;
+    //private Transform guideHand;
     private Transform guideImage;
     private GuideWindowController guideWindow;
+    private GuideHandController guideHandController;
 
     private GuideData data;
 
@@ -89,7 +90,7 @@ public class GuideWindowMaker : MonoBehaviour
         }
 
         guideMaskContainer = transform.Find("GuideMask");
-        guideHand = transform.Find("GuideHand");
+        guideHandController = transform.Find("GuideHand").GetComponent<GuideHandController>();
         guideImage = transform.Find("GuideImage");
         guideWindow = transform.Find("GuideWindow").GetComponent<GuideWindowController>();
     }
@@ -110,13 +111,18 @@ public class GuideWindowMaker : MonoBehaviour
 
     void SaveGuideData()
     {
-        data.Hand.Show = guideHand.gameObject.activeSelf;
-        data.Hand.Position = new Position(guideHand.GetComponent<RectTransform>().anchoredPosition);
-
         var path = string.Format("{0}/{1}/{2}", Application.dataPath, pathDict[SavePath], GuideFileName);
         data.Name = new FileInfo(path).Name.Replace(new FileInfo(path).Extension, string.Empty);
+
+        // guide hand data.
+        guideHandController.FlushUIToData();
+        data.Hand = guideHandController.Data;
+
+        // guide window data.
         guideWindow.Data.Position = new Position(guideWindow.GetComponent<RectTransform>().anchoredPosition);
         data.Window = guideWindow.Data;
+
+        // guide item data list.
         data.ItemList.Clear();
         data.ItemList.AddRange(ImageList.Select(rectTransform => new GuideItem
         {
@@ -145,8 +151,8 @@ public class GuideWindowMaker : MonoBehaviour
 
     void LoadGuideData()
     {
-        guideHand.gameObject.SetActive(data.Hand.Show);
-        guideHand.GetComponent<RectTransform>().anchoredPosition = new Vector3(data.Hand.Position.X, data.Hand.Position.Y, data.Hand.Position.Z);
+        guideHandController.Data = data.Hand;
+        guideHandController.FlushDataToUI();
 
         guideWindow.Data = data.Window;
         guideWindow.FlushDataToUI();
@@ -171,18 +177,5 @@ public class GuideWindowMaker : MonoBehaviour
         {
             DestroyImmediate(imageContainer.transform.GetChild(i).gameObject);
         }
-    }
-
-    [ContextMenu("RectTransform information")]
-    void GetRectInformation()
-    {
-        Debug.LogWarning(TestImage);
-
-        Debug.LogWarning(TestImage.anchoredPosition);
-        Debug.LogWarning(TestImage.sizeDelta);
-        Debug.LogWarning(TestImage.rect);
-        Debug.LogWarning(TestImage.rect.center);
-        Debug.LogWarning(TestImage.rect.size);
-        Debug.LogWarning("x-" + TestImage.rect.x + ", y-" + TestImage.rect.y + ", width-" + TestImage.rect.width + ", height-" + TestImage.rect.height);
     }
 }

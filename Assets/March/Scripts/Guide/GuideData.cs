@@ -40,7 +40,12 @@ namespace March.Core.Guide
     public class GuideHandData
     {
         public Position Position;
+        /// <summary>
+        /// Direction of hand animation.
+        /// </summary>
+        /// <remarks>Base unit as guide hand image size.</remarks>
         public Position Direction;
+        public float Duration;
         public bool Show;
     }
 }
