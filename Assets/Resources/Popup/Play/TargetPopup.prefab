@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6907d202412ba14992cdc76b4c920ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoClose: 0
+  AutoClose: 1
   NeedBackground: 1
   Duration: 1
   backgroundColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0.6}

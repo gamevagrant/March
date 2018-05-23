@@ -3261,18 +3261,9 @@ public class Board : MonoBehaviour
 
         AudioManager.instance.PopupTargetAudio();
 
-        WindowManager.instance.Show<TargetPopupWindow>();
+        var targetPopup = WindowManager.instance.Show<TargetPopupWindow>().GetComponent<Popup>();
 
-        yield return new WaitForSeconds(1.0f);
-
-        var popup = GameObject.Find("TargetPopup(Clone)");
-
-        if (popup)
-        {
-            popup.GetComponent<Popup>().Close();
-        }
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(targetPopup.Duration + 0.5f);
 
         state = GAME_STATE.WAITING_USER_SWAP;
 
@@ -3284,12 +3275,6 @@ public class Board : MonoBehaviour
         {
             Help.instance.Show();
         }
-
-        // Plus 5 moves popup
-        //        if (Configure.instance.beginFiveMoves == true)
-        //        {
-        //            StartCoroutine(Plus5MovesPopup());
-        //        }
     }
 
     IEnumerator Plus5MovesPopup()
