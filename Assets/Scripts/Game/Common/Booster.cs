@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using qy;
 using qy.config;
-
+using GuideManager = March.Core.Guide.GuideManager;
 
 public class Booster : MonoBehaviour 
 {
@@ -51,38 +51,9 @@ public class Booster : MonoBehaviour
         //todo:从表里读取
         if (LevelLoader.instance.level < 9)
         {
-			//icon.material = m_material;
 			m_lockImage.gameObject.SetActive (true);
-			//numBg.gameObject.SetActive (false);
-			//singleAmount.gameObject.SetActive (false);
 		}
         Messenger.AddListener(ELocalMsgID.RefreshBaseData,refresh);
-//        // change help order in the hierarchy
-//        if (LevelLoader.instance.level == 7)
-//        {
-//            Help.instance.gameObject.transform.SetParent(Booster.instance.gameObject.transform);
-//            Help.instance.gameObject.transform.SetSiblingIndex(0);
-//        }
-//        else if (LevelLoader.instance.level == 12)
-//        {
-//            Help.instance.gameObject.transform.SetParent(Booster.instance.gameObject.transform);
-//            Help.instance.gameObject.transform.SetSiblingIndex(1);
-//        }
-//        else if (LevelLoader.instance.level == 15)
-//        {
-//            Help.instance.gameObject.transform.SetParent(Booster.instance.gameObject.transform);
-//            Help.instance.gameObject.transform.SetSiblingIndex(2);
-//        }
-//        else if (LevelLoader.instance.level == 18)
-//        {
-//            Help.instance.gameObject.transform.SetParent(Booster.instance.gameObject.transform);
-//            Help.instance.gameObject.transform.SetSiblingIndex(3);
-//        }
-//        else if (LevelLoader.instance.level == 25)
-//        {
-//            Help.instance.gameObject.transform.SetParent(Booster.instance.gameObject.transform);
-//            Help.instance.gameObject.transform.SetSiblingIndex(4);
-//        }
     }
 
     void OnDestroy()
@@ -121,8 +92,8 @@ public class Booster : MonoBehaviour
         if (board.booster == BOOSTER_TYPE.NONE)
         {
             ActiveBooster(BOOSTER_TYPE.SINGLE_BREAKER);
-			Help.instance.Hide ();
-			Help.instance.Show ();
+			GuideManager.instance.Hide ();
+			GuideManager.instance.Show ();
         }
         else
         {
@@ -363,7 +334,7 @@ public class Booster : MonoBehaviour
         if (board.booster == BOOSTER_TYPE.SINGLE_BREAKER)
         {
             CancelBooster(BOOSTER_TYPE.SINGLE_BREAKER);
-			Help.instance.Hide ();
+			GuideManager.instance.Hide ();
             // reduce amount
             PropItem prop = GameMainManager.Instance.playerData.GetPropItem("200006");
             int count = prop != null ? prop.count : 0;

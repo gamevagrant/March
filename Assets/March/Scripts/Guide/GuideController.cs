@@ -2,8 +2,6 @@
 using March.Scene;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class GuideController : MonoBehaviour
 {
@@ -21,7 +19,6 @@ public class GuideController : MonoBehaviour
     private const string GuideImage = "GuideImage";
 
     private GameObject guideInstance;
-    //private RectTransform guideHand;
     private GuideWindowController guideWindow;
     private GuideHandController guideHandeController;
     private Transform maskContainer;
@@ -30,35 +27,12 @@ public class GuideController : MonoBehaviour
 
     private int step;
 
-    private GuideActionHandler actionHandler;
-
     private void Start()
     {
         if (!AutoMode)
             return;
 
         Generate();
-    }
-
-    public void GenerateAction()
-    {
-        var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
-        entry.callback.AddListener(eventData => actionHandler.SkipButtonDown());
-        guideWindow.NextButton.GetComponent<EventTrigger>().triggers.Add(entry);
-        entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
-        entry.callback.AddListener(eventData => actionHandler.SkipButtonUp());
-        guideWindow.NextButton.GetComponent<EventTrigger>().triggers.Add(entry);
-
-        for (var i = 0; i < maskContainer.transform.childCount; ++i)
-        {
-            var mask = maskContainer.GetChild(0);
-            var maskEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
-            maskEntry.callback.AddListener(eventData => actionHandler.MaskDown());
-            mask.GetComponent<EventTrigger>().triggers.Add(entry);
-            maskEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
-            maskEntry.callback.AddListener(eventData => actionHandler.MaskUp());
-            mask.GetComponent<EventTrigger>().triggers.Add(entry);
-        }
     }
 
     private void Initialize()
@@ -78,8 +52,6 @@ public class GuideController : MonoBehaviour
 
         guideItemQueue.Clear();
         GuideData.ItemList.ForEach(guideItemQueue.Enqueue);
-
-        actionHandler = gameObject.GetComponent<GuideActionHandler>();
 
         step = 0;
     }
@@ -135,8 +107,6 @@ public class GuideController : MonoBehaviour
         mask0.name = mask0.name + "_0";
         mask0.sizeDelta = maskContainer.GetComponent<RectTransform>().rect.size;
         GenerateMask(mask0);
-
-        GenerateAction();
     }
 
     [ContextMenu("Cleanup")]

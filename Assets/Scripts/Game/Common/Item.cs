@@ -1,9 +1,11 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using March.Core.Guide;
 using UnityEngine;
 
-public class Item : MonoBehaviour 
+public class Item : MonoBehaviour
 {
     [Header("Parent")]
     public Board board;
@@ -12,7 +14,7 @@ public class Item : MonoBehaviour
     [Header("Variables")]
     public int color;
     public ITEM_TYPE type;
-    public ITEM_TYPE next = ITEM_TYPE.NONE;    
+    public ITEM_TYPE next = ITEM_TYPE.NONE;
     public BREAKER_EFFECT effect = BREAKER_EFFECT.NORMAL;
 
     [Header("Check")]
@@ -50,8 +52,6 @@ public class Item : MonoBehaviour
         }
     }
 
-
-    //public int 
     public Vector3 mousePostion = Vector3.zero;
     public Vector3 deltaPosition = Vector3.zero;
     public Vector3 swapDirection = Vector3.zero;
@@ -69,7 +69,7 @@ public class Item : MonoBehaviour
     public AppleBox applebox;
 
     //effect config param
-    private Vector3 COOKIESCALE = new Vector3(1.8f,1.8f,1.8f);
+    private Vector3 COOKIESCALE = new Vector3(1.8f, 1.8f, 1.8f);
 
     void Update()
     {
@@ -89,7 +89,7 @@ public class Item : MonoBehaviour
             if (renderer != null)
             {
                 m_spriteRenderer = renderer;
-                m_spriteRenderer.sortingLayerName="Item";
+                m_spriteRenderer.sortingLayerName = "Item";
             }
         }
     }
@@ -244,7 +244,7 @@ public class Item : MonoBehaviour
         }
         if (direction == SWAP_DIRECTION.NONE)
         {
-            
+
         }
         else if (direction == SWAP_DIRECTION.TOP)
         {
@@ -255,14 +255,14 @@ public class Item : MonoBehaviour
         }
         else if (direction == SWAP_DIRECTION.RIGHT)
         {
-            if (node.baffleright!= null)
+            if (node.baffleright != null)
             {
                 return false;
             }
         }
         else if (direction == SWAP_DIRECTION.BOTTOM)
         {
-            if(node.bafflebottom != null)
+            if (node.bafflebottom != null)
             {
                 return false;
             }
@@ -312,7 +312,7 @@ public class Item : MonoBehaviour
             type == ITEM_TYPE.COLLECTIBLE_9 ||
 
             type == ITEM_TYPE.APPLEBOX
-            
+
             )
         {
             return false;
@@ -348,7 +348,7 @@ public class Item : MonoBehaviour
             type == ITEM_TYPE.COLLECTIBLE_6 ||
             type == ITEM_TYPE.COLLECTIBLE_7 ||
             type == ITEM_TYPE.COLLECTIBLE_8 ||
-            type == ITEM_TYPE.COLLECTIBLE_9 || 
+            type == ITEM_TYPE.COLLECTIBLE_9 ||
             type == ITEM_TYPE.COLLECTIBLE_10 ||
             type == ITEM_TYPE.COLLECTIBLE_11 ||
             type == ITEM_TYPE.COLLECTIBLE_12 ||
@@ -370,7 +370,7 @@ public class Item : MonoBehaviour
     public bool CanChangeToBubble()
     {
         if (Movable()
-            && (IsCookie() ||IsBreaker(type) ||type == ITEM_TYPE.COOKIE_RAINBOW)
+            && (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW)
         )
         {
             return true;
@@ -466,14 +466,14 @@ public class Item : MonoBehaviour
         return false;
     }
 
-	public bool IsPackageBox()
-	{
-		if (type == ITEM_TYPE.APPLEBOX)
-		{
-			return true;
-		}
-		return false;
-	}
+    public bool IsPackageBox()
+    {
+        if (type == ITEM_TYPE.APPLEBOX)
+        {
+            return true;
+        }
+        return false;
+    }
 
     public bool IsChocolate()
     {
@@ -760,7 +760,7 @@ public class Item : MonoBehaviour
                             if (node.RightNeighbor().item.Exchangeable(SWAP_DIRECTION.LEFT))
                             {
                                 neighborNode = node.RightNeighbor();
-                                if(node.baffleright != null)
+                                if (node.baffleright != null)
                                 {
                                     hasbaffle = true;
                                 }
@@ -830,7 +830,7 @@ public class Item : MonoBehaviour
             {
                 if (hasbaffle)
                 {
-                    
+
                 }
                 // if no neighbor item we need to reset to be able to swap again
                 Reset();
@@ -876,7 +876,7 @@ public class Item : MonoBehaviour
         board.dropTime = 1;
 
         // hide help if need
-        Help.instance.Hide();
+        GuideManager.instance.Hide();
     }
 
     public void OnCompleteSwap(Hashtable args)
@@ -886,39 +886,22 @@ public class Item : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
         SwapItem();
-        
+
         // after swap this.node = neighbor
-        var matchesHere = (node.FindMatches() != null)? node.FindMatches().Count : 0;
-        var matchesAtNeighbor = (swapItem.node.FindMatches() != null)? swapItem.node.FindMatches().Count : 0;
+        var matchesHere = (node.FindMatches() != null) ? node.FindMatches().Count : 0;
+        var matchesAtNeighbor = (swapItem.node.FindMatches() != null) ? swapItem.node.FindMatches().Count : 0;
         var squareMatchesHere = (node.FindSquareMatches() != null) ? node.FindSquareMatches().Count : 0;
         var squareMatchesAtNeighbor = (swapItem.node.FindSquareMatches() != null) ? swapItem.node.FindSquareMatches().Count : 0;
-        var special = false;
 
-        //print("matches here:" + matchesHere);
-        //print("matches at neighbor" + matchesAtNeighbor);
-
-        // one of items is rainbow and other is cookie
-        if (type == ITEM_TYPE.COOKIE_RAINBOW && (swapItem.IsCookie() || IsBreaker(swapItem.type) || swapItem.type == ITEM_TYPE.COOKIE_RAINBOW))
-        {
-            special = true;
-        }
-
-
-        if (swapItem.type == ITEM_TYPE.COOKIE_RAINBOW && (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW))
-        {
-            special = true;
-        }
-
-        if (IsBreaker(type) && (swapItem.IsCookie() || IsBreaker(swapItem.type) || swapItem.type == ITEM_TYPE.COOKIE_RAINBOW || swapItem.IsMarshmallow() || swapItem.IsCollectible() || swapItem.IsBlank()))
-        {
-            special = true;
-        }
-
-
-        if (IsBreaker(swapItem.type) && (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW|| IsMarshmallow() || IsCollectible()))
-        {
-            special = true;
-        }
+        var special =
+            type == ITEM_TYPE.COOKIE_RAINBOW && (swapItem.IsCookie() || IsBreaker(swapItem.type) ||
+                                                 swapItem.type == ITEM_TYPE.COOKIE_RAINBOW) ||
+            swapItem.type == ITEM_TYPE.COOKIE_RAINBOW &&
+            (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW) ||
+            IsBreaker(type) && (swapItem.IsCookie() || IsBreaker(swapItem.type) ||
+                                swapItem.type == ITEM_TYPE.COOKIE_RAINBOW || swapItem.IsMarshmallow() ||
+                                swapItem.IsCollectible() || swapItem.IsBlank()) || IsBreaker(swapItem.type) &&
+            (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW || IsMarshmallow() || IsCollectible());
 
         if (matchesHere <= 0 && matchesAtNeighbor <= 0 && squareMatchesHere <= 0 && squareMatchesAtNeighbor <= 0 && special == false && Configure.instance.checkSwap && forced == false)
         {
@@ -930,7 +913,7 @@ public class Item : MonoBehaviour
                 "easetype", iTween.EaseType.linear,
                 "time", Configure.instance.swapTime
             ));
-            
+
             iTween.MoveTo(swapItem.gameObject, iTween.Hash(
                 "position", transform.position,
                 "easetype", iTween.EaseType.linear,
@@ -939,7 +922,6 @@ public class Item : MonoBehaviour
         }
         else
         {
-
             //泡沫增长
             board.needIncreaseBubble = true;
 
@@ -952,7 +934,7 @@ public class Item : MonoBehaviour
             if (special)
             {
                 //如果交换前的位置有草地 特殊块会使交换后的地块变为草地
-                if ((IsBreaker(type)||type == ITEM_TYPE.COOKIE_RAINBOW) && swapItem.node.IsGrass())
+                if ((IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW) && swapItem.node.IsGrass())
                 {
                     node.ChangeToGrass();
                 }
@@ -960,7 +942,6 @@ public class Item : MonoBehaviour
                 {
                     swapItem.node.ChangeToGrass();
                 }
-
 
                 RainbowDestroy(this, swapItem);
 
@@ -972,7 +953,7 @@ public class Item : MonoBehaviour
 
                 ColRowBreakerAndBombBreakerDestroy(this, swapItem);
 
-                if ((swapItem.IsCookie()||swapItem.IsMarshmallow() || swapItem.IsCollectible() || swapItem.IsBlank()) &&
+                if ((swapItem.IsCookie() || swapItem.IsMarshmallow() || swapItem.IsCollectible() || swapItem.IsBlank()) &&
                     (type == ITEM_TYPE.COOKIE_ROW_BREAKER
                     || type == ITEM_TYPE.COOKIE_COLUMN_BREAKER
                     || type == ITEM_TYPE.COOKIE_BOMB_BREAKER
@@ -985,7 +966,7 @@ public class Item : MonoBehaviour
                     board.FindMatches();
                 }
 
-                if ((IsCookie() || IsMarshmallow() || IsCollectible()) && 
+                if ((IsCookie() || IsMarshmallow() || IsCollectible()) &&
                     (swapItem.type == ITEM_TYPE.COOKIE_ROW_BREAKER
                      || swapItem.type == ITEM_TYPE.COOKIE_COLUMN_BREAKER
                      || swapItem.type == ITEM_TYPE.COOKIE_BOMB_BREAKER
@@ -999,7 +980,7 @@ public class Item : MonoBehaviour
 
                 }
 
-                }
+            }
             else
             {
                 //todo:根据配置决定优先级
@@ -1031,7 +1012,6 @@ public class Item : MonoBehaviour
                     swapItem.next = ITEM_TYPE.COOKIE_RAINBOW;
                 }
 
-
                 // find the matches to destroy (destroy match 3/4/5)
                 // this function will not destroy special match such as rainbow swap with breaker etc.
                 board.FindMatches();
@@ -1047,12 +1027,6 @@ public class Item : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
         AudioManager.instance.SwapBackAudio();
-
-        // hide in case the help crash
-        if (Help.instance.gameObject.activeSelf)
-        {
-            Help.instance.HideOnSwapBack();
-        }        
     }
 
     public void OnCompleteSwapBack()
@@ -1115,225 +1089,13 @@ public class Item : MonoBehaviour
 
     public bool CheckHelpSwapable(SWAP_DIRECTION direction)
     {
-        if (!Help.instance.gameObject.activeSelf)
+        if (GuideManager.instance.GuideEnabled)
         {
-            return true;
+            var currentGuideData = GuideManager.instance.GuideManagerData.CurrentGuideData;
+            var result = currentGuideData.ConditionList.Any(condition =>
+                node.OrderOnBoard() == condition.NodeIndex && direction == condition.Direction);
+            return result;
         }
-		if (LevelLoader.instance.level == 1) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.BOTTOM) {
-					return true;
-				} else if (node.OrderOnBoard () == 32 && direction == SWAP_DIRECTION.TOP) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-			if (Help.instance.step == 2) {
-				if (node.OrderOnBoard () == 13 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else if (node.OrderOnBoard () == 12 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-
-		} else if (LevelLoader.instance.level == 2) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 13 && direction == SWAP_DIRECTION.BOTTOM) {
-					return true;
-				} else if (node.OrderOnBoard () == 21 && direction == SWAP_DIRECTION.TOP) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 2) {
-				if (node.OrderOnBoard () == 21 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 22 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 3) {
-				if (node.OrderOnBoard () == 41 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 42 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 4) {
-				if (node.OrderOnBoard () == 49 && direction == SWAP_DIRECTION.SELFCLICK) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		} else if (LevelLoader.instance.level == 3) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 32 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else if (node.OrderOnBoard () == 31 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 2) {
-				if (node.OrderOnBoard () == 31 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else if (node.OrderOnBoard () == 30 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 3) {
-				if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else if (node.OrderOnBoard () == 24 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 4) {
-				if (node.OrderOnBoard () == 24 && direction == SWAP_DIRECTION.SELFCLICK) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		} else if (LevelLoader.instance.level == 4) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 26 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 2) {
-				if (node.OrderOnBoard () == 26 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else if (node.OrderOnBoard () == 25 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 3) {
-				if (node.OrderOnBoard () == 66 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else if (node.OrderOnBoard () == 65 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 4) {
-				if (node.OrderOnBoard () == 65 && direction == SWAP_DIRECTION.SELFCLICK) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		} else if (LevelLoader.instance.level == 5) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 40 && direction == SWAP_DIRECTION.BOTTOM) {
-					return true;
-				} else if (node.OrderOnBoard () == 49 && direction == SWAP_DIRECTION.TOP) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 2) {
-				if (node.OrderOnBoard () == 49 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 50 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		} else if (LevelLoader.instance.level == 6) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 37 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 38 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		} else if (LevelLoader.instance.level == 7) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 1 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 2 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 2) {
-				if (node.OrderOnBoard () == 34 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 35 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 3) {
-				if (node.OrderOnBoard () == 67 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 68 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			} else if (Help.instance.step == 4) {
-				if (node.OrderOnBoard () == 67 && direction == SWAP_DIRECTION.BOTTOM) {
-					return true;
-				} else if (node.OrderOnBoard () == 78 && direction == SWAP_DIRECTION.TOP) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		} else if (LevelLoader.instance.level == 8) {
-			if (Help.instance.step == 1) {
-				if (node.OrderOnBoard () == 13 && direction == SWAP_DIRECTION.RIGHT) {
-					return true;
-				} else if (node.OrderOnBoard () == 14 && direction == SWAP_DIRECTION.LEFT) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}
-        else if (LevelLoader.instance.level == 12)
-        {
-            if (Help.instance.step == 1)
-            {
-                if (node.OrderOnBoard() == 13 && direction == SWAP_DIRECTION.BOTTOM)
-                {
-                    return true;
-                }
-                else if (node.OrderOnBoard() == 22 && direction == SWAP_DIRECTION.TOP)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        else if (LevelLoader.instance.level == 18)
-        {
-            if (Help.instance.step == 1)
-            {
-                return false;
-            }
-        }
-
         return true;
     }
 
@@ -1458,11 +1220,11 @@ public class Item : MonoBehaviour
     public void ChangeToRainbow()
     {
         var prefab = Resources.Load(Configure.CookieRainbow()) as GameObject;
-        
+
         type = ITEM_TYPE.COOKIE_RAINBOW;
-        
+
         color = 0;
-        
+
         GetComponent<SpriteRenderer>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
     }
 
@@ -1700,10 +1462,10 @@ public class Item : MonoBehaviour
 
         // destroy animation
         iTween.ScaleTo(gameObject, iTween.Hash(
-            "scale", new Vector3(1.8f,1.8f,1f),
+            "scale", new Vector3(1.8f, 1.8f, 1f),
             "onstart", "OnStartDestroy",
             "oncomplete", "OnCompleteDestroy",
-            "oncompleteparams", new Hashtable() { { "isPlaneChangeExplode",isPlaneChangeExplode } },
+            "oncompleteparams", new Hashtable() { { "isPlaneChangeExplode", isPlaneChangeExplode } },
             "easetype", iTween.EaseType.linear,
             "time", Configure.instance.destroyTime
         ));
@@ -1753,60 +1515,60 @@ public class Item : MonoBehaviour
         }
         else if (effect == BREAKER_EFFECT.NORMAL)
         {
-			if (IsCookie ())
+            if (IsCookie())
             {
-				CookieExplosion ();
-			}
-            else if (IsGingerbread ())
+                CookieExplosion();
+            }
+            else if (IsGingerbread())
             {
-				GingerbreadExplosion ();
-			}
-            else if (IsMarshmallow ())
+                GingerbreadExplosion();
+            }
+            else if (IsMarshmallow())
             {
-				MarshmallowExplosion ();
-			}
-            else if (IsChocolate ())
+                MarshmallowExplosion();
+            }
+            else if (IsChocolate())
             {
-				ChocolateExplosion ();
-			}
-            else if (IsRockCandy ())
+                ChocolateExplosion();
+            }
+            else if (IsRockCandy())
             {
-				RockCandyExplosion ();
-			}
-            else if (IsCollectible ())
+                RockCandyExplosion();
+            }
+            else if (IsCollectible())
             {
-				CollectibleExplosion ();
-			}
-            else if (IsBombBreaker (type))
+                CollectibleExplosion();
+            }
+            else if (IsBombBreaker(type))
             {
-				BombBreakerExplosion ();
-			}
+                BombBreakerExplosion();
+            }
             else if (type == ITEM_TYPE.COOKIE_RAINBOW)
             {
-				RainbowExplosion ();
-			}
-            else if (IsColumnBreaker (type))
+                RainbowExplosion();
+            }
+            else if (IsColumnBreaker(type))
             {
-				ColumnBreakerExplosion ();
-			}
-            else if (IsRowBreaker (type))
+                ColumnBreakerExplosion();
+            }
+            else if (IsRowBreaker(type))
             {
-				RowBreakerExplosion ();
-			}
-            else if (IsPlaneBreaker (type))
+                RowBreakerExplosion();
+            }
+            else if (IsPlaneBreaker(type))
             {
-				PlaneBreakerExplosion ();
-			}
-            else if (IsAppleBox ())
+                PlaneBreakerExplosion();
+            }
+            else if (IsAppleBox())
             {
-				AppleBoxExplosion ();
-			}
+                AppleBoxExplosion();
+            }
         }
     }
 
-    public void OnCompleteDestroy( Hashtable param)
+    public void OnCompleteDestroy(Hashtable param)
     {
-        bool isPlaneChangeExplode = (bool) param["isPlaneChangeExplode"];
+        bool isPlaneChangeExplode = (bool)param["isPlaneChangeExplode"];
 
         if (board.state == GAME_STATE.PRE_WIN_AUTO_PLAYING)
         {
@@ -1860,7 +1622,7 @@ public class Item : MonoBehaviour
             applebox.TryToDestroyApple(this);
             return;
         }
-        else if(!isPlaneChangeExplode)
+        else if (!isPlaneChangeExplode)
         {
             node.GenerateItem(ITEM_TYPE.BLANK);
         }
@@ -2248,7 +2010,7 @@ public class Item : MonoBehaviour
         if (explosion != null)
         {
             explosion.transform.position = transform.position + transform.position + Vector3.back * 2;
-           // explosion.transform.position = new Vector3(explosion.transform.position.x, explosion.transform.position.y, -12f);
+            // explosion.transform.position = new Vector3(explosion.transform.position.x, explosion.transform.position.y, -12f);
         }
     }
 
@@ -2318,23 +2080,23 @@ public class Item : MonoBehaviour
         AudioManager.instance.ColRowBreakerExplodeAudio();
         PlaneDestroy();
         GameObject explosion = null;
-      //  GameObject animation = null;
+        //  GameObject animation = null;
 
         explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
-       // animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+        // animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
 
-       /* if (animation != null)
-        {
-            animation.transform.Rotate(Vector3.back, 90);
-            animation.transform.position = new Vector3(animation.transform.position.x, animation.transform.position.y, -12f);
-        }*/
+        /* if (animation != null)
+         {
+             animation.transform.Rotate(Vector3.back, 90);
+             animation.transform.position = new Vector3(animation.transform.position.x, animation.transform.position.y, -12f);
+         }*/
 
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
         }
 
-       // GameObject.Destroy(animation, 1f);
+        // GameObject.Destroy(animation, 1f);
     }
 
     void BombXBreakerExplosion()
@@ -2357,7 +2119,7 @@ public class Item : MonoBehaviour
 
     void BombBreakerDestroy(int range)
     {
-        List<Item> items = board.ItemAround(node,range);
+        List<Item> items = board.ItemAround(node, range);
 
         var isgrass = node.IsGrass();
 
@@ -2374,7 +2136,7 @@ public class Item : MonoBehaviour
                 {
                     item.node.bafflebottom.DestroyBaffle();
                 }
-                if(item.node.baffleright != null)
+                if (item.node.baffleright != null)
                 {
                     item.node.baffleright.DestroyBaffle();
                 }
@@ -2593,7 +2355,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    public void RowDestroy(int row = -1,bool isspecialforgrass = false)
+    public void RowDestroy(int row = -1, bool isspecialforgrass = false)
     {
         var nodes = new List<Node>();
 
@@ -2696,10 +2458,10 @@ public class Item : MonoBehaviour
     {
 
 
-//        if (thisItem.Destroyable() == false || otherItem.Destroyable() == false)
-//        {
-//            return;
-//        }
+        //        if (thisItem.Destroyable() == false || otherItem.Destroyable() == false)
+        //        {
+        //            return;
+        //        }
 
         if (thisItem.type == ITEM_TYPE.COOKIE_PLANE_BREAKER)
         {
@@ -2750,7 +2512,7 @@ public class Item : MonoBehaviour
                 thisItem.Destroy();
                 board.FindMatches();
             }
-            else 
+            else
             {
                 thisItem.Destroy();
                 board.FindMatches();
@@ -2866,7 +2628,7 @@ public class Item : MonoBehaviour
         {
             if (board.state == GAME_STATE.WAITING_USER_SWAP)
             {
-               // board.FindMatches();
+                // board.FindMatches();
             }
             return;
         }
@@ -2909,10 +2671,10 @@ public class Item : MonoBehaviour
 
             iTween.MoveTo(gameObjectPlane[i], iTween.Hash(
                 "position", rdmItems[i].transform.position,
-               // "looktarget", rdmItems[i].transform.position,
+                // "looktarget", rdmItems[i].transform.position,
                 "oncomplete", "onPlaneComplete",
                 //"orienttopath", true,
-                "oncompleteparams", new Hashtable() { { "targetItem", rdmItems[i] },{"isGrass", isgrass} },
+                "oncompleteparams", new Hashtable() { { "targetItem", rdmItems[i] }, { "isGrass", isgrass } },
                 "easetype", iTween.EaseType.linear,
                 "time", 0.5f
             ));
@@ -2963,9 +2725,9 @@ public class Item : MonoBehaviour
                 }
             }
         }
-        if(rdmItems.Count < planeNum)
+        if (rdmItems.Count < planeNum)
         {
-            for(int i = rdmItems.Count; i < planeNum; i++)
+            for (int i = rdmItems.Count; i < planeNum; i++)
             {
                 FindPlaneGeneraltarget(rdmItems);
             }
@@ -3008,7 +2770,7 @@ public class Item : MonoBehaviour
                             List<Item> obstacle = new List<Item>();
                             List<Item> targettmp = new List<Item>();
 
-                            for (int k = i+1; k < LevelLoader.instance.row; k++)
+                            for (int k = i + 1; k < LevelLoader.instance.row; k++)
                             {
                                 if (board.GetNode(k, j) != null && board.GetNode(k, j).item != null && !board.GetNode(k, j).CanDropIn())
                                 {
@@ -3109,7 +2871,7 @@ public class Item : MonoBehaviour
         {
             targetItems.Add(allSpecialTargetItems[Random.Range(0, allSpecialTargetItems.Count)]);
         }
-        else if(allCookieTargetItems.Count > 0)
+        else if (allCookieTargetItems.Count > 0)
         {
             targetItems.Add(allCookieTargetItems[Random.Range(0, allCookieTargetItems.Count)]);
         }
@@ -3125,7 +2887,7 @@ public class Item : MonoBehaviour
 
         if ((IsRowBreaker(thisItem.type) || IsColumnBreaker(thisItem.type)) && (IsRowBreaker(otherItem.type) || IsColumnBreaker(otherItem.type)))
         {
-            thisItem.effect = BREAKER_EFFECT.CROSS;            
+            thisItem.effect = BREAKER_EFFECT.CROSS;
             otherItem.effect = BREAKER_EFFECT.NONE;
 
             thisItem.Destroy();
@@ -3164,7 +2926,7 @@ public class Item : MonoBehaviour
 
         if (
             (IsRowBreaker(thisItem.type) || IsColumnBreaker(thisItem.type)) && IsBombBreaker(otherItem.type)
-            ||(IsRowBreaker(otherItem.type) || IsColumnBreaker(otherItem.type)) && IsBombBreaker(thisItem.type)
+            || (IsRowBreaker(otherItem.type) || IsColumnBreaker(otherItem.type)) && IsBombBreaker(thisItem.type)
             )
         {
             thisItem.effect = BREAKER_EFFECT.BOMB_ROWCOL_BREAKER;
@@ -3203,11 +2965,11 @@ public class Item : MonoBehaviour
             ChangeToPlaneBreaker();
         }
         beAbleToDestroy++;
-        Destroy(false,true);
+        Destroy(false, true);
         board.FindMatches();
-//        board.changingList.Add(this);
-//
-//        board.DestroyChangingList(isgrass);
+        //        board.changingList.Add(this);
+        //
+        //        board.DestroyChangingList(isgrass);
     }
 
     void ChangeToBig()
@@ -3248,7 +3010,7 @@ public class Item : MonoBehaviour
             board.droppingItems++;
 
             var dist = (transform.position.y - dropPath[0].y);
-            
+
             //print("dist: " + dist);
 
             var time = (transform.position.y - dropPath[dropPath.Count - 1].y) / board.NodeSize();
@@ -3283,7 +3045,7 @@ public class Item : MonoBehaviour
         }
         else
         {
-             Vector3 target = board.NodeLocalPosition(node.i, node.j)+ board.transform.position;
+            Vector3 target = board.NodeLocalPosition(node.i, node.j) + board.transform.position;
 
             if (Mathf.Abs(transform.position.x - target.x) > 0.1f || Mathf.Abs(transform.position.y - target.y) > 0.1f)
             {
@@ -3293,9 +3055,9 @@ public class Item : MonoBehaviour
 
                 //print("target: " + target);
 
-                 //Debug.Log("Node i:"+node.i+" j:"+node.j+"Target"+target);
+                //Debug.Log("Node i:"+node.i+" j:"+node.j+"Target"+target);
 
-                if(node.ice != null)
+                if (node.ice != null)
                 {
                     iTween.MoveTo(node.ice.gameObject, iTween.Hash(
                         "position", target,
@@ -3345,7 +3107,7 @@ public class Item : MonoBehaviour
 
     public void OnStartDrop()
     {
-        
+
     }
 
     public void OnCompleteDrop()
@@ -3353,7 +3115,7 @@ public class Item : MonoBehaviour
         if (dropping)
         {
 
-           // Debug.Log("Node i:" + node.i + " j:" + node.j + " Position:" + transform.position);
+            // Debug.Log("Node i:" + node.i + " j:" + node.j + " Position:" + transform.position);
 
             AudioManager.instance.DropAudio();
 

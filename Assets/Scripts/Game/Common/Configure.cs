@@ -357,7 +357,7 @@ public class Configure : MonoSingleton<Configure>
     public bool beginBombBreaker;
 
     [Header("")]
-    public bool touchIsSwallowed;
+    //public bool touchIsSwallowed;
 
     // settings
     public static int maxCookies = 6;
