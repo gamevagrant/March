@@ -48,6 +48,15 @@ namespace qy
                 return config.ConfigManager.Instance; 
             }
         }
+
+        public WeatherManager weatherManager
+        {
+            get
+            {
+                return WeatherManager.Instance;
+            }
+        }
+
         public PlayerData playerData;
         public IPlayerModel playerModel;
         /// <summary>

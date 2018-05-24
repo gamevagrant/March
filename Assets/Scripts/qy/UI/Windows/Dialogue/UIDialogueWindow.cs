@@ -26,20 +26,28 @@ public class UIDialogueWindow : UIWindowBase {
     public RectTransform dialogueBox;
     public Image imgBG;
     public Text dialogText;
-    public Image personLeft;
-    public Image personRight;
+
     public RectTransform topBlack;
     public RectTransform bottomBlack;
 
+    public Image blood;
+
     private qy.config.StoryItem lastDialogue;//上一句对话
     private qy.config.StoryItem curDialogue;//当前对话
+    private UIDialoguePerson personLeft;
+    private UIDialoguePerson personRight;
+    private UIDialoguePerson talkingPerson;
     private bool isMoveing = false;
 
     private string beginID;
 
     private void Awake()
     {
+        blood.gameObject.SetActive(false);
         
+        Material material = new Material(Shader.Find("Custom/Gray"));
+        imgBG.material = material;
+        SetBGGray(0);
     }
 
     protected override void StartShowWindow(object[] data)
@@ -52,8 +60,6 @@ public class UIDialogueWindow : UIWindowBase {
         topBlack.sizeDelta = new Vector2(topBlack.sizeDelta.x, 0);
         bottomBlack.sizeDelta = new Vector2(bottomBlack.sizeDelta.x, 0);
         dialogueBox.gameObject.SetActive(false);
-        personLeft.gameObject.SetActive(false);
-        personRight.gameObject.SetActive(false);
         imgBG.color = new Color(1, 1, 1, 0.01f);
     }
 
@@ -76,8 +82,10 @@ public class UIDialogueWindow : UIWindowBase {
             isMoveing = false;
         });
         imgBG.DOFade(0, 0.5f);
-        personLeft.DOFade(0, 0.3f);
-        personRight.DOFade(0, 0.3f);
+        if(personLeft!=null)
+            personLeft.Hide();
+        if(personRight!=null)
+            personRight.Hide();
         HideDialogBox(curDialogue.personLocation);
     }
 
@@ -95,6 +103,17 @@ public class UIDialogueWindow : UIWindowBase {
     {
         lastDialogue = curDialogue;
         curDialogue = story;
+        if(lastDialogue!=null && curDialogue!=null )
+        {
+            if(lastDialogue.weather != curDialogue.weather)
+            {
+                qy.GameMainManager.Instance.weatherManager.StopWeather((WeatherManager.WeatherEnum)lastDialogue.weather);
+            }
+            if(lastDialogue.effect==3 && lastDialogue.effect != curDialogue.effect)
+            {
+                SetBGGray(0);
+            }
+        }
         if(string.IsNullOrEmpty(curDialogue.personLocation))
         {
             curDialogue.personLocation = UnityEngine.Random.Range(0, 2).ToString();
@@ -120,9 +139,7 @@ public class UIDialogueWindow : UIWindowBase {
 
             //});
 
-            var sp =
-                March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground,
-                    curDialogue.bgFile);
+            var sp = March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground,curDialogue.bgFile);
             if (sp != null)
             {
                 imgBG.sprite = sp;
@@ -137,6 +154,41 @@ public class UIDialogueWindow : UIWindowBase {
         string personFile = lastDialogue==null || curDialogue.personFile != lastDialogue.personFile ? curDialogue.personFile : "";
         //如果这句对话和上句对话不是一个人说的则播放对话框动画
         ShowDialog(dialog, personFile, curDialogue.personLocation, lastDialogue==null || lastDialogue.personLocation != curDialogue.personLocation);
+
+        WeatherManager.WeatherEnum weather = (WeatherManager.WeatherEnum)curDialogue.weather;
+        qy.GameMainManager.Instance.weatherManager.StartWeather(weather);
+
+        StartCoroutine(ShowEffect(curDialogue.effect));
+    }
+
+    private IEnumerator ShowEffect(int effect)
+    {
+        yield return new WaitForSeconds(0.5f);
+        switch (effect)
+        {
+            case 1:
+                (imgBG.transform as RectTransform).DOShakeAnchorPos(0.5f, 20, 80);
+                break;
+            case 2:
+                blood.color = new Color(1, 1, 1, 0);
+                blood.gameObject.SetActive(true);
+                Sequence sq = DOTween.Sequence();
+                sq.Append(blood.DOFade(1, 0.3f).SetEase(Ease.OutBounce));
+                sq.Append(blood.DOFade(0, 0.3f).SetEase(Ease.InBack));
+                sq.AppendCallback(() => {
+                    blood.gameObject.SetActive(false);
+
+                });
+                break;
+            case 3:
+                SetBGGray(1);
+                break;
+        }
+    }
+
+    private void SetBGGray(float value)
+    {
+        DOTween.To(() => imgBG.material.GetFloat("_LuminosityAmount"), x => imgBG.material.SetFloat("_LuminosityAmount", x), value, 0.5f);
     }
 
     /// <summary>
@@ -170,62 +222,84 @@ public class UIDialogueWindow : UIWindowBase {
             sq.AppendInterval(0.3f);
             sq.AppendCallback(()=> {
                 isMoveing = false;
+                talkingPerson.StartTalk();
             });
-            sq.Append(dialogText.DOText(dialog, 1, true));
+            sq.Append(dialogText.DOText(dialog, 1, true)).OnComplete(()=> {
+                talkingPerson.StopTalk();
+            });
 
         }
         else
         {
-            
-            dialogText.DOText(dialog, 1, true);
+            talkingPerson.StartTalk();
+            dialogText.DOText(dialog, 1, true).OnComplete(() => {
+                talkingPerson.StopTalk();
+            });
         }
     }
 
     private void ShowTalker(string talkerPic, string position)
     {
         //talkerPic = "person";
-        Image img = position == "0" ? personLeft : personRight;
+        talkingPerson = position == "0" ? personLeft : personRight;
 
-        if(string.IsNullOrEmpty(talkerPic))
+        if(talkingPerson != null && string.IsNullOrEmpty(talkerPic))
         {
-            img.gameObject.SetActive(false);
+            talkingPerson.gameObject.SetActive(false);
+            
         }
         else
         {
-            var sp =
-                March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryPerson,
-                    talkerPic);
-            if (sp != null)
-            {
-                img.sprite = sp;
-                img.SetNativeSize();
-                img.gameObject.SetActive(true);
-            }
-
-            //AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetPersonHeadPath(talkerPic), (sp) => {
-
-            //    if(sp!=null)
-            //    {
-            //        img.sprite = sp;
-            //        img.SetNativeSize();
-            //        img.gameObject.SetActive(true);
-            //    }
-                
-            //});
-
-            img.DOColor(Color.white, 0.5f);
-            img.transform.DOScale(1.1f, 0.5f);
-            img.gameObject.SetActive(true);
+            talkingPerson = GetPerson(talkerPic, position);
+            talkingPerson.Show();
+            
         }
 
     }
 
     private void HideTalker(string position)
     {
-        Image img = position == "0" ? personLeft : personRight;
-        //img.DOFade(0.5f, 0.5f);
-        img.transform.DOScale(0.9f, 0.5f);
-        img.DOColor(new Color(0.5f,0.5f,0.5f), 0.5f);
+        UIDialoguePerson person = position == "0" ? personLeft : personRight;
+        person.Hide();
+    }
+
+    private UIDialoguePerson GetPerson(string name,string position)
+    {
+
+        GameObject go = March.Core.ResourceManager.ResourceManager.instance.Load<GameObject>(Configure.StoryDialogPerson, name);
+        GameObject personGO = GameUtils.CreateGameObject(transform, go);
+        personGO.transform.SetSiblingIndex(1);
+        RectTransform rt = personGO.transform as RectTransform;
+        UIDialoguePerson person = personGO.GetComponent<UIDialoguePerson>();
+        if (position == "0")
+        {
+            rt.pivot = new Vector2(0,0);
+            rt.anchorMin = new Vector2(0,0);
+            rt.anchorMax = new Vector2(0,0);
+            rt.anchoredPosition = new Vector2(25, 0);
+            if(personLeft!=null)
+            {
+                Destroy(personLeft.gameObject);
+                
+            }
+            personLeft = person;
+        }
+        else
+        {
+            rt.pivot = new Vector2(1, 0);
+            rt.anchorMin = new Vector2(1, 0);
+            rt.anchorMax = new Vector2(1, 0);
+            rt.anchoredPosition = new Vector2(-25, 0);
+            if (personRight != null)
+            {
+                Destroy(personRight.gameObject);
+                
+            }
+            personRight = person;
+        }
+        
+        
+        return person;
     }
     /// <summary>
     /// 显示
@@ -303,6 +377,7 @@ public class UIDialogueWindow : UIWindowBase {
             {
                 qy.GameMainManager.Instance.uiManager.OpenWindow(qy.ui.UISettings.UIWindowID.UITaskWindow,qy.GameMainManager.Instance.playerData);
             }
+            qy.GameMainManager.Instance.weatherManager.StopAll();
             OnClickClose();
         }
         

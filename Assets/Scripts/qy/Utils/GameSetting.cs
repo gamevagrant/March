@@ -6,7 +6,8 @@ public class GameSetting {
 
     //------------------全平台一致的配置--------------------------
     public static string serverPath = "http://123.206.90.153:9933";
-    public static string serverPathDevelop = "http://10.1.36.91:9933";
+    public static string serverPathDevelop = "http://10.1.7.215:9933";
+    //public static string serverPathDevelop = "http://10.1.36.91:9933";//勇江
 
     public static string shareFinishTaskLink = "https://csll.app.link/ShareFinishTask";
     public static string homePage = "https://www.facebook.com/caishenlaile";
