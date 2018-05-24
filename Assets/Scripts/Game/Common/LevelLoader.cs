@@ -3,7 +3,6 @@ using MiniJSON;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AssetBundles;
 using UnityEngine;
 
 public class LevelLoader : MonoSingleton<LevelLoader>
@@ -67,28 +66,23 @@ public class LevelLoader : MonoSingleton<LevelLoader>
     [Header("Cake")]
     public int cake;
 
-    //private matchlevel m_matchlevel;
-
-    //public matchlevel LevelConfig { get { if (m_matchlevel == null) { m_matchlevel = DefaultConfig.getInstance().GetConfigByType<matchlevel>(); } return m_matchlevel; } }
-
     public void LoadLevel()
     {
-        TextAsset jsonString;
-
-        //jsonString = Resources.Load("Levels/" + level, typeof(TextAsset)) as TextAsset;
-
-        jsonString =
-            March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.LevelBundlePath, "" + level);
-
+        var jsonString = March.Core.ResourceManager.ResourceManager.instance.Load<TextAsset>(Configure.LevelBundlePath, "" + level);
         if (jsonString == null)
         {
             Debug.LogError(string.Format("Can not load level {0} data", level));
             return;
         }
 
+        LoadLevel(jsonString.text);
+    }
+
+    public void LoadLevel(string json)
+    {
         Clear();
 
-        var dict = Json.Deserialize(jsonString.text) as Dictionary<string, object>;
+        var dict = Json.Deserialize(json) as Dictionary<string, object>;
 
         column = int.Parse(dict["width"].ToString());
         row = int.Parse(dict["height"].ToString());
@@ -375,7 +369,7 @@ public class LevelLoader : MonoSingleton<LevelLoader>
                 break;
             }
 
-            var targetTmp = ((string) properties[str]).Split(',').ToList();
+            var targetTmp = ((string)properties[str]).Split(',').ToList();
 
             if (targetTmp.Count >= 2)
             {
@@ -596,13 +590,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             case "green":
                 return ITEM_TYPE.COOKIE_2;
             case "green_bomb_breaker":
-//                return ITEM_TYPE.COOKIE_2_BOMB_BREAKER;
+                //                return ITEM_TYPE.COOKIE_2_BOMB_BREAKER;
                 return ITEM_TYPE.COOKIE_BOMB_BREAKER;
             case "green_column_breaker":
-//                return ITEM_TYPE.COOKIE_2_COLUMN_BREAKER;
+                //                return ITEM_TYPE.COOKIE_2_COLUMN_BREAKER;
                 return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
             case "green_row_breaker":
-//                return ITEM_TYPE.COOKIE_2_ROW_BREAKER;
+                //                return ITEM_TYPE.COOKIE_2_ROW_BREAKER;
                 return ITEM_TYPE.COOKIE_ROW_BREAKER;
             case "green_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
@@ -611,13 +605,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             case "orange":
                 return ITEM_TYPE.COOKIE_3;
             case "orange_bomb_breaker":
-//                return ITEM_TYPE.COOKIE_3_BOMB_BREAKER;
+                //                return ITEM_TYPE.COOKIE_3_BOMB_BREAKER;
                 return ITEM_TYPE.COOKIE_BOMB_BREAKER;
             case "orange_column_breaker":
-//                return ITEM_TYPE.COOKIE_3_COLUMN_BREAKER;
+                //                return ITEM_TYPE.COOKIE_3_COLUMN_BREAKER;
                 return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
             case "orange_row_breaker":
-//                return ITEM_TYPE.COOKIE_3_ROW_BREAKER;
+                //                return ITEM_TYPE.COOKIE_3_ROW_BREAKER;
                 return ITEM_TYPE.COOKIE_ROW_BREAKER;
             case "orange_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
@@ -626,13 +620,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             case "purple":
                 return ITEM_TYPE.COOKIE_4;
             case "purple_bomb_breaker":
-//                return ITEM_TYPE.COOKIE_4_BOMB_BREAKER;
+                //                return ITEM_TYPE.COOKIE_4_BOMB_BREAKER;
                 return ITEM_TYPE.COOKIE_BOMB_BREAKER;
             case "purple_column_breaker":
-//                return ITEM_TYPE.COOKIE_4_COLUMN_BREAKER;
+                //                return ITEM_TYPE.COOKIE_4_COLUMN_BREAKER;
                 return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
             case "purple_row_breaker":
-//                return ITEM_TYPE.COOKIE_4_ROW_BREAKER;
+                //                return ITEM_TYPE.COOKIE_4_ROW_BREAKER;
                 return ITEM_TYPE.COOKIE_ROW_BREAKER;
             case "purple_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
@@ -641,13 +635,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             case "red":
                 return ITEM_TYPE.COOKIE_5;
             case "red_bomb_breaker":
-//                return ITEM_TYPE.COOKIE_5_BOMB_BREAKER;
+                //                return ITEM_TYPE.COOKIE_5_BOMB_BREAKER;
                 return ITEM_TYPE.COOKIE_BOMB_BREAKER;
             case "red_column_breaker":
-//                return ITEM_TYPE.COOKIE_5_COLUMN_BREAKER;
+                //                return ITEM_TYPE.COOKIE_5_COLUMN_BREAKER;
                 return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
             case "red_row_breaker":
-//                return ITEM_TYPE.COOKIE_5_ROW_BREAKER;
+                //                return ITEM_TYPE.COOKIE_5_ROW_BREAKER;
                 return ITEM_TYPE.COOKIE_ROW_BREAKER;
             case "red_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
@@ -656,13 +650,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             case "yellow":
                 return ITEM_TYPE.COOKIE_6;
             case "yellow_bomb_breaker":
-//                return ITEM_TYPE.COOKIE_6_BOMB_BREAKER;
+                //                return ITEM_TYPE.COOKIE_6_BOMB_BREAKER;
                 return ITEM_TYPE.COOKIE_BOMB_BREAKER;
             case "yellow_column_breaker":
-//                return ITEM_TYPE.COOKIE_6_COLUMN_BREAKER;
+                //                return ITEM_TYPE.COOKIE_6_COLUMN_BREAKER;
                 return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
             case "yellow_row_breaker":
-//                return ITEM_TYPE.COOKIE_6_ROW_BREAKER;
+                //                return ITEM_TYPE.COOKIE_6_ROW_BREAKER;
                 return ITEM_TYPE.COOKIE_ROW_BREAKER;
             case "yellow_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
