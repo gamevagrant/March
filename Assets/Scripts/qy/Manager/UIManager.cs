@@ -124,9 +124,10 @@ namespace qy.ui
         private static void Init()
         {
             GameObject go = new GameObject("UIRoot");
-            Canvas cavas = go.AddComponent<Canvas>();
-            cavas.renderMode = RenderMode.ScreenSpaceOverlay;
-            cavas.sortingOrder = 1;
+            go.layer = LayerMask.NameToLayer("UI");
+            Canvas canvas = go.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 1;
             CanvasScaler canvasScaler = go.AddComponent<CanvasScaler>();
             go.AddComponent<GraphicRaycaster>();
             canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -134,6 +135,16 @@ namespace qy.ui
             canvasScaler.matchWidthOrHeight = 0;
 
             go.AddComponent<UIManager>();
+
+
+            GameObject cameraGO = new GameObject("UICamera");
+            Camera camera = cameraGO.AddComponent<Camera>();
+            camera.transform.position = Vector3.zero;
+            camera.cullingMask = LayerMask.GetMask(new string[] { "UI" });
+            camera.depth = 1;
+            camera.clearFlags = CameraClearFlags.Depth;
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            canvas.worldCamera = camera;
             //GameObject.DontDestroyOnLoad(go);
         }
 
@@ -412,6 +423,7 @@ namespace qy.ui
             {
                 GameObject windowGO = GameObject.Instantiate(go);
                 windowGO.name = id.ToString();
+                windowGO.layer = LayerMask.NameToLayer("UI");
                 windowGO.SetActive(false);
                 window = windowGO.GetComponent<UIWindowBase>();
                 UIWindowData windowData = window.windowData;

@@ -76,7 +76,7 @@ namespace qy
                 SaveData("NET_BUFFER_QUEUE", value);
             }
         }
-#if UNITY_EDITOR
+
         public static List<CallMethodInfo> callMethodList
         {
             get
@@ -88,7 +88,7 @@ namespace qy
                 SaveData("CALL_METHOD_LIST", value);
             }
         }
-#endif
+
 
         private static T GetData<T>(string name)
         {

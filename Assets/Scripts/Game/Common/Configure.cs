@@ -1260,7 +1260,7 @@ public class Configure : MonoSingleton<Configure>
 
     public static string StoryBackground = "story/bg";
     public static string StoryPerson = "story/person";
-
+    public static string StoryDialogPerson = "story/dialogperson";
     protected override void Init()
     {
         base.Init();

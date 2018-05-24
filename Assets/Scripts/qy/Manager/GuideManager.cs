@@ -31,6 +31,8 @@ namespace qy
         private config.GuideItem guideItem;
         private Dictionary<string, string> displayedGuides;//展示过的引导id
         private GameObject maskClickGO;
+        private Canvas canvas;
+        private Camera uiCamera;
 
         private static void Init()
         {
@@ -44,6 +46,7 @@ namespace qy
         private void Awake()
         {
             _instance = this;
+
             mask.gameObject.SetActive(false);
             arrow.gameObject.SetActive(false);
             hollowOffRect.gameObject.SetActive(false);
@@ -52,6 +55,10 @@ namespace qy
             Messenger.AddListener<ui.UISettings.UIWindowID>(ELocalMsgID.OpenUI, OnOpenUIHandle);
             Messenger.AddListener<ui.UISettings.UIWindowID>(ELocalMsgID.CloseUI, OnCloseUIHandle);
             displayedGuides = LocalDatasManager.displayedGuides;
+
+            canvas = gameObject.GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            StartCoroutine(SetCanvasCamera());
         }
 
         private void OnDestroy()
@@ -61,8 +68,24 @@ namespace qy
             Messenger.RemoveListener<ui.UISettings.UIWindowID>(ELocalMsgID.CloseUI, OnCloseUIHandle);
         }
 
+        private IEnumerator SetCanvasCamera()
+        {
+            
+            GameObject uiCameraGO = GameObject.Find("UICamera");
+            while(uiCameraGO == null)
+            {
+                yield return new WaitForSeconds(0.2f);
+                uiCameraGO = GameObject.Find("UICamera");
+            }
+
+            uiCamera = uiCameraGO.GetComponent<Camera>();
+            canvas.worldCamera = uiCamera;
+
+        }
+
         private void OnOpenUIHandle(ui.UISettings.UIWindowID uiID)
         {
+            StartCoroutine(SetCanvasCamera());
             PlayerData playerdata = GameMainManager.Instance.playerData;
             if (playerdata.role!=null && playerdata.GetRoleState(playerdata.role.id)!= PlayerData.RoleState.Normal)
             {
@@ -283,7 +306,8 @@ namespace qy
         {
             Canvas canvas = arrow.root.GetComponent<Canvas>();
             Vector2 pos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, target.position, canvas.worldCamera, out pos);
+            Vector3 screenPoint = canvas.worldCamera.WorldToScreenPoint(target.position);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPoint, canvas.worldCamera, out pos);
 
             Vector2 point = new Vector2(0.5f, 0.5f);
 

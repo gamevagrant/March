@@ -211,6 +211,24 @@ public class FilePathTools
         }
         return str;
     }
+    /// <summary>
+    /// 获取粒子系统
+    /// </summary>
+    /// <param name="prefabName"></param>
+    /// <returns></returns>
+    public static string GetParticle(string prefabName)
+    {
+        string str = "Prefabs/Particle/" + prefabName;
+        if (GameSetting.isUseAssetBundle)
+        {
+            str = str.ToLower();
+        }
+        else
+        {
+            str = str + ".prefab";
+        }
+        return str;
+    }
 
     /// <summary>
     /// 获取特效prefab路径

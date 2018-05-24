@@ -25,6 +25,11 @@ namespace qy.config
             story.dialogue = GetLanguage(item.GetAttribute("dialogue"));
             story.nextId = item.GetAttribute("next");
             story.personLocation = item.GetAttribute("personLocation");
+            string weather = item.GetAttribute("weather");
+            story.weather = string.IsNullOrEmpty(weather) ? 0 : int.Parse(weather);
+            string effect = item.GetAttribute("effect");
+            story.effect = string.IsNullOrEmpty(effect) ? 0 : int.Parse(effect);
+
             dic.Add(story.id, story);
         }
 
@@ -70,6 +75,15 @@ namespace qy.config
         /// 对话
         /// </summary>
         public string dialogue;
+        /// <summary>
+        /// 天气（1：下雨 2：下雪）
+        /// </summary>
+        public int weather;
+        /// <summary>
+        /// 特效（1：抖动 2：血屏 3：背景变灰）
+        /// </summary>
+        public int effect;
+
         internal string nextId;
         /// <summary>
         /// 下一个story

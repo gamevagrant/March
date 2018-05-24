@@ -21,6 +21,7 @@ namespace March.Scene
             BundleList.Add(Configure.ScenePlayerPath);
             BundleList.Add(Configure.StoryBackground);
             BundleList.Add(Configure.StoryPerson);
+            BundleList.Add(Configure.StoryDialogPerson);
         }
 
         public IEnumerator Load()
