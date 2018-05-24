@@ -53,6 +53,8 @@ public class GuideWindowMaker : MonoBehaviour
 
     public List<RectTransform> ImageList;
 
+    public List<GuideCondition> ConditionList;
+
     private Dictionary<PathType, string> pathDict = new Dictionary<PathType, string>
     {
         {PathType.FromResource, "March/Data/Resources/PlayGuide"},
@@ -67,8 +69,6 @@ public class GuideWindowMaker : MonoBehaviour
     private GuideHandController guideHandController;
 
     private GuideData data;
-
-    public RectTransform TestImage;
 
     private string GuideFileName
     {
@@ -133,6 +133,10 @@ public class GuideWindowMaker : MonoBehaviour
             AnchorPosition = new Position(rectTransform.anchoredPosition),
             Size = new Position(rectTransform.rect.size)
         }));
+
+        // guide condition list.
+        data.ConditionList.Clear();
+        data.ConditionList.AddRange(ConditionList);
     }
 
     [ContextMenu("Load")]
@@ -170,6 +174,9 @@ public class GuideWindowMaker : MonoBehaviour
             rect.name = item.ObjectName;
             return rect;
         }));
+
+        ConditionList.Clear();
+        ConditionList.AddRange(data.ConditionList);
     }
     private void CleanupImage()
     {
