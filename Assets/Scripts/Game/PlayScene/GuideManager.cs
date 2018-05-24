@@ -99,6 +99,12 @@ namespace March.Core.Guide
                     GuideManagerData.CurrentGuideLevelData.GuideDataPath);
                 guideController.GuideText = Instantiate(Resources.Load(path)) as TextAsset;
                 guideController.Generate();
+
+                var customControllerName = string.Format("{0}Controller", guideController.name);
+                var customControllerType = Type.GetType(string.Format("{0}, Assembly-CSharp", customControllerName));
+                if (customControllerType != null)
+                    guideController.gameObject.AddComponent(customControllerType);
+
                 guideController.name = string.Format("Level {0} Step {1}", GuideManagerData.CurrentLevel,
                     GuideManagerData.CurrentStep);
 
