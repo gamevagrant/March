@@ -60,6 +60,10 @@ public class UIDialogueWindow : UIWindowBase {
         topBlack.sizeDelta = new Vector2(topBlack.sizeDelta.x, 0);
         bottomBlack.sizeDelta = new Vector2(bottomBlack.sizeDelta.x, 0);
         dialogueBox.gameObject.SetActive(false);
+        if (personLeft != null)
+            personLeft.gameObject.SetActive(false);
+        if (personRight != null)
+            personRight.gameObject.SetActive(false);
         imgBG.color = new Color(1, 1, 1, 0.01f);
     }
 
