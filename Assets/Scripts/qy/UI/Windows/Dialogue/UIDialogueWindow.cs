@@ -38,7 +38,7 @@ public class UIDialogueWindow : UIWindowBase {
     private UIDialoguePerson personRight;
     private UIDialoguePerson talkingPerson;
     private bool isMoveing = false;
-
+    private Dictionary<string, List<GameObject>> personCache = new Dictionary<string, List<GameObject>>();
     private string beginID;
 
     private void Awake()
@@ -60,6 +60,10 @@ public class UIDialogueWindow : UIWindowBase {
         topBlack.sizeDelta = new Vector2(topBlack.sizeDelta.x, 0);
         bottomBlack.sizeDelta = new Vector2(bottomBlack.sizeDelta.x, 0);
         dialogueBox.gameObject.SetActive(false);
+        if (personLeft != null)
+            personLeft.gameObject.SetActive(false);
+        if (personRight != null)
+            personRight.gameObject.SetActive(false);
         imgBG.color = new Color(1, 1, 1, 0.01f);
     }
 
@@ -263,11 +267,36 @@ public class UIDialogueWindow : UIWindowBase {
         person.Hide();
     }
 
+    //todo 待优化 不要平凡创建销毁
     private UIDialoguePerson GetPerson(string name,string position)
     {
+        List<GameObject> cacheList;
+        personCache.TryGetValue(name,out cacheList);
+        GameObject personGO = null;
+        if (cacheList!=null)
+        {
+            foreach(GameObject cache in cacheList)
+            {
+                if(!cache.activeSelf)
+                {
+                    personGO = cache;
+                    break;
+                }
+            }
+        }
+        if(personGO==null)
+        {
+            GameObject go = March.Core.ResourceManager.ResourceManager.instance.Load<GameObject>(Configure.StoryDialogPerson, name);
+            personGO = GameUtils.CreateGameObject(transform, go);
+            if(!personCache.ContainsKey(name))
+            {
+                personCache.Add(name, new List<GameObject>() { personGO });
+            }else
+            {
+                personCache[name].Add(personGO);
+            }
+        }
 
-        GameObject go = March.Core.ResourceManager.ResourceManager.instance.Load<GameObject>(Configure.StoryDialogPerson, name);
-        GameObject personGO = GameUtils.CreateGameObject(transform, go);
         personGO.transform.SetSiblingIndex(1);
         RectTransform rt = personGO.transform as RectTransform;
         UIDialoguePerson person = personGO.GetComponent<UIDialoguePerson>();
@@ -279,8 +308,7 @@ public class UIDialogueWindow : UIWindowBase {
             rt.anchoredPosition = new Vector2(25, 0);
             if(personLeft!=null)
             {
-                Destroy(personLeft.gameObject);
-                
+                personLeft.gameObject.SetActive(false);
             }
             personLeft = person;
         }
@@ -292,8 +320,7 @@ public class UIDialogueWindow : UIWindowBase {
             rt.anchoredPosition = new Vector2(-25, 0);
             if (personRight != null)
             {
-                Destroy(personRight.gameObject);
-                
+                personRight.gameObject.SetActive(false);
             }
             personRight = person;
         }

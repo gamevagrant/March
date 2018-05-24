@@ -65,7 +65,10 @@ public class WeatherManager {
     {
         foreach(GameObject go in dic.Values)
         {
-            go.SetActive(false);
+            if (go != null)
+            {
+                go.SetActive(false);
+            }
         }
     }
 

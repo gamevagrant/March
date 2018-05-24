@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 311371947
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 73f7e2c98bc354b5ffff25b54c3220bb
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 229bd3a35a2cd30c18297395f56a2251
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 239e5d8c68469c947979fc562618961f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 247787c3975c92f4aa80d6896889dcc0, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleResources/Story/DialogPerson/Person3.prefab
+- Assets/AssetBundleResources/Story/DialogPerson/Person4.prefab
+- Assets/AssetBundleResources/Story/DialogPerson/Person2.prefab
+- Assets/AssetBundleResources/Story/DialogPerson/Person6.prefab
+- Assets/AssetBundleResources/Story/DialogPerson/Person5.prefab
+- Assets/AssetBundleResources/Story/DialogPerson/Person1.prefab
+Dependencies:
+- E:/WorkSpace/elex_git/march/AssetBundles/Android/story/person
