@@ -41,7 +41,7 @@ namespace March.Scene
 
         private void OnSceneIsReady(object sender, EventArgs args)
         {
-            PanelController.DataMap = Serializer.Loader.SceneMap;
+            PanelController.DataMap = Serializer.SceneLoader.SceneMap;
             PanelController.FlushUI();
         }
 
@@ -71,7 +71,7 @@ namespace March.Scene
             //    Serializer.DefaultSceneDataMap[key].Position,
             //    Serializer.DefaultSceneDataMap[key].Scale, Serializer.DefaultSceneDataMap[key].SortingOrder,
             //    isModifiable);
-            var go = Serializer.Loader.CreateIdentifyGameObject(Serializer.SceneLayerMap[key], index, position);
+            var go = Serializer.SceneLoader.CreateIdentifyGameObject(Serializer.SceneLayerMap[key], index, position);
 
             if (!isModifiable && Serializer.GoMap.ContainsKey(key))
                 Destroy(Serializer.GoMap[key][0]);

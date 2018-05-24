@@ -1,1 +1,1 @@
-{"Level":1,"Background":[{"Position":{"X":0.0,"Y":0.0,"Z":0.0},"ID":1}],"Player":[],"BuildingList":[],"NPCList":[]}
+{"Background":[{"Position":{"X":0.0,"Y":0.0,"Z":0.0},"ID":1}],"Player":[{"Position":{"X":2.359999895095825,"Y":0.0,"Z":0.0},"ID":0}],"BuildingList":[],"NPCList":[]}
