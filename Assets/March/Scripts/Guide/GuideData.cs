@@ -106,7 +106,7 @@ namespace March.Core.Guide
         {
             get
             {
-                if (CurrentStep - 1 >= 0 && CurrentStep - 1 < GuideManagerDict[CurrentLevel].Count)
+                if (GuideManagerDict.ContainsKey(CurrentLevel) && CurrentStep - 1 >= 0 && CurrentStep - 1 < GuideManagerDict[CurrentLevel].Count)
                     return GuideManagerDict[CurrentLevel][CurrentStep - 1];
                 return null;
             }
