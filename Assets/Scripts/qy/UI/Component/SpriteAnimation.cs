@@ -68,11 +68,15 @@ public class SpriteAnimation : MonoBehaviour {
     }
     public void Play()
     {
+        if (!gameObject.activeInHierarchy)
+            return;
         SetSprite(mCurFrame);
         IsPlaying = true;
     }
     public void Stop()
     {
+        if (!gameObject.activeInHierarchy)
+            return;
         mCurFrame = 0;
         progress = 0;
         SetSprite(mCurFrame);
@@ -80,6 +84,8 @@ public class SpriteAnimation : MonoBehaviour {
     }
     public void Pause()
     {
+        if (!gameObject.activeInHierarchy)
+            return;
         IsPlaying = false;
     }
 
