@@ -1,14 +1,11 @@
 ﻿using March.Core.Guide;
 using March.Scene;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GuideWindowController : MonoBehaviour
 {
     public GuideWindowData Data;
-
-    public UnityAction NextButtonAction;
 
     public Button NextButton;
 
@@ -34,7 +31,7 @@ public class GuideWindowController : MonoBehaviour
         NextButton = transform.Find("NextButton").GetComponent<Button>();
         head = transform.Find("Head");
 
-        NextButton.onClick.AddListener(NextButtonAction);
+        NextButton.onClick.AddListener(()=>GuideManager.instance.Hide());
     }
 
     [ContextMenu("UI to Data")]

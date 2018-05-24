@@ -1,9 +1,10 @@
 ﻿using March.Core.WindowManager;
-using qy;
 using qy.config;
 using System.Collections;
 using System.Collections.Generic;
+using qy;
 using UnityEngine;
+using GuideManager = March.Core.Guide.GuideManager;
 using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
@@ -157,14 +158,6 @@ public class Board : MonoBehaviour
             }
             else
             {
-                if (Configure.instance.touchIsSwallowed
-                    && GameObject.Find("Help") != null
-                    && GameObject.Find("Help").activeSelf
-                    )
-                {
-                    return;
-                }
-
                 // no booster
                 if (booster == BOOSTER_TYPE.NONE)
                 {
@@ -1078,8 +1071,6 @@ public class Board : MonoBehaviour
         return combines;
     }
 
-
-
     // re-generate the board to make sure there is no "pre-matches"
     void GenerateNoMatches()
     {
@@ -1136,7 +1127,6 @@ public class Board : MonoBehaviour
                 }
             }
 
-
             squareCombines = GetSquareMatches();
             combines = GetMatches();
             runNum++;
@@ -1146,14 +1136,10 @@ public class Board : MonoBehaviour
                 break;
             }
 
-
-
         } while (combines.Count > 0 || squareCombines.Count > 0);
 
-        //Debug.Log("End generating matches");
     }
 
-    // return the list of matches on the board
     public List<List<Item>> GetMatches(FIND_DIRECTION direction = FIND_DIRECTION.NONE, int matches = 3)
     {
         var combines = new List<List<Item>>();
@@ -1386,13 +1372,13 @@ public class Board : MonoBehaviour
                         FindMatches();
                     }
 
-                    if (Help.instance.help == false)
+                    if (!GuideManager.instance.GuideEnabled)
                     {
                         StartCoroutine(CheckHint());
                     }
                     else
                     {
-                        Help.instance.Show();
+                        GuideManager.instance.Show();
                     }
                 }
             }
@@ -3261,35 +3247,20 @@ public class Board : MonoBehaviour
 
         AudioManager.instance.PopupTargetAudio();
 
-        WindowManager.instance.Show<TargetPopupWindow>();
+        var targetPopup = WindowManager.instance.Show<TargetPopupWindow>().GetComponent<Popup>();
 
-        yield return new WaitForSeconds(1.0f);
-
-        var popup = GameObject.Find("TargetPopup(Clone)");
-
-        if (popup)
-        {
-            popup.GetComponent<Popup>().Close();
-        }
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(targetPopup.Duration + 0.5f);
 
         state = GAME_STATE.WAITING_USER_SWAP;
 
-        if (Help.instance.help == false)
+        if (!GuideManager.instance.GuideEnabled)
         {
             StartCoroutine(CheckHint());
         }
         else
         {
-            Help.instance.Show();
+            GuideManager.instance.Show();
         }
-
-        // Plus 5 moves popup
-        //        if (Configure.instance.beginFiveMoves == true)
-        //        {
-        //            StartCoroutine(Plus5MovesPopup());
-        //        }
     }
 
     IEnumerator Plus5MovesPopup()
@@ -4755,24 +4726,6 @@ public class Board : MonoBehaviour
             }
 
             Booster.instance.BoosterComplete();
-
-            // hide help object
-            if (LevelLoader.instance.level == 7 && Help.instance.step == 2)
-            {
-                Help.instance.Hide();
-            }
-            if (LevelLoader.instance.level == 12 && Help.instance.step == 2)
-            {
-                Help.instance.Hide();
-            }
-            if (LevelLoader.instance.level == 15 && Help.instance.step == 2)
-            {
-                Help.instance.Hide();
-            }
-            if (LevelLoader.instance.level == 18 && Help.instance.step == 2)
-            {
-                Help.instance.Hide();
-            }
         }
 
         if (boosterItem.Movable() && booster == BOOSTER_TYPE.OVEN_BREAKER)
@@ -4886,12 +4839,6 @@ public class Board : MonoBehaviour
             else
             {
                 lockSwap = true;
-
-                // hide help object
-                if (LevelLoader.instance.level == 25 && Help.instance.step == 2)
-                {
-                    Help.instance.Hide();
-                }
 
                 boosterItem.node.AddOvenBoosterActive();
 
@@ -5175,7 +5122,7 @@ public class Board : MonoBehaviour
                 dropTime = 1;
 
                 // hide help if need
-                Help.instance.Hide();
+                GuideManager.instance.Hide();
 
                 DecreaseMoveLeft();
 

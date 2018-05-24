@@ -58,22 +58,6 @@ namespace qy.net
             }
         }
 
-        private string APIDomain
-        {
-            get
-            {
-                if (GameSetting.isRelease)
-                {
-                    return GameSetting.serverPath;
-                }
-                else
-                {
-                    return GameSetting.serverPathDevelop;
-                }
-
-            }
-        }
-
         private string uid
         {
             get
@@ -209,7 +193,7 @@ namespace qy.net
         }
         private bool Send(Dictionary<string, object> data, Action<bool, PlayerDataMessage> callBack)
         {
-            string url = APIDomain;
+            var url = Configure.instance.ServerUrl;
             return HttpProxy.SendPostRequest<PlayerDataMessage>(url, data, (ret, res) =>
             {
                 if(ret)
