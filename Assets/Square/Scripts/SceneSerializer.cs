@@ -65,8 +65,6 @@ namespace March.Scene
 
         public void Write(int level, string path)
         {
-            SceneLevel.Level = level;
-
             foreach (var pair in SceneLevel.GetSceneMap())
             {
                 var key = pair.Key;

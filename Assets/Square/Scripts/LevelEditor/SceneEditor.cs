@@ -101,7 +101,7 @@ namespace March.Scene
         {
             dirty = false;
 
-            var path = Path.Combine(RelativePath, "Level_" + SceneLevel.Level + ".txt");
+            var path = Path.Combine(RelativePath, "Level_" + PanelController.Level + ".txt");
             Serializer.Write(PanelController.Level, path);
 
             PanelController.Info = Serializer.Message;
@@ -137,7 +137,6 @@ namespace March.Scene
             Serializer.Read(path);
 
             PanelController.Info = Serializer.Message;
-            PanelController.Level = SceneLevel.Level;
         }
 
         public void OnClearAllButtonClicked()
