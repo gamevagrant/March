@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2078552157
+CRC: 2648862369
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 84a9458d5cd60167cd51d06b39064031
+    Hash: ab659fe1b21ef211065f427bdf2ba27a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 460b4f5d62b6facbccf7c01637df8f00
@@ -17,8 +17,7 @@ Assets:
 - Assets/AssetBundleResources/Story/1000239bg.jpg
 - Assets/AssetBundleResources/Story/1000112bg.png
 - Assets/AssetBundleResources/Story/1000235bg.jpg
-- Assets/AssetBundleResources/Story/1000110bg.png
-- Assets/AssetBundleResources/Story/1000121bg.png
+- Assets/AssetBundleResources/Story/1000121bg.jpg
 - Assets/AssetBundleResources/Story/1000241bg.jpg
 - Assets/AssetBundleResources/Story/1000203bg.png
 - Assets/AssetBundleResources/Story/1000126bg.png
@@ -26,7 +25,7 @@ Assets:
 - Assets/AssetBundleResources/Story/1000232bg.jpg
 - Assets/AssetBundleResources/Story/1000113bg.png
 - Assets/AssetBundleResources/Story/1000211bg.png
-- Assets/AssetBundleResources/Story/1000106bg.png
+- Assets/AssetBundleResources/Story/1000110bg.jpg
 - Assets/AssetBundleResources/Story/1000125bg.png
 - Assets/AssetBundleResources/Story/1000219bg.jpg
 - Assets/AssetBundleResources/Story/1000207bg.png
@@ -54,6 +53,7 @@ Assets:
 - Assets/AssetBundleResources/Story/1000118bg.png
 - Assets/AssetBundleResources/Story/1000205bg.png
 - Assets/AssetBundleResources/Story/1000111bg.png
+- Assets/AssetBundleResources/Story/1000106bg.jpg
 - Assets/AssetBundleResources/Story/1000127bg.jpg
 - Assets/AssetBundleResources/Story/1000234bg.jpg
 - Assets/AssetBundleResources/Story/1000210bg.png

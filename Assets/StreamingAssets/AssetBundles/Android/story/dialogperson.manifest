@@ -3,10 +3,10 @@ CRC: 311371947
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 73f7e2c98bc354b5ffff25b54c3220bb
+    Hash: 708d0b2cc1be9b8cdedafdc37f6e5779
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 229bd3a35a2cd30c18297395f56a2251
+    Hash: 86a83896f5be95834449028def689128
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,9 +20,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 239e5d8c68469c947979fc562618961f, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 247787c3975c92f4aa80d6896889dcc0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 239e5d8c68469c947979fc562618961f, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 213
@@ -39,4 +39,4 @@ Assets:
 - Assets/AssetBundleResources/Story/DialogPerson/Person5.prefab
 - Assets/AssetBundleResources/Story/DialogPerson/Person1.prefab
 Dependencies:
-- E:/WorkSpace/elex_git/march/AssetBundles/Android/story/person
+- C:/Projects/Git/marchClient/AssetBundles/Android/story/person

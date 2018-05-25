@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2147737366
+CRC: 1820440947
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 854662929cd6708e752890f1f63fd97d
+    Hash: 680d865a7f6d155e9c3abd4b09859514
   TypeTreeHash:
     serializedVersion: 2
     Hash: 460b4f5d62b6facbccf7c01637df8f00
@@ -16,6 +16,7 @@ ClassTypes:
 Assets:
 - Assets/AssetBundleResources/Story/Person/person1.png
 - Assets/AssetBundleResources/Story/Person/person2.png
+- Assets/ArtAssets/Material/person7.png
 - Assets/AssetBundleResources/Story/Person/person4.png
 - Assets/AssetBundleResources/Story/Person/person5.png
 - Assets/AssetBundleResources/Story/Person/person3.png

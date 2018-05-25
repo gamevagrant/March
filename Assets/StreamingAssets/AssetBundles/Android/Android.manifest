@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2759989766
+CRC: 2349667744
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -29,3 +29,7 @@ AssetBundleManifest:
     Info_8:
       Name: story/person
       Dependencies: {}
+    Info_9:
+      Name: story/dialogperson
+      Dependencies:
+        Dependency_0: story/person

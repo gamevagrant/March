@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3125672629
+CRC: 3359350838
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f0ccd5bcf54bf63eda2a0c76b77365fd
+    Hash: 9633aa49a114baac3ceb1ea293c1043b
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3fe79793f66304e9b58fe99f24bc456a
@@ -30,9 +30,18 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/AssetBundleResources/Scene/Building/2.prefab
 - Assets/AssetBundleResources/Scene/Building/5.prefab
+- Assets/AssetBundleResources/Scene/Building/2.prefab
+- Assets/AssetBundleResources/Scene/Building/7.prefab
+- Assets/AssetBundleResources/Scene/Building/12.prefab
+- Assets/AssetBundleResources/Scene/Building/4.prefab
+- Assets/AssetBundleResources/Scene/Building/6.prefab
+- Assets/AssetBundleResources/Scene/Building/15.prefab
+- Assets/AssetBundleResources/Scene/Building/13.prefab
+- Assets/AssetBundleResources/Scene/Building/11.prefab
+- Assets/AssetBundleResources/Scene/Building/14.prefab
+- Assets/AssetBundleResources/Scene/Building/9.prefab
+- Assets/AssetBundleResources/Scene/Building/8.prefab
 - Assets/AssetBundleResources/Scene/Building/3.prefab
 - Assets/AssetBundleResources/Scene/Building/1.prefab
-- Assets/AssetBundleResources/Scene/Building/4.prefab
 Dependencies: []
