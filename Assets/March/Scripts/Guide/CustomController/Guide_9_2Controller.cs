@@ -9,12 +9,12 @@ public class Guide_9_2Controller : MonoBehaviour , GuideCustomInterface
     void Start()
     {
         shavol = Instantiate(Resources.Load<GameObject>(ShavolPrefab), transform).GetComponent<Animator>();
-        shavol.enabled = false;
+        shavol.gameObject.SetActive(false);
     }
 
     public IEnumerator Hide()
     {
-        shavol.enabled = true;
+        shavol.gameObject.SetActive(value: true);
         shavol.Play("ShavolIt");
         yield return new WaitForSeconds(1f);
     }
