@@ -154,7 +154,6 @@ public class Board : MonoBehaviour
             {
                 needIncreaseBubble = false;
                 IncreaseBubble();
-
             }
             else
             {
@@ -447,7 +446,7 @@ public class Board : MonoBehaviour
                     waffle.transform.localPosition = NodeLocalPosition(i, j);
                     waffle.GetComponent<Waffle>().type = waffleLayerData[order];
                     waffle.GetComponent<Waffle>().node = nodes[order];
-                    waffle.GetComponent<SpriteRenderer>().sortingLayerName = "Waffle";
+                    waffle.GetComponent<SpriteRenderer>().sortingLayerName = SortingLayers.Waffle;
 
                     nodes[order].waffle = waffle.GetComponent<Waffle>();
                 }
@@ -5132,7 +5131,7 @@ public class Board : MonoBehaviour
                 return;
             }
             //点击周围块
-            else if ((clickedItem.node.TopNeighbor() && item.node == clickedItem.node.TopNeighbor())
+            if ((clickedItem.node.TopNeighbor() && item.node == clickedItem.node.TopNeighbor())
                 || (clickedItem.node.LeftNeighbor() && item.node == clickedItem.node.LeftNeighbor())
                 || (clickedItem.node.RightNeighbor() && item.node == clickedItem.node.RightNeighbor())
                 || (clickedItem.node.BottomNeighbor() && item.node == clickedItem.node.BottomNeighbor()))
@@ -5149,11 +5148,9 @@ public class Board : MonoBehaviour
                 {
                     clickedItem = item;
 
-                    CreateChoseSprite(item);
+                    CreateSelectedSprite(item);
                 }
-
             }
-            //check
         }
         else
         {
@@ -5161,10 +5158,10 @@ public class Board : MonoBehaviour
             {
                 clickedItem = item;
 
-                CreateChoseSprite(item);
+                CreateSelectedSprite(item);
             }
-
         }
+
         if (swapItem.type != ITEM_TYPE.BLANK)
         {
             swapItem.drag = true;
@@ -5175,34 +5172,31 @@ public class Board : MonoBehaviour
             generatingGingerbread = false;
             skipGenerateGingerbread = false;
         }
-
-
     }
 
     public void CancelChoseItem()
     {
         if (clickedItem != null)
         {
-            //function()
-
-            if (clickedItem.transform.parent.Find("kuang"))
+            var circle = clickedItem.transform.parent.Find("kuang");
+            if (circle != null)
             {
-                GameObject.Destroy(clickedItem.gameObject.transform.parent.Find("kuang").gameObject);
+                Destroy(circle.gameObject);
             }
             clickedItem = null;
         }
     }
 
-    private void CreateChoseSprite(Item item)
+    private void CreateSelectedSprite(Item item)
     {
         item.CookieGeneralEffect();
-        GameObject kuang = new GameObject();
+        var kuang = new GameObject();
         kuang.transform.parent = item.node.transform;
         kuang.name = "kuang";
         kuang.transform.localPosition = item.transform.localPosition;
         kuang.transform.localScale = item.transform.localScale;
         kuang.AddComponent<SpriteRenderer>();
-        kuang.GetComponent<SpriteRenderer>().sortingLayerName = "Effect";
+        kuang.GetComponent<SpriteRenderer>().sortingLayerName = SortingLayers.Effect;
 
         var spr = new Sprite();
         spr = Resources.Load(Configure.ChoseIcon(), spr.GetType()) as Sprite;
