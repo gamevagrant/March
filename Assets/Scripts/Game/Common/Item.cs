@@ -89,7 +89,7 @@ public class Item : MonoBehaviour
             if (renderer != null)
             {
                 m_spriteRenderer = renderer;
-                m_spriteRenderer.sortingLayerName = "Item";
+                m_spriteRenderer.sortingLayerName = SortingLayers.Item;
             }
         }
     }
@@ -2975,10 +2975,12 @@ public class Item : MonoBehaviour
     void ChangeToBig()
     {
         // prevent multiple calls
-        if (changing) return;
-        else changing = true;
+        if (changing)
+            return;
 
-        this.GetComponent<SpriteRenderer>().sortingLayerName = "Effect";
+        changing = true;
+
+        GetComponent<SpriteRenderer>().sortingLayerName = SortingLayers.Effect;
 
         iTween.ScaleTo(gameObject, iTween.Hash(
             "scale", new Vector3(2.5f, 2.5f, 0),
