@@ -49,12 +49,12 @@ MonoBehaviour:
   - {fileID: 100000, guid: 68de875c57eff7c48bf98c55cdbbc316, type: 2}
   - {fileID: 153204, guid: 8067c9b46f00b0844bdfe312d0b31027, type: 2}
   - {fileID: 173374, guid: 4cbab9ebb4d37f948910764298ac7277, type: 2}
-  - {fileID: 1713700327254572, guid: 2ce463d810f0247aca32625cd9aac78d, type: 2}
-  - {fileID: 142884, guid: 5ed8ef54e2b3bee4abaf8116dab1231a, type: 2}
-  - {fileID: 148226, guid: 4edc04b14bfa59146a27a411e8fba4a7, type: 2}
-  - {fileID: 145566, guid: 242148c1cb1e87948939e754a6055eb4, type: 2}
-  - {fileID: 123312, guid: 914b5f71debad3548ad4b9291cdbe997, type: 2}
-  - {fileID: 171904, guid: e19fc42802feb9a45b87769636572ae7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 137836, guid: d9fc9dacccc18fc4399120d40a542ef9, type: 2}
   - {fileID: 164302, guid: db3d684dedb9b9d4f999b3502a4435d4, type: 2}
   - {fileID: 132668, guid: d459ce58081b4d443bdaec69dbe55fdf, type: 2}

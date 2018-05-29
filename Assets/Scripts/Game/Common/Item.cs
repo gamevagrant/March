@@ -1787,7 +1787,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
@@ -2000,7 +2000,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
@@ -2017,7 +2017,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
@@ -2034,7 +2034,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {

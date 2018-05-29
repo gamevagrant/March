@@ -887,34 +887,9 @@ public class Configure : MonoSingleton<Configure>
     }
 
     // breaker explosion
-    public static string BreakerExplosion1()
+    public static string BreakerExplosion()
     {
-        return "Effects/Explosion (Blue)";
-    }
-
-    public static string BreakerExplosion2()
-    {
-        return "Effects/Explosion (Green)";
-    }
-
-    public static string BreakerExplosion3()
-    {
-        return "Effects/Explosion (Orange)";
-    }
-
-    public static string BreakerExplosion4()
-    {
-        return "Effects/Explosion (Purple)";
-    }
-
-    public static string BreakerExplosion5()
-    {
-        return "Effects/Explosion (Red)";
-    }
-
-    public static string BreakerExplosion6()
-    {
-        return "Effects/Explosion (Yellow)";
+        return "Effects/Explosion";
     }
 
     // generic
