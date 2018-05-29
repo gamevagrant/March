@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 198056179437557094}
   - component: {fileID: 199050973040791692}
   - component: {fileID: 114914072594700416}
-  - component: {fileID: 114572539285141614}
   m_Layer: 0
   m_Name: Jelly_1
   m_TagString: Untagged
@@ -136,17 +135,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114572539285141614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505761495787484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34ee451362ed1458398dbfe63a4768b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114914072594700416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,7 +207,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1679007915
+  randomSeed: -1660617351
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3580,7 +3568,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -185256124
+  randomSeed: -592346854
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6980,7 +6968,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 22357840
+  randomSeed: 31899659
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10374,7 +10362,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -380760325
+  randomSeed: -402979986
   InitialModule:
     serializedVersion: 3
     enabled: 1
