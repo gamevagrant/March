@@ -123,7 +123,9 @@ public class CFX_SpawnSystem : MonoSingleton<CFX_SpawnSystem>
 		GameObject newObj;
 		for(int i = 0; i < number; i++)
 		{
-			newObj = (GameObject)Instantiate(sourceObject);
+			newObj = Instantiate(sourceObject);
+		    newObj.AddComponent<ParticleLayerController>();
+
 			#if UNITY_3_5
 				newObj.SetActiveRecursively(false);
 			#else
