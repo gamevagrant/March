@@ -9,7 +9,6 @@ public abstract class Tags
 	public const string MainCamera = "MainCamera";
 	public const string Player = "Player";
 	public const string Respawn = "Respawn";
-	public const string TaskRequirementsCell = "TaskRequirementsCell";
 	public const string UndoMovePowerupCount = "UndoMovePowerupCount";
 	public const string Untagged = "Untagged";
 	public const string Wall = "Wall";
