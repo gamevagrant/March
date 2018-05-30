@@ -855,58 +855,33 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Items/collectible_box";
     }
 
-    // cookie effects
-    public static string BlueCookieExplosion()
-    {
-        return "Effects/Cookie Explosion (Blue)";
-    }
-
-    public static string GreenCookieExplosion()
-    {
-        return "Effects/Cookie Explosion (Green)";
-    }
-
-    public static string OrangeCookieExplosion()
-    {
-        return "Effects/Cookie Explosion (Orange)";
-    }
-
-    public static string PurpleCookieExplosion()
-    {
-        return "Effects/Cookie Explosion (Purple)";
-    }
-
-    public static string RedCookieExplosion()
-    {
-        return "Effects/Cookie Explosion (Red)";
-    }
-
-    public static string YellowCookieExplosion()
-    {
-        return "Effects/Cookie Explosion (Yellow)";
-    }
-
-    // breaker explosion
-    public static string BreakerExplosion()
-    {
-        return "Effects/Explosion";
-    }
-
     // generic
     public static string ColumnRowBreaker()
     {
         return "Prefabs/Items/column_row_breaker";
     }
 
-	public static string GenericBombBreaker()
-	{
-		return "Prefabs/Items/generic_bomb_breaker";
-	}
+    public static string GenericBombBreaker()
+    {
+        return "Prefabs/Items/generic_bomb_breaker";
+    }
 
-	public static string GenericXBreaker()
-	{
-		return "Prefabs/Items/generic_x_breaker";
-	}
+    public static string GenericXBreaker()
+    {
+        return "Prefabs/Items/generic_x_breaker";
+    }
+
+    // cookie effects
+    public static string CookieExplosion()
+    {
+        return "Effects/Cookie Explosion";
+    }
+
+    // breaker explosion
+    public static string BombBreakerExplosion()
+    {
+        return "Effects/BombExplosion";
+    }
 
     // rainbow explosion
     public static string RainbowExplosion()
@@ -921,46 +896,21 @@ public class Configure : MonoSingleton<Configure>
     }
 
     // column explosion
-    public static string ColRowBreaker1()
+    public static string ColRowBreaker()
     {
-        return "Effects/Striped (Blue)";
+        return "Effects/Striped";
     }
 
     // marshmallow explosion
     public static string MarshmallowExplosion()
     {
-        return "Effects/Marshmallow Explosion1";
+        return "Effects/Marshmallow Explosion";
     }
 
     // chocolate explosion
     public static string ChocolateExplosion()
     {
         return "Effects/Chocolate Explosion";
-    }
-
-    public static string ColRowBreaker2()
-    {
-        return "Effects/Striped (Green)";
-    }
-
-    public static string ColRowBreaker3()
-    {
-        return "Effects/Striped (Orange)";
-    }
-
-    public static string ColRowBreaker4()
-    {
-        return "Effects/Striped (Purple)";
-    }
-
-    public static string ColRowBreaker5()
-    {
-        return "Effects/Striped (Red)";
-    }
-
-    public static string ColRowBreaker6()
-    {
-        return "Effects/Striped (Yellow)";
     }
 
     // booster
@@ -972,75 +922,25 @@ public class Configure : MonoSingleton<Configure>
 	//PackageBox Effects
 	public static string PackageBox1Effects()
 	{
-		return "Effects/Packagebox_1";
+		return "Effects/Packagebox";
 	}
 
 	//Jelly Effects
 	public static string Jelly1Effects()
 	{
-		return "Effects/Jelly_1";
+		return "Effects/Jelly";
 	}
 
     // column breaker animation
-    public static string ColumnBreakerAnimation1()
+    public static string ColumnBreakerAnimation()
     {
-        return "StripeAnim/StripeAnim1";
-    }
-
-    public static string ColumnBreakerAnimation2()
-    {
-        return "StripeAnim/StripeAnim2";
-    }
-
-    public static string ColumnBreakerAnimation3()
-    {
-        return "StripeAnim/StripeAnim3";
-    }
-
-    public static string ColumnBreakerAnimation4()
-    {
-        return "StripeAnim/StripeAnim4";
-    }
-
-    public static string ColumnBreakerAnimation5()
-    {
-        return "StripeAnim/StripeAnim5";
-    }
-
-    public static string ColumnBreakerAnimation6()
-    {
-        return "StripeAnim/StripeAnim6";
+        return "StripeAnim/StripeAnim";
     }
 
     // big column breaker animation
     public static string BigColumnBreakerAnimation1()
     {
-        return "StripeAnim/BigStripeAnim1";
-    }
-
-    public static string BigColumnBreakerAnimation2()
-    {
-        return "StripeAnim/BigStripeAnim2";
-    }
-
-    public static string BigColumnBreakerAnimation3()
-    {
-        return "StripeAnim/BigStripeAnim3";
-    }
-
-    public static string BigColumnBreakerAnimation4()
-    {
-        return "StripeAnim/BigStripeAnim4";
-    }
-
-    public static string BigColumnBreakerAnimation5()
-    {
-        return "StripeAnim/BigStripeAnim5";
-    }
-
-    public static string BigColumnBreakerAnimation6()
-    {
-        return "StripeAnim/BigStripeAnim6";
+        return "StripeAnim/BigStripeAnim";
     }
 
     // waffle
@@ -1202,12 +1102,6 @@ public class Configure : MonoSingleton<Configure>
     public static string ProgressGoldStar()
     {
         return "Prefabs/PlayScene/UI/StarGold";
-    }
-
-    // Win pop up star explode
-    public static string StarExplode()
-    {
-        return "Effects/StarExplode";
     }
 
     public static string ChoseIcon()
