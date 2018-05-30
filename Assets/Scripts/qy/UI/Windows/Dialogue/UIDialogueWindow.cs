@@ -31,9 +31,10 @@ public class UIDialogueWindow : UIWindowBase {
     public RectTransform bottomBlack;
 
     public Image blood;
+    public Image mask;
 
-    private qy.config.StoryItem lastDialogue;//上一句对话
-    private qy.config.StoryItem curDialogue;//当前对话
+    private StoryItem lastDialogue;//上一句对话
+    private StoryItem curDialogue;//当前对话
     private UIDialoguePerson personLeft;
     private UIDialoguePerson personRight;
     private UIDialoguePerson talkingPerson;
@@ -41,13 +42,25 @@ public class UIDialogueWindow : UIWindowBase {
     private Dictionary<string, List<GameObject>> personCache = new Dictionary<string, List<GameObject>>();
     private string beginID;
 
+    private Color BackGroundColor
+    {
+        get
+        {
+            return imgBG.material.color;
+        }
+        set
+        {
+            imgBG.material.color = value;
+        }
+    }
+
     private void Awake()
     {
         blood.gameObject.SetActive(false);
-        
-        Material material = new Material(Shader.Find("Custom/Gray"));
+        mask.gameObject.SetActive(false);
+        Material material = new Material(Shader.Find("Custom/GaussBlur"));
         imgBG.material = material;
-        SetBGGray(0);
+        GrayEffect(0);
     }
 
     protected override void StartShowWindow(object[] data)
@@ -103,7 +116,7 @@ public class UIDialogueWindow : UIWindowBase {
 
     }
 
-    private void ShowStory(qy.config.StoryItem story)
+    private void ShowStory(StoryItem story)
     {
         lastDialogue = curDialogue;
         curDialogue = story;
@@ -115,7 +128,7 @@ public class UIDialogueWindow : UIWindowBase {
             }
             if(lastDialogue.effect==3 && lastDialogue.effect != curDialogue.effect)
             {
-                SetBGGray(0);
+                GrayEffect(0);
             }
         }
         if(string.IsNullOrEmpty(curDialogue.personLocation))
@@ -130,19 +143,7 @@ public class UIDialogueWindow : UIWindowBase {
         }
         else if (lastDialogue == null || curDialogue.bgFile != lastDialogue.bgFile)
         {
-            //AssetsManager.Instance.LoadAssetAsync<Sprite>(FilePathTools.GetStorySpritePath(curDialogue.bgFile), (sp) =>
-            //{
-            //    if (sp != null)
-            //    {
-            //        imgBG.sprite = sp;
-            //        imgBG.DOFade(1, 0.5f);
-            //        RectTransform imgRectTF = imgBG.transform as RectTransform;
-            //        imgRectTF.sizeDelta = new Vector2(0, imgRectTF.rect.width / (sp.texture.width / (float)sp.texture.height));
-            //        imgBG.gameObject.SetActive(true);
-            //    }
-
-            //});
-
+            BackGroundColor = Color.black;
             var sp = March.Core.ResourceManager.ResourceManager.instance.Load<Sprite>(Configure.StoryBackground,curDialogue.bgFile);
             if (sp != null)
             {
@@ -151,6 +152,8 @@ public class UIDialogueWindow : UIWindowBase {
                 RectTransform imgRectTF = imgBG.transform as RectTransform;
                 imgRectTF.sizeDelta = new Vector2(0, imgRectTF.rect.width / (sp.texture.width / (float)sp.texture.height));
                 imgBG.gameObject.SetActive(true);
+                //imgBG.DOColor(Color.white, 0.5f).SetEase(Ease.OutCubic);
+                DOTween.To(() => BackGroundColor, x => BackGroundColor = x, Color.white, 0.5f).SetEase(Ease.OutCubic);
             }
         }
 
@@ -167,13 +170,15 @@ public class UIDialogueWindow : UIWindowBase {
 
     private IEnumerator ShowEffect(int effect)
     {
-        yield return new WaitForSeconds(0.5f);
+        imgBG.material.SetTextureScale("_MainTex", new Vector2(1, 1));
+        imgBG.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
+        yield return null;
         switch (effect)
         {
-            case 1:
+            case 1://抖动
                 (imgBG.transform as RectTransform).DOShakeAnchorPos(0.5f, 20, 80);
                 break;
-            case 2:
+            case 2://血屏幕
                 blood.color = new Color(1, 1, 1, 0);
                 blood.gameObject.SetActive(true);
                 Sequence sq = DOTween.Sequence();
@@ -184,17 +189,90 @@ public class UIDialogueWindow : UIWindowBase {
 
                 });
                 break;
-            case 3:
-                SetBGGray(1);
+            case 3://变灰
+                GrayEffect(1);
                 break;
+            case 4://模糊
+                BlurEffect(0);
+                break;
+            case 5://遮罩扩散
+                MaskEffect();
+                break;
+            case 6://拉近拉远
+                ZoomEffect(0);
+                break;
+            case 7://左右滚动
+                Scroll(0);
+                break;
+
         }
     }
 
-    private void SetBGGray(float value)
+    private void GrayEffect(float value)
     {
-        DOTween.To(() => imgBG.material.GetFloat("_LuminosityAmount"), x => imgBG.material.SetFloat("_LuminosityAmount", x), value, 0.5f);
+        DOTween.To(() => imgBG.material.GetFloat("_LuminosityAmount"), x => imgBG.material.SetFloat("_LuminosityAmount", x), value, 1f);
     }
 
+    private void BlurEffect(float value)
+    {
+        imgBG.material.SetFloat("_OffsetValue", 5);
+        DOTween.To(() => imgBG.material.GetFloat("_OffsetValue"), x => imgBG.material.SetFloat("_OffsetValue", x), value, 1f).SetEase(Ease.InCubic);
+    }
+
+    private void MaskEffect()
+    {
+        mask.gameObject.SetActive(true);
+        mask.material.SetTextureScale("_MaskTex", new Vector2(0,10));
+        mask.material.SetTextureOffset("_MaskTex", new Vector2(0, -5));
+
+        DOTween.To(() => mask.material.GetTextureScale("_MaskTex"), x => mask.material.SetTextureScale("_MaskTex", x), new Vector2(0.5f,0.5f) , 1f).SetEase(Ease.OutCubic);
+        DOTween.To(() => mask.material.GetTextureOffset("_MaskTex"), x => mask.material.SetTextureOffset("_MaskTex", x), new Vector2(0.25f, 0.25f), 1f).SetEase(Ease.OutCubic);
+
+    }
+
+    /// <summary>
+    /// 放大缩小
+    /// </summary>
+    /// <param name="type"> 0： 放大  1：缩小</param>
+    private void ZoomEffect(int type = 0)
+    {
+        if(type == 0)
+        {
+            imgBG.material.SetTextureScale("_MainTex", new Vector2(1, 1));
+            imgBG.material.SetTextureOffset("_MainTex", new Vector2(0f, 0f));
+            DOTween.To(() => imgBG.material.GetTextureScale("_MainTex"), x => imgBG.material.SetTextureScale("_MainTex", x), new Vector2(0.5f, 0.5f), 2f).SetEase(Ease.InCubic);
+            DOTween.To(() => imgBG.material.GetTextureOffset("_MainTex"), x => imgBG.material.SetTextureOffset("_MainTex", x), new Vector2(0.25f, 0.25f), 2f).SetEase(Ease.InCubic);
+        }
+        else
+        {
+            imgBG.material.SetTextureScale("_MainTex", new Vector2(0.5f, 0.5f));
+            imgBG.material.SetTextureOffset("_MainTex", new Vector2(0.25f, 0.25f));
+            DOTween.To(() => imgBG.material.GetTextureScale("_MainTex"), x => imgBG.material.SetTextureScale("_MainTex", x), new Vector2(1, 1), 2f).SetEase(Ease.InCubic);
+            DOTween.To(() => imgBG.material.GetTextureOffset("_MainTex"), x => imgBG.material.SetTextureOffset("_MainTex", x), new Vector2(0, 0), 2f).SetEase(Ease.InCubic);
+        }
+    }
+    /// <summary>
+    /// 左右滚动
+    /// </summary>
+    /// <param name="type">0：向左滚动 1：向右滚动</param>
+    private void Scroll(int type = 0)
+    {
+        if(type == 0)
+        {
+            imgBG.material.SetTextureScale("_MainTex", new Vector2(0.5f, 0.5f));
+            imgBG.material.SetTextureOffset("_MainTex", new Vector2(0.5f, 0.5f));
+
+            DOTween.To(() => imgBG.material.GetTextureOffset("_MainTex"), x => imgBG.material.SetTextureOffset("_MainTex", x), new Vector2(0, 0.5f), 3f);
+        
+        }
+        else
+        {
+            imgBG.material.SetTextureScale("_MainTex", new Vector2(0.5f, 0.5f));
+            imgBG.material.SetTextureOffset("_MainTex", new Vector2(0f, 0.5f));
+
+            DOTween.To(() => imgBG.material.GetTextureOffset("_MainTex"), x => imgBG.material.SetTextureOffset("_MainTex", x), new Vector2(0.5f, 0.5f), 3f);
+        }
+    }
     /// <summary>
     /// 展示对话
     /// </summary>
