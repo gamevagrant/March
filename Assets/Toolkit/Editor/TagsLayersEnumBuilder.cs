@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class TagsLayersEnumBuilder : EditorWindow
 
         RebuildTagsFile(enumsPath + "Tags.cs");
         RebuildLayersFile(enumsPath + "Layers.cs");
+        RebuildSortingLayersFile(enumsPath + "SortingLayers.cs");
 
         AssetDatabase.Refresh();
     }
@@ -81,6 +83,32 @@ public class TagsLayersEnumBuilder : EditorWindow
             int layerNumber = LayerMask.NameToLayer(layerName);
 
             sb.Append("\tpublic const int " + GetVariableName(layerName) + "Number" + " = " + layerNumber + ";\n");
+        }
+
+        sb.Append("}\n");
+
+#if !UNITY_WEBPLAYER
+        File.WriteAllText(filePath, sb.ToString());
+#endif
+    }
+
+    static void RebuildSortingLayersFile(string filePath)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.Append("//This class is auto-generated, do not modify (TagsLayersEnumBuilder.cs)\n");
+        sb.Append("public abstract class SortingLayers\n{\n");
+
+        var srcArr = SortingLayer.layers.Select(layer => layer.name).ToArray();
+        var sortingLayers = new String[srcArr.Length];
+        Array.Copy(srcArr, sortingLayers, sortingLayers.Length);
+        Array.Sort(sortingLayers, StringComparer.InvariantCultureIgnoreCase);
+
+        for (int i = 0, n = sortingLayers.Length; i < n; ++i)
+        {
+            string sortingLayerName = sortingLayers[i];
+
+            sb.Append("\tpublic const string " + sortingLayerName + " = \"" + sortingLayerName + "\";\n");
         }
 
         sb.Append("}\n");

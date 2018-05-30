@@ -48,7 +48,6 @@ namespace March.Scene
             if (itemCollider != null)
                 itemCollider.enabled = false;
             spriteRenderer = itemTransform.GetComponent<SpriteRenderer>();
-            spriteRenderer.flipX = true;
 
             AdjustDeleteButton();
         }

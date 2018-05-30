@@ -41,7 +41,7 @@ namespace March.Scene
 
         private void OnSceneIsReady(object sender, EventArgs args)
         {
-            PanelController.DataMap = Serializer.Loader.SceneMap;
+            PanelController.DataMap = Serializer.SceneLoader.SceneMap;
             PanelController.FlushUI();
         }
 
@@ -71,7 +71,7 @@ namespace March.Scene
             //    Serializer.DefaultSceneDataMap[key].Position,
             //    Serializer.DefaultSceneDataMap[key].Scale, Serializer.DefaultSceneDataMap[key].SortingOrder,
             //    isModifiable);
-            var go = Serializer.Loader.CreateIdentifyGameObject(Serializer.SceneLayerMap[key], index, position);
+            var go = Serializer.SceneLoader.CreateIdentifyGameObject(Serializer.SceneLayerMap[key], index, position);
 
             if (!isModifiable && Serializer.GoMap.ContainsKey(key))
                 Destroy(Serializer.GoMap[key][0]);
@@ -101,7 +101,7 @@ namespace March.Scene
         {
             dirty = false;
 
-            var path = Path.Combine(RelativePath, "Level_" + SceneLevel.Level + ".txt");
+            var path = Path.Combine(RelativePath, "Level_" + PanelController.Level + ".txt");
             Serializer.Write(PanelController.Level, path);
 
             PanelController.Info = Serializer.Message;
@@ -137,7 +137,6 @@ namespace March.Scene
             Serializer.Read(path);
 
             PanelController.Info = Serializer.Message;
-            PanelController.Level = SceneLevel.Level;
         }
 
         public void OnClearAllButtonClicked()

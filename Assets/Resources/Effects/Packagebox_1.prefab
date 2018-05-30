@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 4055666268571690}
   - component: {fileID: 198654572591330062}
   - component: {fileID: 199052911303374240}
-  - component: {fileID: 114142227694525282}
   - component: {fileID: 114043229881788776}
   m_Layer: 0
   m_Name: Packagebox_1
@@ -117,17 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyDeactivate: 0
---- !u!114 &114142227694525282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1958726403070344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34ee451362ed1458398dbfe63a4768b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &198122638698034338
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -188,7 +176,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -983424861
+  randomSeed: 1786753275
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3552,7 +3540,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 725171613
+  randomSeed: 252889901
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6913,7 +6901,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1836212081
+  randomSeed: 1571735005
   InitialModule:
     serializedVersion: 3
     enabled: 1

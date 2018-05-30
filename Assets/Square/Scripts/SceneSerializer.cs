@@ -43,13 +43,15 @@ namespace March.Scene
                 SceneLayerMap.Add(key, layerInfo);
             });
 
-            //yield return SceneUtils.ScanAndLoad();
             if (SceneLoader != null)
                 yield return SceneLoader.Load();
 
-            qy.config.QuestItem quest = qy.GameMainManager.Instance.playerData.GetQuest();
-            int chapter = quest!=null? quest.chapter:1;
-            Data = Resources.Load<TextAsset>("Level_" + chapter);
+            if (Data == null)
+            {
+                qy.config.QuestItem quest = qy.GameMainManager.Instance.playerData.GetQuest();
+                var chapter = quest != null ? quest.chapter : 1;
+                Data = Resources.Load<TextAsset>("Level_" + chapter);
+            }
 
             if (AutoLoad)
             {
@@ -63,8 +65,6 @@ namespace March.Scene
 
         public void Write(int level, string path)
         {
-            SceneLevel.Level = level;
-
             foreach (var pair in SceneLevel.GetSceneMap())
             {
                 var key = pair.Key;
@@ -98,7 +98,7 @@ namespace March.Scene
                 Message = e.Message;
             }
 
-            GenerateGoMap();
+            GenerateGoMap(); 
         }
 
         private void GenerateGoMap()
@@ -109,10 +109,14 @@ namespace March.Scene
                 var key = pair.Key;
                 var list = pair.Value;
                 GoMap.Add(key, new List<GameObject>());
+                GameObject go = null;
                 foreach (var gameInfo in list)
                 {
                     var position = new Vector3(gameInfo.Position.X, gameInfo.Position.Y, gameInfo.Position.Z);
-                    var go = Loader.CreateIdentifyGameObject(SceneLayerMap[key], gameInfo.ID, position);
+                    if (Loader != null)
+                    {
+                        go = Loader.CreateIdentifyGameObject(SceneLayerMap[key], gameInfo.ID, position);
+                    }
                     if (SceneLoader != null)
                     {
                         go = SceneLoader.CreateIdentifyGameObject(SceneLayerMap[key], gameInfo.ID, position);

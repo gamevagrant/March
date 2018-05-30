@@ -62,7 +62,7 @@ public class Item : MonoBehaviour
 
     [Header("Drop")]
     public List<Vector3> dropPath;
-    private SpriteRenderer m_spriteRenderer;
+    private SpriteRenderer spriteRenderer;
 
     private ITEM_TYPE planeTargetType = ITEM_TYPE.NONE;
 
@@ -71,25 +71,20 @@ public class Item : MonoBehaviour
     //effect config param
     private Vector3 COOKIESCALE = new Vector3(1.8f, 1.8f, 1.8f);
 
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sortingLayerName = SortingLayers.Item;
+    }
+
     void Update()
     {
-        //todo: 修改为拖拽时判断 去掉每帧检测
-        // if a item is dragged
         if (drag)
         {
             deltaPosition = mousePostion - GetMousePosition();
             if (swapDirection == Vector3.zero)
             {
                 SwapDirection(deltaPosition);
-            }
-        }
-        if (m_spriteRenderer == null)
-        {
-            var renderer = GetComponent<SpriteRenderer>();
-            if (renderer != null)
-            {
-                m_spriteRenderer = renderer;
-                m_spriteRenderer.sortingLayerName = "Item";
             }
         }
     }
@@ -1792,7 +1787,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
@@ -2005,7 +2000,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
@@ -2022,7 +2017,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
@@ -2039,7 +2034,7 @@ public class Item : MonoBehaviour
 
         GameObject explosion = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
@@ -2644,6 +2639,7 @@ public class Item : MonoBehaviour
             gameObjectPlane[i].GetComponent<Item>().planeTargetType = planeTargetType;
             gameObjectPlane[i].GetComponent<Item>().node = rdmItems[i].node;
             gameObjectPlane[i].GetComponent<Item>().board = board;
+            gameObjectPlane[i].GetComponent<SpriteRenderer>().sortingLayerName = SortingLayers.Effect;
 
             board.playingAnimation++;
 
@@ -2659,7 +2655,7 @@ public class Item : MonoBehaviour
                 angle = 360 - Vector3.Angle(new Vector3(-1, 1.732f, 0), vect);
             }
 
-            Debug.Log("angle " + angle);
+            Debug.LogWarning("angle " + angle);
 
             iTween.RotateTo(gameObjectPlane[i], iTween.Hash(
                 "rotation", new Vector3(0, 0, angle),
@@ -2674,7 +2670,7 @@ public class Item : MonoBehaviour
                 // "looktarget", rdmItems[i].transform.position,
                 "oncomplete", "onPlaneComplete",
                 //"orienttopath", true,
-                "oncompleteparams", new Hashtable() { { "targetItem", rdmItems[i] }, { "isGrass", isgrass } },
+                "oncompleteparams", new Hashtable { { "targetItem", rdmItems[i] }, { "isGrass", isgrass } },
                 "easetype", iTween.EaseType.linear,
                 "time", 0.5f
             ));
@@ -2975,10 +2971,12 @@ public class Item : MonoBehaviour
     void ChangeToBig()
     {
         // prevent multiple calls
-        if (changing) return;
-        else changing = true;
+        if (changing)
+            return;
 
-        this.GetComponent<SpriteRenderer>().sortingLayerName = "Effect";
+        changing = true;
+
+        GetComponent<SpriteRenderer>().sortingLayerName = SortingLayers.Effect;
 
         iTween.ScaleTo(gameObject, iTween.Hash(
             "scale", new Vector3(2.5f, 2.5f, 0),
@@ -2990,7 +2988,7 @@ public class Item : MonoBehaviour
 
     void CompleteChangeToBig()
     {
-        this.Destroy();
+        Destroy();
 
         board.FindMatches();
     }

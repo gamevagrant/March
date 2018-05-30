@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 44545664
+CRC: 4023746877
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a2b1c9515f5f893c8b1d0752f19eaf72
+    Hash: 838fa00116226165b3e2eba2dc41d187
   TypeTreeHash:
     serializedVersion: 2
     Hash: 73553e8f626543835fe85b78faff0fef
@@ -28,6 +28,6 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/AssetBundleResources/Scene/Background/2.prefab
 - Assets/AssetBundleResources/Scene/Background/1.prefab
+- Assets/AssetBundleResources/Scene/Background/2.prefab
 Dependencies: []

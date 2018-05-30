@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Common;
 using qy;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace March.Core.Guide
 
         private const string GuidePrefab = "GuideGenerater";
         private GuideController guideController;
+        private GuideCustomInterface guideCustomController;
 
         private const string RelativePath = "March/Data/Resources/PlayGuide";
         private const string LoadRelativePath = "PlayGuide";
@@ -28,6 +30,8 @@ namespace March.Core.Guide
         private string guidePath;
 
         public GuideLevelManagerData GuideManagerData;
+
+        private bool showing;
 
         protected override void Init()
         {
@@ -89,9 +93,11 @@ namespace March.Core.Guide
 
         public void Show()
         {
-            if (GuideEnabled)
+            if (GuideEnabled && !showing)
             {
                 Debug.Log("Current Step:" + GuideManagerData.CurrentStep);
+
+                showing = true;
 
                 var guide = Instantiate(Resources.Load<GameObject>(GuidePrefab), GameObject.Find("Canvas").transform);
                 guideController = guide.GetComponent<GuideController>();
@@ -99,6 +105,12 @@ namespace March.Core.Guide
                     GuideManagerData.CurrentGuideLevelData.GuideDataPath);
                 guideController.GuideText = Instantiate(Resources.Load(path)) as TextAsset;
                 guideController.Generate();
+
+                var customControllerName = string.Format("{0}Controller", guideController.name);
+                var customControllerType = Type.GetType(string.Format("{0}, Assembly-CSharp", customControllerName));
+                if (customControllerType != null)
+                    guideCustomController = guideController.gameObject.AddComponent(customControllerType) as GuideCustomInterface;
+
                 guideController.name = string.Format("Level {0} Step {1}", GuideManagerData.CurrentLevel,
                     GuideManagerData.CurrentStep);
 
@@ -111,17 +123,29 @@ namespace March.Core.Guide
 
         public void Hide()
         {
-            if (guideController != null && guideController.gameObject.activeSelf)
-            {
-                guideController.gameObject.SetActive(false);
+            if (guideController == null || !guideController.gameObject.activeSelf)
+                return;
 
-                ++GuideManagerData.CurrentStep;
-            }
+            StartCoroutine("DoHide");
+        }
+
+        private IEnumerator DoHide()
+        {
+            if (guideCustomController != null)
+                yield return guideCustomController.Hide();
+
+            guideController.gameObject.SetActive(false);
+
+            ++GuideManagerData.CurrentStep;
+
+            showing = false;
         }
 
         private void Initialize()
         {
             guideController = null;
+            guideCustomController = null;
+            showing = false;
             GuideManagerData.CurrentStep = 1;
         }
 

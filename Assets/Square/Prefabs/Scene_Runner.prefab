@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583995469207140}
   - component: {fileID: 114494189689516070}
-  - component: {fileID: 114111434688720382}
+  - component: {fileID: 114184651408060138}
   m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
@@ -324,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 1582810040907324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 46, y: 8, z: 1}
+  m_LocalScale: {x: 36, y: 15, z: 1}
   m_Children: []
   m_Father: {fileID: 4616785544037112}
   m_RootOrder: 3
@@ -349,7 +349,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706911458491034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.97, y: 2.04, z: 0}
+  m_LocalPosition: {x: -8.91, y: 2.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4616785544037112}
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242123667432570}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60358d533f8274940abb0c6a1f835dd4, type: 3}
   m_Name: 
@@ -436,9 +436,9 @@ MonoBehaviour:
   FlipEase: 21
   BackDuration: 0.2
   BackEase: 27
-  ScaleRange: {x: 0.8, y: 1.2}
-  MoveRange: {x: -4, y: 4}
-  OutMoveRange: {x: -6, y: 6}
+  ScaleRange: {x: 0.9, y: 1.1}
+  MoveRange: {x: -1.8, y: 1.8}
+  OutMoveRange: {x: -2.7, y: 2.7}
   Serilizer: {fileID: 114494189689516070}
   GridManager: {fileID: 114216354115618468}
 --- !u!114 &114101200851547084
@@ -469,18 +469,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Modifiable: 0
   PrefabList: []
---- !u!114 &114111434688720382
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1140143943162292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a67a2afa8f7f8d4cb7414fd35e517b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Editable: 0
 --- !u!114 &114127413959649414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,6 +586,18 @@ MonoBehaviour:
     m_TypeName: TouchScript.Gestures.Gesture+GestureEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   ignoreChildren: 0
+--- !u!114 &114184651408060138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140143943162292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1eca905afb4e0442bd46fd35d9c5922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Editable: 0
 --- !u!114 &114216354115618468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -702,7 +702,8 @@ MonoBehaviour:
     Player: []
     BuildingList: []
     NPCList: []
-  Loader: {fileID: 114111434688720382}
+  Loader: {fileID: 0}
+  SceneLoader: {fileID: 114184651408060138}
   ListenerList: []
 --- !u!114 &114572974667527472
 MonoBehaviour:

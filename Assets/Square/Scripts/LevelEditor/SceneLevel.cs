@@ -50,8 +50,6 @@ namespace March.Scene
             Building
         }
 
-        public static int Level;
-
         public List<GameInfo> Background;
         public List<GameInfo> Player;
 

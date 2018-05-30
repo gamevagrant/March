@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224962403450900084}
   - component: {fileID: 114244898690066818}
-  - component: {fileID: 114282132038876282}
   m_Layer: 5
   m_Name: GuideGenerater
   m_TagString: Untagged
@@ -39,11 +38,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1cdc249ae1a494ebcf4710947eeda4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GuideText: {fileID: 4900000, guid: 1486db73cee48b843b791b9b125518ca, type: 3}
+  GuideText: {fileID: 4900000, guid: c61af360e46c8cc47a5cb55fe18aa4f9, type: 3}
   GuideData:
-    Name: Guide_18_1
+    Name: Guide_9_2
     ItemList:
-    - ObjectName: GuideImage (1)
+    - ObjectName: GuideImage (2)
       AnchorMin:
         X: 0.5
         Y: 0.5
@@ -57,45 +56,36 @@ MonoBehaviour:
         Y: 0.5
         Z: 0
       AnchorPosition:
-        X: 137
-        Y: -157.07996
+        X: 135.56
+        Y: 114.44
         Z: 0
       Size:
-        X: 114.4
-        Y: 765.8401
+        X: 112.92
+        Y: 108.81
         Z: 0
+    ConditionList: []
     Window:
       Position:
-        X: -398
-        Y: -287
+        X: 166.35446
+        Y: -150.79997
         Z: 0
-      Content: 210131
+      Content: 210126
       NextButtonContent: 210155
       HasNextButton: 1
       HasHead: 1
     Hand:
       Position:
-        X: -230
-        Y: 67.5
+        X: 273
+        Y: 222
         Z: 0
       Direction:
-        X: 0
-        Y: 0
+        X: -0.1
+        Y: -0.1
         Z: 0
-      Show: 0
-  StepMax: 10
+      Duration: 0.5
+      Show: 1
+  StepMax: 100
   AutoMode: 0
---- !u!114 &114282132038876282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1620790233766448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97816c5a011ea6e4eb0739bdf4f8f625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &224962403450900084
 RectTransform:
   m_ObjectHideFlags: 1

@@ -425,25 +425,20 @@ public class Node : MonoBehaviour
                 break;
         }
 
-        if (piece != null)
-        {
-            piece.transform.SetParent(gameObject.transform);
-            piece.name = "Item";
-            piece.transform.localPosition = board.NodeLocalPosition(i, j);
-            piece.GetComponent<Item>().node = this;
-            piece.GetComponent<Item>().board = this.board;
-            piece.GetComponent<Item>().type = type;
-            piece.GetComponent<Item>().color = color;
-            piece.GetComponent<Item>().beAbleToDestroy = beabletodestroy;
-
-            this.item = piece.GetComponent<Item>();
-            
-            return piece.GetComponent<Item>();
-        }
-        else
-        {
+        if (piece == null)
             return null;
-        }
+
+        piece.transform.SetParent(gameObject.transform);
+        piece.name = "Item";
+        piece.transform.localPosition = board.NodeLocalPosition(i, j);
+        piece.GetComponent<Item>().node = this;
+        piece.GetComponent<Item>().board = board;
+        piece.GetComponent<Item>().type = type;
+        piece.GetComponent<Item>().color = color;
+        piece.GetComponent<Item>().beAbleToDestroy = beabletodestroy;
+
+        item = piece.GetComponent<Item>();
+        return item;
     }
 
     void InstantiateAppleBox(ITEM_TYPE type)

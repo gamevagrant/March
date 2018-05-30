@@ -8,6 +8,7 @@ public abstract class Layers
 	public const string UI = "UI";
 	public const string OnTopUI = "On Top UI";
 	public const string Scene = "Scene";
+	public const string Weather = "Weather";
 
 	public const int DefaultMask = 1;
 	public const int TransparentFXMask = 1 << 1;
@@ -16,6 +17,7 @@ public abstract class Layers
 	public const int UIMask = 1 << 5;
 	public const int OnTopUIMask = 1 << 8;
 	public const int SceneMask = 1 << 9;
+	public const int WeatherMask = 1 << 10;
 
 	public const int DefaultNumber = 0;
 	public const int TransparentFXNumber = 1;
@@ -24,4 +26,5 @@ public abstract class Layers
 	public const int UINumber = 5;
 	public const int OnTopUINumber = 8;
 	public const int SceneNumber = 9;
+	public const int WeatherNumber = 10;
 }

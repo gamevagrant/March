@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3125672629
+CRC: 3495604674
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f0ccd5bcf54bf63eda2a0c76b77365fd
+    Hash: 7ab7494ab396bbcf892b8e647cf2c7d3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3fe79793f66304e9b58fe99f24bc456a
@@ -30,9 +30,29 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/AssetBundleResources/Scene/Building/2.prefab
-- Assets/AssetBundleResources/Scene/Building/5.prefab
-- Assets/AssetBundleResources/Scene/Building/3.prefab
-- Assets/AssetBundleResources/Scene/Building/1.prefab
-- Assets/AssetBundleResources/Scene/Building/4.prefab
+- Assets/AssetBundleResources/Scene/Building/1_5.prefab
+- Assets/AssetBundleResources/Scene/Building/2_5.prefab
+- Assets/AssetBundleResources/Scene/Building/1_2.prefab
+- Assets/AssetBundleResources/Scene/Building/1_7.prefab
+- Assets/AssetBundleResources/Scene/Building/2_9.prefab
+- Assets/AssetBundleResources/Scene/Building/2_12.prefab
+- Assets/AssetBundleResources/Scene/Building/1_4.prefab
+- Assets/AssetBundleResources/Scene/Building/2_16.prefab
+- Assets/AssetBundleResources/Scene/Building/2_15.prefab
+- Assets/AssetBundleResources/Scene/Building/2_8.prefab
+- Assets/AssetBundleResources/Scene/Building/2_10.prefab
+- Assets/AssetBundleResources/Scene/Building/2_7.prefab
+- Assets/AssetBundleResources/Scene/Building/1_6.prefab
+- Assets/AssetBundleResources/Scene/Building/2_13.prefab
+- Assets/AssetBundleResources/Scene/Building/2_14.prefab
+- Assets/AssetBundleResources/Scene/Building/1_9.prefab
+- Assets/AssetBundleResources/Scene/Building/2_2.prefab
+- Assets/AssetBundleResources/Scene/Building/2_4.prefab
+- Assets/AssetBundleResources/Scene/Building/2_1.prefab
+- Assets/AssetBundleResources/Scene/Building/2_11.prefab
+- Assets/AssetBundleResources/Scene/Building/2_3.prefab
+- Assets/AssetBundleResources/Scene/Building/1_8.prefab
+- Assets/AssetBundleResources/Scene/Building/1_3.prefab
+- Assets/AssetBundleResources/Scene/Building/2_6.prefab
+- Assets/AssetBundleResources/Scene/Building/1_1.prefab
 Dependencies: []
