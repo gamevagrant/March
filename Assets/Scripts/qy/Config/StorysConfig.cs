@@ -80,7 +80,7 @@ namespace qy.config
         /// </summary>
         public int weather;
         /// <summary>
-        /// 特效（1：抖动 2：血屏 3：背景变灰）
+        /// 特效（1：抖动 2：血屏 3：背景变灰 4:模糊 5:遮罩扩散 6:拉近拉远 7:左右滚动）
         /// </summary>
         public int effect;
 
