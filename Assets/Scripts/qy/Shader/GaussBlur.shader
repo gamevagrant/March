@@ -67,7 +67,8 @@ Shader "Custom/GaussBlur"
         color += 0.05 * tex2D(_MainTex, i.uv45.zw);
 
 		float luminosity = 0.299 * color.r + 0.587 * color.g + 0.114 * color.b;  
-        color = lerp(color, luminosity, _LuminosityAmount);  
+        color = lerp(color, luminosity, _LuminosityAmount);
+		color.a = _Color.a;
 		color *=_Color;
         return color;  
     }  
