@@ -98,12 +98,12 @@
 	<ItemSpec id="1000189" bgFile="1000234bg" personFile="person2" dialogue="100198" weather="2" next="1000190"/>
 	<ItemSpec id="1000190" bgFile="1000234bg" personFile="person3" dialogue="100199" weather="2" next="1000130"/>
 	<ItemSpec id="1000191" bgFile="1000241bg" personFile="person4" dialogue="100200" weather="2" effect="1" next="1000192"/>
-	<ItemSpec id="1000192" bgFile="1000118bg" personFile="person1" dialogue="100201" weather="2" effect="4" next="1000193"/>
-	<ItemSpec id="1000193" bgFile="1000240bg" personFile="person2" dialogue="100202" weather="2" effect="5" next="1000194"/>
+	<ItemSpec id="1000192" bgFile="1000118bg" personFile="person1" dialogue="100201" weather="2" effect="4:1" next="1000193"/>
+	<ItemSpec id="1000193" bgFile="1000240bg" personFile="person2" dialogue="100202" weather="2" effect="5,4:0" next="1000194"/>
 	<ItemSpec id="1000194" bgFile="1000224bg" personFile="person3" dialogue="100203" weather="1" effect="3" next="1000195"/>
-	<ItemSpec id="1000195" bgFile="1000238bg" personFile="person4" dialogue="100204" weather="1" effect="6" next="1000196"/>
-	<ItemSpec id="1000196" bgFile="1000118bg" personFile="person1" dialogue="100205" weather="2" effect="7" next="1000197"/>
-	<ItemSpec id="1000197" bgFile="1000217bg" personFile="person2" dialogue="100206" weather="2" effect="7" next="1000198"/>
+	<ItemSpec id="1000195" bgFile="1000238bg" personFile="person4" dialogue="100204" weather="1" effect="6:1,4:1,3:1" next="1000196"/>
+	<ItemSpec id="1000196" bgFile="1000118bg" personFile="person1" dialogue="100205" weather="2" effect="7,4" next="1000197"/>
+	<ItemSpec id="1000197" bgFile="1000217bg" personFile="person2" dialogue="100206" weather="2" effect="7:1" next="1000198"/>
 	<ItemSpec id="1000198" bgFile="1000217bg" personFile="person3" dialogue="100207" weather="1" effect="1" next="0"/>
 	<ItemSpec id="1000199" bgFile="1000224bg" personFile="person4" dialogue="100208" weather="1" effect="1" next="1000200"/>
 	<ItemSpec id="1000200" bgFile="1000224bg" personFile="person1" dialogue="100209" weather="2" effect="2" next="1000201"/>

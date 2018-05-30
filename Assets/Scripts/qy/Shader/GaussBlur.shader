@@ -82,11 +82,12 @@ Shader "Custom/GaussBlur"
         Pass  
         {  
             //后处理效果一般都是这几个状态  
-            ZTest Always  
-            //Cull Off  
-            //ZWrite Off  
-            //Fog{ Mode Off }  
-  
+            Cull Off
+			Lighting Off
+			ZWrite Off
+			ZTest [unity_GUIZTestMode]
+			Fog { Mode Off }
+			Blend SrcAlpha OneMinusSrcAlpha
             //使用上面定义的vertex和fragment shader  
             CGPROGRAM  
             #pragma vertex vert_blur  

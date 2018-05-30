@@ -8,6 +8,11 @@
 		Tags { "Queue"="Transparent"  }
         LOD 100
         Pass {  
+			Cull Off
+			Lighting Off
+			ZWrite Off
+			ZTest [unity_GUIZTestMode]
+			Fog { Mode Off }
 			Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM  
             #pragma vertex vert_img  

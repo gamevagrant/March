@@ -13,14 +13,23 @@
     }
     SubShader
     {
-        Tags { "Queue"="Transparent"  }
+        Tags {"Queue"="Transparent" 
+			"IgnoreProjector"="True" 
+			"RenderType"="Transparent" 
+			"PreviewType"="Plane"
+			"CanUseSpriteAtlas"="True"}
         LOD 100
-
+		Cull Off
+		Lighting Off
+		ZWrite Off
+		ZTest [unity_GUIZTestMode]
+		Fog { Mode Off }
+		Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
 			//ZTest Always
 			//ZWrite On
-			Blend SrcAlpha OneMinusSrcAlpha
+			//Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
