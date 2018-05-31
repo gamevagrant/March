@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Group>
 	<ItemSpec id="101001" bgFile="101001bg" personFile="person1" personLocation="0" dialogue="101001"/>
 	<ItemSpec id="101002" bgFile="1000106bg" personFile="person1" personLocation="1" dialogue="101002"/>
