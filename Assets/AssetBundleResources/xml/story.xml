@@ -88,47 +88,6 @@
 	<ItemSpec id="1000179" bgFile="1000118bg" personFile="person4" dialogue="100188" effect="1" next="1000180"/>
 	<ItemSpec id="1000180" bgFile="1000118bg" personFile="person2" dialogue="100189" next="1000181"/>
 	<ItemSpec id="1000181" bgFile="1000118bg" personFile="person1" dialogue="100190" next="0"/>
-<<<<<<< HEAD
-	<ItemSpec id="1000182" bgFile="1000118bg" personFile="person2" dialogue="100191" next="1000183"/>
-	<ItemSpec id="1000183" bgFile="1000118bg" personFile="person3" dialogue="100192" weather="2" next="1000184"/>
-	<ItemSpec id="1000184" bgFile="1000118bg" personFile="person1" dialogue="100193" weather="2" next="0"/>
-	<ItemSpec id="1000185" bgFile="1000118bg" personFile="person2" dialogue="100194" weather="2" next="1000186"/>
-	<ItemSpec id="1000186" bgFile="1000118bg" personFile="person3" dialogue="100195" weather="2" next="1000187"/>
-	<ItemSpec id="1000187" bgFile="1000118bg" personFile="person4" dialogue="100196" weather="2" next="1000188"/>
-	<ItemSpec id="1000188" bgFile="1000118bg" personFile="person1" dialogue="100197" weather="2" next="0"/>
-	<ItemSpec id="1000189" bgFile="1000234bg" personFile="person2" dialogue="100198" weather="2" next="1000190"/>
-	<ItemSpec id="1000190" bgFile="1000234bg" personFile="person3" dialogue="100199" weather="2" next="1000130"/>
-	<ItemSpec id="1000191" bgFile="1000241bg" personFile="person4" dialogue="100200" weather="2" effect="1" next="1000192"/>
-	<ItemSpec id="1000192" bgFile="1000118bg" personFile="person1" dialogue="100201" weather="2" effect="4" next="1000193"/>
-	<ItemSpec id="1000193" bgFile="1000240bg" personFile="person2" dialogue="100202" weather="2" effect="5" next="1000194"/>
-	<ItemSpec id="1000194" bgFile="1000224bg" personFile="person3" dialogue="100203" weather="1" effect="3" next="1000195"/>
-	<ItemSpec id="1000195" bgFile="1000238bg" personFile="person4" dialogue="100204" weather="1" effect="6" next="1000196"/>
-	<ItemSpec id="1000196" bgFile="1000118bg" personFile="person1" dialogue="100205" weather="2" effect="7" next="1000197"/>
-	<ItemSpec id="1000197" bgFile="1000217bg" personFile="person2" dialogue="100206" weather="2" effect="7" next="1000198"/>
-	<ItemSpec id="1000198" bgFile="1000217bg" personFile="person3" dialogue="100207" weather="1" effect="1" next="0"/>
-	<ItemSpec id="1000199" bgFile="1000224bg" personFile="person4" dialogue="100208" weather="1" effect="1" next="1000200"/>
-	<ItemSpec id="1000200" bgFile="1000224bg" personFile="person1" dialogue="100209" weather="2" effect="2" next="1000201"/>
-	<ItemSpec id="1000201" bgFile="1000224bg" personFile="person2" dialogue="100210" weather="2" effect="2" next="1000202"/>
-	<ItemSpec id="1000202" bgFile="1000224bg" personFile="person3" dialogue="100211" weather="2" effect="3" next="1000203"/>
-	<ItemSpec id="1000203" bgFile="1000224bg" personFile="person4" dialogue="100212" weather="2" effect="3" next="1000204"/>
-	<ItemSpec id="1000204" bgFile="1000224bg" personFile="person1" dialogue="100213" weather="2" effect="3" next="1000205"/>
-	<ItemSpec id="1000205" bgFile="1000224bg" personFile="person2" dialogue="100214" weather="2" effect="1" next="0"/>
-	<ItemSpec id="1000206" bgFile="1000224bg" personFile="person3" dialogue="100215" weather="2" effect="1" next="1000207"/>
-	<ItemSpec id="1000207" bgFile="1000224bg" personFile="person4" dialogue="100216" weather="2" effect="1" next="0"/>
-	<ItemSpec id="1000208" bgFile="1000224bg" personFile="person1" dialogue="100217" weather="2" next="1000209"/>
-	<ItemSpec id="1000209" bgFile="1000224bg" personFile="person2" dialogue="100218" weather="2" next="1000210"/>
-	<ItemSpec id="1000210" bgFile="1000224bg" personFile="person3" dialogue="100219" weather="2" next="0"/>
-	<ItemSpec id="1000211" bgFile="1000218bg" personFile="person4" dialogue="100220" weather="2" next="1000212"/>
-	<ItemSpec id="1000212" bgFile="1000218bg" personFile="person1" dialogue="100221" weather="1" next="1000213"/>
-	<ItemSpec id="1000213" bgFile="1000218bg" personFile="person2" dialogue="100222" weather="1" next="1000214"/>
-	<ItemSpec id="1000214" bgFile="1000218bg" personFile="person3" dialogue="100223" weather="1" next="1000215"/>
-	<ItemSpec id="1000215" bgFile="1000218bg" personFile="person4" dialogue="100224" weather="1" next="1000216"/>
-	<ItemSpec id="1000216" bgFile="1000218bg" personFile="person1" dialogue="100225" weather="1" next="0"/>
-	<ItemSpec id="1000217" bgFile="1000218bg" personFile="person2" dialogue="100226" weather="1" next="1000218"/>
-	<ItemSpec id="1000218" bgFile="1000219bg" personFile="person3" dialogue="100227" weather="1" next="1000219"/>
-	<ItemSpec id="1000219" bgFile="1000219bg" personFile="person4" dialogue="100228" weather="1" next="1000220"/>
-	<ItemSpec id="1000220" bgFile="1000219bg" personFile="person1" dialogue="100229" weather="1" next="0"/>
-=======
 	<ItemSpec id="1000182" bgFile="1000118bg" personFile="person2" dialogue="100191" effect="1" next="1000183"/>
 	<ItemSpec id="1000183" bgFile="1000118bg" personFile="person3" dialogue="100192" next="1000184"/>
 	<ItemSpec id="1000184" bgFile="1000118bg" personFile="person1" dialogue="100193" next="0"/>
@@ -168,7 +127,6 @@
 	<ItemSpec id="1000218" bgFile="1000219bg" personFile="person3" dialogue="100227" next="1000219"/>
 	<ItemSpec id="1000219" bgFile="1000219bg" personFile="person4" dialogue="100228" next="1000220"/>
 	<ItemSpec id="1000220" bgFile="1000219bg" personFile="person1" dialogue="100229" effect="7:0" next="0"/>
->>>>>>> cd8d5118f7e3cf2db46a79fb15e41ca7d895bc10
 	<ItemSpec id="1000221" bgFile="1000219bg" personFile="person2" dialogue="100230" next="1000222"/>
 	<ItemSpec id="1000222" bgFile="1000219bg" personFile="person3" dialogue="100231" next="1000223"/>
 	<ItemSpec id="1000223" bgFile="1000219bg" personFile="person4" dialogue="100232" next="0"/>
