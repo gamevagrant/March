@@ -60,7 +60,8 @@ public class UIDialogueWindow : UIWindowBase {
         mask.gameObject.SetActive(false);
         Material material = new Material(Shader.Find("Custom/GaussBlur"));
         imgBG.material = material;
-        GrayEffect(0);
+        BackGroundColor = Color.black;
+        GrayEffect(1);
     }
 
     protected override void StartShowWindow(object[] data)
@@ -126,10 +127,14 @@ public class UIDialogueWindow : UIWindowBase {
             {
                 qy.GameMainManager.Instance.weatherManager.StopWeather((WeatherManager.WeatherEnum)lastDialogue.weather);
             }
-            if(lastDialogue.effect==3 && lastDialogue.effect != curDialogue.effect)
+            /*
+            StoryItem.Effect lastGray = lastDialogue.effects.Find((effect)=>{ return effect.type == StoryItem.Effect.EffectType.Gray; });
+            StoryItem.Effect currGray = curDialogue.effects.Find((effect) => { return effect.type == StoryItem.Effect.EffectType.Gray; });
+            if (lastGray!=null && currGray == null)
             {
-                GrayEffect(0);
+                GrayEffect(1);
             }
+            */
         }
         if(string.IsNullOrEmpty(curDialogue.personLocation))
         {
@@ -165,58 +170,89 @@ public class UIDialogueWindow : UIWindowBase {
         WeatherManager.WeatherEnum weather = (WeatherManager.WeatherEnum)curDialogue.weather;
         qy.GameMainManager.Instance.weatherManager.StartWeather(weather);
 
-        StartCoroutine(ShowEffect(curDialogue.effect));
+        StartCoroutine(ShowEffect(curDialogue.effects));
     }
 
-    private IEnumerator ShowEffect(int effect)
+    private IEnumerator ShowEffect(List<StoryItem.Effect> effects)
     {
         imgBG.material.SetTextureScale("_MainTex", new Vector2(1, 1));
         imgBG.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
         yield return null;
-        switch (effect)
+        foreach(StoryItem.Effect effect in effects)
         {
-            case 1://抖动
-                (imgBG.transform as RectTransform).DOShakeAnchorPos(0.5f, 20, 80);
-                break;
-            case 2://血屏幕
-                blood.color = new Color(1, 1, 1, 0);
-                blood.gameObject.SetActive(true);
-                Sequence sq = DOTween.Sequence();
-                sq.Append(blood.DOFade(1, 0.3f).SetEase(Ease.OutBounce));
-                sq.Append(blood.DOFade(0, 0.3f).SetEase(Ease.InBack));
-                sq.AppendCallback(() => {
-                    blood.gameObject.SetActive(false);
+            StoryItem.Effect.EffectType type = effect.type;
+            
+            switch (type)
+            {
+                case StoryItem.Effect.EffectType.Shake://抖动
+                    (imgBG.transform as RectTransform).DOShakeAnchorPos(0.5f, 20, 80);
+                    break;
+                case StoryItem.Effect.EffectType.Blood://血屏幕
+                    BloodEffect();
+                    break;
+                case StoryItem.Effect.EffectType.Gray://变灰
+                    GrayEffect(effect.data.Count>0? effect.data[0]:0);
+                    break;
+                case StoryItem.Effect.EffectType.Blur://模糊
+                    BlurEffect(effect.data.Count > 0 ? effect.data[0] : 0);
+                    break;
+                case StoryItem.Effect.EffectType.Mask://遮罩扩散
+                    MaskEffect();
+                    break;
+                case StoryItem.Effect.EffectType.Zoom://拉近拉远
+                    ZoomEffect(effect.data.Count > 0 ? effect.data[0] : 0);
+                    break;
+                case StoryItem.Effect.EffectType.Scroll://左右滚动
+                    Scroll(effect.data.Count > 0 ? effect.data[0] : 0);
+                    break;
 
-                });
-                break;
-            case 3://变灰
-                GrayEffect(1);
-                break;
-            case 4://模糊
-                BlurEffect(0);
-                break;
-            case 5://遮罩扩散
-                MaskEffect();
-                break;
-            case 6://拉近拉远
-                ZoomEffect(0);
-                break;
-            case 7://左右滚动
-                Scroll(0);
-                break;
-
+            }
         }
+        
     }
 
-    private void GrayEffect(float value)
+    private void BloodEffect()
     {
-        DOTween.To(() => imgBG.material.GetFloat("_LuminosityAmount"), x => imgBG.material.SetFloat("_LuminosityAmount", x), value, 1f);
+        blood.color = new Color(1, 1, 1, 0);
+        blood.gameObject.SetActive(true);
+        Sequence sq = DOTween.Sequence();
+        sq.Append(blood.DOFade(1, 0.3f).SetEase(Ease.OutBounce));
+        sq.Append(blood.DOFade(0, 0.3f).SetEase(Ease.InBack));
+        sq.AppendCallback(() => {
+            blood.gameObject.SetActive(false);
+
+        });
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="type"></param>
+    private void GrayEffect(int type = 0)
+    {
+        if (type == 0)
+        {
+            DOTween.To(() => imgBG.material.GetFloat("_LuminosityAmount"), x => imgBG.material.SetFloat("_LuminosityAmount", x), 1, 1f);
+        }
+        else
+        {
+            DOTween.To(() => imgBG.material.GetFloat("_LuminosityAmount"), x => imgBG.material.SetFloat("_LuminosityAmount", x), 0, 1f);
+        }
+        
     }
 
-    private void BlurEffect(float value)
+    private void BlurEffect(int type = 0)
     {
-        imgBG.material.SetFloat("_OffsetValue", 5);
-        DOTween.To(() => imgBG.material.GetFloat("_OffsetValue"), x => imgBG.material.SetFloat("_OffsetValue", x), value, 1f).SetEase(Ease.InCubic);
+        if (type == 0)
+        {
+            imgBG.material.SetFloat("_OffsetValue", 5);
+            DOTween.To(() => imgBG.material.GetFloat("_OffsetValue"), x => imgBG.material.SetFloat("_OffsetValue", x), 0, 1f).SetEase(Ease.InCubic);
+        }
+        else
+        {
+            imgBG.material.SetFloat("_OffsetValue", 0);
+            DOTween.To(() => imgBG.material.GetFloat("_OffsetValue"), x => imgBG.material.SetFloat("_OffsetValue", x), 5, 1f).SetEase(Ease.InCubic);
+        }
+        
     }
 
     private void MaskEffect()
@@ -226,7 +262,10 @@ public class UIDialogueWindow : UIWindowBase {
         mask.material.SetTextureOffset("_MaskTex", new Vector2(0, -5));
 
         DOTween.To(() => mask.material.GetTextureScale("_MaskTex"), x => mask.material.SetTextureScale("_MaskTex", x), new Vector2(0.5f,0.5f) , 1f).SetEase(Ease.OutCubic);
-        DOTween.To(() => mask.material.GetTextureOffset("_MaskTex"), x => mask.material.SetTextureOffset("_MaskTex", x), new Vector2(0.25f, 0.25f), 1f).SetEase(Ease.OutCubic);
+        DOTween.To(() => mask.material.GetTextureOffset("_MaskTex"), x => mask.material.SetTextureOffset("_MaskTex", x), new Vector2(0.25f, 0.25f), 1f).SetEase(Ease.OutCubic).OnComplete(()=> {
+
+            mask.gameObject.SetActive(false);
+        });
 
     }
 
@@ -328,13 +367,11 @@ public class UIDialogueWindow : UIWindowBase {
         if(talkingPerson != null && string.IsNullOrEmpty(talkerPic))
         {
             talkingPerson.gameObject.SetActive(false);
-            
         }
         else
         {
             talkingPerson = GetPerson(talkerPic, position);
             talkingPerson.Show();
-            
         }
 
     }
@@ -348,6 +385,19 @@ public class UIDialogueWindow : UIWindowBase {
     //todo 待优化 不要平凡创建销毁
     private UIDialoguePerson GetPerson(string name,string position)
     {
+        talkingPerson = position == "0" ? personLeft : personRight;
+        if(talkingPerson!=null)
+        {
+            if (talkingPerson.gameObject.name == name)
+            {
+                return talkingPerson;
+            }else
+            {
+                talkingPerson.gameObject.SetActive(false);
+            }
+           
+        }
+
         List<GameObject> cacheList;
         personCache.TryGetValue(name,out cacheList);
         GameObject personGO = null;
@@ -383,11 +433,9 @@ public class UIDialogueWindow : UIWindowBase {
             rt.pivot = new Vector2(0,0);
             rt.anchorMin = new Vector2(0,0);
             rt.anchorMax = new Vector2(0,0);
-            rt.anchoredPosition = new Vector2(25, 0);
-            if(personLeft!=null)
-            {
-                personLeft.gameObject.SetActive(false);
-            }
+            rt.anchoredPosition = new Vector2(-525,0);
+            rt.DOAnchorPosX(25, 0.5f).SetEase(Ease.OutCubic);
+            //rt.anchoredPosition = new Vector2(25, 0);
             personLeft = person;
         }
         else
@@ -395,15 +443,12 @@ public class UIDialogueWindow : UIWindowBase {
             rt.pivot = new Vector2(1, 0);
             rt.anchorMin = new Vector2(1, 0);
             rt.anchorMax = new Vector2(1, 0);
-            rt.anchoredPosition = new Vector2(-25, 0);
-            if (personRight != null)
-            {
-                personRight.gameObject.SetActive(false);
-            }
+            rt.anchoredPosition = new Vector2(525, 0);
+            rt.DOAnchorPosX(-25, 0.5f).SetEase(Ease.OutCubic);
+            //rt.anchoredPosition = new Vector2(-25, 0);
+
             personRight = person;
         }
-        
-        
         return person;
     }
     /// <summary>

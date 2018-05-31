@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 public class UIDialoguePerson : MonoBehaviour
 {
 
@@ -12,6 +13,7 @@ public class UIDialoguePerson : MonoBehaviour
     {
         mouth.Loop = true;
         mouth.AutoPlay = false;
+        GetComponent<Image>().material.shader = Shader.Find("Custom/Flutter");
     }
     public void StartTalk()
     {

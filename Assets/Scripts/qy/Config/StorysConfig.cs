@@ -27,10 +27,36 @@ namespace qy.config
             story.personLocation = item.GetAttribute("personLocation");
             string weather = item.GetAttribute("weather");
             story.weather = string.IsNullOrEmpty(weather) ? 0 : int.Parse(weather);
-            string effect = item.GetAttribute("effect");
-            story.effect = string.IsNullOrEmpty(effect) ? 0 : int.Parse(effect);
+            story.effects = ReadEffects(item.GetAttribute("effect"));
 
             dic.Add(story.id, story);
+        }
+
+        private List<StoryItem.Effect> ReadEffects(string data)
+        {
+            if(string.IsNullOrEmpty(data))
+            {
+                return new List<StoryItem.Effect>();
+            }
+            List<StoryItem.Effect> list = new List<StoryItem.Effect>();
+            string[] effectsStr = data.Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
+            foreach(string effectStr in effectsStr)
+            {
+                string[] strs = effectStr.Split(new char[]{ ':'},System.StringSplitOptions.RemoveEmptyEntries);
+                List<int> effectData = new List<int>();
+                for(int i =1;i<strs.Length;i++)
+                {
+                    effectData.Add(int.Parse(strs[i]));
+                }
+                StoryItem.Effect effect = new StoryItem.Effect()
+                {
+                    type = (StoryItem.Effect.EffectType)int.Parse(strs[0]),
+                    data = effectData,
+                };
+                list.Add(effect);
+            }
+
+            return list;
         }
 
         public StoryItem GetItem(string id)
@@ -51,6 +77,7 @@ namespace qy.config
 
     public class StoryItem
     {
+       
         /// <summary>
         /// id
         /// </summary>
@@ -80,9 +107,9 @@ namespace qy.config
         /// </summary>
         public int weather;
         /// <summary>
-        /// 特效（1：抖动 2：血屏 3：背景变灰 4:模糊 5:遮罩扩散 6:拉近拉远 7:左右滚动）
+        /// 特效（1：抖动 2：血屏 3：背景变灰 4:模糊[0:模糊变清晰 1:清晰变模糊] 5:遮罩扩散 6:拉近拉远[0:放大 1:缩小] 7:左右滚动[0:镜头向左移动 1:镜头向右移动]）【特效1id:特效1参数,特效2id:特效2参数】
         /// </summary>
-        public int effect;
+        public List<StoryItem.Effect> effects;
 
         internal string nextId;
         /// <summary>
@@ -94,6 +121,23 @@ namespace qy.config
             {
                 return ConfigManager.Instance.storysConfig.GetItem(nextId);
             }
+        }
+
+        public class Effect
+        {
+            public enum EffectType
+            {
+                Shake = 1,//抖动
+                Blood,//血
+                Gray,//灰色
+                Blur,//模糊
+                Mask,//遮罩扩散
+                Zoom,//放大缩小
+                Scroll,//滚动
+            }
+
+            public EffectType type;
+            public List<int> data;
         }
     }
 }
