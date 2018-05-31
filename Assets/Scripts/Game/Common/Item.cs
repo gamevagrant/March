@@ -1209,7 +1209,30 @@ public class Item : MonoBehaviour
 
         AudioManager.instance.GingerbreadAudio();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        switch (node.item.type)
+        {
+            case ITEM_TYPE.COOKIE_1:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_2:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.GreenCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_3:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.OrangeCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_4:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.PurpleCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_5:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RedCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_6:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.YellowCookieExplosion()) as GameObject);
+                break;
+        }
+
         if (explosion != null) explosion.transform.position = node.item.transform.position + Vector3.back * 2;
 
         GameObject prefab = null;
@@ -1590,7 +1613,30 @@ public class Item : MonoBehaviour
     {
         AudioManager.instance.CookieCrushAudio();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        switch (type)
+        {
+            case ITEM_TYPE.COOKIE_1:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_2:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.GreenCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_3:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.OrangeCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_4:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.PurpleCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_5:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RedCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.COOKIE_6:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.YellowCookieExplosion()) as GameObject);
+                break;
+        }
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
@@ -1601,7 +1647,30 @@ public class Item : MonoBehaviour
     {
         AudioManager.instance.GingerbreadExplodeAudio();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        switch (type)
+        {
+            case ITEM_TYPE.GINGERBREAD_1:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.GINGERBREAD_2:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.GreenCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.GINGERBREAD_3:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.OrangeCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.GINGERBREAD_4:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.PurpleCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.GINGERBREAD_5:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RedCookieExplosion()) as GameObject);
+                break;
+            case ITEM_TYPE.GINGERBREAD_6:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.YellowCookieExplosion()) as GameObject);
+                break;
+        }
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
@@ -1612,7 +1681,10 @@ public class Item : MonoBehaviour
     {
         AudioManager.instance.MarshmallowExplodeAudio();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.MarshmallowExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.MarshmallowExplosion()) as GameObject);
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
@@ -1623,7 +1695,10 @@ public class Item : MonoBehaviour
     {
         AudioManager.instance.MarshmallowExplodeAudio();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.MarshmallowExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.MarshmallowExplosion()) as GameObject);
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
@@ -1634,7 +1709,10 @@ public class Item : MonoBehaviour
     {
         AudioManager.instance.ChocolateExplodeAudio();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ChocolateExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ChocolateExplosion()) as GameObject);
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
@@ -1645,7 +1723,15 @@ public class Item : MonoBehaviour
     {
         AudioManager.instance.RockCandyExplodeAudio();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        switch (type)
+        {
+            case ITEM_TYPE.ROCK_CANDY:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                break;
+        }
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
@@ -1663,11 +1749,14 @@ public class Item : MonoBehaviour
 
         BombBreakerDestroy(2);
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BombBreakerExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
 
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
+            //explosion.transform.position = new Vector3(explosion.transform.position.x, explosion.transform.position.y, -12f);
         }
     }
 
@@ -1692,15 +1781,43 @@ public class Item : MonoBehaviour
 
         XBreakerDestroy();
 
-        var breakerExplosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
-        var breakerAnimation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity);
-
+        GameObject explosion = null;
+        GameObject animation = null;
         GameObject cross = null;
-        if (breakerAnimation != null)
+
+        switch (GetCookie(type))
         {
-            cross = Instantiate(breakerAnimation);
-            breakerAnimation.transform.Rotate(Vector3.back, 45);
-            breakerAnimation.transform.position = new Vector3(breakerAnimation.transform.position.x, breakerAnimation.transform.position.y, -12f);
+            case ITEM_TYPE.COOKIE_1:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_2:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker2()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation2()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_3:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker3()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation3()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_4:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker4()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation4()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_5:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker5()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation5()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_6:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker6()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation6()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+        }
+
+        if (animation != null)
+        {
+            cross = Instantiate(animation);
+            animation.transform.Rotate(Vector3.back, 45);
+            animation.transform.position = new Vector3(animation.transform.position.x, animation.transform.position.y, -12f);
         }
 
         if (cross != null)
@@ -1709,12 +1826,12 @@ public class Item : MonoBehaviour
             cross.transform.position = new Vector3(cross.transform.position.x, cross.transform.position.y, -12f);
         }
 
-        if (breakerExplosion != null)
+        if (explosion != null)
         {
-            breakerExplosion.transform.position = transform.position + Vector3.back * 2;
+            explosion.transform.position = transform.position + Vector3.back * 2;
         }
 
-        Destroy(breakerAnimation, 1f);
+        GameObject.Destroy(animation, 1f);
     }
 
     void ColumnBreakerExplosion()
@@ -1723,8 +1840,11 @@ public class Item : MonoBehaviour
 
         ColumnDestroy();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
-        var animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion = null;
+        GameObject animation = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+        animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
 
         if (explosion != null)
         {
@@ -1736,14 +1856,17 @@ public class Item : MonoBehaviour
             animation.transform.position = transform.position + Vector3.back;
         }
 
-        Destroy(animation, 1f);
+        GameObject.Destroy(animation, 1f);
     }
 
     void BombColRowBreakerExplosion()
     {
         AudioManager.instance.ColRowBreakerExplodeAudio();
-
-        var isSpecialForGrass = node.IsGrass();
+        bool isSpecialForGrass = false;
+        if (node.IsGrass())
+        {
+            isSpecialForGrass = true;
+        }
         ColumnDestroy(node.j - 1, isSpecialForGrass);
         ColumnDestroy(node.j, isSpecialForGrass);
         ColumnDestroy(node.j + 1, isSpecialForGrass);
@@ -1752,8 +1875,13 @@ public class Item : MonoBehaviour
         RowDestroy(node.i, isSpecialForGrass);
         RowDestroy(node.i + 1, isSpecialForGrass);
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
-        var animation = Instantiate(Resources.Load(Configure.BigColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion = null;
+        GameObject animation = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+        animation = Instantiate(Resources.Load(Configure.BigColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + transform.position + Vector3.back * 2;
@@ -1764,7 +1892,7 @@ public class Item : MonoBehaviour
             animation.transform.position = transform.position + Vector3.back;
         }
 
-        Destroy(animation, 1f);
+        GameObject.Destroy(animation, 1f);
     }
 
     void CrossBreakerExplosion()
@@ -1774,13 +1902,41 @@ public class Item : MonoBehaviour
         ColumnDestroy();
         RowDestroy();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
-        var columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
-
+        GameObject explosion = null;
+        GameObject columnEffect = null;
         GameObject rowEffect = null;
+
+        switch (GetCookie(type))
+        {
+            case ITEM_TYPE.COOKIE_1:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_2:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker2()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation2()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_3:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker3()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation3()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_4:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker4()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation4()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_5:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker5()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation5()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case ITEM_TYPE.COOKIE_6:
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker6()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation6()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+        }
+
         if (columnEffect != null)
         {
-            rowEffect = Instantiate(columnEffect, transform.position, Quaternion.identity);
+            rowEffect = Instantiate(columnEffect as GameObject, transform.position, Quaternion.identity) as GameObject;
             columnEffect.transform.position = new Vector3(columnEffect.transform.position.x, columnEffect.transform.position.y, -12f);
         }
 
@@ -1795,8 +1951,9 @@ public class Item : MonoBehaviour
             explosion.transform.position = transform.position + transform.position + Vector3.back * 2;
         }
 
-        Destroy(rowEffect, 1f);
-        Destroy(columnEffect, 1f);
+        GameObject.Destroy(rowEffect, 1f);
+
+        GameObject.Destroy(columnEffect, 1f);
     }
 
     void BigBombBreakerExplosion()
@@ -1805,10 +1962,14 @@ public class Item : MonoBehaviour
 
         BombBreakerDestroy(3);
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BombBreakerExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + transform.position + Vector3.back * 2;
+            // explosion.transform.position = new Vector3(explosion.transform.position.x, explosion.transform.position.y, -12f);
         }
     }
 
@@ -1818,10 +1979,14 @@ public class Item : MonoBehaviour
 
         PlaneDestroy(3);
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BombBreakerExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + transform.position + Vector3.back * 2;
+            //explosion.transform.position = new Vector3(explosion.transform.position.x, explosion.transform.position.y, -12f);
         }
     }
 
@@ -1831,10 +1996,14 @@ public class Item : MonoBehaviour
 
         PlaneDestroy();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BombBreakerExplosion()) as GameObject);
+        GameObject explosion = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BreakerExplosion()) as GameObject);
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + transform.position + Vector3.back * 2;
+            //explosion.transform.position = new Vector3(explosion.transform.position.x, explosion.transform.position.y, -12f);
         }
     }
 
@@ -1844,8 +2013,11 @@ public class Item : MonoBehaviour
 
         RowDestroy();
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
-        var animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion = null;
+        GameObject animation = null;
+
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+        animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
 
         if (animation != null)
         {
@@ -1859,19 +2031,31 @@ public class Item : MonoBehaviour
             explosion.transform.SetParent(node.transform);
         }
 
-        Destroy(animation, 1f);
+        GameObject.Destroy(animation, 1f);
     }
 
     void PlaneBreakerExplosion()
     {
         AudioManager.instance.ColRowBreakerExplodeAudio();
         PlaneDestroy();
+        GameObject explosion = null;
+        //  GameObject animation = null;
 
-        var explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+        // animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+
+        /* if (animation != null)
+         {
+             animation.transform.Rotate(Vector3.back, 90);
+             animation.transform.position = new Vector3(animation.transform.position.x, animation.transform.position.y, -12f);
+         }*/
+
         if (explosion != null)
         {
             explosion.transform.position = transform.position + Vector3.back * 2;
         }
+
+        // GameObject.Destroy(animation, 1f);
     }
 
     void BombXBreakerExplosion()
