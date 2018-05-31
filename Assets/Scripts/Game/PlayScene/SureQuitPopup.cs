@@ -29,7 +29,7 @@ public class SureQuitPopup : MonoBehaviour
                 {
                     if (loseTargetLayout != null)
                     {
-                        GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseTargetCell"), loseTargetLayout.transform) as GameObject;
+                        GameObject cell = Instantiate(Resources.Load(Configure.LoseTargetCellPrefab), loseTargetLayout.transform) as GameObject;
 
                         cell.GetComponent<UILoseTargetCell>().Init(LevelLoader.instance.targetList[i].Type, board.targetLeftList[i], LevelLoader.instance.targetList[i].color);
                     }

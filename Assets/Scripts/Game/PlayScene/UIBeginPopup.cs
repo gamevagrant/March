@@ -1,7 +1,7 @@
-﻿using Org.BouncyCastle.Math.EC.Multiplier;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class UIBeginPopup : MonoBehaviour
 {
     public Text HeadText;
@@ -17,7 +17,7 @@ public class UIBeginPopup : MonoBehaviour
 	{
 	    popup = GetComponent<Popup>();
 
-        HeadText.text = LanguageManager.instance.GetValueByKey("200014") + qy.GameMainManager.Instance.playerData.eliminateLevel.ToString();
+        HeadText.text = LanguageManager.instance.GetValueByKey("200014") + qy.GameMainManager.Instance.playerData.eliminateLevel;
 		BeginBottomText.text = LanguageManager.instance.GetValueByKey ("200016");
         if (SceneManager.GetActiveScene().name == "Play")
 	    {
@@ -32,7 +32,7 @@ public class UIBeginPopup : MonoBehaviour
 	    {
 	        for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
 	        {
-	            var tmp = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/UITargetCell"), TargetListLayout.transform) as GameObject;
+	            var tmp = Instantiate(Resources.Load(Configure.UITargetCellPrefab), TargetListLayout.transform) as GameObject;
                 tmp.GetComponent<UITargetCell>().Init(LevelLoader.instance.targetList[i].Type, LevelLoader.instance.targetList[i].Amount, LevelLoader.instance.targetList[i].color);
 	        }
 	    }
@@ -41,9 +41,11 @@ public class UIBeginPopup : MonoBehaviour
 	    if (BeginItemListLayout != null)
 	    {
 			int[] itemids = {200004, 200003, 200005};
-			foreach (int itemid in itemids) {
-				var tmp = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/EnhancementItem"), BeginItemListLayout.transform) as GameObject;
-				tmp.GetComponent<BeginProp>().Init(itemid);
+			foreach (int itemid in itemids)
+			{
+			    var go = Instantiate(Resources.Load(Configure.EnhancementItemPrefab), BeginItemListLayout.transform) as GameObject;
+			    if (go != null)
+			        go.GetComponent<EnhancementItemController>().Init(itemid);
 			}
 	    }
     }

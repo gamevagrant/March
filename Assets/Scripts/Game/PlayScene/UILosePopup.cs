@@ -48,7 +48,7 @@ public class UILosePopup : MonoBehaviour
                 {
                     if (loseTargetLayout != null)
                     {
-                        GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseTargetCell"), loseTargetLayout.transform) as GameObject;
+                        GameObject cell = Instantiate(Resources.Load(Configure.LoseTargetCellPrefab), loseTargetLayout.transform) as GameObject;
                         cell.GetComponent<UILoseTargetCell>().Init(LevelLoader.instance.targetList[i].Type, board.targetLeftList[i], LevelLoader.instance.targetList[i].color);
                     }
                 }
@@ -57,7 +57,7 @@ public class UILosePopup : MonoBehaviour
             List<qy.config.PropItem> list = GameMainManager.Instance.configManager.settingConfig.GetBonusItemWithStep(times);
             if (list.Count > 0)
             {
-                GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
+                GameObject cell = Instantiate(Resources.Load(Configure.LoseStepBuyItemCellPrefab), loseSBILayout.transform) as GameObject;
 
                 cell.GetComponent<UILoseSBICell>().Init();
             }
@@ -65,7 +65,7 @@ public class UILosePopup : MonoBehaviour
             {
                 if (loseSBILayout != null)
                 {
-                    GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
+                    GameObject cell = Instantiate(Resources.Load(Configure.LoseStepBuyItemCellPrefab), loseSBILayout.transform) as GameObject;
 
                     cell.GetComponent<UILoseSBICell>().Init(tmp.id, tmp.count);
                 }
@@ -76,7 +76,7 @@ public class UILosePopup : MonoBehaviour
             {
                 if (loseSBILayout != null)
                 {
-                    GameObject cell = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/LoseStepBuyItemCell"), loseSBILayout.transform) as GameObject;
+                    GameObject cell = Instantiate(Resources.Load(Configure.LoseStepBuyItemCellPrefab), loseSBILayout.transform) as GameObject;
 
                     cell.GetComponent<UILoseSBICell>().Init(tmp.id, tmp.count);
                 }

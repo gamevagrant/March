@@ -564,12 +564,12 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             case "blank":
                 return ITEM_TYPE.BLANK;
             case "random_item":
-                return ITEM_TYPE.COOKIE_RAMDOM;
+                return ITEM_TYPE.RAMDOM;
             case "rainbow":
-                return ITEM_TYPE.COOKIE_RAINBOW;
+                return ITEM_TYPE.RAINBOW;
 
             case "plane_breaker":
-                return ITEM_TYPE.COOKIE_PLANE_BREAKER;
+                return ITEM_TYPE.PLANE_BREAKER;
 
             case "cherry":
                 return ITEM_TYPE.CHERRY;
@@ -578,11 +578,11 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             case "blue":
                 return ITEM_TYPE.COOKIE_1;
             case "blue_bomb_breaker":
-                return ITEM_TYPE.COOKIE_BOMB_BREAKER;
+                return ITEM_TYPE.BOMB_BREAKER;
             case "blue_column_breaker":
-                return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                return ITEM_TYPE.COLUMN_BREAKER;
             case "blue_row_breaker":
-                return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                return ITEM_TYPE.ROW_BREAKER;
             case "blue_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
                 return ITEM_TYPE.COOKIE_1;
@@ -591,13 +591,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
                 return ITEM_TYPE.COOKIE_2;
             case "green_bomb_breaker":
                 //                return ITEM_TYPE.COOKIE_2_BOMB_BREAKER;
-                return ITEM_TYPE.COOKIE_BOMB_BREAKER;
+                return ITEM_TYPE.BOMB_BREAKER;
             case "green_column_breaker":
                 //                return ITEM_TYPE.COOKIE_2_COLUMN_BREAKER;
-                return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                return ITEM_TYPE.COLUMN_BREAKER;
             case "green_row_breaker":
                 //                return ITEM_TYPE.COOKIE_2_ROW_BREAKER;
-                return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                return ITEM_TYPE.ROW_BREAKER;
             case "green_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
                 return ITEM_TYPE.COOKIE_2;
@@ -606,13 +606,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
                 return ITEM_TYPE.COOKIE_3;
             case "orange_bomb_breaker":
                 //                return ITEM_TYPE.COOKIE_3_BOMB_BREAKER;
-                return ITEM_TYPE.COOKIE_BOMB_BREAKER;
+                return ITEM_TYPE.BOMB_BREAKER;
             case "orange_column_breaker":
                 //                return ITEM_TYPE.COOKIE_3_COLUMN_BREAKER;
-                return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                return ITEM_TYPE.COLUMN_BREAKER;
             case "orange_row_breaker":
                 //                return ITEM_TYPE.COOKIE_3_ROW_BREAKER;
-                return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                return ITEM_TYPE.ROW_BREAKER;
             case "orange_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
                 return ITEM_TYPE.COOKIE_3;
@@ -621,13 +621,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
                 return ITEM_TYPE.COOKIE_4;
             case "purple_bomb_breaker":
                 //                return ITEM_TYPE.COOKIE_4_BOMB_BREAKER;
-                return ITEM_TYPE.COOKIE_BOMB_BREAKER;
+                return ITEM_TYPE.BOMB_BREAKER;
             case "purple_column_breaker":
                 //                return ITEM_TYPE.COOKIE_4_COLUMN_BREAKER;
-                return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                return ITEM_TYPE.COLUMN_BREAKER;
             case "purple_row_breaker":
                 //                return ITEM_TYPE.COOKIE_4_ROW_BREAKER;
-                return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                return ITEM_TYPE.ROW_BREAKER;
             case "purple_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
                 return ITEM_TYPE.COOKIE_4;
@@ -636,13 +636,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
                 return ITEM_TYPE.COOKIE_5;
             case "red_bomb_breaker":
                 //                return ITEM_TYPE.COOKIE_5_BOMB_BREAKER;
-                return ITEM_TYPE.COOKIE_BOMB_BREAKER;
+                return ITEM_TYPE.BOMB_BREAKER;
             case "red_column_breaker":
                 //                return ITEM_TYPE.COOKIE_5_COLUMN_BREAKER;
-                return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                return ITEM_TYPE.COLUMN_BREAKER;
             case "red_row_breaker":
                 //                return ITEM_TYPE.COOKIE_5_ROW_BREAKER;
-                return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                return ITEM_TYPE.ROW_BREAKER;
             case "red_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
                 return ITEM_TYPE.COOKIE_5;
@@ -651,13 +651,13 @@ public class LevelLoader : MonoSingleton<LevelLoader>
                 return ITEM_TYPE.COOKIE_6;
             case "yellow_bomb_breaker":
                 //                return ITEM_TYPE.COOKIE_6_BOMB_BREAKER;
-                return ITEM_TYPE.COOKIE_BOMB_BREAKER;
+                return ITEM_TYPE.BOMB_BREAKER;
             case "yellow_column_breaker":
                 //                return ITEM_TYPE.COOKIE_6_COLUMN_BREAKER;
-                return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                return ITEM_TYPE.COLUMN_BREAKER;
             case "yellow_row_breaker":
                 //                return ITEM_TYPE.COOKIE_6_ROW_BREAKER;
-                return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                return ITEM_TYPE.ROW_BREAKER;
             case "yellow_x_breaker":
                 Debug.Log("读取到x breaker 暂时先用相应cookie代替 需修改关卡配置");
                 return ITEM_TYPE.COOKIE_6;
@@ -935,10 +935,7 @@ public class LevelLoader : MonoSingleton<LevelLoader>
             }
         }
 
-        //print(cookies.Count);
-
         var index = UnityEngine.Random.Range(0, cookies.Count);
-
         return cookies[index];
     }
 

@@ -289,12 +289,12 @@ public class Item : MonoBehaviour
             type == ITEM_TYPE.CHOCOLATE_6_LAYER ||
             type == ITEM_TYPE.ROCK_CANDY ||
             type == ITEM_TYPE.MARSHMALLOW ||
-            type == ITEM_TYPE.COOKIE_RAINBOW ||
+            type == ITEM_TYPE.RAINBOW ||
 
-            type == ITEM_TYPE.COOKIE_COLUMN_BREAKER ||
-            type == ITEM_TYPE.COOKIE_ROW_BREAKER ||
-            type == ITEM_TYPE.COOKIE_BOMB_BREAKER ||
-            type == ITEM_TYPE.COOKIE_PLANE_BREAKER ||
+            type == ITEM_TYPE.COLUMN_BREAKER ||
+            type == ITEM_TYPE.ROW_BREAKER ||
+            type == ITEM_TYPE.BOMB_BREAKER ||
+            type == ITEM_TYPE.PLANE_BREAKER ||
 
             type == ITEM_TYPE.COLLECTIBLE_1 ||
             type == ITEM_TYPE.COLLECTIBLE_2 ||
@@ -365,7 +365,7 @@ public class Item : MonoBehaviour
     public bool CanChangeToBubble()
     {
         if (Movable()
-            && (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW)
+            && (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.RAINBOW)
         )
         {
             return true;
@@ -529,7 +529,7 @@ public class Item : MonoBehaviour
                 case ITEM_TYPE.COOKIE_4:
                 case ITEM_TYPE.COOKIE_5:
                 case ITEM_TYPE.COOKIE_6:
-                    return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                    return ITEM_TYPE.ROW_BREAKER;
                 default:
                     return ITEM_TYPE.NONE;
             }
@@ -546,7 +546,7 @@ public class Item : MonoBehaviour
                 case ITEM_TYPE.COOKIE_4:
                 case ITEM_TYPE.COOKIE_5:
                 case ITEM_TYPE.COOKIE_6:
-                    return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                    return ITEM_TYPE.COLUMN_BREAKER;
                 default:
                     return ITEM_TYPE.NONE;
             }
@@ -555,7 +555,7 @@ public class Item : MonoBehaviour
 
     public bool IsBombBreaker(ITEM_TYPE check)
     {
-        if (check == ITEM_TYPE.COOKIE_BOMB_BREAKER
+        if (check == ITEM_TYPE.BOMB_BREAKER
             )
         {
             return true;
@@ -567,7 +567,7 @@ public class Item : MonoBehaviour
 
     public bool IsColumnBreaker(ITEM_TYPE check)
     {
-        if (check == ITEM_TYPE.COOKIE_COLUMN_BREAKER
+        if (check == ITEM_TYPE.COLUMN_BREAKER
             )
         {
             return true;
@@ -578,7 +578,7 @@ public class Item : MonoBehaviour
 
     public bool IsRowBreaker(ITEM_TYPE check)
     {
-        if (check == ITEM_TYPE.COOKIE_ROW_BREAKER
+        if (check == ITEM_TYPE.ROW_BREAKER
             )
         {
             return true;
@@ -589,7 +589,7 @@ public class Item : MonoBehaviour
 
     public bool IsPlaneBreaker(ITEM_TYPE check)
     {
-        if (check == ITEM_TYPE.COOKIE_PLANE_BREAKER
+        if (check == ITEM_TYPE.PLANE_BREAKER
         )
         {
             return true;
@@ -618,7 +618,7 @@ public class Item : MonoBehaviour
             case ITEM_TYPE.COOKIE_4:
             case ITEM_TYPE.COOKIE_5:
             case ITEM_TYPE.COOKIE_6:
-                return ITEM_TYPE.COOKIE_BOMB_BREAKER;
+                return ITEM_TYPE.BOMB_BREAKER;
             default:
                 return ITEM_TYPE.NONE;
         }
@@ -634,7 +634,7 @@ public class Item : MonoBehaviour
             case ITEM_TYPE.COOKIE_4:
             case ITEM_TYPE.COOKIE_5:
             case ITEM_TYPE.COOKIE_6:
-                return ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+                return ITEM_TYPE.COLUMN_BREAKER;
             default:
                 return ITEM_TYPE.NONE;
         }
@@ -650,7 +650,7 @@ public class Item : MonoBehaviour
             case ITEM_TYPE.COOKIE_4:
             case ITEM_TYPE.COOKIE_5:
             case ITEM_TYPE.COOKIE_6:
-                return ITEM_TYPE.COOKIE_ROW_BREAKER;
+                return ITEM_TYPE.ROW_BREAKER;
             default:
                 return ITEM_TYPE.NONE;
         }
@@ -666,7 +666,7 @@ public class Item : MonoBehaviour
             case ITEM_TYPE.COOKIE_4:
             case ITEM_TYPE.COOKIE_5:
             case ITEM_TYPE.COOKIE_6:
-                return ITEM_TYPE.COOKIE_PLANE_BREAKER;
+                return ITEM_TYPE.PLANE_BREAKER;
             default:
                 return ITEM_TYPE.NONE;
         }
@@ -889,14 +889,14 @@ public class Item : MonoBehaviour
         var squareMatchesAtNeighbor = (swapItem.node.FindSquareMatches() != null) ? swapItem.node.FindSquareMatches().Count : 0;
 
         var special =
-            type == ITEM_TYPE.COOKIE_RAINBOW && (swapItem.IsCookie() || IsBreaker(swapItem.type) ||
-                                                 swapItem.type == ITEM_TYPE.COOKIE_RAINBOW) ||
-            swapItem.type == ITEM_TYPE.COOKIE_RAINBOW &&
-            (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW) ||
+            type == ITEM_TYPE.RAINBOW && (swapItem.IsCookie() || IsBreaker(swapItem.type) ||
+                                                 swapItem.type == ITEM_TYPE.RAINBOW) ||
+            swapItem.type == ITEM_TYPE.RAINBOW &&
+            (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.RAINBOW) ||
             IsBreaker(type) && (swapItem.IsCookie() || IsBreaker(swapItem.type) ||
-                                swapItem.type == ITEM_TYPE.COOKIE_RAINBOW || swapItem.IsMarshmallow() ||
+                                swapItem.type == ITEM_TYPE.RAINBOW || swapItem.IsMarshmallow() ||
                                 swapItem.IsCollectible() || swapItem.IsBlank()) || IsBreaker(swapItem.type) &&
-            (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW || IsMarshmallow() || IsCollectible());
+            (IsCookie() || IsBreaker(type) || type == ITEM_TYPE.RAINBOW || IsMarshmallow() || IsCollectible());
 
         if (matchesHere <= 0 && matchesAtNeighbor <= 0 && squareMatchesHere <= 0 && squareMatchesAtNeighbor <= 0 && special == false && Configure.instance.checkSwap && forced == false)
         {
@@ -929,11 +929,11 @@ public class Item : MonoBehaviour
             if (special)
             {
                 //如果交换前的位置有草地 特殊块会使交换后的地块变为草地
-                if ((IsBreaker(type) || type == ITEM_TYPE.COOKIE_RAINBOW) && swapItem.node.IsGrass())
+                if ((IsBreaker(type) || type == ITEM_TYPE.RAINBOW) && swapItem.node.IsGrass())
                 {
                     node.ChangeToGrass();
                 }
-                if ((swapItem.IsBreaker(swapItem.type) || swapItem.type == ITEM_TYPE.COOKIE_RAINBOW) && node.IsGrass())
+                if ((swapItem.IsBreaker(swapItem.type) || swapItem.type == ITEM_TYPE.RAINBOW) && node.IsGrass())
                 {
                     swapItem.node.ChangeToGrass();
                 }
@@ -949,9 +949,9 @@ public class Item : MonoBehaviour
                 ColRowBreakerAndBombBreakerDestroy(this, swapItem);
 
                 if ((swapItem.IsCookie() || swapItem.IsMarshmallow() || swapItem.IsCollectible() || swapItem.IsBlank()) &&
-                    (type == ITEM_TYPE.COOKIE_ROW_BREAKER
-                    || type == ITEM_TYPE.COOKIE_COLUMN_BREAKER
-                    || type == ITEM_TYPE.COOKIE_BOMB_BREAKER
+                    (type == ITEM_TYPE.ROW_BREAKER
+                    || type == ITEM_TYPE.COLUMN_BREAKER
+                    || type == ITEM_TYPE.BOMB_BREAKER
                     )
                 )
                 {
@@ -962,9 +962,9 @@ public class Item : MonoBehaviour
                 }
 
                 if ((IsCookie() || IsMarshmallow() || IsCollectible()) &&
-                    (swapItem.type == ITEM_TYPE.COOKIE_ROW_BREAKER
-                     || swapItem.type == ITEM_TYPE.COOKIE_COLUMN_BREAKER
-                     || swapItem.type == ITEM_TYPE.COOKIE_BOMB_BREAKER
+                    (swapItem.type == ITEM_TYPE.ROW_BREAKER
+                     || swapItem.type == ITEM_TYPE.COLUMN_BREAKER
+                     || swapItem.type == ITEM_TYPE.BOMB_BREAKER
                      )
                 )
                 {
@@ -982,12 +982,12 @@ public class Item : MonoBehaviour
                 //飞机生成的优先级最低在最上面
                 if (squareMatchesHere == 4)
                 {
-                    next = ITEM_TYPE.COOKIE_PLANE_BREAKER;
+                    next = ITEM_TYPE.PLANE_BREAKER;
                 }
 
                 if (squareMatchesAtNeighbor == 4)
                 {
-                    swapItem.next = ITEM_TYPE.COOKIE_PLANE_BREAKER;
+                    swapItem.next = ITEM_TYPE.PLANE_BREAKER;
                 }
 
                 if (matchesHere == 4)
@@ -996,7 +996,7 @@ public class Item : MonoBehaviour
                 }
                 else if (matchesHere >= 5)
                 {
-                    next = ITEM_TYPE.COOKIE_RAINBOW;
+                    next = ITEM_TYPE.RAINBOW;
                 }
                 if (matchesAtNeighbor == 4)
                 {
@@ -1004,7 +1004,7 @@ public class Item : MonoBehaviour
                 }
                 else if (matchesAtNeighbor >= 5)
                 {
-                    swapItem.next = ITEM_TYPE.COOKIE_RAINBOW;
+                    swapItem.next = ITEM_TYPE.RAINBOW;
                 }
 
                 // find the matches to destroy (destroy match 3/4/5)
@@ -1176,36 +1176,7 @@ public class Item : MonoBehaviour
 
     public void ChangeSpriteAndType(int itemColor)
     {
-        GameObject prefab = null;
-
-        switch (itemColor)
-        {
-            case 1:
-                prefab = Resources.Load(Configure.Cookie1()) as GameObject;
-                type = ITEM_TYPE.COOKIE_1;
-                break;
-            case 2:
-                prefab = Resources.Load(Configure.Cookie2()) as GameObject;
-                type = ITEM_TYPE.COOKIE_2;
-                break;
-            case 3:
-                prefab = Resources.Load(Configure.Cookie3()) as GameObject;
-                type = ITEM_TYPE.COOKIE_3;
-                break;
-            case 4:
-                prefab = Resources.Load(Configure.Cookie4()) as GameObject;
-                type = ITEM_TYPE.COOKIE_4;
-                break;
-            case 5:
-                prefab = Resources.Load(Configure.Cookie5()) as GameObject;
-                type = ITEM_TYPE.COOKIE_5;
-                break;
-            case 6:
-                prefab = Resources.Load(Configure.Cookie6()) as GameObject;
-                type = ITEM_TYPE.COOKIE_6;
-                break;
-        }
-
+        var prefab = Resources.Load(string.Format("{0}/cookie_{1}", Configure.ItemsPath, itemColor)) as GameObject;
         if (prefab != null)
         {
             GetComponent<SpriteRenderer>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
@@ -1215,8 +1186,7 @@ public class Item : MonoBehaviour
     public void ChangeToRainbow()
     {
         var prefab = Resources.Load(Configure.CookieRainbow()) as GameObject;
-
-        type = ITEM_TYPE.COOKIE_RAINBOW;
+        type = ITEM_TYPE.RAINBOW;
 
         color = 0;
 
@@ -1292,7 +1262,7 @@ public class Item : MonoBehaviour
         GameObject prefab = null;
 
         prefab = Resources.Load(Configure.Cookie1BombBreaker()) as GameObject;
-        type = ITEM_TYPE.COOKIE_BOMB_BREAKER;
+        type = ITEM_TYPE.BOMB_BREAKER;
 
         if (prefab != null)
         {
@@ -1307,12 +1277,12 @@ public class Item : MonoBehaviour
         if (Random.Range(0, 2) == 0)
         {
             prefab = Resources.Load(Configure.Cookie1ColumnBreaker()) as GameObject;
-            type = ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+            type = ITEM_TYPE.COLUMN_BREAKER;
         }
         else
         {
             prefab = Resources.Load(Configure.Cookie1RowBreaker()) as GameObject;
-            type = ITEM_TYPE.COOKIE_ROW_BREAKER;
+            type = ITEM_TYPE.ROW_BREAKER;
         }
 
         if (prefab != null)
@@ -1325,7 +1295,7 @@ public class Item : MonoBehaviour
     {
         GameObject prefab = null;
         prefab = Resources.Load(Configure.Cookie1ColumnBreaker()) as GameObject;
-        type = ITEM_TYPE.COOKIE_COLUMN_BREAKER;
+        type = ITEM_TYPE.COLUMN_BREAKER;
 
         if (prefab != null)
         {
@@ -1335,10 +1305,9 @@ public class Item : MonoBehaviour
 
     public void ChangeToRowBreaker()
     {
-        GameObject prefab = null;
-        prefab = Resources.Load(Configure.Cookie1RowBreaker()) as GameObject;
-        type = ITEM_TYPE.COOKIE_ROW_BREAKER;
+        type = ITEM_TYPE.ROW_BREAKER;
 
+        var prefab = Resources.Load(Configure.Cookie1RowBreaker()) as GameObject;
         if (prefab != null)
         {
             GetComponent<SpriteRenderer>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
@@ -1347,11 +1316,9 @@ public class Item : MonoBehaviour
 
     public void ChangeToPlaneBreaker()
     {
-        GameObject prefab = null;
+        type = ITEM_TYPE.PLANE_BREAKER;
 
-        prefab = Resources.Load(Configure.PlaneBreaker()) as GameObject;
-        type = ITEM_TYPE.COOKIE_PLANE_BREAKER;
-
+        var prefab = Resources.Load(Configure.PlaneBreaker()) as GameObject;
         if (prefab != null)
         {
             GetComponent<SpriteRenderer>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
@@ -1361,22 +1328,19 @@ public class Item : MonoBehaviour
     public void SetRandomNextType()
     {
         var random = Random.Range(0, 4);
-
         if (random == 0)
-        {
-            next = ITEM_TYPE.COOKIE_COLUMN_BREAKER;
-        }
+            next = ITEM_TYPE.COLUMN_BREAKER;
         else if (random == 1)
         {
-            next = ITEM_TYPE.COOKIE_ROW_BREAKER;
+            next = ITEM_TYPE.ROW_BREAKER;
         }
         else if (random == 2)
         {
-            next = ITEM_TYPE.COOKIE_BOMB_BREAKER;
+            next = ITEM_TYPE.BOMB_BREAKER;
         }
         else if (random == 3)
         {
-            next = ITEM_TYPE.COOKIE_PLANE_BREAKER;
+            next = ITEM_TYPE.PLANE_BREAKER;
         }
     }
 
@@ -1391,9 +1355,10 @@ public class Item : MonoBehaviour
             return;
         }
 
-        // prevent multiple calls
-        if (destroying) return;
-        else destroying = true;
+        if (destroying)
+            return;
+
+        destroying = true;
 
         beAbleToDestroy--;
 
@@ -1515,7 +1480,7 @@ public class Item : MonoBehaviour
             {
                 BombBreakerExplosion();
             }
-            else if (type == ITEM_TYPE.COOKIE_RAINBOW)
+            else if (type == ITEM_TYPE.RAINBOW)
             {
                 RainbowExplosion();
             }
@@ -1540,8 +1505,7 @@ public class Item : MonoBehaviour
 
     public void OnCompleteDestroy(Hashtable param)
     {
-        bool isPlaneChangeExplode = (bool)param["isPlaneChangeExplode"];
-
+        var isPlaneChangeExplode = (bool)param["isPlaneChangeExplode"];
         if (board.state == GAME_STATE.PRE_WIN_AUTO_PLAYING)
         {
             board.score += Configure.instance.finishedScoreItem * board.dropTime;
@@ -1561,7 +1525,7 @@ public class Item : MonoBehaviour
             {
                 if (nextSound) AudioManager.instance.ColRowBreakerAudio();
             }
-            else if (next == ITEM_TYPE.COOKIE_RAINBOW)
+            else if (next == ITEM_TYPE.RAINBOW)
             {
                 if (nextSound) AudioManager.instance.RainbowAudio();
             }
@@ -1604,10 +1568,10 @@ public class Item : MonoBehaviour
             board.destroyingItems--;
 
             // there is a case when a item is dropping and it is destroyed by other call
-            if (dropping) board.droppingItems--;
+            if (dropping)
+                board.droppingItems--;
 
-
-            GameObject.Destroy(gameObject);
+            Object.Destroy(gameObject);
         }
     }
 
@@ -2000,10 +1964,8 @@ public class Item : MonoBehaviour
 
         bool isgrass = node.IsGrass();
 
-        if (thisItem.type == ITEM_TYPE.COOKIE_RAINBOW)
+        if (thisItem.type == ITEM_TYPE.RAINBOW)
         {
-            //Debug.Log("touched item is rainbow");
-
             if (otherItem.IsCookie())
             {
                 thisItem.DestroyItemsSameColor(otherItem.color);
@@ -2013,7 +1975,6 @@ public class Item : MonoBehaviour
             }
             else if (otherItem.IsBombBreaker(otherItem.type) || otherItem.IsRowBreaker(otherItem.type) || otherItem.IsColumnBreaker(otherItem.type) || otherItem.IsPlaneBreaker(otherItem.type))
             {
-                //board.
                 var mostColor = board.GetMostColor();
                 board.ChangeItemsType(mostColor, otherItem.type, thisItem.node.IsGrass());
 
@@ -2023,7 +1984,7 @@ public class Item : MonoBehaviour
                 thisItem.Destroy();
                 otherItem.Destroy();
             }
-            else if (otherItem.type == ITEM_TYPE.COOKIE_RAINBOW)
+            else if (otherItem.type == ITEM_TYPE.RAINBOW)
             {
                 board.DoubleRainbowDestroy(isgrass);
 
@@ -2034,10 +1995,8 @@ public class Item : MonoBehaviour
                 otherItem.Destroy();
             }
         }
-        else if (otherItem.type == ITEM_TYPE.COOKIE_RAINBOW)
+        else if (otherItem.type == ITEM_TYPE.RAINBOW)
         {
-            //Debug.Log("swap item is rainbow");
-
             if (thisItem.IsCookie())
             {
                 otherItem.DestroyItemsSameColor(thisItem.color);
@@ -2057,7 +2016,7 @@ public class Item : MonoBehaviour
                 otherItem.Destroy();
                 thisItem.Destroy();
             }
-            else if (thisItem.type == ITEM_TYPE.COOKIE_RAINBOW)
+            else if (thisItem.type == ITEM_TYPE.RAINBOW)
             {
                 //                thisItem.type = ITEM_TYPE.NONE;
                 //                otherItem.type = ITEM_TYPE.NONE;
@@ -2130,6 +2089,7 @@ public class Item : MonoBehaviour
         {
             downNodes.Add(nodes[i]);
         }
+
         isGrass = false;
         findMarshmallow = false;
         foreach (var node in downNodes)
@@ -2226,6 +2186,7 @@ public class Item : MonoBehaviour
         {
             rightNodes.Add(nodes[i]);
         }
+
         isGrass = false;
         findMarshmallow = false;
         foreach (var node in rightNodes)
@@ -2267,14 +2228,7 @@ public class Item : MonoBehaviour
 
     public void PlaneSpecialDestroy(Item thisItem, Item otherItem)
     {
-
-
-        //        if (thisItem.Destroyable() == false || otherItem.Destroyable() == false)
-        //        {
-        //            return;
-        //        }
-
-        if (thisItem.type == ITEM_TYPE.COOKIE_PLANE_BREAKER)
+        if (thisItem.type == ITEM_TYPE.PLANE_BREAKER)
         {
 
             if (otherItem.IsCookie())
@@ -2284,7 +2238,6 @@ public class Item : MonoBehaviour
             }
             else if (otherItem.IsBombBreaker(otherItem.type) || otherItem.IsRowBreaker(otherItem.type) || otherItem.IsColumnBreaker(otherItem.type))
             {
-                //board.
                 planeTargetType = otherItem.type;
                 thisItem.effect = BREAKER_EFFECT.PLANE_CHANGE_BREAKER;
 
@@ -2318,7 +2271,6 @@ public class Item : MonoBehaviour
                     thisItem.node.BottomRightNeighbor().item.Destroy();
                 }
 
-
                 otherItem.Destroy();
                 thisItem.Destroy();
                 board.FindMatches();
@@ -2329,10 +2281,8 @@ public class Item : MonoBehaviour
                 board.FindMatches();
             }
         }
-        else if (otherItem.type == ITEM_TYPE.COOKIE_PLANE_BREAKER)
+        else if (otherItem.type == ITEM_TYPE.PLANE_BREAKER)
         {
-            //Debug.Log("swap item is rainbow");
-
             if (thisItem.IsCookie())
             {
                 otherItem.Destroy();
@@ -2374,14 +2324,10 @@ public class Item : MonoBehaviour
                     thisItem.node.BottomRightNeighbor().item.Destroy();
                 }
 
-
                 otherItem.Destroy();
-
-
 
                 thisItem.Destroy();
                 board.FindMatches();
-
             }
             else
             {
@@ -2394,24 +2340,19 @@ public class Item : MonoBehaviour
 
     public void PlaneDestroy(int planeNum = 1)
     {
-        //开始时使用了生成飞机增加
         planeNum += board.planePlusNum;
 
-        bool isgrass = node.IsGrass();
-
+        var isgrass = node.IsGrass();
         var items = board.ItemAround(node, 1);
         foreach (var item in items)
         {
-            // this item maybe destroyed in other call
             if (item != null)
             {
                 if (isgrass)
                 {
                     item.node.ChangeToGrass();
                 }
-                //item.beAbleToDestroy--;
                 item.Destroy();
-                //board.FindMatches();
             }
         }
 
@@ -2432,26 +2373,20 @@ public class Item : MonoBehaviour
             node.baffleright.DestroyBaffle();
         }
 
-
         var rdmItems = ChosePlaneTargets(planeNum);
-
         if (rdmItems.Count < planeNum)
         {
-            if (board.state == GAME_STATE.WAITING_USER_SWAP)
-            {
-                // board.FindMatches();
-            }
             return;
         }
 
-        List<GameObject> gameObjectPlane = new List<GameObject>();
+        var gameObjectPlane = new List<GameObject>();
 
-        for (int i = 0; i < planeNum; i++)
+        for (var i = 0; i < planeNum; i++)
         {
             rdmItems[i].beAbleToDestroy--;
 
             gameObjectPlane.Add(Instantiate(Resources.Load(Configure.PlaneBreaker())) as GameObject);
-            gameObjectPlane[i].transform.position = gameObject.transform.position;//+ Vector3.back;
+            gameObjectPlane[i].transform.position = gameObject.transform.position;
             gameObjectPlane[i].GetComponent<Item>().planeTargetType = planeTargetType;
             gameObjectPlane[i].GetComponent<Item>().node = rdmItems[i].node;
             gameObjectPlane[i].GetComponent<Item>().board = board;
@@ -2459,9 +2394,8 @@ public class Item : MonoBehaviour
 
             board.playingAnimation++;
 
-            //var angle = Vector3.Angle(gameObjectPlane[i].transform.position, rdmItems[i].transform.position);
             var vect = rdmItems[i].transform.position - gameObjectPlane[i].transform.position;
-            float angle = 0;
+            float angle;
             if (Vector3.Cross(new Vector3(-1, 1.732f, 0), vect).z > 0)
             {
                 angle = Vector3.Angle(new Vector3(-1, 1.732f, 0), vect);
@@ -2959,9 +2893,7 @@ public class Item : MonoBehaviour
         {
             Sequence m_sequence = DOTween.Sequence();
 
-            var tmp = Resources.Load(Configure.Cookie1()) as GameObject;
-            Vector3 scale = COOKIESCALE;
-
+            var scale = COOKIESCALE;
             m_sequence.Append(transform.DOScale(new Vector3(scale.x + 0.15f, scale.y - 0.2f, scale.z), 0.15f))
                 .Append(transform.DOScale(new Vector3(scale.x - 0.10f, scale.y + 0.03f, scale.z), 0.15f))
                 .Append(transform.DOScale(new Vector3(scale.x + 0.05f, scale.y, scale.z), 0.024f))

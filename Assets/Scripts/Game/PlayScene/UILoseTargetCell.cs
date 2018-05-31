@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UILoseTargetCell : MonoBehaviour
 {
-
     public Image Image;
     public GameObject TargetCross;
-	public Text TargetNum;
+    public Text TargetNum;
 
-	public void Init(TARGET_TYPE type, int num, int color = 0)
+    public void Init(TARGET_TYPE type, int num, int color = 0)
     {
         Image.gameObject.SetActive(true);
         TargetCross.gameObject.SetActive(true);
@@ -20,28 +17,7 @@ public class UILoseTargetCell : MonoBehaviour
 
         if (type == TARGET_TYPE.COOKIE)
         {
-            switch (color)
-            {
-                case 1:
-                    prefab = Resources.Load(Configure.Cookie1()) as GameObject;
-                    break;
-                case 2:
-                    prefab = Resources.Load(Configure.Cookie2()) as GameObject;
-                    break;
-                case 3:
-                    prefab = Resources.Load(Configure.Cookie3()) as GameObject;
-                    break;
-                case 4:
-                    prefab = Resources.Load(Configure.Cookie4()) as GameObject;
-                    break;
-                case 5:
-                    prefab = Resources.Load(Configure.Cookie5()) as GameObject;
-                    break;
-                case 6:
-                    prefab = Resources.Load(Configure.Cookie6()) as GameObject;
-                    break;
-            }
-
+            prefab = Resources.Load(string.Format("{0}/cookie_{1}", Configure.ItemsPath, color)) as GameObject;
             if (prefab != null)
             {
                 Image.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
@@ -76,70 +52,7 @@ public class UILoseTargetCell : MonoBehaviour
         // 5 - collectible
         else if (type == TARGET_TYPE.COLLECTIBLE)
         {
-            switch (color)
-            {
-                case 1:
-                    prefab = Resources.Load(Configure.Collectible1()) as GameObject;
-                    break;
-                case 2:
-                    prefab = Resources.Load(Configure.Collectible2()) as GameObject;
-                    break;
-                case 3:
-                    prefab = Resources.Load(Configure.Collectible3()) as GameObject;
-                    break;
-                case 4:
-                    prefab = Resources.Load(Configure.Collectible4()) as GameObject;
-                    break;
-                case 5:
-                    prefab = Resources.Load(Configure.Collectible5()) as GameObject;
-                    break;
-                case 6:
-                    prefab = Resources.Load(Configure.Collectible6()) as GameObject;
-                    break;
-                case 7:
-                    prefab = Resources.Load(Configure.Collectible7()) as GameObject;
-                    break;
-                case 8:
-                    prefab = Resources.Load(Configure.Collectible8()) as GameObject;
-                    break;
-                case 9:
-                    prefab = Resources.Load(Configure.Collectible9()) as GameObject;
-                    break;
-                case 10:
-                    prefab = Resources.Load(Configure.Collectible10()) as GameObject;
-                    break;
-                case 11:
-                    prefab = Resources.Load(Configure.Collectible11()) as GameObject;
-                    break;
-                case 12:
-                    prefab = Resources.Load(Configure.Collectible12()) as GameObject;
-                    break;
-                case 13:
-                    prefab = Resources.Load(Configure.Collectible13()) as GameObject;
-                    break;
-                case 14:
-                    prefab = Resources.Load(Configure.Collectible14()) as GameObject;
-                    break;
-                case 15:
-                    prefab = Resources.Load(Configure.Collectible15()) as GameObject;
-                    break;
-                case 16:
-                    prefab = Resources.Load(Configure.Collectible16()) as GameObject;
-                    break;
-                case 17:
-                    prefab = Resources.Load(Configure.Collectible17()) as GameObject;
-                    break;
-                case 18:
-                    prefab = Resources.Load(Configure.Collectible18()) as GameObject;
-                    break;
-                case 19:
-                    prefab = Resources.Load(Configure.Collectible19()) as GameObject;
-                    break;
-                case 20:
-                    prefab = Resources.Load(Configure.Collectible20()) as GameObject;
-                    break;
-            }
-
+            prefab = Resources.Load(string.Format("{0}/collectible_{1}", Configure.ItemsPath, color)) as GameObject;
             if (prefab != null)
             {
                 Image.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
@@ -235,7 +148,7 @@ public class UILoseTargetCell : MonoBehaviour
         // 14 - grass
         else if (type == TARGET_TYPE.GRASS)
         {
-            prefab = Resources.Load(Configure.GrassPrefab()) as GameObject;
+            prefab = Resources.Load(Configure.GrassPrefab) as GameObject;
 
             if (prefab != null)
             {

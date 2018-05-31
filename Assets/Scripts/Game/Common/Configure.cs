@@ -33,8 +33,8 @@ public enum ITEM_TYPE
 
     BLANK,
 
-    COOKIE_RAMDOM,
-    COOKIE_RAINBOW,
+    RAMDOM,
+    RAINBOW,
 
     COOKIE_1,
 
@@ -48,10 +48,10 @@ public enum ITEM_TYPE
     
     COOKIE_6,
 
-    COOKIE_COLUMN_BREAKER,
-    COOKIE_ROW_BREAKER,
-    COOKIE_BOMB_BREAKER,
-    COOKIE_PLANE_BREAKER,
+    COLUMN_BREAKER,
+    ROW_BREAKER,
+    BOMB_BREAKER,
+    PLANE_BREAKER,
 
     MARSHMALLOW,
 
@@ -409,36 +409,16 @@ public class Configure : MonoSingleton<Configure>
 
     #region Prefab
 
-    // node
-    public static string NodePrefab()
-    {
-        return "Prefabs/PlayScene/Node";
-    }
+    public static string NodePrefab = "Prefabs/PlayScene/Node";
+    public static string LightTilePrefab = "Prefabs/PlayScene/TileLayer/LightTile";
+    public static string DarkTilePrefab = "Prefabs/PlayScene/TileLayer/DarkTile";
+    public static string NoneTilePrefab = "Prefabs/PlayScene/TileLayer/NoneTile";
+    public static string GrassPrefab = "Prefabs/Grass/Grass";
+    public static string CollectorPrefab = "Prefabs/Collector";
 
-    // tile
-    public static string LightTilePrefab()
-    {
-        return "Prefabs/PlayScene/TileLayer/LightTile";
-    }
+    public static string UITargetCellPrefab = "Prefabs/Popup/UITargetCell";
+    public static string EnhancementItemPrefab = "Prefabs/Popup/EnhancementItem";
 
-    public static string DarkTilePrefab()
-    {
-        return "Prefabs/PlayScene/TileLayer/DarkTile";
-    }
-
-    public static string NoneTilePrefab()
-    {
-        return "Prefabs/PlayScene/TileLayer/NoneTile";
-    }
-
-    //grass
-
-    public static string GrassPrefab()
-    {
-        return "Prefabs/Grass/Grass";
-    }
-
-    // tile border
     public static string TileBorderTop()
     {
         return "Prefabs/PlayScene/TileLayer/Top/";
@@ -459,81 +439,46 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/PlayScene/TileLayer/Right/";
     }
 
-    public static string Cookie1()
-    {
-        return "Prefabs/Cookies/blue";
-    }
-
-    public static string Cookie2()
-    {
-        return "Prefabs/Cookies/green";
-    }
-
-    public static string Cookie3()
-    {
-        return "Prefabs/Cookies/orange";
-    }
-
-    public static string Cookie4()
-    {
-        return "Prefabs/Cookies/purple";
-    }
-
-    public static string Cookie5()
-    {
-        return "Prefabs/Cookies/red";
-    }
-
-    public static string Cookie6()
-    {
-        return "Prefabs/Cookies/yellow";
-    }
-
     public static string Cookie1BombBreaker()
     {
-        return "Prefabs/Cookies/bomb_breaker";
+        return "Prefabs/Items/bomb_breaker";
     }
 
     public static string Cookie1ColumnBreaker()
     {
-        return "Prefabs/Cookies/column_breaker";
+        return "Prefabs/Items/column_breaker";
     }
 
     public static string Cookie1RowBreaker()
     {
-        return "Prefabs/Cookies/row_breaker";
+        return "Prefabs/Items/row_breaker";
     }
 
     public static string PlaneBreaker()
     {
-        return "Prefabs/Cookies/plane_breaker";
+        return "Prefabs/Items/plane_breaker";
     }
 
-    // blank
     public static string Blank()
     {
         return "Prefabs/Items/blank";
     }
 
-    // rainbow
     public static string CookieRainbow()
     {
-        return "Prefabs/Cookies/rainbow";
+        return "Prefabs/Items/rainbow";
     }
 
-    // marshmallow
     public static string Marshmallow()
     {
         return "Prefabs/Items/marshmallow";
     }
 
-    // cherry
     public static string Cherry()
     {
-        return "Prefabs/Cookies/cherry";
+        return "Prefabs/Items/cherry";
     }
 
-    // gingerbread
     public static string Gingerbread1()
     {
         return "Prefabs/Items/gingerbread_1";
@@ -569,7 +514,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Items/gingerbread_generic";
     }
 
-    // chocolate
     public static string Chocolate1()
     {
         return "Prefabs/Items/chocolate_1";
@@ -600,7 +544,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Items/chocolate_6";
     }
 
-    // rock candy
     public static string RockCandy1()
     {
         return "Prefabs/Items/rock_candy_1";
@@ -636,113 +579,13 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Items/rock_candy_1";
     }
 
-    // collectible
-    public static string Collectible1()
-    {
-        return "Prefabs/Items/collectible_1";
-    }
-
-    public static string Collectible2()
-    {
-        return "Prefabs/Items/collectible_2";
-    }
-
-    public static string Collectible3()
-    {
-        return "Prefabs/Items/collectible_3";
-    }
-
-    public static string Collectible4()
-    {
-        return "Prefabs/Items/collectible_4";
-    }
-
-    public static string Collectible5()
-    {
-        return "Prefabs/Items/collectible_5";
-    }
-
-    public static string Collectible6()
-    {
-        return "Prefabs/Items/collectible_6";
-    }
-
-    public static string Collectible7()
-    {
-        return "Prefabs/Items/collectible_7";
-    }
-
-    public static string Collectible8()
-    {
-        return "Prefabs/Items/collectible_8";
-    }
-
-    public static string Collectible9()
-    {
-        return "Prefabs/Items/collectible_9";
-    }
-
-    public static string Collectible10()
-    {
-        return "Prefabs/Items/collectible_10";
-    }
-
-    public static string Collectible11()
-    {
-        return "Prefabs/Items/collectible_11";
-    }
-
-    public static string Collectible12()
-    {
-        return "Prefabs/Items/collectible_12";
-    }
-
-    public static string Collectible13()
-    {
-        return "Prefabs/Items/collectible_13";
-    }
-
-    public static string Collectible14()
-    {
-        return "Prefabs/Items/collectible_14";
-    }
-
-    public static string Collectible15()
-    {
-        return "Prefabs/Items/collectible_15";
-    }
-
-    public static string Collectible16()
-    {
-        return "Prefabs/Items/collectible_16";
-    }
-
-    public static string Collectible17()
-    {
-        return "Prefabs/Items/collectible_17";
-    }
-
-    public static string Collectible18()
-    {
-        return "Prefabs/Items/collectible_18";
-    }
-
-    public static string Collectible19()
-    {
-        return "Prefabs/Items/collectible_19";
-    }
-
-    public static string Collectible20()
-    {
-        return "Prefabs/Items/collectible_20";
-    }
+    public static string ItemsPath = "Prefabs/Items";
 
     public static string CollectibleBox()
     {
         return "Prefabs/Items/collectible_box";
     }
 
-    // generic
     public static string ColumnRowBreaker()
     {
         return "Prefabs/Items/column_row_breaker";
@@ -758,79 +601,66 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Items/generic_x_breaker";
     }
 
-    // cookie effects
     public static string CookieExplosion()
     {
         return "Effects/Cookie Explosion";
     }
 
-    // breaker explosion
     public static string BombBreakerExplosion()
     {
         return "Effects/BombExplosion";
     }
 
-    // rainbow explosion
     public static string RainbowExplosion()
     {
         return "Effects/Rainbow";
     }
 
-    // ring
     public static string RingExplosion()
     {
         return "Effects/Moves Ring";
     }
 
-    // column explosion
     public static string ColRowBreaker()
     {
         return "Effects/Striped";
     }
 
-    // marshmallow explosion
     public static string MarshmallowExplosion()
     {
         return "Effects/Marshmallow Explosion";
     }
 
-    // chocolate explosion
     public static string ChocolateExplosion()
     {
         return "Effects/Chocolate Explosion";
     }
 
-    // booster
     public static string BoosterActive()
     {
         return "Effects/Booster Active";
     }
 
-	//PackageBox Effects
 	public static string PackageBox1Effects()
 	{
 		return "Effects/Packagebox";
 	}
 
-	//Jelly Effects
 	public static string Jelly1Effects()
 	{
 		return "Effects/Jelly";
 	}
 
-    // column breaker animation
     public static string ColumnBreakerAnimation()
     {
         return "StripeAnim/StripeAnim";
     }
 
-    // big column breaker animation
     public static string BigColumnBreakerAnimation1()
     {
         return "StripeAnim/BigStripeAnim";
     }
 
-    // waffle
     public static string Waffle1()
     {
         return "Prefabs/Items/waffle_1";
@@ -846,7 +676,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Items/waffle_3";
     }
 
-    // cage
     public static string Cage1()
     {
         return "Prefabs/Cage/cage_1";
@@ -857,7 +686,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Cage/cage_2";
     }
 
-    // jelly
     public static string Jelly1()
     {
         return "Prefabs/Jelly/jelly_1";
@@ -872,7 +700,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Jelly/jelly_3";
     }
 
-    // packagebox
     public static string PackageBox1()
     {
         return "Prefabs/PackageBox/packagebox_1";
@@ -898,7 +725,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/PackageBox/packagebox_6";
     }
 
-    //applebox
     public static string Applebox8Main()
     {
         return "Prefabs/Items/applebox_8_main";
@@ -944,8 +770,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Items/apple";
     }
 
-
-    //ice
     public static string Ice1()
     {
         return "Prefabs/Ice/ice_1";
@@ -956,7 +780,6 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Ice/ice_2";
     }
 
-    //baffle
     public static string bafflebottom()
     {
         return "Prefabs/Baffle/baffle_bottom";
@@ -967,25 +790,21 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/Baffle/baffle_right";
     }
 
-    // cake
     public static string Cake(string name)
     {
         return "Cakes/" + name;
     }
 
-    // star
     public static string StarGold()
     {
         return "Prefabs/PlayScene/UI/StarGold";
     }
 
-    // mask
     public static string Mask()
     {
         return "Prefabs/PlayScene/Mask";
     }   
 
-    // Progress gold star
     public static string ProgressGoldStar()
     {
         return "Prefabs/PlayScene/UI/StarGold";
@@ -1017,6 +836,9 @@ public class Configure : MonoSingleton<Configure>
     public static string StoryBackground = "story/bg";
     public static string StoryPerson = "story/person";
     public static string StoryDialogPerson = "story/dialogperson";
+    public static string LoseTargetCellPrefab = "Prefabs/Popup/LoseTargetCell";
+    public static string LoseStepBuyItemCellPrefab = "Prefabs/Popup/LoseStepBuyItemCell";
+
     protected override void Init()
     {
         base.Init();

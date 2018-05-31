@@ -21,10 +21,10 @@ public class UITarget : MonoBehaviour
     {
         for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
         {
-            var tmp = Instantiate(Resources.Load("Prefabs/PlayScene/Popup/UITargetCell"), TargetLayout.transform) as GameObject;
-            tmp.GetComponent<UITargetCell>().Init(LevelLoader.instance.targetList[i].Type, LevelLoader.instance.targetList[i].Amount, LevelLoader.instance.targetList[i].color);
+            var go = Instantiate(Resources.Load(Configure.UITargetCellPrefab), TargetLayout.transform) as GameObject;
+            go.GetComponent<UITargetCell>().Init(LevelLoader.instance.targetList[i].Type, LevelLoader.instance.targetList[i].Amount, LevelLoader.instance.targetList[i].color);
 
-            TargetCellList.Add(tmp.GetComponent<UITargetCell>());
+            TargetCellList.Add(go.GetComponent<UITargetCell>());
         }
     }
 
@@ -32,7 +32,7 @@ public class UITarget : MonoBehaviour
     {
         if (index < TargetCellList.Count)
         {
-            TargetCellList[index].Amount.text = (GameObject.Find("Board").GetComponent<Board>().targetLeftList[index]).ToString();
+            TargetCellList[index].Amount.text = GameObject.Find("Board").GetComponent<Board>().targetLeftList[index].ToString();
             if (int.Parse(TargetCellList[index].Amount.text) <= 0)
             {
                 TargetCellList[index].Amount.gameObject.SetActive(false);

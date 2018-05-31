@@ -249,7 +249,7 @@ public class Board : MonoBehaviour
             {
                 var order = NodeOrder(i, j);
 
-                GameObject node = Instantiate(Resources.Load(Configure.NodePrefab())) as GameObject;
+                GameObject node = Instantiate(Resources.Load(Configure.NodePrefab)) as GameObject;
                 node.transform.SetParent(gameObject.transform, false);
                 node.name = "Node " + order;
                 node.GetComponent<Node>().board = this;
@@ -302,10 +302,10 @@ public class Board : MonoBehaviour
                 switch (tileLayerData[order])
                 {
                     case TILE_TYPE.NONE:
-                        tile = Instantiate(Resources.Load(Configure.NoneTilePrefab())) as GameObject;
+                        tile = Instantiate(Resources.Load(Configure.NoneTilePrefab)) as GameObject;
                         break;
                     case TILE_TYPE.PASS_THROUGH:
-                        tile = Instantiate(Resources.Load(Configure.NoneTilePrefab())) as GameObject;
+                        tile = Instantiate(Resources.Load(Configure.NoneTilePrefab)) as GameObject;
                         break;
                         //case TILE_TYPE.LIGHT_TILE:
                         //    tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
@@ -318,12 +318,12 @@ public class Board : MonoBehaviour
                 if ((i % 2 + j % 2) % 2 == 0)
                 {
                     if (tile == null)
-                        tile = Instantiate(Resources.Load(Configure.LightTilePrefab())) as GameObject;
+                        tile = Instantiate(Resources.Load(Configure.LightTilePrefab)) as GameObject;
                 }
                 else
                 {
                     if (tile == null)
-                        tile = Instantiate(Resources.Load(Configure.DarkTilePrefab())) as GameObject;
+                        tile = Instantiate(Resources.Load(Configure.DarkTilePrefab)) as GameObject;
                 }
 
                 if (tile)
@@ -386,7 +386,7 @@ public class Board : MonoBehaviour
                     switch (grassLayerData[order])
                     {
                         case GRASS_TYPE.GRASS_1:
-                            grass = Instantiate(Resources.Load(Configure.GrassPrefab())) as GameObject;
+                            grass = Instantiate(Resources.Load(Configure.GrassPrefab)) as GameObject;
                             break;
                         case GRASS_TYPE.NONE:
                             grass = null;
@@ -791,7 +791,7 @@ public class Board : MonoBehaviour
 
             if (node != null && node.CanStoreItem())
             {
-                var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
+                var box = Instantiate(Resources.Load(Configure.CollectorPrefab)) as GameObject;
                 if (box)
                 {
                     box.transform.SetParent(node.gameObject.transform);
@@ -834,7 +834,7 @@ public class Board : MonoBehaviour
 
                     if (node != null)
                     {
-                        var box = Instantiate(Resources.Load("Prefabs/Items/Collector")) as GameObject;
+                        var box = Instantiate(Resources.Load(Configure.CollectorPrefab)) as GameObject;
                         if (box)
                         {
                             box.transform.SetParent(node.gameObject.transform);
@@ -1119,7 +1119,7 @@ public class Board : MonoBehaviour
             int i = 0;
             foreach (var item in rdmItems)
             {
-                if (item.OriginCookieType() == ITEM_TYPE.COOKIE_RAMDOM)
+                if (item.OriginCookieType() == ITEM_TYPE.RAMDOM)
                 {
                     item.GenerateColor(item.color + i);
                     i++;
@@ -1244,7 +1244,7 @@ public class Board : MonoBehaviour
                 bool isDestroy = false;
                 foreach (var item in combine)
                 {
-                    if (!(item.next == ITEM_TYPE.NONE || item.next == ITEM_TYPE.COOKIE_PLANE_BREAKER))
+                    if (!(item.next == ITEM_TYPE.NONE || item.next == ITEM_TYPE.PLANE_BREAKER))
                     {
                         isDestroy = true;
                     }
@@ -1629,7 +1629,7 @@ public class Board : MonoBehaviour
                         // generate a new random cookie
                         else
                         {
-                            GetNode(i, j).GenerateItem(ITEM_TYPE.COOKIE_RAMDOM);
+                            GetNode(i, j).GenerateItem(ITEM_TYPE.RAMDOM);
                         }
 
                         // set position
@@ -1784,7 +1784,7 @@ public class Board : MonoBehaviour
                     if (item.node.FindMatches(FIND_DIRECTION.COLUMN).Count > 2)
                     {
                         //todo : 优先级根据配置 改掉死代码
-                        if (item.next == ITEM_TYPE.NONE || item.next == ITEM_TYPE.COOKIE_ROW_BREAKER || item.next == ITEM_TYPE.COOKIE_COLUMN_BREAKER || item.next == ITEM_TYPE.COOKIE_PLANE_BREAKER)
+                        if (item.next == ITEM_TYPE.NONE || item.next == ITEM_TYPE.ROW_BREAKER || item.next == ITEM_TYPE.COLUMN_BREAKER || item.next == ITEM_TYPE.PLANE_BREAKER)
                         {
                             // L shape = bomb breaker
                             item.next = item.GetBombBreaker(item.type);
@@ -1862,7 +1862,7 @@ public class Board : MonoBehaviour
         // rainbow优先级最高
         foreach (Item item in combine)
         {
-            if (item.next == ITEM_TYPE.COOKIE_RAINBOW)
+            if (item.next == ITEM_TYPE.RAINBOW)
             {
                 isSwap = true;
                 break;
@@ -1896,7 +1896,7 @@ public class Board : MonoBehaviour
                 {
                     if (item.node.OrderOnBoard() == first.node.RightNeighbor().OrderOnBoard())
                     {
-                        combine[2].next = ITEM_TYPE.COOKIE_RAINBOW;
+                        combine[2].next = ITEM_TYPE.RAINBOW;
                         break;
                     }
                 }
@@ -1905,7 +1905,7 @@ public class Board : MonoBehaviour
                 {
                     if (item.node.OrderOnBoard() == first.node.BottomNeighbor().OrderOnBoard())
                     {
-                        first.next = ITEM_TYPE.COOKIE_RAINBOW;
+                        first.next = ITEM_TYPE.RAINBOW;
                         break;
                     }
                 }
@@ -2642,32 +2642,9 @@ public class Board : MonoBehaviour
                 flyingItem.name = "Flying Cookie";
                 flyingItem.layer = LayerMask.NameToLayer("On Top UI");
 
-                SpriteRenderer spriteRenderer = flyingItem.AddComponent<SpriteRenderer>();
+                var spriteRenderer = flyingItem.AddComponent<SpriteRenderer>();
 
-                GameObject prefab = null;
-
-                switch (item.color)
-                {
-                    case 1:
-                        prefab = Resources.Load(Configure.Cookie1()) as GameObject;
-                        break;
-                    case 2:
-                        prefab = Resources.Load(Configure.Cookie2()) as GameObject;
-                        break;
-                    case 3:
-                        prefab = Resources.Load(Configure.Cookie3()) as GameObject;
-                        break;
-                    case 4:
-                        prefab = Resources.Load(Configure.Cookie4()) as GameObject;
-                        break;
-                    case 5:
-                        prefab = Resources.Load(Configure.Cookie5()) as GameObject;
-                        break;
-                    case 6:
-                        prefab = Resources.Load(Configure.Cookie6()) as GameObject;
-                        break;
-                }
-
+                var prefab = Resources.Load(string.Format("{0}/{1}", Configure.ItemsPath, item.type.ToString())) as GameObject;
                 if (prefab != null)
                 {
                     spriteRenderer.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
@@ -2835,7 +2812,7 @@ public class Board : MonoBehaviour
             }
         }
         // rainbow
-        else if (item.type == ITEM_TYPE.COOKIE_RAINBOW)
+        else if (item.type == ITEM_TYPE.RAINBOW)
         {
             for (int i = 0; i < LevelLoader.instance.targetList.Count; i++)
             {
@@ -3084,7 +3061,7 @@ public class Board : MonoBehaviour
 
             if (collectable)
             {
-                Debug.Log("收集到cake" + item.node.name + item.type.ToString());
+                Debug.Log("收集到cake" + item.node.name + item.type);
                 GameObject flyingItem = null;
                 var order = 0;
 
@@ -3108,74 +3085,8 @@ public class Board : MonoBehaviour
                     flyingItem.name = "Flying Collectible";
                     flyingItem.layer = LayerMask.NameToLayer("On Top UI");
 
-                    SpriteRenderer spriteRenderer = flyingItem.AddComponent<SpriteRenderer>();
-
-                    GameObject prefab = null;
-
-                    switch (item.color)
-                    {
-                        case 1:
-                            prefab = Resources.Load(Configure.Collectible1()) as GameObject;
-                            break;
-                        case 2:
-                            prefab = Resources.Load(Configure.Collectible2()) as GameObject;
-                            break;
-                        case 3:
-                            prefab = Resources.Load(Configure.Collectible3()) as GameObject;
-                            break;
-                        case 4:
-                            prefab = Resources.Load(Configure.Collectible4()) as GameObject;
-                            break;
-                        case 5:
-                            prefab = Resources.Load(Configure.Collectible5()) as GameObject;
-                            break;
-                        case 6:
-                            prefab = Resources.Load(Configure.Collectible6()) as GameObject;
-                            break;
-                        case 7:
-                            prefab = Resources.Load(Configure.Collectible7()) as GameObject;
-                            break;
-                        case 8:
-                            prefab = Resources.Load(Configure.Collectible7()) as GameObject;
-                            break;
-                        case 9:
-                            prefab = Resources.Load(Configure.Collectible9()) as GameObject;
-                            break;
-                        case 10:
-                            prefab = Resources.Load(Configure.Collectible10()) as GameObject;
-                            break;
-                        case 11:
-                            prefab = Resources.Load(Configure.Collectible11()) as GameObject;
-                            break;
-                        case 12:
-                            prefab = Resources.Load(Configure.Collectible12()) as GameObject;
-                            break;
-                        case 13:
-                            prefab = Resources.Load(Configure.Collectible13()) as GameObject;
-                            break;
-                        case 14:
-                            prefab = Resources.Load(Configure.Collectible14()) as GameObject;
-                            break;
-                        case 15:
-                            prefab = Resources.Load(Configure.Collectible15()) as GameObject;
-                            break;
-                        case 16:
-                            prefab = Resources.Load(Configure.Collectible16()) as GameObject;
-                            break;
-                        case 17:
-                            prefab = Resources.Load(Configure.Collectible17()) as GameObject;
-                            break;
-                        case 18:
-                            prefab = Resources.Load(Configure.Collectible18()) as GameObject;
-                            break;
-                        case 19:
-                            prefab = Resources.Load(Configure.Collectible19()) as GameObject;
-                            break;
-                        case 20:
-                            prefab = Resources.Load(Configure.Collectible20()) as GameObject;
-                            break;
-                    }
-
+                    var spriteRenderer = flyingItem.AddComponent<SpriteRenderer>();
+                    var prefab = Resources.Load(string.Format("{0}/collectible_{1}", Configure.ItemsPath, item.color)) as GameObject;
                     if (prefab != null)
                     {
                         spriteRenderer.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
@@ -3486,7 +3397,7 @@ public class Board : MonoBehaviour
             winGold += config.bombbreaker;
             getWinGold(item, winGold);
         }
-        else if (item.type == ITEM_TYPE.COOKIE_RAINBOW)
+        else if (item.type == ITEM_TYPE.RAINBOW)
         {
             //winGold += Int32.Parse(config["rainbow"]);
             winGold += config.rainbow;
@@ -3502,22 +3413,6 @@ public class Board : MonoBehaviour
 
     private void getWinGold(Item item, int gold)
     {
-        //var cloneGold = Instantiate(item.gameObject, GameObject.Find("Board").transform);
-        //cloneGold.transform.position = item.transform.position;
-        //cloneGold.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/Cookie/UI/Map/goldsp", typeof(Sprite)) as Sprite;
-        //cloneGold.GetComponent<SpriteRenderer>().sortingOrder = 90;
-        //cloneGold.transform.localScale = new Vector3(1.0f, 1.0f, 1);
-        //cloneGold.gameObject.SetActive(true);
-
-        //Vector3 v1 = new Vector3(item.transform.position.x, item.transform.position.y, 0);
-        //Vector3 v2 = GameObject.Find("Canvas").transform.Find("PiggyBank").transform.position;
-        //Vector3[] path = { v1, new Vector3(v1.x + 1, v1.y + 1, 0), new Vector3(v1.x + 2, v1.y + 2, 0), new Vector3(v1.x + 3, v1.y + 3, 0), v2 };
-        //cloneGold.transform.DOPath(path, 1.0f).SetEase(Ease.InQuad).OnComplete(() =>
-        //    {
-        //        Destroy(cloneGold);
-        //        GameObject.FindObjectOfType<Canvas>().transform.Find("PiggyBank").transform.Find("Text").GetComponent<Text>().text = gold.ToString();
-        //    }
-        //);
     }
 
     private void DestroyAllObstacles()
@@ -3598,7 +3493,7 @@ public class Board : MonoBehaviour
         {
             if (item != null)
             {
-                if (item.type == ITEM_TYPE.COOKIE_RAINBOW || item.IsColumnBreaker(item.type) || item.IsRowBreaker(item.type) || item.IsBombBreaker(item.type) || item.IsPlaneBreaker(item.type))
+                if (item.type == ITEM_TYPE.RAINBOW || item.IsColumnBreaker(item.type) || item.IsRowBreaker(item.type) || item.IsBombBreaker(item.type) || item.IsPlaneBreaker(item.type))
                 {
                     specials.Add(item);
                 }
@@ -4404,7 +4299,7 @@ public class Board : MonoBehaviour
                         continue;
                     }
 
-                    if (node.item.type == ITEM_TYPE.COOKIE_RAINBOW)
+                    if (node.item.type == ITEM_TYPE.RAINBOW)
                     {
                         Node neighbor = null;
 

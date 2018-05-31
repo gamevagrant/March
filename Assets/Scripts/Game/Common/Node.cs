@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -75,13 +76,13 @@ public class Node : MonoBehaviour
 
         switch (type)
         {
-            case ITEM_TYPE.COOKIE_RAMDOM:
+            case ITEM_TYPE.RAMDOM:
                 GenerateRandomCookie();
                 break;
 
             case ITEM_TYPE.BLANK:
 
-            case ITEM_TYPE.COOKIE_RAINBOW:
+            case ITEM_TYPE.RAINBOW:
 
             case ITEM_TYPE.COOKIE_1:
 
@@ -95,10 +96,10 @@ public class Node : MonoBehaviour
 
             case ITEM_TYPE.COOKIE_6:
 
-            case ITEM_TYPE.COOKIE_COLUMN_BREAKER:
-            case ITEM_TYPE.COOKIE_ROW_BREAKER:
-            case ITEM_TYPE.COOKIE_BOMB_BREAKER:
-            case ITEM_TYPE.COOKIE_PLANE_BREAKER:
+            case ITEM_TYPE.COLUMN_BREAKER:
+            case ITEM_TYPE.ROW_BREAKER:
+            case ITEM_TYPE.BOMB_BREAKER:
+            case ITEM_TYPE.PLANE_BREAKER:
 
             case ITEM_TYPE.MARSHMALLOW:
 
@@ -208,222 +209,16 @@ public class Node : MonoBehaviour
 
     Item InstantiateItem(ITEM_TYPE type)
     {
-        GameObject piece = null;
         var color = 0;
-        int beabletodestroy = 1;
-        switch (type)
+
+        var piece = Instantiate(Resources.Load(string.Format("{0}/{1}", Configure.ItemsPath, type.ToString().ToLower()))) as GameObject;
+
+        var tokens = type.ToString().Split(new[] {'_'}, StringSplitOptions.RemoveEmptyEntries);
+        if (tokens.Length > 0 && int.TryParse(tokens[tokens.Length - 1], out color))
         {
-            case ITEM_TYPE.BLANK:
-                piece = Instantiate(Resources.Load(Configure.Blank())) as GameObject;
-                break;
-
-            case ITEM_TYPE.COOKIE_RAINBOW:
-                piece = Instantiate(Resources.Load(Configure.CookieRainbow())) as GameObject;
-                break;
-
-            case ITEM_TYPE.COOKIE_1:
-                color = 1;
-                piece = Instantiate(Resources.Load(Configure.Cookie1())) as GameObject;
-                break;
-           
-            case ITEM_TYPE.COOKIE_2:
-                color = 2;
-                piece = Instantiate(Resources.Load(Configure.Cookie2())) as GameObject;
-                break;
-
-            case ITEM_TYPE.COOKIE_3:
-                color = 3;
-                piece = Instantiate(Resources.Load(Configure.Cookie3())) as GameObject;
-                break;
-
-            case ITEM_TYPE.COOKIE_4:
-                color = 4;
-                piece = Instantiate(Resources.Load(Configure.Cookie4())) as GameObject;
-                break;
-
-            case ITEM_TYPE.COOKIE_5:
-                color = 5;
-                piece = Instantiate(Resources.Load(Configure.Cookie5())) as GameObject;
-                break;
-
-            case ITEM_TYPE.COOKIE_6:
-                color = 6;
-                piece = Instantiate(Resources.Load(Configure.Cookie6())) as GameObject;
-                break;
-
-
-            case ITEM_TYPE.COOKIE_COLUMN_BREAKER:
-                piece = Instantiate(Resources.Load(Configure.Cookie1ColumnBreaker())) as GameObject;
-                break;
-            case ITEM_TYPE.COOKIE_ROW_BREAKER:
-                piece = Instantiate(Resources.Load(Configure.Cookie1RowBreaker())) as GameObject;
-                break;
-            case ITEM_TYPE.COOKIE_BOMB_BREAKER:
-                piece = Instantiate(Resources.Load(Configure.Cookie1BombBreaker())) as GameObject;
-                break;
-            case ITEM_TYPE.COOKIE_PLANE_BREAKER:
-                piece = Instantiate(Resources.Load(Configure.PlaneBreaker())) as GameObject;
-                break;
-
-
-            case ITEM_TYPE.MARSHMALLOW:
-                piece = Instantiate(Resources.Load(Configure.Marshmallow())) as GameObject;
-                break;
-
-            case ITEM_TYPE.CHERRY:
-                beabletodestroy = 0;
-                piece = Instantiate(Resources.Load(Configure.Cherry())) as GameObject;
-                break;
-
-            case ITEM_TYPE.GINGERBREAD_1:
-                color = 1;
-                piece = Instantiate(Resources.Load(Configure.Gingerbread1())) as GameObject;
-                break;
-            case ITEM_TYPE.GINGERBREAD_2:
-                color = 2;
-                piece = Instantiate(Resources.Load(Configure.Gingerbread2())) as GameObject;
-                break;
-            case ITEM_TYPE.GINGERBREAD_3:
-                color = 3;
-                piece = Instantiate(Resources.Load(Configure.Gingerbread3())) as GameObject;
-                break;
-            case ITEM_TYPE.GINGERBREAD_4:
-                color = 4;
-                piece = Instantiate(Resources.Load(Configure.Gingerbread4())) as GameObject;
-                break;
-            case ITEM_TYPE.GINGERBREAD_5:
-                color = 5;
-                piece = Instantiate(Resources.Load(Configure.Gingerbread5())) as GameObject;
-                break;
-            case ITEM_TYPE.GINGERBREAD_6:
-                color = 6;
-                piece = Instantiate(Resources.Load(Configure.Gingerbread6())) as GameObject;
-                break;
-
-            case ITEM_TYPE.CHOCOLATE_1_LAYER:
-                piece = Instantiate(Resources.Load(Configure.Chocolate1())) as GameObject;
-                break;
-            case ITEM_TYPE.CHOCOLATE_2_LAYER:
-                piece = Instantiate(Resources.Load(Configure.Chocolate2())) as GameObject;
-                break;
-            case ITEM_TYPE.CHOCOLATE_3_LAYER:
-                piece = Instantiate(Resources.Load(Configure.Chocolate3())) as GameObject;
-                break;
-            case ITEM_TYPE.CHOCOLATE_4_LAYER:
-                piece = Instantiate(Resources.Load(Configure.Chocolate4())) as GameObject;
-                break;
-            case ITEM_TYPE.CHOCOLATE_5_LAYER:
-                piece = Instantiate(Resources.Load(Configure.Chocolate5())) as GameObject;
-                break;
-            case ITEM_TYPE.CHOCOLATE_6_LAYER:
-                piece = Instantiate(Resources.Load(Configure.Chocolate6())) as GameObject;
-                break;
-
-            case ITEM_TYPE.ROCK_CANDY:
-                color = 0;
-                piece = Instantiate(Resources.Load(Configure.RockCandy1())) as GameObject;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_1:
-                piece = Instantiate(Resources.Load(Configure.Collectible1())) as GameObject;
-                color = 1;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_2:
-                piece = Instantiate(Resources.Load(Configure.Collectible2())) as GameObject;
-                color = 2;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_3:
-                piece = Instantiate(Resources.Load(Configure.Collectible3())) as GameObject;
-                color = 3;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_4:
-                piece = Instantiate(Resources.Load(Configure.Collectible4())) as GameObject;
-                color = 4;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_5:
-                piece = Instantiate(Resources.Load(Configure.Collectible5())) as GameObject;
-                color = 5;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_6:
-                piece = Instantiate(Resources.Load(Configure.Collectible6())) as GameObject;
-                color = 6;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_7:
-                piece = Instantiate(Resources.Load(Configure.Collectible7())) as GameObject;
-                color = 7;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_8:
-                piece = Instantiate(Resources.Load(Configure.Collectible8())) as GameObject;
-                color = 8;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_9:
-                piece = Instantiate(Resources.Load(Configure.Collectible9())) as GameObject;
-                color = 9;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_10:
-                piece = Instantiate(Resources.Load(Configure.Collectible10())) as GameObject;
-                color = 10;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_11:
-                piece = Instantiate(Resources.Load(Configure.Collectible11())) as GameObject;
-                color = 11;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_12:
-                piece = Instantiate(Resources.Load(Configure.Collectible12())) as GameObject;
-                color = 12;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_13:
-                piece = Instantiate(Resources.Load(Configure.Collectible13())) as GameObject;
-                color = 13;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_14:
-                piece = Instantiate(Resources.Load(Configure.Collectible14())) as GameObject;
-                color = 14;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_15:
-                piece = Instantiate(Resources.Load(Configure.Collectible15())) as GameObject;
-                color = 15;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_16:
-                piece = Instantiate(Resources.Load(Configure.Collectible16())) as GameObject;
-                color = 16;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_17:
-                piece = Instantiate(Resources.Load(Configure.Collectible17())) as GameObject;
-                color = 17;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_18:
-                piece = Instantiate(Resources.Load(Configure.Collectible18())) as GameObject;
-                color = 18;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_19:
-                piece = Instantiate(Resources.Load(Configure.Collectible19())) as GameObject;
-                color = 19;
-                break;
-
-            case ITEM_TYPE.COLLECTIBLE_20:
-                piece = Instantiate(Resources.Load(Configure.Collectible20())) as GameObject;
-                color = 20;
-                break;
         }
+
+        var beabletodestroy = type == ITEM_TYPE.CHERRY ? 0 : 1;
 
         if (piece == null)
             return null;
@@ -513,7 +308,6 @@ public class Node : MonoBehaviour
             BottomRightNeighbor().item = applebox_4.GetComponent<Item>();
 
             board.appleBoxes.Add(applebox_1.GetComponent<AppleBox>());
-
         }
     }
 
@@ -566,14 +360,7 @@ public class Node : MonoBehaviour
         {
             return false;
         }
-        if (checkNode.item.Matchable() && checkNode.item.color == item.color)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return checkNode.item.Matchable() && checkNode.item.color == item.color;
     }
 
     // find matches at a node
@@ -931,7 +718,7 @@ public class Node : MonoBehaviour
 
     public void WaffleExplode()
     {
-        if (waffle != null && item != null & (item.IsCookie() || item.IsBreaker(item.type) || item.type == ITEM_TYPE.COOKIE_RAINBOW))
+        if (waffle != null && item != null & (item.IsCookie() || item.IsBreaker(item.type) || item.type == ITEM_TYPE.RAINBOW))
         {
             AudioManager.instance.WaffleExplodeAudio();
 
@@ -1352,7 +1139,7 @@ public class Node : MonoBehaviour
 
         if (grass == null)
         {
-            var grassPrefab = Instantiate(Resources.Load(Configure.GrassPrefab())) as GameObject;
+            var grassPrefab = Instantiate(Resources.Load(Configure.GrassPrefab)) as GameObject;
 
             if (grassPrefab)
             {
