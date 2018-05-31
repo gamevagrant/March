@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1743728366949696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,7 +81,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   node: {fileID: 0}
+  board: {fileID: 0}
+  beAbleToDestroy: 0
   status: 2
+  appleNum: 0
 --- !u!114 &114880270410215774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +107,7 @@ MonoBehaviour:
   destroying: 0
   dropping: 0
   changing: 0
+  _beabletodestroy: 0
   mousePostion: {x: 0, y: 0, z: 0}
   deltaPosition: {x: 0, y: 0, z: 0}
   swapDirection: {x: 0, y: 0, z: 0}

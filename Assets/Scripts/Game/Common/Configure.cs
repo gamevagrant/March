@@ -459,163 +459,51 @@ public class Configure : MonoSingleton<Configure>
         return "Prefabs/PlayScene/TileLayer/Right/";
     }
 
-    // cookie1
     public static string Cookie1()
     {
         return "Prefabs/Cookies/blue";
     }
 
-    public static string Cookie1BombBreaker()
-    {
-        return "Prefabs/Cookies/blue_bomb_breaker";
-    }
-
-    public static string Cookie1ColumnBreaker()
-    {
-        return "Prefabs/Cookies/blue_column_breaker";
-    }
-
-    public static string Cookie1RowBreaker()
-    {
-        return "Prefabs/Cookies/blue_row_breaker";
-    }
-
-    public static string Cookie1XBreaker()
-    {
-        return "Prefabs/Cookies/blue_x_breaker";
-    }
-
-    // cookie2
     public static string Cookie2()
     {
         return "Prefabs/Cookies/green";
     }
 
-    public static string Cookie2BombBreaker()
-    {
-        return "Prefabs/Cookies/green_bomb_breaker";
-    }
-
-    public static string Cookie2ColumnBreaker()
-    {
-        return "Prefabs/Cookies/green_column_breaker";
-    }
-
-    public static string Cookie2RowBreaker()
-    {
-        return "Prefabs/Cookies/green_row_breaker";
-    }
-
-    public static string Cookie2XBreaker()
-    {
-        return "Prefabs/Cookies/green_x_breaker";
-    }
-
-    // cookie3
     public static string Cookie3()
     {
         return "Prefabs/Cookies/orange";
     }
 
-    public static string Cookie3BombBreaker()
-    {
-        return "Prefabs/Cookies/orange_bomb_breaker";
-    }
-
-    public static string Cookie3ColumnBreaker()
-    {
-        return "Prefabs/Cookies/orange_column_breaker";
-    }
-
-    public static string Cookie3RowBreaker()
-    {
-        return "Prefabs/Cookies/orange_row_breaker";
-    }
-
-    public static string Cookie3XBreaker()
-    {
-        return "Prefabs/Cookies/orange_x_breaker";
-    }
-
-    // cookie4
     public static string Cookie4()
     {
         return "Prefabs/Cookies/purple";
     }
 
-    public static string Cookie4BombBreaker()
-    {
-        return "Prefabs/Cookies/purple_bomb_breaker";
-    }
-
-    public static string Cookie4ColumnBreaker()
-    {
-        return "Prefabs/Cookies/purple_column_breaker";
-    }
-
-    public static string Cookie4RowBreaker()
-    {
-        return "Prefabs/Cookies/purple_row_breaker";
-    }
-
-    public static string Cookie4XBreaker()
-    {
-        return "Prefabs/Cookies/purple_x_breaker";
-    }
-
-    // cookie5
     public static string Cookie5()
     {
         return "Prefabs/Cookies/red";
     }
 
-    public static string Cookie5BombBreaker()
-    {
-        return "Prefabs/Cookies/red_bomb_breaker";
-    }
-
-    public static string Cookie5ColumnBreaker()
-    {
-        return "Prefabs/Cookies/red_column_breaker";
-    }
-
-    public static string Cookie5RowBreaker()
-    {
-        return "Prefabs/Cookies/red_row_breaker";
-    }
-
-    public static string Cookie5XBreaker()
-    {
-        return "Prefabs/Cookies/red_x_breaker";
-    }
-
-    // cookie6
     public static string Cookie6()
     {
         return "Prefabs/Cookies/yellow";
     }
 
-    public static string Cookie6BombBreaker()
+    public static string Cookie1BombBreaker()
     {
-        return "Prefabs/Cookies/yellow_bomb_breaker";
+        return "Prefabs/Cookies/bomb_breaker";
     }
 
-    public static string Cookie6ColumnBreaker()
+    public static string Cookie1ColumnBreaker()
     {
-        return "Prefabs/Cookies/yellow_column_breaker";
+        return "Prefabs/Cookies/column_breaker";
     }
 
-    public static string Cookie6RowBreaker()
+    public static string Cookie1RowBreaker()
     {
-        return "Prefabs/Cookies/yellow_row_breaker";
+        return "Prefabs/Cookies/row_breaker";
     }
 
-    public static string Cookie6XBreaker()
-    {
-        return "Prefabs/Cookies/yellow_x_breaker";
-    }
-
-    //breaker
     public static string PlaneBreaker()
     {
         return "Prefabs/Cookies/plane_breaker";
@@ -626,7 +514,6 @@ public class Configure : MonoSingleton<Configure>
     {
         return "Prefabs/Items/blank";
     }
-
 
     // rainbow
     public static string CookieRainbow()
