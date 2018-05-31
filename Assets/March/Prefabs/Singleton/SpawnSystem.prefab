@@ -42,31 +42,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToPreload:
-  - {fileID: 100000, guid: 084ed13bfe0256e45a06517e5f23605d, type: 2}
-  - {fileID: 152492, guid: 9587d2b9ce39d2544b3215a11aebb924, type: 2}
-  - {fileID: 154092, guid: 705d6ab903ac4414193dfda15664e3f4, type: 2}
-  - {fileID: 100000, guid: 8be67a78b6b28314597a9ee6e20635d1, type: 2}
-  - {fileID: 100000, guid: 68de875c57eff7c48bf98c55cdbbc316, type: 2}
-  - {fileID: 153204, guid: 8067c9b46f00b0844bdfe312d0b31027, type: 2}
-  - {fileID: 173374, guid: 4cbab9ebb4d37f948910764298ac7277, type: 2}
   - {fileID: 1713700327254572, guid: 2ce463d810f0247aca32625cd9aac78d, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 137836, guid: d9fc9dacccc18fc4399120d40a542ef9, type: 2}
-  - {fileID: 164302, guid: db3d684dedb9b9d4f999b3502a4435d4, type: 2}
-  - {fileID: 132668, guid: d459ce58081b4d443bdaec69dbe55fdf, type: 2}
-  - {fileID: 116338, guid: 5c6071c416988ff429154767f576923e, type: 2}
-  - {fileID: 112568, guid: 58d85d9525bad7a44b9daca78170cc3b, type: 2}
-  - {fileID: 178936, guid: 1d5d5a0984a2a41449151bd26fdc28da, type: 2}
-  - {fileID: 104872, guid: baf22317c74b18e47a53b28a411c07e4, type: 2}
-  - {fileID: 1117580984224722, guid: a199e4c0f10104243a884f108a10c19f, type: 2}
+  - {fileID: 185136, guid: 5f7e84db99f22164080590837862b1a7, type: 2}
   - {fileID: 147916, guid: 5cb0f7a49e14f2c46a54ef5926260057, type: 2}
-  - {fileID: 1958726403070344, guid: 0cf3bfa49346a4908b6cd70be27d0d62, type: 2}
+  - {fileID: 100000, guid: 084ed13bfe0256e45a06517e5f23605d, type: 2}
   - {fileID: 1505761495787484, guid: 7fe3befe05ac1124a8ab0ae7d9087746, type: 2}
-  objectsToPreloadTimes: 1e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000001e0000000500000005000000050000000500000005000000
+  - {fileID: 123276, guid: 0e02fb8b1114cf94b84f832601c409e6, type: 2}
+  - {fileID: 104872, guid: baf22317c74b18e47a53b28a411c07e4, type: 2}
+  - {fileID: 1958726403070344, guid: 0cf3bfa49346a4908b6cd70be27d0d62, type: 2}
+  - {fileID: 173374, guid: 4cbab9ebb4d37f948910764298ac7277, type: 2}
+  - {fileID: 137836, guid: d9fc9dacccc18fc4399120d40a542ef9, type: 2}
+  objectsToPreloadTimes: 0a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a000000
   hideObjectsInHierarchy: 1
 --- !u!114 &11400002
 MonoBehaviour:

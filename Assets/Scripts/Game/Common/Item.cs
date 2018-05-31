@@ -1214,22 +1214,22 @@ public class Item : MonoBehaviour
         switch (node.item.type)
         {
             case ITEM_TYPE.COOKIE_1:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_2:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.GreenCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_3:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.OrangeCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_4:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.PurpleCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_5:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RedCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_6:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.YellowCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
         }
 
@@ -1618,22 +1618,22 @@ public class Item : MonoBehaviour
         switch (type)
         {
             case ITEM_TYPE.COOKIE_1:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_2:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.GreenCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_3:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.OrangeCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_4:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.PurpleCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_5:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RedCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.COOKIE_6:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.YellowCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
         }
 
@@ -1652,22 +1652,22 @@ public class Item : MonoBehaviour
         switch (type)
         {
             case ITEM_TYPE.GINGERBREAD_1:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.GINGERBREAD_2:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.GreenCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.GINGERBREAD_3:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.OrangeCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.GINGERBREAD_4:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.PurpleCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.GINGERBREAD_5:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.RedCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
             case ITEM_TYPE.GINGERBREAD_6:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.YellowCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
         }
 
@@ -1728,7 +1728,7 @@ public class Item : MonoBehaviour
         switch (type)
         {
             case ITEM_TYPE.ROCK_CANDY:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.BlueCookieExplosion()) as GameObject);
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.CookieExplosion()) as GameObject);
                 break;
         }
 
@@ -1788,28 +1788,28 @@ public class Item : MonoBehaviour
         switch (GetCookie(type))
         {
             case ITEM_TYPE.COOKIE_1:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
-                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_2:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker2()) as GameObject);
-                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation2()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_3:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker3()) as GameObject);
-                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation3()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_4:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker4()) as GameObject);
-                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation4()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_5:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker5()) as GameObject);
-                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation5()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_6:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker6()) as GameObject);
-                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation6()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
         }
 
@@ -1843,8 +1843,8 @@ public class Item : MonoBehaviour
         GameObject explosion = null;
         GameObject animation = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
-        animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+        animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
 
         if (explosion != null)
         {
@@ -1862,11 +1862,7 @@ public class Item : MonoBehaviour
     void BombColRowBreakerExplosion()
     {
         AudioManager.instance.ColRowBreakerExplodeAudio();
-        bool isSpecialForGrass = false;
-        if (node.IsGrass())
-        {
-            isSpecialForGrass = true;
-        }
+        var isSpecialForGrass = node.IsGrass();
         ColumnDestroy(node.j - 1, isSpecialForGrass);
         ColumnDestroy(node.j, isSpecialForGrass);
         ColumnDestroy(node.j + 1, isSpecialForGrass);
@@ -1878,7 +1874,7 @@ public class Item : MonoBehaviour
         GameObject explosion = null;
         GameObject animation = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
         animation = Instantiate(Resources.Load(Configure.BigColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
 
 
@@ -1909,28 +1905,28 @@ public class Item : MonoBehaviour
         switch (GetCookie(type))
         {
             case ITEM_TYPE.COOKIE_1:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
-                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_2:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker2()) as GameObject);
-                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation2()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_3:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker3()) as GameObject);
-                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation3()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_4:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker4()) as GameObject);
-                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation4()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_5:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker5()) as GameObject);
-                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation5()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
             case ITEM_TYPE.COOKIE_6:
-                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker6()) as GameObject);
-                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation6()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+                explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+                columnEffect = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
                 break;
         }
 
@@ -2016,8 +2012,8 @@ public class Item : MonoBehaviour
         GameObject explosion = null;
         GameObject animation = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
-        animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
+        animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation()) as GameObject, transform.position, Quaternion.identity) as GameObject;
 
         if (animation != null)
         {
@@ -2041,7 +2037,7 @@ public class Item : MonoBehaviour
         GameObject explosion = null;
         //  GameObject animation = null;
 
-        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker1()) as GameObject);
+        explosion = CFX_SpawnSystem.GetNextObject(Resources.Load(Configure.ColRowBreaker()) as GameObject);
         // animation = Instantiate(Resources.Load(Configure.ColumnBreakerAnimation1()) as GameObject, transform.position, Quaternion.identity) as GameObject;
 
         /* if (animation != null)
