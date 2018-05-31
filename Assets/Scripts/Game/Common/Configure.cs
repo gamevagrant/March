@@ -606,7 +606,7 @@ public class Configure : MonoSingleton<Configure>
         return "Effects/Cookie Explosion";
     }
 
-    public static string BreakerExplosion()
+    public static string BombBreakerExplosion()
     {
         return "Effects/BombExplosion";
     }
