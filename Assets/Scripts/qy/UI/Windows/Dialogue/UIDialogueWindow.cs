@@ -39,6 +39,7 @@ public class UIDialogueWindow : UIWindowBase {
     private UIDialoguePerson personRight;
     private UIDialoguePerson talkingPerson;
     private bool isMoveing = false;
+    private bool isTalking = false;
     private Dictionary<string, List<GameObject>> personCache = new Dictionary<string, List<GameObject>>();
     private string beginID;
 
@@ -344,17 +345,22 @@ public class UIDialogueWindow : UIWindowBase {
             sq.AppendCallback(()=> {
                 isMoveing = false;
                 talkingPerson.StartTalk();
+                isTalking = true;
             });
             sq.Append(dialogText.DOText(dialog, 1, true)).OnComplete(()=> {
                 talkingPerson.StopTalk();
+                isTalking = false;
+
             });
 
         }
         else
         {
             talkingPerson.StartTalk();
+            isTalking = true;
             dialogText.DOText(dialog, 1, true).OnComplete(() => {
                 talkingPerson.StopTalk();
+                isTalking = false;
             });
         }
     }
@@ -505,12 +511,12 @@ public class UIDialogueWindow : UIWindowBase {
         {
             return;
         }
-        if(DOTween.TotalPlayingTweens()>0)
+        if(isTalking)
         {
             DOTween.CompleteAll();
-            DOTween.KillAll();
             return;
         }
+
         
         qy.config.StoryItem story = curDialogue.next;
         if(story!=null)
