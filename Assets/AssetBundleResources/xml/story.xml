@@ -28,7 +28,7 @@
 	<ItemSpec id="1000119" bgFile="3bg" personFile="person3" dialogue="100128" next="1000120"/>
 	<ItemSpec id="1000120" bgFile="1000235bg" personFile="person4" dialogue="100129" next="1000121"/>
 	<ItemSpec id="1000121" bgFile="1000235bg" personFile="person1" dialogue="100130" next="0"/>
-	<ItemSpec id="1000122" bgFile="1000122bg" personFile="person2" dialogue="100131" effect="6:0" next="1000123"/>
+	<ItemSpec id="1000122" bgFile="1000122bg" personFile="person2" dialogue="100131" effect="6" next="1000123"/>
 	<ItemSpec id="1000123" bgFile="nplbg" personFile="person3" dialogue="100132" next="1000124"/>
 	<ItemSpec id="1000124" bgFile="nplbg" personFile="person4" dialogue="100133" next="1000125"/>
 	<ItemSpec id="1000125" bgFile="2bg" personFile="person1" dialogue="100134" next="1000126"/>
